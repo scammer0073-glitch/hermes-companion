@@ -39,6 +39,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.theme.LocalSpacing
@@ -56,16 +57,19 @@ fun SectionHeader(
         modifier =
             modifier
                 .fillMaxWidth()
-                .padding(horizontal = spacing.md, vertical = spacing.sm),
+                .padding(horizontal = spacing.md, vertical = 10.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary,
-            fontWeight = FontWeight.SemiBold,
-        )
+        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            androidx.compose.foundation.layout.Box(Modifier.size(4.dp).background(androidx.compose.ui.graphics.Color(0xFF2DD4BF), androidx.compose.foundation.shape.CircleShape))
+            Text(
+                text = title.uppercase(),
+                style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.6.sp, fontSize = 11.sp),
+                color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                fontWeight = FontWeight.Bold,
+            )
+        }
         trailing?.invoke()
     }
 }
@@ -357,19 +361,21 @@ fun InfoRow(
         modifier =
             modifier
                 .fillMaxWidth()
-                .padding(horizontal = spacing.md, vertical = spacing.sm),
+                .padding(horizontal = spacing.md, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, letterSpacing = 0.3.sp),
+            color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+            fontWeight = FontWeight.Medium,
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 13.sp),
+            color = androidx.compose.ui.graphics.Color.White,
+            fontWeight = FontWeight.Medium,
         )
     }
 }
