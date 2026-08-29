@@ -196,14 +196,7 @@ fun KanbanScreen(
                                                     .width(280.dp)
                                                     .fillMaxSize(),
                                         ) {
-                                            Text(
-                                                text = "${colName.replaceFirstChar { it.uppercase() }} (${
-                                                    colTasks.size
-                                                })",
-                                                style = MaterialTheme.typography.titleMedium,
-                                                fontWeight = FontWeight.Bold,
-                                                modifier = Modifier.padding(bottom = 8.dp),
-                                            )
+                                            Row(Modifier.fillMaxWidth().padding(bottom = 10.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween) { androidx.compose.material3.Text(colName.replaceFirstChar { it.uppercase() }, style = androidx.compose.material3.MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = androidx.compose.ui.graphics.Color.White); androidx.compose.material3.Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp), color = androidx.compose.ui.graphics.Color(0xFF14302C)) { androidx.compose.material3.Text("${colTasks.size}", modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp), style = androidx.compose.material3.MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = androidx.compose.ui.graphics.Color(0xFF2DD4BF)) } }
 
                                             if (colTasks.isEmpty()) {
                                                 androidx.compose.material3.Surface(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp), color = androidx.compose.ui.graphics.Color(0xFF0D0F12), border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44))) { Row(Modifier.fillMaxWidth().padding(vertical = 18.dp), horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) { androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Add, null, tint = androidx.compose.ui.graphics.Color(0xFF2DD4BF), modifier = Modifier.size(14.dp)); androidx.compose.foundation.layout.Spacer(Modifier.width(6.dp)); androidx.compose.material3.Text("Drop tasks here", style = androidx.compose.material3.MaterialTheme.typography.labelMedium, color = androidx.compose.ui.graphics.Color(0xFF8B9AB0)) } }
