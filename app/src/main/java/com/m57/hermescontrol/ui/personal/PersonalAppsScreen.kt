@@ -45,8 +45,7 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
     LaunchedEffect(Unit) { PersonalAppStore.flow(ctx).collect { apps = it } }
     HermesScaffold(title = { Text("Personal Apps") }, navigationIcon = onOpenDrawer?.let { NavIcon.Menu(it) }) { pad ->
         Box(Modifier.fillMaxSize()) {
-            Column(Modifier.fillMaxSize().padding(16.dp)) {
-        Column(Modifier.padding(pad).fillMaxSize().padding(16.dp)) {
+            Column(Modifier.padding(pad).fillMaxSize().padding(16.dp)) {
             if (apps.isEmpty()) {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -72,7 +71,6 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                         }
                     }
                 }
-            }
             }
             }
             FloatingActionButton(onClick = { showCreate = true }, containerColor = Color(0xFF2DD4BF), contentColor = Color(0xFF001018), modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)) { Icon(Icons.Filled.Add, null) }

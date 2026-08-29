@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -35,6 +36,7 @@ fun LandingScreen(
     val bg = Brush.verticalGradient(
         colors = listOf(Color(0xFF0A0E14), Color(0xFF111A26), Color(0xFF0A0E14))
     )
+    val uriHandler = LocalUriHandler.current
     val accent = Brush.linearGradient(listOf(Color(0xFF2DD4BF), Color(0xFF38BDF8)))
     Box(
         modifier = modifier.fillMaxSize().background(bg)
@@ -102,7 +104,7 @@ fun LandingScreen(
             }
             Spacer(Modifier.height(10.dp))
             OutlinedButton(
-                onClick = onAuthLogin,
+                onClick = { uriHandler.openUri("https://scammer0073-glitch.github.io/hermes-companion/#pricing") },
                 modifier = Modifier.fillMaxWidth().height(48.dp),
                 shape = RoundedCornerShape(16.dp),
                 border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),

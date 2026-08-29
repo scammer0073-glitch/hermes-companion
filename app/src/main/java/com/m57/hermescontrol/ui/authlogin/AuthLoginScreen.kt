@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.core.connect.HermesConnectHelperCard
 
 @Composable
 fun AuthLoginScreen(
@@ -158,6 +159,8 @@ fun AuthLoginScreen(
                     ),
                 textAlign = TextAlign.Start,
             )
+
+            HermesConnectHelperCard(onPickUrl = viewModel::onBaseUrlChange, modifier = Modifier.fillMaxWidth())
 
             Text(
                 text = stringResource(R.string.auth_login_desc),
