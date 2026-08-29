@@ -1,150 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hermes Mobile — Native Android client for Hermes Agent</title>
-  <meta name="description" content="Hermes Mobile is the open-source native Android client for Hermes Agent. Real-time chat, cron management, session resume, Kanban, skills and more — from your pocket. Available on F-Droid and GitHub Releases.">
-  <meta name="keywords" content="Hermes Agent, Android, mobile client, open source, F-Droid, AI assistant, hermes mobile">
-  <link rel="canonical" href="https://hy4ri.github.io/hermes-mobile/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Hermes Mobile — Native Android client for Hermes Agent">
-  <meta property="og:description" content="Chat, automation, productivity, and agent configuration — from your phone.">
-  <meta property="og:url" content="https://hy4ri.github.io/hermes-mobile/">
-  <meta name="theme-color" content="#0d0f12">
-  <style>
-    :root {
-      --bg: #0d0f12;
-      --surface: #161a20;
-      --border: #262c36;
-      --text: #e8eaed;
-      --muted: #9aa4b2;
-      --accent: #f5b842;
-      --accent-ink: #14100a;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-    header { padding: 72px 0 40px; text-align: center; }
-    .logo {
-      display: inline-flex; align-items: center; gap: 12px;
-      font-size: 15px; font-weight: 600; color: var(--muted);
-      border: 1px solid var(--border); border-radius: 999px;
-      padding: 8px 18px; margin-bottom: 28px;
-    }
-    .logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-    h1 { font-size: 42px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
-    h1 .accent { color: var(--accent); }
-    .tagline { font-size: 18px; color: var(--muted); max-width: 620px; margin: 0 auto 32px; }
-    .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-block; padding: 12px 26px; border-radius: 10px;
-      font-size: 15px; font-weight: 600; text-decoration: none;
-      border: 1px solid var(--border); color: var(--text); transition: 0.15s ease;
-    }
-    .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
-    section { padding: 44px 0; border-top: 1px solid var(--border); }
-    h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-    .sub { color: var(--muted); margin-bottom: 28px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 20px;
-    }
-    .card h3 { font-size: 16px; margin-bottom: 6px; }
-    .card p { font-size: 14px; color: var(--muted); }
-    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
-    .shots img {
-      width: 100%; border-radius: 12px; border: 1px solid var(--border);
-      background: var(--surface);
-    }
-    ol.steps { list-style: none; counter-reset: step; }
-    ol.steps li {
-      counter-increment: step; position: relative;
-      padding: 16px 16px 16px 60px; background: var(--surface);
-      border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px;
-      font-size: 15px;
-    }
-    ol.steps li::before {
-      content: counter(step); position: absolute; left: 16px; top: 14px;
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--accent); color: var(--accent-ink);
-      font-weight: 700; font-size: 14px; display: flex;
-      align-items: center; justify-content: center;
-    }
-    code {
-      background: #0d0f12; border: 1px solid var(--border);
-      padding: 2px 8px; border-radius: 6px; font-size: 13px;
-      font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
-    }
-    footer { padding: 36px 0 64px; text-align: center; color: var(--muted); font-size: 14px; }
-    footer a { color: var(--accent); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    @media (max-width: 640px) {
-      h1 { font-size: 30px; }
-      header { padding: 48px 0 28px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nemasys — Your Hermes, Everywhere. Open source Android client + hosted hub.</title>
+<meta name="description" content="Nemasys is the open-source Android companion for Hermes Agent. Self-host free, or subscribe to Nemasys Hub — managed Hermes hosting with zero DevOps. APK on GitHub Releases.">
+<link rel="canonical" href="https://scammer0073-glitch.github.io/hermes-companion/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nemasys — Your Hermes, Everywhere">
+<meta property="og:description" content="Open-source Android app for Hermes Agent + optional Nemasys Hub cloud. Self-host free. Subscribe for hosted, always-on Hermes.">
+<meta property="og:url" content="https://scammer0073-glitch.github.io/hermes-companion/">
+<meta name="theme-color" content="#0A0E14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{--bg:#0A0E14;--surface:#111820;--surface2:#16202E;--border:#1E2D44;--text:#E6EDF3;--muted:#8B9AB0;--accent:#2DD4BF;--accent2:#38BDF8;--gold:#FACC15;--radius:16px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family: ui-sans-system, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial, sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent)}a:hover{color:var(--accent2)}
+.nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);background:rgba(10,14,20,.8);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--text);font-weight:800;letter-spacing:.02em}
+.brand-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#001018;font-weight:900;font-size:14px}
+.brand small{color:var(--muted);font-weight:600;margin-left:6px}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:14px}
+.navlinks a{color:var(--muted);text-decoration:none}.navlinks a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid transparent;transition:.15s}
+.btn-primary{background:var(--accent);color:#001018}.btn-primary:hover{background:#22C7B5}
+.btn-ghost{border-color:var(--border);color:var(--text);background:transparent}.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
+.hero{max-width:1100px;margin:0 auto;padding:56px 20px 24px;display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.kicker{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+h1{font-size:44px;line-height:1.05;margin:12px 0 14px;letter-spacing:-.02em}
+@media(max-width:600px){h1{font-size:36px}}
+.lead{color:var(--muted);font-size:17px;max-width:56ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.badges img{height:28px}
+.phone{border:1px solid var(--border);background:linear-gradient(180deg,var(--surface),var(--surface2));border-radius:28px;padding:14px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.phone-inner{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:#000}
+.phone-inner img{width:100%;display:block}
+.section{max-width:1100px;margin:0 auto;padding:28px 20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.card h3{margin:6px 0 6px;font-size:16px}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.pill{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(45,212,191,.3);background:rgba(45,212,191,.1);padding:4px 8px;border-radius:999px}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+@media(max-width:900px){.price-grid{grid-template-columns:1fr}}
+.price{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column}
+.price.featured{border-color:var(--accent);box-shadow:0 0 0 1px rgba(45,212,191,.3), 0 12px 40px rgba(45,212,191,.12)}
+.price h3{margin:0}.price .amt{font-size:32px;font-weight:800;margin:6px 0}.price .amt small{font-size:14px;color:var(--muted);font-weight:600}
+.price ul{margin:12px 0 16px;padding-left:18px;color:var(--muted);font-size:14px}
+.price li{margin:4px 0}
+.notice{background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.25);color:#FDE68A;padding:12px 14px;border-radius:12px;font-size:13px;margin-top:14px}
+.footer{border-top:1px solid var(--border);margin-top:32px;padding:22px 20px;color:var(--muted);font-size:13px}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+code{background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:6px;font-size:13px}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Hermes <span class="accent">Mobile</span></h1>
-      <div class="logo"><span class="dot"></span> Hermes Agent · Android</div>
-      <p class="tagline">The native Android client for Hermes Agent. Chat, automation, productivity, and agent configuration — from your phone.</p>
-      <div class="cta">
-        <a class="btn primary" href="https://f-droid.org/packages/com.m57.hermescontrol/">Get it on F-Droid</a>
-        <a class="btn" href="https://github.com/Hy4ri/hermes-mobile/releases/latest">Latest release</a>
-        <a class="btn" href="https://github.com/Hy4ri/hermes-mobile">Source code</a>
-      </div>
-    </header>
-
-    <section>
-      <h2>Features</h2>
-      <p class="sub">Everything your agent can do, in your pocket.</p>
-      <div class="grid">
-        <div class="card"><h3>Real-time chat</h3><p>Message your agent with Room-backed local history and inline reply notifications.</p></div>
-        <div class="card"><h3>System config</h3><p>Manage profiles, skills, plugins, toolsets, and LLM model/provider selections.</p></div>
-        <div class="card"><h3>Operations</h3><p>Stream live logs, manage cron jobs, edit environment keys, test webhooks, monitor processes.</p></div>
-        <div class="card"><h3>Gateway status</h3><p>WebSocket connection, MCP servers, messaging channels, and OAuth providers at a glance.</p></div>
-        <div class="card"><h3>Productivity</h3><p>Kanban boards, agent milestones, and session history — all in the app.</p></div>
-        <div class="card"><h3>Analytics &amp; billing</h3><p>Usage analytics dashboard and billing/subscription management.</p></div>
-        <div class="card"><h3>Theming</h3><p>6 built-in color presets plus Material You dynamic colors on supported devices.</p></div>
-        <div class="card"><h3>Modern UX</h3><p>Native Material 3 design with pull-to-refresh and customizable bottom navigation.</p></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Screenshots</h2>
-      <p class="sub">Chat, cron, Kanban, and skills screens.</p>
-      <div class="shots">
-        <img src="screenshots/chat.png" alt="Hermes Mobile chat screen">
-        <img src="screenshots/cron.png" alt="Hermes Mobile cron jobs screen">
-        <img src="screenshots/kanban.png" alt="Hermes Mobile Kanban screen">
-        <img src="screenshots/skills.png" alt="Hermes Mobile skills screen">
-      </div>
-    </section>
-
-    <section>
-      <h2>Quick start</h2>
-      <p class="sub">Point the app at your Hermes gateway and go.</p>
-      <ol class="steps">
-        <li>Install from <a href="https://f-droid.org/packages/com.m57.hermescontrol/">F-Droid</a>, <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fadd%2Fhttps%3A%2F%2Fgithub.com%2FHy4ri%2Fhermes-mobile">Obtainium</a>, or <a href="https://github.com/Hy4ri/hermes-mobile/releases/latest">GitHub Releases</a>.</li>
-        <li>Start your dashboard on the host: <code>hermes dashboard --host 0.0.0.0</code></li>
-        <li>Tap <strong>Sign in</strong>, enter the host and port — the app auto-detects the auth mode.</li>
-      </ol>
-    </section>
-
-    <footer>
-      <p>Copyright © 2026 M57 (Hy4ri) · <a href="https://github.com/Hy4ri/hermes-mobile/blob/main/LICENSE">Apache License 2.0</a> · <a href="https://github.com/Hy4ri/hermes-mobile">GitHub</a></p>
-    </footer>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#"><span class="brand-mark">N</span> Nemasys <small>by M57</small></a>
+    <div class="navlinks">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://github.com/scammer0073-glitch/hermes-companion">GitHub</a>
+      <a class="btn btn-primary" href="https://github.com/scammer0073-glitch/hermes-companion/releases/latest">Download APK</a>
+    </div>
   </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="kicker">Open source · Android · Hermes Agent</div>
+    <h1>Your Hermes,<br>everywhere.</h1>
+    <p class="lead">Nemasys is the native Android companion for <b>Hermes Agent</b>. Chat, run tools, manage cron, Kanban and skills — from your pocket. <b>Self-host free forever</b>, or subscribe to <b>Nemasys Hub</b> for managed, always-on hosting.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/scammer0073-glitch/hermes-companion/releases/latest">↓ Download APK</a>
+      <a class="btn btn-ghost" href="https://github.com/scammer0073-glitch/hermes-companion">★ View Source</a>
+      <a class="btn btn-ghost" href="#pricing">See Pricing →</a>
+    </div>
+    <div class="badges">
+      <img src="https://img.shields.io/badge/Android-34DDDD?style=for-the-badge&logo=android&logoColor=black" alt="Android">
+      <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin">
+      <img src="https://img.shields.io/github/v/release/scammer0073-glitch/hermes-companion?color=2DD4BF&label=Release" alt="Release">
+      <img src="https://img.shields.io/badge/License-Apache--2.0-8B9AB0" alt="Apache 2.0">
+    </div>
+    <p style="color:var(--muted);font-size:13px;margin-top:10px">Free & open source (Apache 2.0). No ads. No tracking. Your data stays yours.</p>
+  </div>
+  <div class="phone">
+    <div class="phone-inner">
+      <img src="screenshots/chat.png" alt="Nemasys chat">
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:12px;margin:10px 0 0">AMOLED teal/gold · Bot picker · Real-time chat</p>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <span class="pill">Why Nemasys</span>
+  <h2 style="margin:8px 0 6px">Everything Hermes can do, on your phone</h2>
+  <p style="color:var(--muted);max-width:65ch">Built on <code>Hy4ri/hermes-mobile</code>. Same power, new identity. Faster iteration, cleaner theming, and a clear path to monetize without closing the source.</p>
+  <div class="grid3" style="margin-top:16px">
+    <div class="card"><h3>💬 Real-time Chat</h3><p>Room-backed history, streaming responses, attachments, notifications with inline reply.</p></div>
+    <div class="card"><h3>🤖 Bots = Profiles</h3><p>Switch Hermes profiles as bots — each with its own soul, model, skills, memory.</p></div>
+    <div class="card"><h3>🎨 6 Themes + AMOLED</h3><p>Default, Monochrome, Gruvbox, Catppuccin, Nord + true-black AMOLED with teal/gold.</p></div>
+    <div class="card"><h3>⏰ Automation</h3><p>Cron jobs, webhooks, live logs, env keys, MCP servers, processes — all from mobile.</p></div>
+    <div class="card"><h3>📋 Productivity</h3><p>Kanban boards, session history, analytics, model & toolset management.</p></div>
+    <div class="card"><h3>🔒 You Own It</h3><p>Self-host Hermes on your PC/VPS. Nemasys connects via LAN or Tailscale. No vendor lock-in.</p></div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <span class="pill">Nemasys Hub — coming soon</span>
+  <h2 style="margin:8px 0 6px">Open core, paid hosting. Simple.</h2>
+  <p style="color:var(--muted);max-width:65ch">App is <b>100% open source</b> and free forever. Nemasys Hub is the optional <b>managed Hermes host</b> — we run Hermes for you. Subscribe in-app, get a private URL, connect instantly.</p>
+  <div class="price-grid">
+    <div class="price">
+      <h3>Self-Hosted</h3>
+      <div class="amt">₹0 <small>/ forever</small></div>
+      <p style="color:var(--muted);font-size:13px">For tinkerers. Host Hermes on your own PC/VPS.</p>
+      <ul>
+        <li>All app features</li>
+        <li>LAN + Tailscale connect</li>
+        <li>Community support</li>
+        <li>Apache 2.0 — fork it</li>
+      </ul>
+      <a class="btn btn-ghost" href="https://github.com/scammer0073-glitch/hermes-companion#overview">Self-host guide</a>
+    </div>
+    <div class="price featured">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3>Hub Starter</h3><span class="pill">Most popular</span></div>
+      <div class="amt">₹199 <small>/ month</small></div>
+      <p style="color:var(--muted);font-size:13px">Managed Hermes on Nemasys Hub. No DevOps.</p>
+      <ul>
+        <li>1 hosted Hermes instance</li>
+        <li>Always-on • HTTPS URL</li>
+        <li>5 bots (profiles), 50 cron jobs</li>
+        <li>Email support</li>
+      </ul>
+      <a class="btn btn-primary" href="https://github.com/scammer0073-glitch/hermes-companion/discussions">Join waitlist</a>
+    </div>
+    <div class="price">
+      <h3>Hub Pro</h3>
+      <div class="amt">₹599 <small>/ month</small></div>
+      <p style="color:var(--muted);font-size:13px">For creators & small teams.</p>
+      <ul>
+        <li>3 hosted instances</li>
+        <li>Unlimited bots & crons</li>
+        <li>Custom domain + backups</li>
+        <li>Priority support</li>
+      </ul>
+      <a class="btn btn-ghost" href="https://github.com/scammer0073-glitch/hermes-companion/discussions">Join waitlist</a>
+    </div>
+  </div>
+  <div class="notice">🔓 <b>Open-source promise:</b> App stays Apache 2.0 forever. Hub is just hosted infra — like WordPress.com vs WordPress.org. Self-host stays free. No feature-gating the app.</div>
+  <p style="color:var(--muted);font-size:13px;margin-top:10px">Payments via Razorpay/UPI + Play Billing (once on Play Store). GST invoices included.</p>
+</section>
+
+<section class="section">
+  <div class="card" style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center">
+    <div>
+      <h3 style="margin:0">Developers — ship faster</h3>
+      <p>New dev loop: <code>./gradlew assembleDebug</code> → <code>adb install -r app/build/.../app-debug.apk</code> in &lt; 2 min. CI builds, ktlint & lint on every PR.</p>
+    </div>
+    <a class="btn btn-ghost" href="https://github.com/scammer0073-glitch/hermes-companion/blob/main/CONTRIBUTING.md">Contributing →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Nemasys (M57) · <a href="https://github.com/scammer0073-glitch/hermes-companion/blob/main/LICENSE">Apache 2.0</a> · Fork of <a href="https://github.com/Hy4ri/hermes-mobile">Hy4ri/hermes-mobile</a> · Not affiliated with Nous Research</span>
+    <span><a href="https://github.com/scammer0073-glitch/hermes-companion">GitHub</a> · <a href="https://github.com/scammer0073-glitch/hermes-companion/issues">Issues</a> · <a href="https://github.com/scammer0073-glitch/hermes-companion/releases">Releases</a></span>
+  </div>
+</footer>
 </body>
 </html>
