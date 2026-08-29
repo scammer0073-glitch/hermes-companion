@@ -54,6 +54,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -289,7 +290,7 @@ private fun McpSectionHeader(
             Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.surfaceContainerLow,
+                    color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     shape = RoundedCornerShape(12.dp),
                 ).padding(horizontal = spacing.md, vertical = spacing.sm),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -342,7 +343,7 @@ private fun AddServerSection(
     AnimatedVisibility(visible = state.showAddForm) {
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+            colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
                 SecondaryTabRow(selectedTabIndex = if (state.addMode == AddServerMode.HTTP) 0 else 1) {
@@ -473,7 +474,7 @@ private fun ServerCard(
                     if (server.enabled) {
                         MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.15f)
                     } else {
-                        MaterialTheme.colorScheme.surfaceVariant
+                        androidx.compose.ui.graphics.Color(0xFF0D0F12)
                     },
             ),
     ) {
@@ -787,7 +788,7 @@ private fun CatalogEntryCard(
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
     ) {
         Column(modifier = Modifier.padding(spacing.md)) {
             Row(
