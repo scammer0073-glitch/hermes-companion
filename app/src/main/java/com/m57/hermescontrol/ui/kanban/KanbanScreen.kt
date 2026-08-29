@@ -288,7 +288,7 @@ fun TaskCard(
     task: KanbanTask,
     onTaskClick: (KanbanTask) -> Unit,
 ) {
-    Card(onClick = { onTaskClick(task) }, modifier = Modifier.fillMaxWidth()) {
+    androidx.compose.material3.Card(onClick = { onTaskClick(task) }, modifier = Modifier.fillMaxWidth(), shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)), border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)), elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 0.dp)) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(text = task.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(4.dp))
