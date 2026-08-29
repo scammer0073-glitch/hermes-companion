@@ -161,7 +161,7 @@ private fun ProcessCard(
         modifier = Modifier.fillMaxWidth(),
         colors =
             CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
             ),
     ) {
         Row(
