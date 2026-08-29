@@ -1,6 +1,6 @@
 package com.m57.hermescontrol.ui.cron
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -134,14 +134,12 @@ fun CronJobsScreen(
                 ) {
                     items(state.jobs, key = { it.id }) { job ->
                         Card(
-                            modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .clickable(onClick = { selectedJob = job }),
-                            colors =
-                                CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                                ),
+                            onClick = { selectedJob = job },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
+                            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
                             Column(modifier = Modifier.padding(spacing.md)) {
                                 Row(
