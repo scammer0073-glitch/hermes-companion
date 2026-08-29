@@ -65,6 +65,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -422,9 +423,10 @@ private fun LazyListScope.hostSection(
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                colors =
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    colors =
                     CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     ),
             ) {
                 Column(modifier = Modifier.padding(spacing.md)) {
@@ -620,7 +622,7 @@ private fun LazyListScope.portalSection(
                 modifier = Modifier.fillMaxWidth(),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     ),
             ) {
                 Column(modifier = Modifier.padding(spacing.md)) {
@@ -705,7 +707,7 @@ private fun LazyListScope.curatorSection(
                 modifier = Modifier.fillMaxWidth(),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     ),
             ) {
                 Column(modifier = Modifier.padding(spacing.md)) {
@@ -812,7 +814,7 @@ private fun LazyListScope.gatewaySection(
                 modifier = Modifier.fillMaxWidth(),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     ),
             ) {
                 Column(modifier = Modifier.padding(spacing.md)) {
@@ -976,7 +978,7 @@ private fun LazyListScope.credentialsSection(
             modifier = Modifier.fillMaxWidth(),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                 ),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
@@ -1086,7 +1088,7 @@ private fun LazyListScope.operationsSection(
             modifier = Modifier.fillMaxWidth(),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                 ),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
@@ -1429,7 +1431,7 @@ private fun LazyListScope.checkpointsSection(
                 modifier = Modifier.fillMaxWidth(),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     ),
             ) {
                 Column(modifier = Modifier.padding(spacing.md)) {
@@ -1606,7 +1608,7 @@ private fun LazyListScope.actionLogSection(
             modifier = Modifier.fillMaxWidth(),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                 ),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {

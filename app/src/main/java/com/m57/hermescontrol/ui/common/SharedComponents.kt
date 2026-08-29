@@ -151,7 +151,7 @@ fun ToggleRow(
         modifier = modifier.fillMaxWidth(),
         colors =
             CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                containerColor = Color(0xFF0D0F12),
             ),
     ) {
         Row(
@@ -305,9 +305,11 @@ fun StatCard(
     val spacing = LocalSpacing.current
     Card(
         modifier = modifier,
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
         colors =
             CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                containerColor = Color(0xFF0D0F12),
             ),
     ) {
         Column(
