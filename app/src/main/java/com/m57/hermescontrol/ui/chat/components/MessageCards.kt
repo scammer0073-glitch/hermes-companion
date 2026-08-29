@@ -12,6 +12,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
@@ -268,7 +269,7 @@ fun CodeBlockCard(
             modifier
                 .fillMaxWidth()
                 .testTag("code_block"),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(12.dp),
         color = CodeTerminalBg,
         border = BorderStroke(1.dp, CodeTerminalBorder),
     ) {
@@ -278,6 +279,8 @@ fun CodeBlockCard(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+                Box(Modifier.size(8.dp).clip(androidx.compose.foundation.shape.CircleShape).background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)))
+                Spacer(Modifier.width(8.dp))
                 if (!language.isNullOrBlank()) {
                     Text(
                         text = language.uppercase(),
