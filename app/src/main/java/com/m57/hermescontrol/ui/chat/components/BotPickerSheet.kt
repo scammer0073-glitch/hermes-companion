@@ -1,6 +1,7 @@
 package com.m57.hermescontrol.ui.chat.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -38,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -87,7 +89,7 @@ fun BotPickerSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
     ) {
         Column(
             modifier =
@@ -185,13 +187,9 @@ internal fun BotPickerRow(
     Surface(
         onClick = onClick,
         shape = RoundedCornerShape(16.dp),
-        color =
-            if (isActive) {
-                MaterialTheme.colorScheme.surfaceContainerHigh
-            } else {
-                MaterialTheme.colorScheme.surface
-            },
-        contentColor = MaterialTheme.colorScheme.onSurface,
+        color = if (isActive) androidx.compose.ui.graphics.Color(0xFF14302C) else androidx.compose.ui.graphics.Color(0xFF0D0F12),
+        contentColor = androidx.compose.ui.graphics.Color.White,
+        border = androidx.compose.foundation.BorderStroke(1.dp, if (isActive) androidx.compose.ui.graphics.Color(0xFF2DD4BF) else androidx.compose.ui.graphics.Color(0xFF1E2D44)),
     ) {
         Row(
             modifier =
@@ -200,20 +198,22 @@ internal fun BotPickerRow(
                     .padding(horizontal = 10.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            if (isActive) androidx.compose.foundation.layout.Box(Modifier.size(width = 3.dp, height = 28.dp).background(androidx.compose.ui.graphics.Color(0xFF2DD4BF), androidx.compose.foundation.shape.RoundedCornerShape(2.dp)))
+            if (isActive) androidx.compose.foundation.layout.Spacer(Modifier.width(8.dp))
             Surface(
                 modifier = Modifier.size(44.dp),
                 shape = CircleShape,
                 color =
                     if (isActive) {
-                        MaterialTheme.colorScheme.primary
+                        androidx.compose.ui.graphics.Color(0xFF2DD4BF)
                     } else {
-                        MaterialTheme.colorScheme.surfaceContainerHighest
+                        androidx.compose.ui.graphics.Color(0xFF1A232F)
                     },
                 contentColor =
                     if (isActive) {
-                        MaterialTheme.colorScheme.onPrimary
+                        androidx.compose.ui.graphics.Color(0xFF001018)
                     } else {
-                        MaterialTheme.colorScheme.onSurface
+                        androidx.compose.ui.graphics.Color.White
                     },
             ) {
                 Box(contentAlignment = Alignment.Center) {
