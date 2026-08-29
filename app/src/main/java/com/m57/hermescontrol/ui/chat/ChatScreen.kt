@@ -104,6 +104,7 @@ import com.m57.hermescontrol.ui.chat.components.SearchBarRow
 import com.m57.hermescontrol.ui.chat.components.SubagentInspectionSheet
 import com.m57.hermescontrol.ui.chat.components.rememberChatScrollController
 import com.m57.hermescontrol.ui.chat.components.tailContentKey
+import com.m57.hermescontrol.ui.chat.components.NemasysChatEmpty
 import com.m57.hermescontrol.ui.chat.fullbleed.FullBleedChatList
 import com.m57.hermescontrol.ui.common.ActionProgressDialog
 import com.m57.hermescontrol.ui.common.AutoScrollingTitleText
@@ -646,7 +647,10 @@ fun ChatScreen(
 
                 // Full-bleed chat renderer (issue #866) — the single chat
                 // surface since the bubble renderer was removed.
-                FullBleedChatList(
+                if (state.messages.isEmpty() && !state.isLoading && streamingState.streamingMessage == null) {
+                    NemasysChatEmpty(botName = (activeBotId ?: "Hermes"), onPrompt = { p -> inputFieldValue = androidx.compose.ui.text.input.TextFieldValue(p) })
+                } else {
+                    FullBleedChatList(
                     messages = state.messages,
                     streamingMessage = streamingState.streamingMessage,
                     searchState = searchState,
@@ -669,6 +673,7 @@ fun ChatScreen(
                     openingAttachmentPath = state.openingAttachmentPath,
                     onImageClick = { viewingImage = it },
                 )
+                }
 
                 // Loading overlay
                 ChatLoadingOverlay(isLoading = state.isLoading && state.resumeError == null)

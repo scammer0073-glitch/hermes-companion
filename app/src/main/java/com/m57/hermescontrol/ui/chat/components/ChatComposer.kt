@@ -111,14 +111,14 @@ fun ChatInputBar(
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp, vertical = 8.dp),
             shape = RoundedCornerShape(26.dp),
-            color = MaterialTheme.colorScheme.surfaceContainer,
+            shadowElevation = 12.dp,
+            color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
             border =
                 BorderStroke(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.55f),
+                    color = if (isFocused) androidx.compose.ui.graphics.Color(0xFF2DD4BF).copy(alpha=0.9f) else androidx.compose.ui.graphics.Color(0xFF1E2D44),
                 ),
             tonalElevation = 0.dp,
-            shadowElevation = 0.dp,
         ) {
             Column {
                 // Commands hidden from the suggestion menu — desktop/CLI-only and

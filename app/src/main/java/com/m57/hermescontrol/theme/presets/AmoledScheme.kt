@@ -6,87 +6,53 @@ import com.m57.hermescontrol.theme.PaletteColors
 import com.m57.hermescontrol.theme.buildThemeDarkOnly
 
 // ---------------------------------------------------------------------
-// AMOLED — true-black variant of MonochromeTheme. Dark only:
-// background is pure #000000 so OLED panels switch those pixels off,
-// which MonochromeTheme's #121212 baseline doesn't give you.
+// Nemasys Black — signature AMOLED. True black canvas (pixels off),
+// warm grays, teal primary, amber warning. This IS the product.
+// Monochrome is the fallback; this is the hero.
 // ---------------------------------------------------------------------
 
-private val AmoledFloor = Color(0xFF000000) // background/surface/lowest — nothing darker exists
-private val AmoledContainer = Color(0xFF0D0D0D) // surfaceContainer
-private val AmoledContainerHigh = Color(0xFF1A1A1A) // surfaceContainerHigh, surfaceVariant, status containers
-private val AmoledContainerHighest = Color(0xFF262626) // surfaceContainerHighest, primaryContainer
-private val AmoledOutline = Color(0xFF808080)
-private val AmoledOutlineVariant = Color(0xFF404040)
-private val AmoledTextDim = Color(0xFFB3B3B3) // onSurfaceVariant
-private val AmoledTextBright = Color(0xFFFFFFFF) // pure white — max contrast on black
-private val AmoledTeal = Color(0xFF80D5D2) // Hermes desktop default accent
-private val AmoledGold = Color(0xFFECC248) // Hermes tool/marker gold
-private val AmoledSecondary = Color(0xFFCCCCCC) // warning
-private val AmoledTertiary = Color(0xFF81D692) // success
-private val AmoledInfo = Color(0xFF8ECEFF)
-private val AmoledInversePrimary = Color(0xFF121212) // dark tone on the (light, fallback) inverseSurface
+private val NBlack = Color(0xFF000000)
+private val NCard = Color(0xFF0D0F12)        // cards, sheets
+private val NCardHover = Color(0xFF13171C)   // hover / high
+private val NBorder = Color(0xFF1A232F)      // subtle stroke
+private val NBorderStrong = Color(0xFF243146)
+private val NMuted = Color(0xFF7A8AA1)       // secondary text
+private val NDim = Color(0xFF9FB0C6)         // tertiary
+private val NText = Color(0xFFE6EDF3)        // primary text
+private val NTeal = Color(0xFF2DD4BF)        // interactive, primary
+private val NTealDim = Color(0xFF1E9E8E)     // pressed
+private val NTealSoft = Color(0xFF14302C)    // container
+private val NAmber = Color(0xFFFACC15)       // warning / highlight
+private val NAmberSoft = Color(0xFF2E2608)
+private val NRed = Color(0xFFFF4D4D)         // error — slightly desaturated
+private val NRedSoft = Color(0xFF2A1212)
+private val NGreen = Color(0xFF34D399)       // success
+private val NGreenSoft = Color(0xFF0F2A1F)
+private val NBlue = Color(0xFF38BDF8)        // info
 
-/**
- * AMOLED theme — dark-only variant of MonochromeTheme for
- * true-black displays. Background is pure #000000 rather than the
- * #121212 baseline the standard Monochrome preset uses, so surfaceContainerLowest
- * and surfaceContainerLow collapse to the same value — there's nothing
- * darker than black to separate them into. Light mode isn't shipped
- * (a light AMOLED theme is a contradiction); the dispatcher falls back
- * to the default theme.
- *
- * Same accessibility note as MonochromeTheme: status colors are pure
- * grayscale, separated only by lightness, so don't rely on them alone
- * to convey success/warning/error/info — pair with an icon or label.
- */
-val AmoledTheme =
-    buildThemeDarkOnly(
-        dark =
-            PaletteColors(
-                primary = AmoledTeal,
-                onPrimary = AmoledFloor,
-                primaryContainer = AmoledContainerHighest,
-                onPrimaryContainer = AmoledTeal,
-                secondary = AmoledGold,
-                onSecondary = AmoledFloor,
-                secondaryContainer = AmoledContainerHigh,
-                onSecondaryContainer = AmoledGold,
-                tertiary = AmoledTertiary,
-                onTertiary = AmoledFloor,
-                tertiaryContainer = AmoledContainerHigh,
-                onTertiaryContainer = AmoledTertiary,
-                background = AmoledFloor,
-                onBackground = AmoledTextBright,
-                surface = AmoledFloor,
-                onSurface = AmoledTextBright,
-                surfaceVariant = AmoledContainerHigh,
-                onSurfaceVariant = AmoledTextDim,
-                surfaceContainerLowest = AmoledFloor,
-                surfaceContainerLow = AmoledFloor,
-                surfaceContainer = AmoledContainer,
-                surfaceContainerHigh = AmoledContainerHigh,
-                surfaceContainerHighest = AmoledContainerHighest,
-                inverseSurface = AmoledTextBright,
-                inverseOnSurface = AmoledFloor,
-                inversePrimary = AmoledInversePrimary,
-                outline = AmoledOutline,
-                outlineVariant = AmoledOutlineVariant,
-                scrim = Color.Black,
-                status =
-                    HermesStatusColors(
-                        success = AmoledTertiary,
-                        successContainer = AmoledContainerHigh,
-                        onSuccess = AmoledFloor,
-                        warning = AmoledSecondary,
-                        warningContainer = AmoledContainerHigh,
-                        onWarning = AmoledFloor,
-                        error = AmoledTextBright,
-                        errorContainer = AmoledContainerHigh,
-                        onError = AmoledFloor,
-                        onErrorContainer = AmoledTextBright,
-                        info = AmoledInfo,
-                        infoContainer = AmoledContainerHigh,
-                        onInfo = AmoledFloor,
-                    ),
-            ),
+val AmoledTheme = buildThemeDarkOnly(
+    dark = PaletteColors(
+        primary = NTeal, onPrimary = Color(0xFF001410),
+        primaryContainer = NTealSoft, onPrimaryContainer = Color(0xFFA7F3E6),
+        secondary = NDim, onSecondary = NBlack,
+        secondaryContainer = NCardHover, onSecondaryContainer = NDim,
+        tertiary = NAmber, onTertiary = Color(0xFF1A1400),
+        tertiaryContainer = NAmberSoft, onTertiaryContainer = NAmber,
+        background = NBlack, onBackground = NText,
+        surface = NBlack, onSurface = NText,
+        surfaceVariant = NCardHover, onSurfaceVariant = NMuted,
+        surfaceContainerLowest = NBlack, surfaceContainerLow = NBlack,
+        surfaceContainer = NCard, surfaceContainerHigh = NCardHover,
+        surfaceContainerHighest = Color(0xFF1A212C),
+        inverseSurface = NText, inverseOnSurface = NBlack,
+        inversePrimary = Color(0xFF0D2A24),
+        outline = NBorderStrong, outlineVariant = NBorder,
+        scrim = Color.Black,
+        status = HermesStatusColors(
+            success = NGreen, successContainer = NGreenSoft, onSuccess = Color(0xFF001410),
+            warning = NAmber, warningContainer = NAmberSoft, onWarning = Color(0xFF1A1400),
+            error = NRed, errorContainer = NRedSoft, onError = NBlack, onErrorContainer = Color(0xFFFFC9C9),
+            info = NBlue, infoContainer = Color(0xFF0F2433), onInfo = NBlack,
+        )
     )
+)

@@ -211,6 +211,7 @@ fun ProfilesScreen(
                                         singleLine = true,
                                         placeholder = { Text(stringResource(R.string.bots_picker_search)) },
                                         shape = RoundedCornerShape(16.dp),
+                                        colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(focusedBorderColor = androidx.compose.ui.graphics.Color(0xFF2DD4BF), unfocusedBorderColor = androidx.compose.ui.graphics.Color(0xFF1E2D44), focusedContainerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12), unfocusedContainerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
                                     )
                                 }
                                 val visibleProfiles =
@@ -231,7 +232,7 @@ fun ProfilesScreen(
                                             CardDefaults.cardColors(
                                                 containerColor =
                                                     if (isActive) {
-                                                        MaterialTheme.colorScheme.primaryContainer
+                                                        androidx.compose.ui.graphics.Color(0xFF14302C)
                                                     } else {
                                                         MaterialTheme.colorScheme.surfaceContainer
                                                     },
@@ -241,9 +242,9 @@ fun ProfilesScreen(
                                                 width = 1.dp,
                                                 color =
                                                     if (isActive) {
-                                                        MaterialTheme.colorScheme.outline
+                                                        androidx.compose.ui.graphics.Color(0xFF2DD4BF)
                                                     } else {
-                                                        MaterialTheme.colorScheme.outlineVariant
+                                                        androidx.compose.ui.graphics.Color(0xFF1E2D44)
                                                     },
                                             ),
                                         onClick = {

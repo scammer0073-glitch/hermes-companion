@@ -154,7 +154,7 @@ fun BotPickerSheet(
                     }
                 }
             }
-            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            HorizontalDivider(color = androidx.compose.ui.graphics.Color(0xFF1E2D44))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -249,7 +249,7 @@ internal fun BotPickerRow(
                 Icon(
                     imageVector = Icons.Filled.Check,
                     contentDescription = stringResource(R.string.profiles_content_desc_active),
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
                 )
             }
         }
