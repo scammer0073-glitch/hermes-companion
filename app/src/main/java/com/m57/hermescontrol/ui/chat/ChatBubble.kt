@@ -174,7 +174,7 @@ fun ChatBubble(
                     color = Color.Transparent,
                     tonalElevation = 0.dp,
                 ) {
-                    Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+                    Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 11.dp)) {
                         SelectionContainer {
                             Text(
                                 text = highlightedText,
@@ -221,8 +221,8 @@ fun ChatBubble(
                                     Icon(
                                         imageVector = if (copied) Icons.Filled.Check else Icons.Filled.ContentCopy,
                                         contentDescription = stringResource(R.string.content_desc_copy),
-                                        modifier = Modifier.size(12.dp),
-                                        tint = userBubbleTextColor.copy(alpha = 0.7f),
+                                        modifier = Modifier.size(13.dp),
+                                        tint = userBubbleTextColor.copy(alpha = 0.62f),
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(2.dp))
@@ -232,8 +232,8 @@ fun ChatBubble(
                                             message.timestamp,
                                             DateFormat.is24HourFormat(LocalContext.current),
                                         ),
-                                    color = userBubbleTextColor.copy(alpha = 0.6f),
-                                    style = MaterialTheme.typography.labelSmall,
+                                    color = userBubbleTextColor.copy(alpha = 0.58f),
+                                    style = MaterialTheme.typography.labelSmall.copy(fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 0.3.sp),
                                 )
                             }
                         }
