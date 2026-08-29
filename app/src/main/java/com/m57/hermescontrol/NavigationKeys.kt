@@ -66,6 +66,7 @@ import kotlinx.serialization.Serializable
 @Serializable data object AnalyticsScreen : NavKey
 
 @Serializable data object BillingScreen : NavKey
+@Serializable data object NemasysHubScreen : NavKey
 
 @Serializable data object FilesScreen : NavKey
 

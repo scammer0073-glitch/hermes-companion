@@ -972,16 +972,17 @@
     <string name="auth_login_use_profile">Enter as %1$s</string>
 
     <!-- Landing Screen -->
-    <string name="landing_brand">HERMES</string>
-    <string name="landing_brand_caption">COMPANION</string>
-    <string name="landing_private_badge">PRIVATE</string>
-    <string name="landing_title">Your agents, ready to work.</string>
-    <string name="landing_subtitle">Talk, research, build, and run tools through your private Hermes workspace.</string>
+    <string name="landing_brand">NEMASYS</string>
+    <string name="landing_brand_caption">YOUR HERMES, EVERYWHERE</string>
+    <string name="landing_private_badge">OPEN SOURCE</string>
+    <string name="landing_title">Your Hermes,
+everywhere.</string>
+    <string name="landing_subtitle">Chat, build and automate through your Hermes — self-host free, or on Nemasys Hub.</string>
     <string name="landing_capability_bots">Bots</string>
     <string name="landing_capability_memory">Memory</string>
     <string name="landing_capability_tools">Tools</string>
     <string name="landing_action_auth_login">Connect to Hermes</string>
-    <string name="landing_connection_hint">Securely connects to your Hermes dashboard</string>
+    <string name="landing_connection_hint">Self-host free • Hub from ₹199/mo • Apache 2.0</string>
 
     <!-- Loading State -->
 
@@ -1181,4 +1182,8 @@
     <!-- system action toast templates -->
     <string name="system_action_started">%1$s started</string>
     <string name="system_action_failed">%1$s failed: %2$s</string>
+    <string name="hub_title">Nemasys Hub</string>
+    <string name="hub_subtitle">Managed Hermes hosting</string>
+    <string name="hub_cta">Get Hub Access</string>
+    <string name="screen_hub">Nemasys Hub</string>
 </resources>

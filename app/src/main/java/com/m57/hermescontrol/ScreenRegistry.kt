@@ -34,6 +34,7 @@ import com.m57.hermescontrol.ui.common.NeurologyIcon
 import com.m57.hermescontrol.ui.achievements.AchievementsScreen as AchievementsScreenContent
 import com.m57.hermescontrol.ui.analytics.AnalyticsScreen as AnalyticsScreenContent
 import com.m57.hermescontrol.ui.billing.BillingScreen as BillingScreenContent
+import com.m57.hermescontrol.ui.hub.NemasysHubScreen as NemasysHubScreenContent
 import com.m57.hermescontrol.ui.channels.ChannelsScreen as ChannelsScreenContent
 import com.m57.hermescontrol.ui.chat.ChatScreen as ChatScreenContent
 import com.m57.hermescontrol.ui.config.ConfigScreen as ConfigScreenContent
@@ -234,6 +235,12 @@ object ScreenRegistry {
                 Icons.Filled.EmojiEvents,
                 DrawerSection.INSPECT,
             ) { sessionId, openDrawer -> AchievementsScreenContent(onOpenDrawer = openDrawer) },
+            ScreenDefinition(
+                NemasysHubScreen,
+                R.string.hub_title,
+                Icons.Filled.Cloud,
+                DrawerSection.CONVERSE,
+            ) { _, openDrawer -> NemasysHubScreenContent() },
             ScreenDefinition(
                 SettingsScreen,
                 R.string.screen_settings,
