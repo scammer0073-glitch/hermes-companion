@@ -1,5 +1,7 @@
 package com.m57.hermescontrol.ui.gateway
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,8 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -29,9 +34,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
@@ -168,9 +177,13 @@ fun GatewayScreen(
                                 }
                             }
 
-                            // Action Controls Card
+                            // Action Controls Card — Nemasys Black #0D0F12 16dp #1E2D44 elevation 0
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
                                 Column(
                                     modifier =
@@ -179,11 +192,23 @@ fun GatewayScreen(
                                             .padding(16.dp),
                                     verticalArrangement = Arrangement.spacedBy(12.dp),
                                 ) {
-                                    Text(
-                                        text = stringResource(R.string.gateway_sec_controls),
-                                        style = MaterialTheme.typography.titleMedium,
-                                        fontWeight = FontWeight.SemiBold,
-                                    )
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Box(
+                                            Modifier
+                                                .size(6.dp)
+                                                .clip(CircleShape)
+                                                .background(Color(0xFF2DD4BF)),
+                                        )
+                                        Spacer(Modifier.width(6.dp))
+                                        Text(
+                                            text = stringResource(R.string.gateway_sec_controls).uppercase(),
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = 0.6.sp,
+                                            color = Color(0xFF8B9AB0),
+                                        )
+                                    }
 
                                     Row(
                                         modifier = Modifier.fillMaxWidth(),
@@ -241,11 +266,15 @@ fun GatewayScreen(
                                 }
                             }
 
-                            // Platforms Card
+                            // Platforms Card — Nemasys Black #0D0F12 16dp #1E2D44 elevation 0
                             status?.gateway_platforms?.let { platforms ->
                                 if (platforms.isNotEmpty()) {
                                     Card(
                                         modifier = Modifier.fillMaxWidth(),
+                                        shape = RoundedCornerShape(16.dp),
+                                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                     ) {
                                         Column(
                                             modifier =
@@ -254,11 +283,23 @@ fun GatewayScreen(
                                                     .padding(16.dp),
                                             verticalArrangement = Arrangement.spacedBy(8.dp),
                                         ) {
-                                            Text(
-                                                text = stringResource(R.string.gateway_sec_active_platforms),
-                                                style = MaterialTheme.typography.titleMedium,
-                                                fontWeight = FontWeight.SemiBold,
-                                            )
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Box(
+                                                    Modifier
+                                                        .size(6.dp)
+                                                        .clip(CircleShape)
+                                                        .background(Color(0xFF2DD4BF)),
+                                                )
+                                                Spacer(Modifier.width(6.dp))
+                                                Text(
+                                                    text = stringResource(R.string.gateway_sec_active_platforms).uppercase(),
+                                                    fontFamily = FontFamily.Monospace,
+                                                    fontSize = 11.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    letterSpacing = 0.6.sp,
+                                                    color = Color(0xFF8B9AB0),
+                                                )
+                                            }
 
                                             platforms.forEach { (platform, pStatus) ->
                                                 Row(
