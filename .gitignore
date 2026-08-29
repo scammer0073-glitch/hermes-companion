@@ -22,6 +22,8 @@ ktlint
 # Local workspace artifacts and logs
 *.py
 .kotlin/
+kls_database.db
+HERMES-COMPANION-QUICKSTART.md
 
 
 # direnv
