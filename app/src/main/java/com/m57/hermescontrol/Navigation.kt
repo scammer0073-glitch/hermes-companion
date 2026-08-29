@@ -194,6 +194,8 @@ fun MainNavigation(sessionId: String? = null) {
             drawerContent = {
                 ModalDrawerSheet(
                     modifier = Modifier.verticalScroll(rememberScrollState()),
+                    drawerContainerColor = androidx.compose.ui.graphics.Color(0xFF0A0E14),
+                    drawerContentColor = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
                 ) {
                     val connectionStatus by HermesWsClient.connectionStatus.collectAsState()
                     val statusColor =
@@ -264,9 +266,9 @@ fun MainNavigation(sessionId: String? = null) {
                                     },
                                     colors =
                                         NavigationDrawerItemDefaults.colors(
-                                            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                                            selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                            selectedIconColor = MaterialTheme.colorScheme.primary,
+                                            selectedContainerColor = androidx.compose.ui.graphics.Color(0xFF14302C),
+                                            selectedTextColor = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
+                                            selectedIconColor = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
                                             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                         ),
