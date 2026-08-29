@@ -66,8 +66,8 @@
     <string name="billing_topup">Top-up</string>
 
     <!-- Navigation & Drawer -->
-    <string name="nav_drawer_title">Hermes</string>
-    <string name="nav_drawer_subtitle">Private companion</string>
+    <string name="nav_drawer_title">Nemasys</string>
+    <string name="nav_drawer_subtitle">Your Hermes, everywhere</string>
     <string name="nav_drawer_section_converse">Converse</string>
     <string name="nav_drawer_section_automate">Automate</string>
     <string name="nav_drawer_section_configure">Configure</string>
