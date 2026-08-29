@@ -547,8 +547,8 @@ private fun AchievementCard(
                 containerColor =
                     when {
                         isUnlocked -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
-                        isDiscovered -> MaterialTheme.colorScheme.surfaceVariant
-                        else -> MaterialTheme.colorScheme.surfaceContainerLow
+                        isDiscovered -> androidx.compose.ui.graphics.Color(0xFF0D0F12)
+                        else -> androidx.compose.ui.graphics.Color(0xFF0D0F12)
                     },
             ),
         border =
@@ -664,7 +664,7 @@ private fun AchievementCard(
                             .height(6.dp)
                             .clip(RoundedCornerShape(3.dp)),
                     color = MaterialTheme.colorScheme.tertiary,
-                    trackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                    trackColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                 )
             }
 
@@ -710,7 +710,7 @@ private fun AchievementCard(
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(8.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     ) {
                         Text(
                             text = criteria,

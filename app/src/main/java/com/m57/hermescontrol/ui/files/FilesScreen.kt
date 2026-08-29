@@ -49,6 +49,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -341,7 +342,7 @@ private fun FileRow(
                 .clickable(enabled = !isBusy, onClick = onClick),
         colors =
             CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
             ),
         shape = RoundedCornerShape(12.dp),
     ) {
