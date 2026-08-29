@@ -68,6 +68,10 @@ import kotlinx.serialization.Serializable
 @Serializable data object BillingScreen : NavKey
 @Serializable data object NemasysHubScreen : NavKey
 
+@Serializable data object PersonalAppsScreen : NavKey
+
+@Serializable data class PersonalAppDetailKey(val appId: String) : NavKey
+
 @Serializable data object FilesScreen : NavKey
 
 // ── Settings drill-down sub-pages ──────────────────────────────────────

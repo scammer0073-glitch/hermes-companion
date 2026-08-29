@@ -58,6 +58,7 @@ import com.m57.hermescontrol.ui.settings.SettingsChatPage
 import com.m57.hermescontrol.ui.settings.SettingsConnectionPage
 import com.m57.hermescontrol.ui.settings.SettingsLanguagePage
 import com.m57.hermescontrol.ui.settings.SettingsViewModel
+import com.m57.hermescontrol.ui.personal.PersonalAppDetailScreen
 import com.m57.hermescontrol.ui.toolsets.ToolsetDetailScreen
 import kotlinx.coroutines.launch
 import com.m57.hermescontrol.ui.authlogin.AuthLoginScreen as AuthLoginScreenContent
@@ -153,6 +154,13 @@ private fun appEntryProvider(
             name = key.name,
             label = key.label,
             onBack = { NavigationController.goBack() },
+        )
+    }
+
+    entry<PersonalAppDetailKey> { key ->
+        PersonalAppDetailScreen(
+            appId = key.appId,
+            onOpenDrawer = null,
         )
     }
 }

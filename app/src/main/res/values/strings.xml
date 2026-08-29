@@ -105,6 +105,7 @@
     <string name="screen_analytics">Analytics</string>
     <string name="screen_billing">Billing</string>
     <string name="screen_files">Files</string>
+    <string name="screen_personal_apps">Personal Apps</string>
 
     <!-- Notifications -->
     <string name="notif_title">Hermes</string>

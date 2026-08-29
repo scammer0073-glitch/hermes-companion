@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Devices
@@ -48,6 +49,7 @@ import com.m57.hermescontrol.ui.mcp.McpServersScreen as McpServersScreenContent
 import com.m57.hermescontrol.ui.memory.MemoryScreen as MemoryScreenContent
 import com.m57.hermescontrol.ui.model.ModelScreen as ModelScreenContent
 import com.m57.hermescontrol.ui.pairing.PairingScreen as PairingScreenContent
+import com.m57.hermescontrol.ui.personal.PersonalAppsScreen
 import com.m57.hermescontrol.ui.plugins.PluginsScreen as PluginsScreenContent
 import com.m57.hermescontrol.ui.process.ProcessesScreen as ProcessesScreenContent
 import com.m57.hermescontrol.ui.profiles.ProfilesScreen as ProfilesScreenContent
@@ -241,6 +243,12 @@ object ScreenRegistry {
                 Icons.Filled.Cloud,
                 DrawerSection.CONVERSE,
             ) { _, openDrawer -> NemasysHubScreenContent() },
+            ScreenDefinition(
+                PersonalAppsScreen,
+                R.string.screen_personal_apps,
+                Icons.Filled.Apps,
+                DrawerSection.CONVERSE,
+            ) { _, openDrawer -> PersonalAppsScreen(onOpenDrawer = openDrawer) },
             ScreenDefinition(
                 SettingsScreen,
                 R.string.screen_settings,
