@@ -204,10 +204,10 @@ fun HermesScaffold(
                 },
                 colors =
                     TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.surface,
-                        titleContentColor = MaterialTheme.colorScheme.onSurface,
-                        navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
-                        actionIconContentColor = MaterialTheme.colorScheme.onSurface,
+                        containerColor = androidx.compose.ui.graphics.Color(0xFF0A0E14),
+                        titleContentColor = androidx.compose.ui.graphics.Color.White,
+                        navigationIconContentColor = androidx.compose.ui.graphics.Color.White,
+                        actionIconContentColor = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
                     ),
                 scrollBehavior = scrollBehavior,
             )
