@@ -622,7 +622,7 @@ fun SessionsScreen(
                                         ) {
                                             items(sessionsToDisplay, key = { it.session.id }) { item ->
                                                 val session = item.session
-                                                SearchResultCard(
+                                                androidx.compose.foundation.layout.Box(Modifier.animateItem()) { SearchResultCard(
                                                     session = session,
                                                     query = state.searchQuery,
                                                     isSelecting = state.isSelecting,
@@ -653,7 +653,7 @@ fun SessionsScreen(
                                                         )
                                                     },
                                                     onDelete = { viewModel.requestDeleteSession(session.id) },
-                                                )
+                                                ) }
                                             }
                                         }
                                     }
@@ -788,7 +788,7 @@ fun SessionsScreen(
                             ) {
                                 items(sessionsToDisplay, key = { it.session.id }) { item ->
                                     val session = item.session
-                                    SessionCard(
+                                    androidx.compose.foundation.layout.Box(Modifier.animateItem()) { SessionCard(
                                         session = session,
                                         displayTitle = item.displayTitle,
                                         depth = item.depth,
@@ -820,7 +820,7 @@ fun SessionsScreen(
                                         },
                                         onTogglePin = { viewModel.togglePin(session.id) },
                                         onDelete = { viewModel.requestDeleteSession(session.id) },
-                                    )
+                                    ) }
                                 }
 
                                 // Load more
