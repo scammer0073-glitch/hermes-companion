@@ -50,6 +50,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -279,7 +280,7 @@ private fun ToolsetProviderCard(
                     if (expanded) {
                         MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.10f)
                     } else {
-                        MaterialTheme.colorScheme.surfaceVariant
+                        androidx.compose.ui.graphics.Color(0xFF0D0F12)
                     },
             ),
     ) {
@@ -655,7 +656,7 @@ private fun PostSetupRunner(
             if (activeState?.running == true || lines.isNotEmpty()) {
                 Surface(
                     shape = MaterialTheme.shapes.small,
-                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Column(

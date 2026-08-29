@@ -34,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -159,7 +160,7 @@ fun ToolsetsScreen(
                                                 if (toolset.enabled) {
                                                     MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.15f)
                                                 } else {
-                                                    MaterialTheme.colorScheme.surfaceVariant
+                                                    androidx.compose.ui.graphics.Color(0xFF0D0F12)
                                                 },
                                         ),
                                 ) {
