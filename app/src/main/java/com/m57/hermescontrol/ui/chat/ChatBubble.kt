@@ -164,17 +164,17 @@ fun ChatBubble(
                             .widthIn(max = maxBubbleWidth)
                             .clip(
                                 RoundedCornerShape(
-                                    topStart = 16.dp,
-                                    topEnd = 16.dp,
-                                    bottomStart = 16.dp,
-                                    bottomEnd = 4.dp,
+                                    topStart = 22.dp,
+                                    topEnd = 22.dp,
+                                    bottomStart = 22.dp,
+                                    bottomEnd = 6.dp,
                                 ),
                             ).background(color = primary)
                             .testTag("chat_bubble_user"),
                     color = Color.Transparent,
                     tonalElevation = 0.dp,
                 ) {
-                    Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)) {
+                    Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
                         SelectionContainer {
                             Text(
                                 text = highlightedText,

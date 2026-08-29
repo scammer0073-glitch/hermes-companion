@@ -67,7 +67,7 @@
 
     <!-- Navigation & Drawer -->
     <string name="nav_drawer_title">Hermes</string>
-    <string name="nav_drawer_subtitle">AI Agent Control</string>
+    <string name="nav_drawer_subtitle">Private companion</string>
     <string name="nav_drawer_section_converse">Converse</string>
     <string name="nav_drawer_section_automate">Automate</string>
     <string name="nav_drawer_section_configure">Configure</string>
@@ -79,7 +79,12 @@
     <string name="screen_cron">Cron</string>
     <string name="screen_system">System</string>
     <string name="screen_settings">Settings</string>
-    <string name="screen_profiles">Profiles</string>
+    <string name="screen_profiles">Bots</string>
+    <string name="bots_default_name">Hermes</string>
+    <string name="bots_picker_title">Bots</string>
+    <string name="bots_picker_subtitle">Switch personality, model, skills, and memory. These are Hermes profiles.</string>
+    <string name="bots_picker_search">Search bots</string>
+    <string name="bots_picker_manage">Manage bots</string>
     <string name="screen_webhooks">Webhooks</string>
     <string name="screen_gateway">Gateway</string>
     <string name="screen_toolsets">Toolsets</string>
@@ -163,7 +168,7 @@
     <string name="settings_sec_chat">Chat</string>
     <string name="settings_item_typing_effect">Typing Effect</string>
     <string name="settings_desc_typing_effect">Animate new messages word by word</string>
-    <string name="fullbleed_role_agent">Assistant</string>
+    <string name="fullbleed_role_agent">Hermes</string>
     <string name="settings_item_typing_delay">Delay: %1$d ms</string>
     <string name="settings_delay_10ms">10 ms</string>
     <string name="settings_delay_100ms">100 ms</string>
@@ -616,39 +621,39 @@
     <string name="config_action_save">Save</string>
     <string name="config_action_save_yaml">Save YAML</string>
 
-    <!-- Profiles Screen -->
-    <string name="profiles_empty_title">No profiles available</string>
-    <string name="profiles_empty_desc">Connection profiles from Hermes will appear here.</string>
+    <!-- Bots Screen (backed by Hermes profiles) -->
+    <string name="profiles_empty_title">No bots yet</string>
+    <string name="profiles_empty_desc">Create a bot with its own personality, model, skills, tools, memory, and sessions.</string>
     <string name="profiles_label_model">Model: %1$s</string>
     <string name="profiles_label_provider">Provider: %1$s</string>
     <string name="profiles_label_skills">%1$d skills</string>
     <string name="profiles_label_path">Path: %1$s</string>
     <string name="profiles_badge_auto_generated">Auto-generated</string>
-    <string name="profiles_action_activate">Activate</string>
-    <string name="profiles_action_edit_soul">Edit Soul</string>
+    <string name="profiles_action_activate">Use Bot</string>
+    <string name="profiles_action_edit_soul">Edit Personality</string>
     <string name="profiles_action_set_model">Set Model</string>
-    <string name="profiles_action_clone">Clone</string>
+    <string name="profiles_action_clone">Duplicate Bot</string>
     <string name="profiles_action_edit_description">Edit Description</string>
-    <string name="profiles_content_desc_active">Active Profile</string>
-    <string name="profiles_title_edit_soul">Edit Soul Profile: %1$s</string>
-    <string name="profiles_title_set_model">Set Model: %1$s</string>
-    <string name="profiles_title_clone">Clone Profile: %1$s</string>
-    <string name="profiles_title_edit_description">Edit Description: %1$s</string>
-    <string name="profiles_label_new_name_input">New Profile Name</string>
+    <string name="profiles_content_desc_active">Active Bot</string>
+    <string name="profiles_title_edit_soul">Edit Personality: %1$s</string>
+    <string name="profiles_title_set_model">Set Bot Model: %1$s</string>
+    <string name="profiles_title_clone">Duplicate Bot: %1$s</string>
+    <string name="profiles_title_edit_description">Edit Bot Description: %1$s</string>
+    <string name="profiles_label_new_name_input">New Bot Name</string>
     <string name="profiles_label_description_input">Description</string>
-    <string name="profiles_description_placeholder">No description provided. Describe this profile\'s role.</string>
+    <string name="profiles_description_placeholder">No description yet. Describe what this bot is best at.</string>
     <string name="profiles_action_rename">Rename</string>
     <string name="profiles_action_auto_describe">Auto-Describe</string>
     <string name="profiles_action_setup_command">Setup Command</string>
     <string name="profiles_action_copy">Copy</string>
     <string name="profiles_action_copied">Copied ✓</string>
-    <string name="profiles_title_rename">Rename Profile: %1$s</string>
-    <string name="profiles_title_delete">Delete Profile: %1$s</string>
+    <string name="profiles_title_rename">Rename Bot: %1$s</string>
+    <string name="profiles_title_delete">Delete Bot: %1$s</string>
     <string name="profiles_title_setup_command">Setup Command: %1$s</string>
-    <string name="profiles_delete_warning">This permanently deletes the profile \'%1$s\' and its data.</string>
+    <string name="profiles_delete_warning">This permanently deletes the bot \'%1$s\' and its data.</string>
     <string name="profiles_delete_path">Path: %1$s</string>
-    <string name="profiles_delete_gateway_warning">This profile has a running gateway — deleting it will stop it.</string>
-    <string name="profiles_setup_command_hint">Run this command in the Hermes CLI to configure this profile.</string>
+    <string name="profiles_delete_gateway_warning">This bot has a running gateway, deleting it will stop the gateway.</string>
+    <string name="profiles_setup_command_hint">Run this command in the Hermes CLI to configure this bot profile.</string>
     <string name="profiles_builder_step_indicator">Step %1$d of 5</string>
     <string name="profiles_builder_step_identity">Identity</string>
     <string name="profiles_builder_step_model">Model Configuration</string>
@@ -657,8 +662,8 @@
     <string name="profiles_builder_step_review">Review &amp; Create</string>
     <string name="profiles_builder_action_back">Back</string>
     <string name="profiles_builder_action_next">Next</string>
-    <string name="profiles_builder_action_create">Create Profile</string>
-    <string name="profiles_builder_label_profile_name">Profile Name</string>
+    <string name="profiles_builder_action_create">Create Bot</string>
+    <string name="profiles_builder_label_profile_name">Bot Name</string>
     <string name="profiles_builder_label_description">Description</string>
     <string name="profiles_builder_title_provider">Select Provider (Optional)</string>
     <string name="profiles_builder_title_model">Select Model</string>
@@ -679,7 +684,7 @@
     <string name="profiles_builder_mcp_command">Command</string>
     <string name="profiles_builder_mcp_args">Arguments (comma-separated)</string>
     <string name="profiles_builder_mcp_sse_url">SSE URL</string>
-    <string name="profiles_builder_review_name">Profile Name</string>
+    <string name="profiles_builder_review_name">Bot Name</string>
     <string name="profiles_builder_review_description">Description</string>
     <string name="profiles_builder_review_provider">Provider: %1$s</string>
     <string name="profiles_builder_review_model">Model: %1$s</string>
@@ -948,8 +953,8 @@
     <string name="settings_logout">Logout</string>
 
     <!-- Auth Login Screen -->
-    <string name="auth_login_title">Auth Login</string>
-    <string name="auth_login_desc">Connect to your Hermes dashboard</string>
+    <string name="auth_login_title">Connect</string>
+    <string name="auth_login_desc">Sign in to your private Hermes workspace.</string>
     <string name="auth_login_base_url_label">Server URL</string>
     <string name="auth_login_token_label">Session Token</string>
     <string name="auth_login_username_label">Username</string>
@@ -967,9 +972,16 @@
     <string name="auth_login_use_profile">Enter as %1$s</string>
 
     <!-- Landing Screen -->
-    <string name="landing_title">Hermes Mobile</string>
-    <string name="landing_subtitle">Control panel for Hermes Agent</string>
-    <string name="landing_action_auth_login">Auth Login</string>
+    <string name="landing_brand">HERMES</string>
+    <string name="landing_brand_caption">COMPANION</string>
+    <string name="landing_private_badge">PRIVATE</string>
+    <string name="landing_title">Your agents, ready to work.</string>
+    <string name="landing_subtitle">Talk, research, build, and run tools through your private Hermes workspace.</string>
+    <string name="landing_capability_bots">Bots</string>
+    <string name="landing_capability_memory">Memory</string>
+    <string name="landing_capability_tools">Tools</string>
+    <string name="landing_action_auth_login">Connect to Hermes</string>
+    <string name="landing_connection_hint">Securely connects to your Hermes dashboard</string>
 
     <!-- Loading State -->
 

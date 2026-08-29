@@ -1,6 +1,7 @@
 package com.m57.hermescontrol.ui.profiles
 
 import android.content.ClipData
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,15 +13,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.SmartToy
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -35,6 +39,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -99,6 +104,7 @@ fun ProfilesScreen(
     val scope = rememberCoroutineScope()
 
     var isBuildingProfile by remember { mutableStateOf(false) }
+    var botQuery by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         viewModel.loadProfiles()
@@ -110,7 +116,7 @@ fun ProfilesScreen(
         title = {
             Text(
                 if (isBuildingProfile) {
-                    "Create Profile"
+                    stringResource(R.string.profiles_builder_action_create)
                 } else {
                     stringResource(R.string.screen_profiles)
                 },
@@ -167,8 +173,11 @@ fun ProfilesScreen(
                     EmptyState(
                         title = stringResource(R.string.profiles_empty_title),
                         subtitle = stringResource(R.string.profiles_empty_desc),
-                        onAction = { viewModel.loadProfiles() },
-                        actionLabel = stringResource(R.string.content_desc_refresh),
+                        onAction = {
+                            isBuildingProfile = true
+                            viewModel.loadBuilderData()
+                        },
+                        actionLabel = stringResource(R.string.profiles_builder_action_create),
                         modifier = Modifier.padding(paddingValues),
                     )
                 }
@@ -192,19 +201,49 @@ fun ProfilesScreen(
                             LazyColumn(
                                 modifier = Modifier.fillMaxSize(),
                                 contentPadding = PaddingValues(16.dp),
-                                verticalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp),
                             ) {
-                                items(state.profiles, key = { it.name }) { profile ->
+                                item(key = "bots-search") {
+                                    OutlinedTextField(
+                                        value = botQuery,
+                                        onValueChange = { botQuery = it },
+                                        modifier = Modifier.fillMaxWidth(),
+                                        singleLine = true,
+                                        placeholder = { Text(stringResource(R.string.bots_picker_search)) },
+                                        shape = RoundedCornerShape(16.dp),
+                                    )
+                                }
+                                val visibleProfiles =
+                                    if (botQuery.isBlank()) {
+                                        state.profiles
+                                    } else {
+                                        state.profiles.filter {
+                                            it.name.contains(botQuery, ignoreCase = true) ||
+                                                (it.description?.contains(botQuery, ignoreCase = true) == true)
+                                        }
+                                    }
+                                items(visibleProfiles, key = { it.name }) { profile ->
                                     val isActive = profile.name == state.activeProfileName
                                     Card(
                                         modifier = Modifier.fillMaxWidth(),
+                                        shape = RoundedCornerShape(22.dp),
                                         colors =
                                             CardDefaults.cardColors(
                                                 containerColor =
                                                     if (isActive) {
                                                         MaterialTheme.colorScheme.primaryContainer
                                                     } else {
-                                                        MaterialTheme.colorScheme.surfaceVariant
+                                                        MaterialTheme.colorScheme.surfaceContainer
+                                                    },
+                                            ),
+                                        border =
+                                            BorderStroke(
+                                                width = 1.dp,
+                                                color =
+                                                    if (isActive) {
+                                                        MaterialTheme.colorScheme.outline
+                                                    } else {
+                                                        MaterialTheme.colorScheme.outlineVariant
                                                     },
                                             ),
                                         onClick = {
@@ -224,6 +263,31 @@ fun ProfilesScreen(
                                                 horizontalArrangement = Arrangement.SpaceBetween,
                                                 verticalAlignment = Alignment.CenterVertically,
                                             ) {
+                                                Surface(
+                                                    modifier = Modifier.size(46.dp),
+                                                    shape = CircleShape,
+                                                    color =
+                                                        if (isActive) {
+                                                            MaterialTheme.colorScheme.primary
+                                                        } else {
+                                                            MaterialTheme.colorScheme.surfaceContainerHighest
+                                                        },
+                                                    contentColor =
+                                                        if (isActive) {
+                                                            MaterialTheme.colorScheme.onPrimary
+                                                        } else {
+                                                            MaterialTheme.colorScheme.onSurface
+                                                        },
+                                                ) {
+                                                    Box(contentAlignment = Alignment.Center) {
+                                                        Icon(
+                                                            imageVector = Icons.Filled.SmartToy,
+                                                            contentDescription = null,
+                                                            modifier = Modifier.size(24.dp),
+                                                        )
+                                                    }
+                                                }
+                                                Spacer(modifier = Modifier.width(12.dp))
                                                 Column(modifier = Modifier.weight(1f)) {
                                                     Text(
                                                         text = profile.name.replaceFirstChar { it.uppercase() },

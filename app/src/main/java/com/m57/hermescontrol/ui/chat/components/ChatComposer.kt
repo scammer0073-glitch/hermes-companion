@@ -109,16 +109,16 @@ fun ChatInputBar(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 6.dp),
-            shape = RoundedCornerShape(20.dp),
-            color = MaterialTheme.colorScheme.surface,
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+            shape = RoundedCornerShape(26.dp),
+            color = MaterialTheme.colorScheme.surfaceContainer,
             border =
                 BorderStroke(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.55f),
                 ),
-            tonalElevation = 2.dp,
-            shadowElevation = 4.dp,
+            tonalElevation = 0.dp,
+            shadowElevation = 0.dp,
         ) {
             Column {
                 // Commands hidden from the suggestion menu — desktop/CLI-only and
@@ -244,18 +244,18 @@ fun ChatInputBar(
                         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
                         decorationBox = { innerTextField ->
                             Surface(
-                                shape = RoundedCornerShape(18.dp),
+                                shape = RoundedCornerShape(20.dp),
                                 border =
                                     BorderStroke(
-                                        width = if (isFocused) 2.dp else 1.dp,
+                                        width = 1.dp,
                                         color =
                                             if (isFocused) {
                                                 MaterialTheme.colorScheme.primary
                                             } else {
-                                                MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+                                                MaterialTheme.colorScheme.outlineVariant
                                             },
                                     ),
-                                color = MaterialTheme.colorScheme.surface,
+                                color = MaterialTheme.colorScheme.surfaceContainerHigh,
                                 modifier = Modifier.fillMaxWidth(),
                             ) {
                                 Row(
@@ -289,7 +289,11 @@ fun ChatInputBar(
                                             IconButton(
                                                 onClick = onSend,
                                                 enabled = canSend,
-                                                colors = IconButtonDefaults.filledTonalIconButtonColors(),
+                                                colors =
+                                                    IconButtonDefaults.filledIconButtonColors(
+                                                        containerColor = MaterialTheme.colorScheme.primary,
+                                                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                                                    ),
                                                 modifier =
                                                     Modifier
                                                         .size(36.dp)

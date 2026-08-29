@@ -65,13 +65,13 @@ object AuthManager {
                 "AuthManager not initialized. Call init(context) first.",
             )
 
-    private val _themePreferenceFlow = MutableStateFlow<ThemePreference>(ThemePreference.SYSTEM)
+    private val _themePreferenceFlow = MutableStateFlow<ThemePreference>(ThemePreference.DARK)
     val themePreferenceFlow: StateFlow<ThemePreference> = _themePreferenceFlow.asStateFlow()
 
-    private val _useDynamicColorsFlow = MutableStateFlow<Boolean>(true)
+    private val _useDynamicColorsFlow = MutableStateFlow<Boolean>(false)
     val useDynamicColorsFlow: StateFlow<Boolean> = _useDynamicColorsFlow.asStateFlow()
 
-    private val _themePresetFlow = MutableStateFlow<ThemePreset>(ThemePreset.DEFAULT)
+    private val _themePresetFlow = MutableStateFlow<ThemePreset>(ThemePreset.AMOLED)
     val themePresetFlow: StateFlow<ThemePreset> = _themePresetFlow.asStateFlow()
 
     private val _tokenFlow = MutableStateFlow<String?>(null)

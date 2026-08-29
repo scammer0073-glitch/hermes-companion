@@ -1,7 +1,10 @@
 package com.m57.hermescontrol.data.config
 
+import com.m57.hermescontrol.theme.ThemePreference
+import com.m57.hermescontrol.theme.ThemePreset
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -14,6 +17,9 @@ class ServerStoreTest {
         assertEquals("127.0.0.1", state.host)
         assertEquals(9119, state.port)
         assertTrue(state.autoReconnect)
+        assertEquals(ThemePreference.DARK, state.themePreference)
+        assertEquals(ThemePreset.AMOLED, state.themePreset)
+        assertFalse(state.useDynamicColors)
         assertEquals("token", state.wsAuthParam)
         assertTrue(state.connectionProfiles.isEmpty())
         assertNull(state.selectedProfileId)

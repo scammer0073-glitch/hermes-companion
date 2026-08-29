@@ -18,10 +18,12 @@ private val AmoledContainerHighest = Color(0xFF262626) // surfaceContainerHighes
 private val AmoledOutline = Color(0xFF808080)
 private val AmoledOutlineVariant = Color(0xFF404040)
 private val AmoledTextDim = Color(0xFFB3B3B3) // onSurfaceVariant
-private val AmoledTextBright = Color(0xFFFFFFFF) // pure white — max contrast on black; primary, error, text
-private val AmoledSecondary = Color(0xFFCCCCCC) // secondary accent + warning
-private val AmoledTertiary = Color(0xFF999999) // tertiary accent + success
-private val AmoledInfo = Color(0xFF808080) // info — same value as outline, distinct role
+private val AmoledTextBright = Color(0xFFFFFFFF) // pure white — max contrast on black
+private val AmoledTeal = Color(0xFF80D5D2) // Hermes desktop default accent
+private val AmoledGold = Color(0xFFECC248) // Hermes tool/marker gold
+private val AmoledSecondary = Color(0xFFCCCCCC) // warning
+private val AmoledTertiary = Color(0xFF81D692) // success
+private val AmoledInfo = Color(0xFF8ECEFF)
 private val AmoledInversePrimary = Color(0xFF121212) // dark tone on the (light, fallback) inverseSurface
 
 /**
@@ -41,14 +43,14 @@ val AmoledTheme =
     buildThemeDarkOnly(
         dark =
             PaletteColors(
-                primary = AmoledTextBright,
+                primary = AmoledTeal,
                 onPrimary = AmoledFloor,
                 primaryContainer = AmoledContainerHighest,
-                onPrimaryContainer = AmoledTextBright,
-                secondary = AmoledSecondary,
+                onPrimaryContainer = AmoledTeal,
+                secondary = AmoledGold,
                 onSecondary = AmoledFloor,
                 secondaryContainer = AmoledContainerHigh,
-                onSecondaryContainer = AmoledSecondary,
+                onSecondaryContainer = AmoledGold,
                 tertiary = AmoledTertiary,
                 onTertiary = AmoledFloor,
                 tertiaryContainer = AmoledContainerHigh,

@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.AccountBalanceWallet
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Build
@@ -25,6 +24,7 @@ import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Sensors
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.SmartToy
 import androidx.compose.material.icons.filled.ViewKanban
 import androidx.compose.material.icons.filled.Webhook
 import androidx.compose.runtime.Composable
@@ -83,7 +83,13 @@ object ScreenRegistry {
                 R.string.screen_chat,
                 Icons.AutoMirrored.Filled.Chat,
                 DrawerSection.CONVERSE,
-            ) { sessionId, openDrawer -> ChatScreenContent(onOpenDrawer = openDrawer, sessionId = sessionId) },
+            ) { sessionId, openDrawer ->
+                ChatScreenContent(
+                    onOpenDrawer = openDrawer,
+                    onOpenBots = { NavigationController.navigateTo(ProfilesScreen) },
+                    sessionId = sessionId,
+                )
+            },
             ScreenDefinition(
                 HistoryScreen,
                 R.string.screen_history,
@@ -93,7 +99,7 @@ object ScreenRegistry {
             ScreenDefinition(
                 ProfilesScreen,
                 R.string.screen_profiles,
-                Icons.Filled.AccountCircle,
+                Icons.Filled.SmartToy,
                 DrawerSection.CONVERSE,
             ) { sessionId, openDrawer -> ProfilesScreenContent(onOpenDrawer = openDrawer) },
             ScreenDefinition(
