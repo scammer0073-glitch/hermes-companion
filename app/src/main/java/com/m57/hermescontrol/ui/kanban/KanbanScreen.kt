@@ -53,6 +53,7 @@ import com.m57.hermescontrol.ui.common.HermesScaffold
 import com.m57.hermescontrol.ui.common.NavIcon
 import com.m57.hermescontrol.ui.common.SearchBar
 import com.m57.hermescontrol.ui.common.SkeletonListState
+import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ToastEffect
 
 private const val DEFAULT_COLUMN = "todo"
@@ -149,13 +150,9 @@ fun KanbanScreen(
                             }
 
                             if (state.selectedBoard == null) {
-                                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                    Text(stringResource(R.string.kanban_no_boards))
-                                }
+                                EmptyState(title = "No boards yet", subtitle = "Boards organize your work — create one to start", icon = androidx.compose.material.icons.Icons.Filled.Add)
                             } else if (state.columns.isEmpty()) {
-                                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                    Text(stringResource(R.string.kanban_no_columns))
-                                }
+                                EmptyState(title = "No columns", subtitle = "This board has no columns yet — add one to track work", icon = androidx.compose.material.icons.Icons.Filled.Person)
                             } else {
                                 Row(
                                     modifier =
@@ -209,19 +206,7 @@ fun KanbanScreen(
                                             )
 
                                             if (colTasks.isEmpty()) {
-                                                Box(
-                                                    modifier =
-                                                        Modifier
-                                                            .fillMaxWidth()
-                                                            .padding(vertical = 16.dp),
-                                                    contentAlignment = Alignment.Center,
-                                                ) {
-                                                    Text(
-                                                        text = stringResource(R.string.kanban_no_tasks),
-                                                        style = MaterialTheme.typography.bodySmall,
-                                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                                    )
-                                                }
+                                                androidx.compose.material3.Surface(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp), color = androidx.compose.ui.graphics.Color(0xFF0D0F12), border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44))) { Row(Modifier.fillMaxWidth().padding(vertical = 18.dp), horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) { androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Add, null, tint = androidx.compose.ui.graphics.Color(0xFF2DD4BF), modifier = Modifier.size(14.dp)); androidx.compose.foundation.layout.Spacer(Modifier.width(6.dp)); androidx.compose.material3.Text("Drop tasks here", style = androidx.compose.material3.MaterialTheme.typography.labelMedium, color = androidx.compose.ui.graphics.Color(0xFF8B9AB0)) } }
                                             } else {
                                                 LazyColumn(
                                                     modifier = Modifier.weight(1f),
