@@ -1,6 +1,9 @@
 package com.m57.hermescontrol.ui.channels.components
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -21,6 +25,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,10 +42,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.MessagingPlatform
 import com.m57.hermescontrol.data.model.MessagingPlatformUpdate
@@ -112,8 +121,33 @@ internal fun PlatformCard(
     var showRemoveConfirm by remember { mutableStateOf(false) }
     val style = platformStateStyle(platform.state)
 
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+    ) {
         Column(modifier = Modifier.padding(16.dp)) {
+            // ── Nemasys header: mono 11sp uppercase with teal dot ──
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF2DD4BF)),
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = "PLATFORM",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = Color(0xFF8B9AB0),
+                )
+            }
+            Spacer(modifier = Modifier.height(10.dp))
             // ── Top row: icon + name + badge + switch ──
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -135,6 +169,7 @@ internal fun PlatformCard(
                         Text(
                             text = platform.name,
                             style = MaterialTheme.typography.titleMedium,
+                            color = Color(0xFFE6EDF3),
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -162,7 +197,7 @@ internal fun PlatformCard(
                 Text(
                     text = platform.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = Color(0xFF8B9AB0),
                 )
             }
 
@@ -185,6 +220,7 @@ internal fun PlatformCard(
                 OutlinedButton(
                     onClick = onTest,
                     enabled = !isTesting,
+                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
                 ) {
                     if (isTesting) {
                         CircularProgressIndicator(
@@ -196,11 +232,16 @@ internal fun PlatformCard(
                     Text(
                         text = stringResource(R.string.channels_action_test),
                         style = MaterialTheme.typography.labelSmall,
+                        color = Color(0xFF8B9AB0),
                     )
                 }
 
                 Button(
                     onClick = { showConfigureForm = !showConfigureForm },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF2DD4BF),
+                        contentColor = Color(0xFF001018),
+                    ),
                 ) {
                     Text(
                         text =
@@ -210,6 +251,7 @@ internal fun PlatformCard(
                                 stringResource(R.string.channels_action_configure)
                             },
                         style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
                     )
                 }
 
@@ -238,6 +280,10 @@ internal fun PlatformCard(
                 Spacer(modifier = Modifier.height(8.dp))
                 Button(
                     onClick = onStartOnboarding,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF2DD4BF),
+                        contentColor = Color(0xFF001018),
+                    ),
                 ) {
                     Icon(
                         imageVector = Icons.Filled.QrCode,
@@ -248,6 +294,7 @@ internal fun PlatformCard(
                     Text(
                         text = stringResource(R.string.platform_setup_qr),
                         style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
                     )
                 }
             }
