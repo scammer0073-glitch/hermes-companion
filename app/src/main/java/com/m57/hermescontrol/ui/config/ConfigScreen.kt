@@ -433,29 +433,47 @@ private fun FormEditor(
         }
 
         if (activeCategory == "Other" && !isSearching) {
-            // Non-schema config values — read-only cards
+            // Non-schema config values — read-only cards (Nemasys Black)
             items(uncoveredPaths, key = { it }) { dotPath ->
                 Card(
                     modifier =
                         Modifier
                             .fillMaxWidth()
                             .padding(vertical = 4.dp),
-                    colors =
-                        CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        ),
+                    shape = RoundedCornerShape(16.dp),
+                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Text(
-                            text = dotPath,
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Medium,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(0xFF2DD4BF)),
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                text = dotPath.uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = Color(0xFF8B9AB0),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.weight(1f),
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(6.dp))
                         Text(
                             text = values[dotPath]?.let(::jsonText) ?: "",
                             style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = Color(0xFF8B9AB0),
                         )
                     }
                 }
