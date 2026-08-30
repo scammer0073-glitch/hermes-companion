@@ -1,6 +1,7 @@
 package com.m57.hermescontrol.ui.analytics
 
 import android.app.Application
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,8 +14,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BarChart
@@ -37,9 +41,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.NavigationController
@@ -146,6 +152,9 @@ private fun AnalyticsContent(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Box(
                         modifier =
@@ -221,12 +230,20 @@ private fun AnalyticsContent(
                 }
             } else {
                 item {
-                    Text(
-                        text = stringResource(R.string.analytics_no_model_data),
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Text(
+                            text = stringResource(R.string.analytics_no_model_data),
+                            modifier = Modifier.padding(16.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
             }
         }
@@ -243,12 +260,20 @@ private fun AnalyticsContent(
                 }
             } else {
                 item {
-                    Text(
-                        text = stringResource(R.string.analytics_no_skill_data),
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Text(
+                            text = stringResource(R.string.analytics_no_skill_data),
+                            modifier = Modifier.padding(16.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
             }
         }
@@ -260,12 +285,20 @@ private fun AnalyticsContent(
                 }
             } else {
                 item {
-                    Text(
-                        text = stringResource(R.string.analytics_no_tool_data),
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Text(
+                            text = stringResource(R.string.analytics_no_tool_data),
+                            modifier = Modifier.padding(16.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
             }
         }
@@ -294,13 +327,26 @@ private fun DayRangeSelector(
 
 @Composable
 private fun SectionTitle(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleSmall,
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
-    )
+    ) {
+        Box(
+            Modifier
+                .size(6.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF2DD4BF)),
+        )
+        Spacer(Modifier.width(6.dp))
+        Text(
+            text = text.uppercase(),
+            fontFamily = FontFamily.Monospace,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 0.6.sp,
+            color = Color(0xFF8B9AB0),
+        )
+    }
 }
 
 @Composable
@@ -310,6 +356,8 @@ private fun TotalsCard(totals: com.m57.hermescontrol.data.model.AnalyticsTotals)
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
         shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
@@ -379,6 +427,9 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             if (maxCost <= 0.0) {
@@ -441,7 +492,10 @@ private fun ModelRow(model: ModelsAnalyticsModelEntry) {
     val status = LocalHermesStatusColors.current
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Row(
@@ -492,7 +546,10 @@ private fun ModelEntryRow(entry: com.m57.hermescontrol.data.model.AnalyticsModel
     val status = LocalHermesStatusColors.current
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier =
@@ -537,7 +594,10 @@ private fun ModelEntryRow(entry: com.m57.hermescontrol.data.model.AnalyticsModel
 private fun SkillRow(skill: com.m57.hermescontrol.data.model.AnalyticsSkillEntry) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier =
@@ -574,7 +634,10 @@ private fun SkillRow(skill: com.m57.hermescontrol.data.model.AnalyticsSkillEntry
 private fun ToolRow(tool: com.m57.hermescontrol.data.model.AnalyticsToolUsage) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier =
