@@ -995,18 +995,17 @@ private fun SessionCard(
                     // "Select" item.
                     onLongClick = { if (!isSelecting) menuExpanded = true },
                 ),
-        colors =
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainer,
-            ),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
         border =
             if (isActive && !isSelecting) {
                 BorderStroke(2.dp, statusColors.success)
             } else if (isSelected) {
-                BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+                BorderStroke(2.dp, Color(0xFF2DD4BF))
             } else {
-                null
+                BorderStroke(1.dp, Color(0xFF1E2D44))
             },
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Box {
             Row(
