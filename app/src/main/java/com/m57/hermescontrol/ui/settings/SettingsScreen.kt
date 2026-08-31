@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.settings
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.ListAlt
@@ -148,8 +150,10 @@ private data class SettingsRow(
 private fun SettingsCategoryCard(items: List<SettingsRow>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(1.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column {
             items.forEachIndexed { index, row ->
@@ -163,13 +167,14 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                         Icon(
                             imageVector = row.icon,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = Color(0xFF8B9AB0),
                         )
                     },
                     headlineContent = {
                         Text(
                             text = row.label,
                             style = MaterialTheme.typography.bodyLarge,
+                            color = Color(0xFFE6EDF3),
                         )
                     },
                     supportingContent =
@@ -178,7 +183,7 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                                 Text(
                                     text = summary,
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = Color(0xFF8B9AB0),
                                 )
                             }
                         },
@@ -186,14 +191,14 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            tint = Color(0xFF8B9AB0),
                         )
                     },
                 )
                 if (index < items.lastIndex) {
                     HorizontalDivider(
                         modifier = Modifier.padding(start = 56.dp, end = 16.dp),
-                        color = MaterialTheme.colorScheme.outlineVariant,
+                        color = Color(0xFF1E2D44),
                     )
                 }
             }
