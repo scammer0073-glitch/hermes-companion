@@ -577,10 +577,10 @@ private fun PinnedSectionCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth().animateContentSize().padding(bottom = 8.dp),
-        colors =
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-            ),
+        shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         onClick = onToggleExpanded,
     ) {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
@@ -593,15 +593,25 @@ private fun PinnedSectionCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFF2DD4BF)),
+                    )
                     Icon(
                         imageVector = Icons.Filled.PushPin,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = Color(0xFF8B9AB0),
+                        modifier = Modifier.size(16.dp),
                     )
                     Text(
-                        text = stringResource(R.string.model_section_pinned),
-                        style = MaterialTheme.typography.titleMedium,
+                        text = stringResource(R.string.model_section_pinned).uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = Color(0xFF8B9AB0),
                     )
                 }
 
