@@ -186,14 +186,35 @@ private fun BillingContent(
 private fun PlanCard(subscription: SubscriptionCurrent) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
         shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF2DD4BF)),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text = "PLAN",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = Color(0xFF8B9AB0),
+                )
+            }
             Text(
                 text = subscription.tier_name ?: stringResource(R.string.billing_free_plan),
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier.padding(top = 6.dp),
             )
             if (subscription.credits_remaining != null) {
                 Text(
@@ -203,7 +224,7 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                             subscription.credits_remaining,
                         ),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = Color(0xFF8B9AB0),
                     modifier = Modifier.padding(top = 4.dp),
                 )
             }
@@ -211,7 +232,7 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                 Text(
                     text = stringResource(R.string.billing_renews, subscription.cycle_ends_at),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = Color(0xFF8B9AB0),
                     modifier = Modifier.padding(top = 4.dp),
                 )
             }
@@ -219,7 +240,7 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                 Text(
                     text = subscription.pending_downgrade_display,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = Color(0xFF8B9AB0),
                     modifier = Modifier.padding(top = 4.dp),
                 )
             }
@@ -231,14 +252,35 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
 private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
         shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF2DD4BF)),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text = "PLAN",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = Color(0xFF8B9AB0),
+                )
+            }
             Text(
                 text = stringResource(R.string.billing_free_plan),
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier.padding(top = 6.dp),
             )
             Text(
                 text =
@@ -248,7 +290,7 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
                         stringResource(R.string.billing_login_required)
                     },
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = Color(0xFF8B9AB0),
                 modifier = Modifier.padding(top = 4.dp),
             )
         }
@@ -318,13 +360,26 @@ private fun UsageBarRow(
 
 @Composable
 private fun SectionTitle(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleSmall,
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
-    )
+    ) {
+        Box(
+            Modifier
+                .size(6.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF2DD4BF)),
+        )
+        Spacer(Modifier.width(6.dp))
+        Text(
+            text = text.uppercase(),
+            fontFamily = FontFamily.Monospace,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 0.6.sp,
+            color = Color(0xFF8B9AB0),
+        )
+    }
 }
 
 @Composable
