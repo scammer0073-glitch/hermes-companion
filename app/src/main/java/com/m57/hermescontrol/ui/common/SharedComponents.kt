@@ -153,6 +153,9 @@ fun ToggleRow(
     val spacing = LocalSpacing.current
     Card(
         modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors =
             CardDefaults.cardColors(
                 containerColor = Color(0xFF0D0F12),
@@ -175,7 +178,7 @@ fun ToggleRow(
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = Color(0xFF2DD4BF),
                     )
                 }
                 Column(modifier = Modifier.weight(1f)) {
