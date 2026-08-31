@@ -8,6 +8,7 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -711,10 +712,10 @@ fun SessionsScreen(
                                 // stat cards keep enough width for large counts.
                                 Card(
                                     modifier = Modifier.fillMaxHeight(),
-                                    colors =
-                                        CardDefaults.cardColors(
-                                            containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                                        ),
+                                    shape = RoundedCornerShape(16.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                     onClick = { viewModel.showPruneDialog() },
                                 ) {
                                     Box(
