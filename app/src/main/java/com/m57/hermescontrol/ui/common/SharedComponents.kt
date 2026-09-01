@@ -221,12 +221,12 @@ fun SearchBar(
                 .fillMaxWidth()
                 .height(40.dp)
                 .background(
-                    color = MaterialTheme.colorScheme.surfaceContainer,
-                    shape = RoundedCornerShape(12.dp),
+                    color = Color(0xFF0D0F12),
+                    shape = RoundedCornerShape(16.dp),
                 ).border(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-                    shape = RoundedCornerShape(12.dp),
+                    color = Color(0xFF1E2D44),
+                    shape = RoundedCornerShape(16.dp),
                 ).padding(horizontal = 12.dp),
         singleLine = true,
         textStyle = MaterialTheme.typography.bodyMedium.copy(color = textColor),
