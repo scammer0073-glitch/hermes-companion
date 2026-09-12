@@ -1,8 +1,10 @@
 package com.m57.hermescontrol.ui.model.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,8 +13,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -32,9 +36,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.ModelProvider
 import com.m57.hermescontrol.data.model.PinnedModel
@@ -160,17 +167,14 @@ fun ModelPickerDialog(
                                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                                     modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
                                 ) {
-                                    Icon(
-                                        imageVector = Icons.Filled.PushPin,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.size(16.dp),
-                                    )
+                                    Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
                                     Text(
-                                        text = "Pinned",
-                                        style = MaterialTheme.typography.labelLarge,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.primary,
+                                        text = "PINNED",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontFamily = FontFamily.Monospace,
+                                        letterSpacing = 0.8.sp,
+                                        color = Color(0xFF8B9AB0),
                                     )
                                 }
                             }
@@ -197,19 +201,23 @@ fun ModelPickerDialog(
                             item(key = "header:${provider.slug}") {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
                                     modifier = Modifier.padding(top = 12.dp, bottom = 6.dp),
                                 ) {
+                                    Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
                                     Text(
-                                        text = provider.name,
-                                        style = MaterialTheme.typography.labelLarge,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.onSurface,
+                                        text = provider.name.uppercase(),
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontFamily = FontFamily.Monospace,
+                                        letterSpacing = 0.8.sp,
+                                        color = Color(0xFF8B9AB0),
                                     )
                                     Spacer(modifier = Modifier.weight(1f))
                                     Text(
                                         text = "${models.size} models",
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        color = Color(0xFF8B9AB0),
                                     )
                                 }
                             }
@@ -253,14 +261,14 @@ private fun ModelItemCard(
             modifier
                 .fillMaxWidth()
                 .padding(vertical = 2.dp)
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(16.dp))
                 .clickable(onClick = onClick),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        shape = RoundedCornerShape(16.dp),
+        color = Color(0xFF0D0F12),
         border =
             BorderStroke(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f),
+                color = Color(0xFF1E2D44),
             ),
     ) {
         Row(
@@ -286,9 +294,9 @@ private fun ModelItemCard(
                         contentDescription = if (isPinned) "Unpin model" else "Pin model",
                         tint =
                             if (isPinned) {
-                                MaterialTheme.colorScheme.primary
+                                Color(0xFF2DD4BF)
                             } else {
-                                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                                Color(0xFF8B9AB0).copy(alpha = 0.6f)
                             },
                         modifier = Modifier.size(16.dp),
                     )
