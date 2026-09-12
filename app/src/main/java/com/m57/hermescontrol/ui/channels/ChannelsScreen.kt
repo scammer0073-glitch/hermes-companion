@@ -232,7 +232,10 @@ private fun RestartBanner(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier =
@@ -251,6 +254,7 @@ private fun RestartBanner(
             Button(
                 onClick = onRestart,
                 enabled = !isRestarting,
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color(0xFF2DD4BF), contentColor = Color(0xFF001018)),
             ) {
                 if (isRestarting) {
                     CircularProgressIndicator(
@@ -275,7 +279,10 @@ private fun RestartBanner(
 private fun GatewayOfflineBanner(gatewayCommand: String) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().padding(12.dp),
