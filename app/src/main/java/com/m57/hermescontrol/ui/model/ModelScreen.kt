@@ -728,15 +728,10 @@ private fun ProviderCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         onClick = onToggleExpand,
-        colors =
-            CardDefaults.cardColors(
-                containerColor =
-                    if (isCurrent) {
-                        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f)
-                    } else {
-                        MaterialTheme.colorScheme.surfaceVariant
-                    },
-            ),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
             Row(
@@ -744,28 +739,43 @@ private fun ProviderCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column {
-                    Text(
-                        text = provider.name,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
                     )
                     Text(
-                        text = stringResource(R.string.model_label_slug, provider.slug),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = provider.name.uppercase(),
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        letterSpacing = 0.8.sp,
+                        color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
                     )
                 }
 
                 if (isCurrent) {
                     Text(
-                        text = stringResource(R.string.model_status_current),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary,
+                        text = stringResource(R.string.model_status_current).uppercase(),
+                        fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        letterSpacing = 0.6.sp,
+                        color = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
                     )
                 }
             }
+            Text(
+                text = stringResource(R.string.model_label_slug, provider.slug),
+                style = MaterialTheme.typography.bodySmall,
+                color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                modifier = Modifier.padding(top = 2.dp),
+            )
 
             provider.warning?.let {
                 if (it.isNotBlank()) {
@@ -780,12 +790,26 @@ private fun ProviderCard(
 
             AnimatedVisibility(visible = isExpanded) {
                 Column(modifier = Modifier.padding(top = 16.dp)) {
-                    Text(
-                        text = stringResource(R.string.model_label_available),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
                         modifier = Modifier.padding(bottom = 8.dp),
-                    )
+                    ) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                        )
+                        Text(
+                            text = stringResource(R.string.model_label_available).uppercase(),
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                            letterSpacing = 0.8.sp,
+                            color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                        )
+                    }
 
                     val models = provider.models.orEmpty()
                     val filteredModels =
