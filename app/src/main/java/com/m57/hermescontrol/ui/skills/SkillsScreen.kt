@@ -1219,10 +1219,13 @@ fun SkillPreviewDialog(
                 Modifier
                     .fillMaxSize()
                     .padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
+                    containerColor = Color(0xFF0D0F12),
                 ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             HermesScaffold(
                 title = { Text(stringResource(R.string.skills_preview_title, skillName)) },
