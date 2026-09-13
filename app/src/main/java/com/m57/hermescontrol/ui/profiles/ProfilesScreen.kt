@@ -60,6 +60,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
@@ -227,14 +228,14 @@ fun ProfilesScreen(
                                     val isActive = profile.name == state.activeProfileName
                                     Card(
                                         modifier = Modifier.fillMaxWidth(),
-                                        shape = RoundedCornerShape(22.dp),
+                                        shape = RoundedCornerShape(16.dp),
                                         colors =
                                             CardDefaults.cardColors(
                                                 containerColor =
                                                     if (isActive) {
                                                         androidx.compose.ui.graphics.Color(0xFF14302C)
                                                     } else {
-                                                        MaterialTheme.colorScheme.surfaceContainer
+                                                        androidx.compose.ui.graphics.Color(0xFF0D0F12)
                                                     },
                                             ),
                                         border =
@@ -247,6 +248,7 @@ fun ProfilesScreen(
                                                         androidx.compose.ui.graphics.Color(0xFF1E2D44)
                                                     },
                                             ),
+                                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                         onClick = {
                                             if (!isActive) {
                                                 viewModel.selectActiveProfile(profile.name)
@@ -259,6 +261,24 @@ fun ProfilesScreen(
                                                     .fillMaxWidth()
                                                     .padding(16.dp),
                                         ) {
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Box(
+                                                    Modifier
+                                                        .size(6.dp)
+                                                        .clip(CircleShape)
+                                                        .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                                                )
+                                                Spacer(Modifier.width(6.dp))
+                                                androidx.compose.material3.Text(
+                                                    text = "PROFILE",
+                                                    fontFamily = FontFamily.Monospace,
+                                                    fontSize = 11.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    letterSpacing = 0.6.sp,
+                                                    color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                                                )
+                                            }
+                                            Spacer(Modifier.height(10.dp))
                                             Row(
                                                 modifier = Modifier.fillMaxWidth(),
                                                 horizontalArrangement = Arrangement.SpaceBetween,
