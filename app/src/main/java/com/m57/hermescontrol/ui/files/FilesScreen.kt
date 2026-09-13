@@ -340,11 +340,13 @@ private fun FileRow(
             Modifier
                 .fillMaxWidth()
                 .clickable(enabled = !isBusy, onClick = onClick),
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors =
             CardDefaults.cardColors(
-                containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                containerColor = Color(0xFF0D0F12),
             ),
-        shape = RoundedCornerShape(12.dp),
     ) {
         Row(
             modifier =
