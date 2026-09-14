@@ -5,6 +5,7 @@ import android.content.Intent
 import android.speech.RecognizerIntent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,7 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.NavigationController
@@ -48,11 +51,65 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
             Column(Modifier.padding(pad).fillMaxSize().padding(16.dp)) {
             if (apps.isEmpty()) {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Box(Modifier.size(64.dp).clip(CircleShape).background(Color(0xFF111820)), contentAlignment = Alignment.Center) { Icon(Icons.Filled.Apps, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(28.dp)) }
-                        Spacer(Modifier.height(12.dp))
-                        Text("No personal apps yet", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                        Text("Create Food and Sleep, Gym, etc.", color = Color(0xFF8B9AB0), fontSize = 12.sp, modifier = Modifier.padding(top = 6.dp))
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                    ) {
+                        Column(
+                            modifier = Modifier.fillMaxWidth().padding(20.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            ) {
+                                Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .clip(CircleShape)
+                                        .background(Color(0xFF2DD4BF)),
+                                )
+                                Text(
+                                    text = "PERSONAL APPS",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = Color(0xFF8B9AB0),
+                                )
+                            }
+                            Box(
+                                Modifier
+                                    .size(64.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(0xFF111820)),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Icon(
+                                    Icons.Filled.Apps,
+                                    null,
+                                    tint = Color(0xFF2DD4BF),
+                                    modifier = Modifier.size(28.dp),
+                                )
+                            }
+                            Text(
+                                "No personal apps yet",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 16.sp,
+                                textAlign = TextAlign.Center,
+                            )
+                            Text(
+                                "Create Food and Sleep, Gym, etc.",
+                                color = Color(0xFF8B9AB0),
+                                fontSize = 12.sp,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
                     }
                 }
             } else {
