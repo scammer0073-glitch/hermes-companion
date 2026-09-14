@@ -123,18 +123,13 @@ fun GatewayScreen(
                                 PressureBanner(memory = s.memory, disk = s.disk)
                             }
 
-                            // Status Overview Card
+                            // Status Overview Card — Nemasys Black #0D0F12 16dp #1E2D44 elevation 0 — teal only on interactive
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
-                                colors =
-                                    CardDefaults.cardColors(
-                                        containerColor =
-                                            if (isRunning) {
-                                                MaterialTheme.colorScheme.primaryContainer
-                                            } else {
-                                                MaterialTheme.colorScheme.errorContainer
-                                            },
-                                    ),
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
                                 Column(
                                     modifier =
@@ -142,7 +137,27 @@ fun GatewayScreen(
                                             .fillMaxWidth()
                                             .padding(16.dp),
                                     horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
                                 ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Box(
+                                            Modifier
+                                                .size(6.dp)
+                                                .clip(CircleShape)
+                                                .background(
+                                                    if (isRunning) Color(0xFF2DD4BF) else statusColors.error,
+                                                ),
+                                        )
+                                        Spacer(Modifier.width(6.dp))
+                                        Text(
+                                            text = "STATUS",
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = 0.6.sp,
+                                            color = Color(0xFF8B9AB0),
+                                        )
+                                    }
                                     Text(
                                         text =
                                             if (isRunning) {
@@ -154,24 +169,13 @@ fun GatewayScreen(
                                             },
                                         style = MaterialTheme.typography.headlineSmall,
                                         fontWeight = FontWeight.Bold,
-                                        color =
-                                            if (isRunning) {
-                                                MaterialTheme.colorScheme.onPrimaryContainer
-                                            } else {
-                                                MaterialTheme.colorScheme.onErrorContainer
-                                            },
+                                        color = if (isRunning) Color(0xFF2DD4BF) else statusColors.error,
                                     )
                                     status?.version?.let {
-                                        Spacer(modifier = Modifier.height(4.dp))
                                         Text(
                                             text = stringResource(R.string.gateway_label_version, it),
                                             style = MaterialTheme.typography.bodySmall,
-                                            color =
-                                                if (isRunning) {
-                                                    MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
-                                                } else {
-                                                    MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f)
-                                                },
+                                            color = Color(0xFF8B9AB0),
                                         )
                                     }
                                 }
