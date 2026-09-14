@@ -160,13 +160,16 @@ private fun BillingContent(
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Text(
                         text = state.actionMessage,
                         modifier = Modifier.padding(12.dp),
                         style = MaterialTheme.typography.bodyMedium,
+                        color = Color(0xFFE6EDF3),
                     )
                 }
             }
