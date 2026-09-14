@@ -3,6 +3,7 @@ package com.m57.hermescontrol.ui.hub
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -13,9 +14,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,9 +41,27 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
                 Text("Managed Hermes — no PC, no Tailscale, just a URL", style = MaterialTheme.typography.labelMedium, color = Color(0xFF8B9AB0))
             }
         }
-        Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF111820)), border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44))) {
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        ) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text("How it works", fontWeight = FontWeight.Bold, color = Color.White)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = "HOW IT WORKS",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = Color(0xFF8B9AB0),
+                    )
+                }
                 HubStep("1", "Subscribe — ₹199/mo Starter or ₹599 Pro")
                 HubStep("2", "We spin your private https://you.nemasys.in in ~60s")
                 HubStep("3", "Paste URL in Nemasys → Connect. Same token/password flow.")
