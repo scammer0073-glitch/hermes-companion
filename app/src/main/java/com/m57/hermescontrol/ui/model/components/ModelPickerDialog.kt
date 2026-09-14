@@ -72,9 +72,9 @@ fun ModelPickerDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        shape = RoundedCornerShape(24.dp),
-        containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 6.dp,
+        shape = RoundedCornerShape(16.dp),
+        containerColor = Color(0xFF0D0F12),
+        tonalElevation = 0.dp,
         title = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
