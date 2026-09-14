@@ -5,6 +5,7 @@
 
 package com.m57.hermescontrol.ui.toolsets
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -274,15 +275,18 @@ private fun ToolsetProviderCard(
 
     Card(
         modifier = Modifier.fillMaxWidth(),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
         colors =
             CardDefaults.cardColors(
                 containerColor =
                     if (expanded) {
-                        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.10f)
+                        Color(0xFF14302C)
                     } else {
-                        androidx.compose.ui.graphics.Color(0xFF0D0F12)
+                        Color(0xFF0D0F12)
                     },
             ),
+        border = BorderStroke(1.dp, if (expanded) Color(0xFF2DD4BF) else Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             // ── Header (tap to expand/collapse) ────────────────────────
