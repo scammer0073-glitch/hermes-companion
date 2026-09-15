@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.profiles.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -42,9 +44,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.CreateProfileRequest
@@ -355,10 +360,16 @@ private fun ModelStep(
         if (selectedProvider.isNotBlank()) {
             val providerObj = providers.find { it.slug == selectedProvider }
             providerObj?.models?.let { models ->
-                Text(
-                    text = stringResource(R.string.profiles_builder_title_model),
-                    style = MaterialTheme.typography.titleSmall,
-                )
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Box(Modifier.size(4.dp).background(Color(0xFF2DD4BF), CircleShape))
+                    Text(
+                        text = stringResource(R.string.profiles_builder_title_model).uppercase(),
+                        style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.6.sp, fontSize = 11.sp),
+                        fontFamily = FontFamily.Monospace,
+                        color = Color(0xFF8B9AB0),
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
@@ -369,13 +380,16 @@ private fun ModelStep(
                                 Modifier
                                     .fillMaxWidth()
                                     .clickable { onModelChange(modelName) },
+                            shape = RoundedCornerShape(16.dp),
+                            border = BorderStroke(1.dp, if (isSelected) Color(0xFF2DD4BF) else Color(0xFF1E2D44)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             colors =
                                 CardDefaults.cardColors(
                                     containerColor =
                                         if (isSelected) {
-                                            MaterialTheme.colorScheme.secondaryContainer
+                                            Color(0xFF14302C)
                                         } else {
-                                            MaterialTheme.colorScheme.surfaceVariant
+                                            Color(0xFF0D0F12)
                                         },
                                 ),
                         ) {
@@ -390,12 +404,13 @@ private fun ModelStep(
                                 Text(
                                     text = modelName,
                                     style = MaterialTheme.typography.bodyLarge,
+                                    color = Color.White,
                                 )
                                 if (isSelected) {
                                     Icon(
                                         imageVector = Icons.Default.Check,
                                         contentDescription = "Selected",
-                                        tint = MaterialTheme.colorScheme.secondary,
+                                        tint = Color(0xFF2DD4BF),
                                     )
                                 }
                             }
