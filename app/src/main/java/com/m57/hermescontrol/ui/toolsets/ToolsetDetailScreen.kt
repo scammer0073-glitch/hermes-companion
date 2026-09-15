@@ -418,8 +418,9 @@ private fun ToolsetEnvVarRow(
     val clearDesc = stringResource(R.string.toolset_clear_env_desc, envVar.key)
 
     Surface(
-        shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surface,
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+        color = Color(0xFF0D0F12),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(
