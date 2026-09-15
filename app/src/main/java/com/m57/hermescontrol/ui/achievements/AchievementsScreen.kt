@@ -538,28 +538,11 @@ private fun AchievementCard(
     val isDiscovered = achievement.discovered && !isUnlocked
 
     Card(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp)),
-        colors =
-            CardDefaults.cardColors(
-                containerColor =
-                    when {
-                        isUnlocked -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
-                        isDiscovered -> androidx.compose.ui.graphics.Color(0xFF0D0F12)
-                        else -> androidx.compose.ui.graphics.Color(0xFF0D0F12)
-                    },
-            ),
-        border =
-            if (isUnlocked) {
-                androidx.compose.foundation.BorderStroke(
-                    1.dp,
-                    MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-                )
-            } else {
-                null
-            },
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
             modifier =
