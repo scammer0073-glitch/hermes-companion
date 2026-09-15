@@ -164,7 +164,48 @@ fun PersonalAppDetailScreen(appId: String, onOpenDrawer: (() -> Unit)? = null) {
                 LazyColumn(Modifier.weight(1f).padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(app.food) { f -> Card(shape = RoundedCornerShape(12.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)), border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44))) { Text(f.text, modifier = Modifier.padding(12.dp), color = Color.White, fontSize = 13.sp) } }
                     items(app.sleep) { s -> Card(shape = RoundedCornerShape(12.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF14302C)), border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF2DD4BF))) { Text("Sleep entry", modifier = Modifier.padding(12.dp), color = Color.White) } }
-                    if (app.food.isEmpty() && app.sleep.isEmpty()) item { Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) { Text("Type or speak: ate 2 eggs 8am, slept 11:30-6:45", color = Color(0xFF8B9AB0)) } }
+                    if (app.food.isEmpty() && app.sleep.isEmpty()) item {
+                        Card(
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth().padding(20.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(8.dp),
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                ) {
+                                    Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                                    Text(
+                                        text = "NO ENTRIES",
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                        color = Color(0xFF8B9AB0),
+                                    )
+                                }
+                                Box(
+                                    Modifier.size(48.dp).clip(CircleShape).background(Color(0xFF111820)),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Icon(Icons.Filled.Mic, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(22.dp))
+                                }
+                                Text(
+                                    text = "Type or speak: ate 2 eggs 8am, slept 11:30-6:45",
+                                    color = Color(0xFF8B9AB0),
+                                    fontSize = 12.sp,
+                                    textAlign = TextAlign.Center,
+                                )
+                            }
+                        }
+                    }
                 }
                 Row(Modifier.fillMaxWidth().padding(12.dp).background(Color(0xFF0D0F12), RoundedCornerShape(16.dp)).padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
                     OutlinedTextField(value = input, onValueChange = { input = it }, modifier = Modifier.weight(1f), placeholder = { Text("Log food or sleep...") }, singleLine = true)
