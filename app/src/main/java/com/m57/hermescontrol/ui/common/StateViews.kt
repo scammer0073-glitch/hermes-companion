@@ -73,19 +73,41 @@ fun ErrorState(message: String, onRetry: (() -> Unit)? = null, modifier: Modifie
 fun EmptyState(title: String, subtitle: String? = null, icon: ImageVector = Icons.Outlined.Inbox, actionLabel: String? = null, onAction: (() -> Unit)? = null, modifier: Modifier = Modifier) {
     val s = LocalSpacing.current
     Column(modifier.fillMaxSize().padding(s.lg), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Box(Modifier.size(64.dp).clip(CircleShape).background(Color(0xFF111820)), contentAlignment = Alignment.Center) {
-            Icon(icon, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(28.dp))
-        }
-        Spacer(Modifier.height(14.dp))
-        Text(title, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp, textAlign = TextAlign.Center)
-        if (subtitle != null) {
-            Spacer(Modifier.height(6.dp))
-            Text(subtitle, color = Color(0xFF8B9AB0), textAlign = TextAlign.Center, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(horizontal = 12.dp))
-        }
-        if (actionLabel != null && onAction != null) {
-            Spacer(Modifier.height(16.dp))
-            Button(onClick = onAction, colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2DD4BF), contentColor = Color(0xFF001018)), shape = RoundedCornerShape(12.dp)) {
-                Text(actionLabel, fontWeight = FontWeight.Bold)
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        ) {
+            Column(modifier = Modifier.fillMaxWidth().padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Box(Modifier.size(64.dp).clip(CircleShape).background(Color(0xFF111820)), contentAlignment = Alignment.Center) {
+                    Icon(icon, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(28.dp))
+                }
+                Spacer(Modifier.height(14.dp))
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                    Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = title.uppercase(),
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = Color(0xFF8B9AB0),
+                        textAlign = TextAlign.Center,
+                    )
+                }
+                if (subtitle != null) {
+                    Spacer(Modifier.height(6.dp))
+                    Text(subtitle, color = Color(0xFF8B9AB0), textAlign = TextAlign.Center, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(horizontal = 12.dp))
+                }
+                if (actionLabel != null && onAction != null) {
+                    Spacer(Modifier.height(16.dp))
+                    Button(onClick = onAction, colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2DD4BF), contentColor = Color(0xFF001018)), shape = RoundedCornerShape(12.dp)) {
+                        Text(actionLabel, fontWeight = FontWeight.Bold)
+                    }
+                }
             }
         }
     }
