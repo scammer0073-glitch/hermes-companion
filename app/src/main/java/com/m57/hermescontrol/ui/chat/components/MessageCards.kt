@@ -570,38 +570,62 @@ fun SubagentCard(
     val isComplete = indicator.type == "subagent.complete"
     Surface(
         modifier = modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 2.dp).testTag("subagent_card"),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.tertiaryContainer,
+        shape = RoundedCornerShape(16.dp),
+        color = Color(0xFF0D0F12),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
     ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
+        Column(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            if (isComplete) {
-                Text(text = "✅", fontSize = 14.sp)
-            } else {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(16.dp),
-                    strokeWidth = 2.dp,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF2DD4BF)),
+                )
+                Text(
+                    text = if (isComplete) "SUBAGENT \u00B7 COMPLETE" else "SUBAGENT \u00B7 RUNNING",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    letterSpacing = 0.6.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF8B9AB0),
                 )
             }
-            Spacer(Modifier.width(8.dp))
-            val displayText =
-                if (isComplete && !indicator.summary.isNullOrBlank()) {
-                    indicator.summary
-                } else if (!indicator.goal.isNullOrBlank()) {
-                    indicator.goal
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                if (isComplete) {
+                    Text(text = "\u2705", fontSize = 14.sp)
                 } else {
-                    "Subagent task"
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(16.dp),
+                        strokeWidth = 2.dp,
+                        color = Color(0xFF2DD4BF),
+                    )
                 }
-            Text(
-                text = displayText,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onTertiaryContainer,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
+                Spacer(Modifier.width(8.dp))
+                val displayText =
+                    if (isComplete && !indicator.summary.isNullOrBlank()) {
+                        indicator.summary
+                    } else if (!indicator.goal.isNullOrBlank()) {
+                        indicator.goal
+                    } else {
+                        "Subagent task"
+                    }
+                Text(
+                    text = displayText,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color(0xFFE6EDF3),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
     }
 }
