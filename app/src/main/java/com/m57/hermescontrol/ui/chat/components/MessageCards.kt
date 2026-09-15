@@ -49,6 +49,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.SuggestionChipDefaults
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -457,22 +458,44 @@ fun ClarifyBubble(
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp, vertical = 4.dp)
                 .testTag("clarify_bubble"),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        shape = RoundedCornerShape(16.dp),
+        color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
         border =
             BorderStroke(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.outline,
+                color = androidx.compose.ui.graphics.Color(0xFF1E2D44),
             ),
     ) {
         Column(
             modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            // ── Nemasys header: mono 11sp uppercase with teal dot ──
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                )
+                Text(
+                    text = "CLARIFY",
+                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                )
+            }
+            Spacer(Modifier.height(10.dp))
             Text(
                 text = text,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
             )
             if (options.isNotEmpty()) {
                 Spacer(Modifier.height(10.dp))
@@ -515,6 +538,11 @@ fun ClarifyBubble(
                         }
                     },
                     enabled = typedText.isNotBlank(),
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            containerColor = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
+                            contentColor = androidx.compose.ui.graphics.Color(0xFF001018),
+                        ),
                 ) {
                     Text("Send")
                 }
