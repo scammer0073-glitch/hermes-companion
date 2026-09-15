@@ -783,12 +783,39 @@ private fun CatalogSection(
                 }
 
                 filteredCatalog.isEmpty() -> {
-                    Text(
-                        text = stringResource(R.string.mcp_servers_catalog_empty),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(vertical = spacing.md),
-                    )
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Column(modifier = Modifier.padding(spacing.md)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .clip(CircleShape)
+                                        .background(Color(0xFF2DD4BF)),
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                Text(
+                                    text = "NO RESULTS",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = Color(0xFF8B9AB0),
+                                )
+                            }
+                            Spacer(Modifier.height(6.dp))
+                            Text(
+                                text = stringResource(R.string.mcp_servers_catalog_empty),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = Color(0xFF8B9AB0),
+                            )
+                        }
+                    }
                 }
 
                 else -> {
