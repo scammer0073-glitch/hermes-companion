@@ -147,13 +147,10 @@ fun ChatInputBar(
                                 Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = 12.dp, vertical = 4.dp),
-                            shape = RoundedCornerShape(12.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                            border =
-                                BorderStroke(
-                                    1.dp,
-                                    MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
-                                ),
+                            shape = RoundedCornerShape(16.dp),
+                            color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                            tonalElevation = 0.dp,
                         ) {
                             LazyColumn(
                                 modifier = Modifier.heightIn(max = 200.dp),
