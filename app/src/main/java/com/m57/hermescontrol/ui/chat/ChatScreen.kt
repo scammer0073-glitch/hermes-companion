@@ -591,13 +591,10 @@ fun ChatScreen(
             ) {
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
-                    color = MaterialTheme.colorScheme.surfaceContainerLow,
-                    tonalElevation = 2.dp,
-                    border =
-                        BorderStroke(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.12f),
-                        ),
+                    color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    tonalElevation = 0.dp,
+                    shape = RoundedCornerShape(16.dp),
+                    border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
                 ) {
                     Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                         SearchBarRow(
