@@ -8,6 +8,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +21,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
@@ -43,6 +46,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
@@ -126,8 +130,8 @@ internal fun ToolBubble(
 
     var expanded by remember { mutableStateOf(false) }
     var showRawJson by remember { mutableStateOf(false) }
-    val chipColor = MaterialTheme.colorScheme.surfaceContainerHigh
-    val contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val chipColor = Color(0xFF0D0F12)
+    val contentColor = Color(0xFFE6EDF3)
     val statusColors = LocalHermesStatusColors.current
 
     val view =
@@ -158,7 +162,9 @@ internal fun ToolBubble(
         Card(
             onClick = { expanded = !expanded },
             colors = CardDefaults.cardColors(containerColor = chipColor),
-            shape = RoundedCornerShape(8.dp),
+            shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(
                 modifier =
@@ -510,14 +516,17 @@ private fun HeaderRow(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
+        Box(
+            Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+        )
         // Status icon or spinner
         if (message.toolStatus == ToolStatus.RUNNING) {
             CircularProgressIndicator(
                 modifier = Modifier.size(14.dp),
                 strokeWidth = 2.dp,
-                color = MaterialTheme.colorScheme.secondary,
+                color = Color(0xFF2DD4BF),
             )
         } else {
             val icon =
@@ -541,12 +550,12 @@ private fun HeaderRow(
         }
 
         Text(
-            text = message.toolName ?: stringResource(R.string.chat_tool_fallback),
-            style =
-                MaterialTheme.typography.labelMedium.copy(
-                    color = contentColor,
-                    fontFamily = FontFamily.Monospace,
-                ),
+            text = (message.toolName ?: stringResource(R.string.chat_tool_fallback)).uppercase(),
+            fontFamily = FontFamily.Monospace,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 0.6.sp,
+            color = Color(0xFF8B9AB0),
         )
     }
 }
