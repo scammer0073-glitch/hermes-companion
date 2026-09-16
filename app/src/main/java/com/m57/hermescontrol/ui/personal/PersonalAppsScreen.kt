@@ -239,7 +239,43 @@ fun PersonalAppDetailScreen(appId: String, onOpenDrawer: (() -> Unit)? = null) {
                         Column(Modifier.padding(16.dp)) {
                             Text("Food recent", color = Color.White, fontWeight = FontWeight.Bold)
                             app.food.takeLast(5).reversed().forEach { f -> Text(f.text, color = Color(0xFFE6EDF3), fontSize = 12.sp, modifier = Modifier.padding(vertical=2.dp)) }
-                            if (app.food.isEmpty()) Text("No food yet chat to log", color = Color(0xFF8B9AB0), fontSize = 12.sp)
+                            if (app.food.isEmpty()) {
+                                Spacer(Modifier.height(8.dp))
+                                Card(
+                                    shape = RoundedCornerShape(16.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                                    modifier = Modifier.fillMaxWidth(),
+                                ) {
+                                    Column(
+                                        modifier = Modifier.fillMaxWidth().padding(12.dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                                    ) {
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                        ) {
+                                            Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                                            Text(
+                                                text = "NO FOOD",
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                                color = Color(0xFF8B9AB0),
+                                            )
+                                        }
+                                        Text(
+                                            "No food yet — chat to log",
+                                            color = Color(0xFF8B9AB0),
+                                            fontSize = 12.sp,
+                                            textAlign = TextAlign.Center,
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
