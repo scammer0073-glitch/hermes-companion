@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -448,17 +449,34 @@ private fun McpStep(
         }
 
         if (mcpServers.isEmpty()) {
-            Box(
-                modifier =
-                    Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                contentAlignment = Alignment.Center,
+            Card(
+                modifier = Modifier.weight(1f).fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
-                Text(
-                    text = stringResource(R.string.profiles_builder_mcp_none),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                Column(
+                    modifier = Modifier.fillMaxWidth().padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Box(Modifier.size(48.dp).clip(CircleShape).background(Color(0xFF111820)), contentAlignment = Alignment.Center) {
+                        Icon(Icons.Default.Delete, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(24.dp))
+                    }
+                    Spacer(Modifier.height(12.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                        Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = stringResource(R.string.profiles_builder_mcp_none).uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = Color(0xFF8B9AB0),
+                        )
+                    }
+                }
             }
         } else {
             LazyColumn(
