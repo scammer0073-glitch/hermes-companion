@@ -649,8 +649,9 @@ private fun ConfigFieldCard(
             ) {
                 if (showCategoryChip) {
                     Surface(
-                        shape = RoundedCornerShape(6.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = RoundedCornerShape(16.dp),
+                        color = Color(0xFF0D0F12),
+                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
                     ) {
                         Text(
                             text = row.category.replaceFirstChar { it.uppercase() },
