@@ -71,6 +71,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
@@ -712,9 +713,10 @@ private fun EnvVarCard(
                 }
             } else {
                 Surface(
-                    shape = RoundedCornerShape(10.dp),
-                    color = MaterialTheme.colorScheme.surfaceContainerLowest,
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)),
+                    shape = RoundedCornerShape(16.dp),
+                    color = Color(0xFF0D0F12),
+                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    shadowElevation = 0.dp,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Row(
