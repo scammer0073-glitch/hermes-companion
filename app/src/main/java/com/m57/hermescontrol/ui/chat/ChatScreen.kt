@@ -457,9 +457,12 @@ fun ChatScreen(
                 if (!terminalBackend.isNullOrBlank() && terminalBackend != "local") {
                     Spacer(modifier = Modifier.width(8.dp))
                     Surface(
-                        shape = RoundedCornerShape(6.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = RoundedCornerShape(16.dp),
+                        color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                         contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                        tonalElevation = 0.dp,
+                        shadowElevation = 0.dp,
                     ) {
                         Text(
                             text = terminalBackend,
