@@ -241,18 +241,20 @@ fun ChatInputBar(
                         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
                         decorationBox = { innerTextField ->
                             Surface(
-                                shape = RoundedCornerShape(20.dp),
+                                shape = RoundedCornerShape(16.dp),
                                 border =
                                     BorderStroke(
                                         width = 1.dp,
                                         color =
                                             if (isFocused) {
-                                                MaterialTheme.colorScheme.primary
+                                                androidx.compose.ui.graphics.Color(0xFF2DD4BF)
                                             } else {
-                                                MaterialTheme.colorScheme.outlineVariant
+                                                androidx.compose.ui.graphics.Color(0xFF1E2D44)
                                             },
                                     ),
-                                color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                                tonalElevation = 0.dp,
+                                shadowElevation = 0.dp,
                                 modifier = Modifier.fillMaxWidth(),
                             ) {
                                 Row(
