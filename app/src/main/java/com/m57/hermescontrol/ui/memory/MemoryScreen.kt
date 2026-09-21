@@ -362,8 +362,11 @@ private fun SelfImprovementSection(graph: LearningGraphResponse?) {
                             Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 4.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        shape = RoundedCornerShape(16.dp),
+                        color = Color(0xFF0D0F12),
+                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        tonalElevation = 0.dp,
+                        shadowElevation = 0.dp,
                     ) {
                         Row(
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
