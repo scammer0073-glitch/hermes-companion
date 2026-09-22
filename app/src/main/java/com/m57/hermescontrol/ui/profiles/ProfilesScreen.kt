@@ -3,6 +3,7 @@ package com.m57.hermescontrol.ui.profiles
 import android.content.ClipData
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -913,8 +914,9 @@ fun ProfilesScreen(
                             modifier =
                                 Modifier
                                     .fillMaxWidth()
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                                    .clip(RoundedCornerShape(16.dp))
+                                    .background(androidx.compose.ui.graphics.Color(0xFF0D0F12))
+                                    .border(BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)), RoundedCornerShape(16.dp))
                                     .padding(12.dp),
                         ) {
                             Text(
