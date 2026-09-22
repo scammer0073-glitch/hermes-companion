@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.chat.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -19,7 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -36,16 +37,20 @@ fun InlineVideoPlayer(
     modifier: Modifier = Modifier,
     onFullScreenClick: () -> Unit = {},
 ) {
-    Box(
+    Surface(
         modifier =
             modifier
                 .fillMaxWidth()
                 .aspectRatio(16f / 9f)
-                .clip(RoundedCornerShape(14.dp))
-                .background(MaterialTheme.colorScheme.surfaceContainerHigh)
                 .clickable { onFullScreenClick() }
                 .testTag("inline_video_player"),
+        shape = RoundedCornerShape(16.dp),
+        color = Color(0xFF0D0F12),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
     ) {
+        Box {
         // Play icon badge in center
         Surface(
             shape = CircleShape,
@@ -94,6 +99,7 @@ fun InlineVideoPlayer(
                 )
             }
         }
+    }
     }
 }
 
