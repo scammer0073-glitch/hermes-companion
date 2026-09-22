@@ -2,6 +2,7 @@ package com.m57.hermescontrol.ui.profiles.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -56,6 +57,8 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.CreateProfileRequest
 import com.m57.hermescontrol.data.model.McpServerConfigInput
 import com.m57.hermescontrol.data.model.ModelProvider
+import com.m57.hermescontrol.theme.NemasysCard
+import com.m57.hermescontrol.theme.NemasysCardBorder
 import com.m57.hermescontrol.ui.profiles.ProfilesUiState
 import com.m57.hermescontrol.ui.profiles.ProfilesViewModel
 
@@ -129,12 +132,13 @@ fun ProfileBuilderView(
                         Modifier
                             .weight(1f)
                             .height(4.dp)
-                            .clip(RoundedCornerShape(2.dp))
+                            .clip(RoundedCornerShape(16.dp))
+                            .border(1.dp, NemasysCardBorder, RoundedCornerShape(16.dp))
                             .background(
                                 if (i <= step) {
                                     MaterialTheme.colorScheme.primary
                                 } else {
-                                    MaterialTheme.colorScheme.surfaceVariant
+                                    NemasysCard
                                 },
                             ),
                 )
