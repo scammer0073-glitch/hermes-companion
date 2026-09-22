@@ -421,7 +421,6 @@ private fun Metric(
 @Composable
 private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
     val primary = MaterialTheme.colorScheme.primary
-    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
     val maxCost = entries.maxOfOrNull { it.estimated_cost } ?: 0.0
 
     Card(
@@ -433,11 +432,26 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             if (maxCost <= 0.0) {
-                Text(
-                    text = stringResource(R.string.analytics_no_cost_data),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Box(
+                        modifier =
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(Color(0xFF2DD4BF)),
+                    )
+                    Text(
+                        text = stringResource(R.string.analytics_no_cost_data).uppercase(),
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            fontFamily = FontFamily.Monospace,
+                            letterSpacing = 0.6.sp,
+                        ),
+                        color = Color(0xFF8B9AB0),
+                    )
+                }
             } else {
                 val barHeight = 96.dp
                 Row(
