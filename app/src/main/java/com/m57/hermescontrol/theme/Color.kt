@@ -23,6 +23,10 @@ val StatusGreyLight = Color(0xFFF5F5F5)
 val DarkOnSurface = Color(0xFFE8E6EE)
 val LightOnSurface = Color(0xFF1A1A24)
 
+// Nemasys black-glass card tokens used by branded surfaces outside presets.
+val NemasysCard = Color(0xFF0D0F12)
+val NemasysCardBorder = Color(0xFF1E2D44)
+
 // Syntax highlighting tokens (code blocks) — VS Code Dark+ palette — good
 // general readability across all presets. Consumed by CodeBlockCard.
 val CodeKeyword = Color(0xFF569CD6) // blue — for val, fun, class, etc.

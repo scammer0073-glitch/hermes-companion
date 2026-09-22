@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.chat.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -25,6 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysCard
+import com.m57.hermescontrol.theme.NemasysCardBorder
 import com.m57.hermescontrol.ui.chat.ContextBreakdown
 import kotlin.math.min
 
@@ -60,19 +65,26 @@ fun ContextDetailSheet(
                 else -> MaterialTheme.colorScheme.primary
             }
 
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = NemasysCard),
+            border = BorderStroke(1.dp, NemasysCardBorder),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
-            Text(
-                text = stringResource(R.string.context_window),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-            )
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Text(
+                    text = stringResource(R.string.context_window),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                )
 
             // Big used / full header
             Row(
@@ -112,26 +124,27 @@ fun ContextDetailSheet(
                             .background(color = barColor, shape = RoundedCornerShape(4.dp)),
                 )
             }
-            Text(
-                text = "$pct% of context window used",
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+                Text(
+                    text = "$pct% of context window used",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
 
             // Breakdown rows
-            ContextRow(label = stringResource(R.string.context_prompt_input), value = breakdown.inputTokens)
-            ContextRow(label = stringResource(R.string.context_completion_output), value = breakdown.outputTokens)
-            ContextRow(label = stringResource(R.string.context_cache_read), value = breakdown.cacheReadTokens)
-            ContextRow(label = stringResource(R.string.context_cache_write), value = breakdown.cacheWriteTokens)
-            ContextRow(label = "Reasoning", value = breakdown.reasoningTokens)
-            ContextRow(label = "Messages", value = breakdown.messageCount.toLong(), isCount = true)
+                ContextRow(label = stringResource(R.string.context_prompt_input), value = breakdown.inputTokens)
+                ContextRow(label = stringResource(R.string.context_completion_output), value = breakdown.outputTokens)
+                ContextRow(label = stringResource(R.string.context_cache_read), value = breakdown.cacheReadTokens)
+                ContextRow(label = stringResource(R.string.context_cache_write), value = breakdown.cacheWriteTokens)
+                ContextRow(label = "Reasoning", value = breakdown.reasoningTokens)
+                ContextRow(label = "Messages", value = breakdown.messageCount.toLong(), isCount = true)
 
-            Text(
-                text = stringResource(R.string.context_tokens_note),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(bottom = 16.dp),
-            )
+                Text(
+                    text = stringResource(R.string.context_tokens_note),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 16.dp),
+                )
+            }
         }
     }
 }
