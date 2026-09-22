@@ -292,7 +292,7 @@ fun ProfilesScreen(
                                                         if (isActive) {
                                                             MaterialTheme.colorScheme.primary
                                                         } else {
-                                                            MaterialTheme.colorScheme.surfaceContainerHighest
+                                                            androidx.compose.ui.graphics.Color(0xFF0D0F12)
                                                         },
                                                     contentColor =
                                                         if (isActive) {
