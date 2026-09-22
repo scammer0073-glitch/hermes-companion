@@ -2,6 +2,7 @@ package com.m57.hermescontrol.ui.chat.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -112,7 +113,12 @@ fun ContextDetailSheet(
                         .fillMaxWidth()
                         .height(8.dp)
                         .background(
-                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            color = NemasysCard,
+                            shape = RoundedCornerShape(4.dp),
+                        )
+                        .border(
+                            width = 1.dp,
+                            color = NemasysCardBorder,
                             shape = RoundedCornerShape(4.dp),
                         ),
             ) {
