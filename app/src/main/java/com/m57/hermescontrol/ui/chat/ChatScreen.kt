@@ -475,10 +475,12 @@ fun ChatScreen(
                 Spacer(modifier = Modifier.width(8.dp))
                 Surface(
                     onClick = { showBotPicker = true },
-                    shape = RoundedCornerShape(50),
-                    color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                    shape = RoundedCornerShape(16.dp),
+                    color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                     contentColor = MaterialTheme.colorScheme.onSurface,
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                    border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                    tonalElevation = 0.dp,
+                    shadowElevation = 0.dp,
                 ) {
                     Row(
                         modifier = Modifier.padding(start = 10.dp, end = 6.dp, top = 5.dp, bottom = 5.dp),
