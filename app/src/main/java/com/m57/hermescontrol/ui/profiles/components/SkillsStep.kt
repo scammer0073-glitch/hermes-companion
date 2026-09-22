@@ -1,6 +1,6 @@
 package com.m57.hermescontrol.ui.profiles.components
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -190,30 +192,32 @@ fun SkillsStep(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     items(addedHubSkills) { skillName ->
-                        Row(
-                            modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .background(
-                                        MaterialTheme.colorScheme.surfaceVariant,
-                                        RoundedCornerShape(4.dp),
-                                    ).padding(horizontal = 8.dp, vertical = 4.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically,
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = Color(0xFF0D0F12),
+                            shape = RoundedCornerShape(16.dp),
+                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            shadowElevation = 0.dp,
                         ) {
-                            Text(
-                                text = skillName,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                            IconButton(
-                                onClick = { onAddedHubSkillsChange(addedHubSkills - skillName) },
-                                modifier = Modifier.size(24.dp),
+                            Row(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically,
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.Close,
-                                    contentDescription = "Remove",
-                                    modifier = Modifier.size(16.dp),
+                                Text(
+                                    text = skillName,
+                                    style = MaterialTheme.typography.bodyMedium,
                                 )
+                                IconButton(
+                                    onClick = { onAddedHubSkillsChange(addedHubSkills - skillName) },
+                                    modifier = Modifier.size(24.dp),
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Close,
+                                        contentDescription = "Remove",
+                                        modifier = Modifier.size(16.dp),
+                                    )
+                                }
                             }
                         }
                     }
