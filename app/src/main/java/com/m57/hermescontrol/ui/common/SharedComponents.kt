@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.common
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -103,13 +104,14 @@ fun StatusBadge(
             }
 
             StatusBadgeType.NEUTRAL -> {
-                MaterialTheme.colorScheme.surfaceContainerHigh to
+                Color(0xFF0D0F12) to
                     MaterialTheme.colorScheme.onSurfaceVariant
             }
         }
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
+        shape = if (status == StatusBadgeType.NEUTRAL) RoundedCornerShape(16.dp) else RoundedCornerShape(8.dp),
+        border = if (status == StatusBadgeType.NEUTRAL) BorderStroke(1.dp, Color(0xFF1E2D44)) else null,
         color = bgColor,
     ) {
         Row(
