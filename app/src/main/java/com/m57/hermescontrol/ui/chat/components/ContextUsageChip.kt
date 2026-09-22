@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -125,7 +126,7 @@ fun ContextUsageChip(
                     .fillMaxWidth()
                     .height(3.dp)
                     .background(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        color = Color(0xFF0D0F12),
                         shape = RoundedCornerShape(2.dp),
                     ),
         ) {
