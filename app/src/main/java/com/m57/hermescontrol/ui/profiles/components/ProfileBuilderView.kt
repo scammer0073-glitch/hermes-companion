@@ -491,7 +491,13 @@ private fun McpStep(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(mcpServers) { server ->
-                    Card(modifier = Modifier.fillMaxWidth()) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = NemasysCard),
+                        border = BorderStroke(1.dp, NemasysCardBorder),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
                         Row(
                             modifier =
                                 Modifier
