@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -39,7 +40,6 @@ fun CompactSearchInput(
 ) {
     val textColor = MaterialTheme.colorScheme.onSurface
     val errorColor = MaterialTheme.colorScheme.error
-    val outlineColor = if (isError) errorColor else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
 
     BasicTextField(
         value = value,
@@ -48,12 +48,12 @@ fun CompactSearchInput(
             modifier
                 .height(40.dp)
                 .background(
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                    shape = RoundedCornerShape(20.dp),
+                    color = Color(0xFF0D0F12),
+                    shape = RoundedCornerShape(16.dp),
                 ).border(
                     width = 1.dp,
-                    color = outlineColor,
-                    shape = RoundedCornerShape(20.dp),
+                    color = if (isError) errorColor else Color(0xFF1E2D44),
+                    shape = RoundedCornerShape(16.dp),
                 ).padding(horizontal = 12.dp),
         singleLine = true,
         textStyle = MaterialTheme.typography.bodyMedium.copy(color = textColor),
