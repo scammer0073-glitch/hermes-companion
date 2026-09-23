@@ -785,13 +785,33 @@ private fun ReviewStep(
             }
         }
 
-        Card(modifier = Modifier.fillMaxWidth()) {
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(1.dp, NemasysCardBorder),
+            colors = CardDefaults.cardColors(containerColor = NemasysCard),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = stringResource(R.string.profiles_builder_review_skills_title),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(5.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFF2DD4BF)),
+                    )
+                    Text(
+                        text = stringResource(R.string.profiles_builder_review_skills_title).uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        letterSpacing = 0.8.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = Color(0xFF2DD4BF),
+                    )
+                }
                 if (useDefaultSkills) {
                     Text(
                         text = stringResource(R.string.profiles_builder_review_skills_default),
