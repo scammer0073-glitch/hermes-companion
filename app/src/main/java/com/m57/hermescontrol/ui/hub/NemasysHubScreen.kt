@@ -69,7 +69,7 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
             }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-            PriceCard("Self-Hosted", "₹0", "Forever free", listOf("All app features", "LAN + Tailscale", "Community help"), Modifier.weight(1f))
+            PriceCard("Self-Hosted", "₹0", "Forever free", listOf("All app features", "LAN + Tailscale", "Community help"), Modifier.weight(1f), nemasysBlack = true)
             PriceCard("Hub Starter", "₹199/mo", "Most popular", listOf("1 instance, HTTPS", "5 bots, 50 crons", "Email support"), Modifier.weight(1f), featured = true)
         }
         PriceCard("Hub Pro", "₹599/mo", "For teams", listOf("3 instances", "Unlimited bots/crons", "Custom domain + backups"), Modifier.fillMaxWidth(), featured = false, nemasysBlack = true)
