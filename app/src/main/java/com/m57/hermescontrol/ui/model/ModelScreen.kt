@@ -809,11 +809,31 @@ private fun ProviderCard(
                         }
 
                     if (filteredModels.isEmpty()) {
-                        Text(
-                            text = stringResource(R.string.model_no_models),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
+                        Card(
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth().padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Box(
+                                    Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                Text(
+                                    text = stringResource(R.string.model_no_models).uppercase(),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = Color(0xFF8B9AB0),
+                                )
+                            }
+                        }
                     } else {
                         filteredModels.forEach { model ->
                             val isActive =
