@@ -132,14 +132,24 @@ fun PairingScreen(
                                 border = BorderStroke(1.dp, Color(0xFF1E2D44)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth().padding(24.dp),
-                                    contentAlignment = Alignment.Center,
+                                Row(
+                                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
                                 ) {
+                                    Box(
+                                        Modifier
+                                            .size(6.dp)
+                                            .clip(CircleShape)
+                                            .background(Color(0xFF2DD4BF)),
+                                    )
+                                    Spacer(Modifier.width(8.dp))
                                     Text(
-                                        text = stringResource(R.string.pairing_empty_approved),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        text = stringResource(R.string.pairing_empty_approved).uppercase(),
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                        color = Color(0xFF8B9AB0),
                                     )
                                 }
                             }
