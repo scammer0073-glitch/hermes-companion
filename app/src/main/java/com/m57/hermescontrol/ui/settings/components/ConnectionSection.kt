@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -204,11 +205,34 @@ internal fun TestResultCard(testResult: String?) {
                 border = BorderStroke(1.dp, Color(0xFF1E2D44)),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
-                Text(
-                    text = result,
-                    modifier = Modifier.padding(16.dp),
-                    style = MaterialTheme.typography.bodyMedium,
-                )
+                if (result.isBlank()) {
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(Color(0xFF2DD4BF)),
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            text = "NO RESPONSE",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = Color(0xFF8B9AB0),
+                        )
+                    }
+                } else {
+                    Text(
+                        text = result,
+                        modifier = Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
             }
         }
     }
