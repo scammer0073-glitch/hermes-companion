@@ -48,6 +48,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
@@ -388,8 +389,11 @@ fun AttachmentChip(
     val thumbnail = attachment.uri
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
-        tonalElevation = 2.dp,
+        shape = RoundedCornerShape(16.dp),
+        color = Color(0xFF0D0F12),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
     ) {
         Row(
             modifier = Modifier.padding(4.dp),
