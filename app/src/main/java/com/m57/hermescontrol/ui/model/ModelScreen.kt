@@ -822,25 +822,14 @@ private fun ProviderCard(
                             Card(
                                 onClick = { onModelClick(provider.slug, model) },
                                 modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                                colors =
-                                    CardDefaults.cardColors(
-                                        containerColor =
-                                            if (isActive) {
-                                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                                            } else {
-                                                MaterialTheme.colorScheme.surface
-                                            },
-                                    ),
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
                                 border =
                                     BorderStroke(
                                         width = 1.dp,
-                                        color =
-                                            if (isActive) {
-                                                MaterialTheme.colorScheme.primary
-                                            } else {
-                                                MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
-                                            },
+                                        color = if (isActive) Color(0xFF2DD4BF) else Color(0xFF1E2D44),
                                     ),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth().padding(12.dp),
