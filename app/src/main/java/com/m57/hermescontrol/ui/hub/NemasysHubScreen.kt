@@ -72,7 +72,7 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
             PriceCard("Self-Hosted", "₹0", "Forever free", listOf("All app features", "LAN + Tailscale", "Community help"), Modifier.weight(1f))
             PriceCard("Hub Starter", "₹199/mo", "Most popular", listOf("1 instance, HTTPS", "5 bots, 50 crons", "Email support"), Modifier.weight(1f), featured = true)
         }
-        PriceCard("Hub Pro", "₹599/mo", "For teams", listOf("3 instances", "Unlimited bots/crons", "Custom domain + backups"), Modifier.fillMaxWidth(), featured = false)
+        PriceCard("Hub Pro", "₹599/mo", "For teams", listOf("3 instances", "Unlimited bots/crons", "Custom domain + backups"), Modifier.fillMaxWidth(), featured = false, nemasysBlack = true)
         Button(
             onClick = { uri.openUri("https://scammer0073-glitch.github.io/hermes-companion/#pricing") },
             modifier = Modifier.fillMaxWidth().height(54.dp),
@@ -100,8 +100,24 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
         Text(t, color = Color.White, style = MaterialTheme.typography.bodySmall)
     }
 }
-@Composable private fun PriceCard(title: String, price: String, badge: String, feats: List<String>, mod: Modifier, featured: Boolean = false) {
-    Card(mod, shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = if (featured) Color(0xFF16202E) else Color(0xFF111820)), border = androidx.compose.foundation.BorderStroke(1.dp, if (featured) Color(0xFF2DD4BF) else Color(0xFF1E2D44))) {
+@Composable private fun PriceCard(
+    title: String,
+    price: String,
+    badge: String,
+    feats: List<String>,
+    mod: Modifier,
+    featured: Boolean = false,
+    nemasysBlack: Boolean = false,
+) {
+    val cardColor = if (nemasysBlack) Color(0xFF0D0F12) else if (featured) Color(0xFF16202E) else Color(0xFF111820)
+    val cardBorder = if (featured && !nemasysBlack) Color(0xFF2DD4BF) else Color(0xFF1E2D44)
+    Card(
+        mod,
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = cardColor),
+        border = androidx.compose.foundation.BorderStroke(1.dp, cardBorder),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+    ) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) { Text(title, fontWeight = FontWeight.Bold, color = Color.White); Spacer(Modifier.weight(1f)); Surface(shape = RoundedCornerShape(50), color = if (featured) Color(0xFF2DD4BF) else Color(0xFF1E2D44)) { Text(badge, modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp), fontSize = 10.sp, fontWeight = FontWeight.Bold, color = if (featured) Color(0xFF001018) else Color(0xFF8B9AB0)) } }
             Text(price, fontWeight = FontWeight.Black, fontSize = 22.sp, color = Color.White)
