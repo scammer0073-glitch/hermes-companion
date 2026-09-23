@@ -198,16 +198,11 @@ internal fun TestResultCard(testResult: String?) {
     ) {
         testResult?.let { result ->
             Card(
-                colors =
-                    CardDefaults.cardColors(
-                        containerColor =
-                            if (result.startsWith("✅")) {
-                                MaterialTheme.colorScheme.primaryContainer
-                            } else {
-                                MaterialTheme.colorScheme.errorContainer
-                            },
-                    ),
                 modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Text(
                     text = result,
