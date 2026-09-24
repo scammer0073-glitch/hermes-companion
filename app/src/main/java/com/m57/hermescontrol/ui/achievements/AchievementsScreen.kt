@@ -690,10 +690,12 @@ private fun AchievementCard(
                     enter = expandVertically(),
                     exit = shrinkVertically(),
                 ) {
-                    Surface(
+                    androidx.compose.material3.Surface(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(8.dp),
-                        color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                        shape = RoundedCornerShape(16.dp),
+                        color = Color(0xFF0D0F12),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        shadowElevation = 0.dp,
                     ) {
                         Text(
                             text = criteria,
