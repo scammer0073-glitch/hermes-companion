@@ -893,10 +893,25 @@ private fun SearchableSelectField(
             if (filtered.isEmpty()) {
                 DropdownMenuItem(
                     text = {
-                        Text(
-                            text = stringResource(R.string.config_no_matches),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(0xFF2DD4BF)),
+                            )
+                            Text(
+                                text = stringResource(R.string.config_no_matches).uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = Color(0xFF8B9AB0),
+                            )
+                        }
                     },
                     onClick = {},
                 )
