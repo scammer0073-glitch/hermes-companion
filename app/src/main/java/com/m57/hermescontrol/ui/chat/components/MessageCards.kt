@@ -83,8 +83,6 @@ import com.m57.hermescontrol.theme.CodeKeyword
 import com.m57.hermescontrol.theme.CodeNumber
 import com.m57.hermescontrol.theme.CodePunctuation
 import com.m57.hermescontrol.theme.CodeString
-import com.m57.hermescontrol.theme.CodeTerminalBg
-import com.m57.hermescontrol.theme.CodeTerminalBorder
 import com.m57.hermescontrol.theme.CodeTerminalMuted
 import com.m57.hermescontrol.theme.CodeTerminalText
 import com.m57.hermescontrol.ui.chat.SubagentIndicator
@@ -274,9 +272,9 @@ fun CodeBlockCard(
             modifier
                 .fillMaxWidth()
                 .testTag("code_block"),
-        shape = RoundedCornerShape(12.dp),
-        color = CodeTerminalBg,
-        border = BorderStroke(1.dp, CodeTerminalBorder),
+        shape = RoundedCornerShape(16.dp),
+        color = Color(0xFF0D0F12),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
     ) {
         Column {
             // Header row: language badge (left) + copy button (right)
