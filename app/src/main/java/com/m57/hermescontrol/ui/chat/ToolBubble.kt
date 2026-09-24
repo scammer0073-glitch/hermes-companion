@@ -626,9 +626,10 @@ private fun CopyButton(
         modifier = modifier,
     ) {
         Surface(
-            shape = RoundedCornerShape(50),
-            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
-            shadowElevation = 6.dp,
+            shape = RoundedCornerShape(16.dp),
+            color = Color(0xFF0D0F12),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            shadowElevation = 0.dp,
         ) {
             IconButton(
                 onClick = {
