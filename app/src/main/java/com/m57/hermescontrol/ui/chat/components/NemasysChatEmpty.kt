@@ -69,7 +69,13 @@ fun NemasysChatEmpty(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Surface(shape = RoundedCornerShape(10.dp), color = Color(0xFF16202E)) {
+                        Surface(
+                            shape = RoundedCornerShape(16.dp),
+                            color = Color(0xFF0D0F12),
+                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            shadowElevation = 0.dp,
+                            tonalElevation = 0.dp,
+                        ) {
                             Icon(icon, contentDescription = null, tint = Color(0xFF2DD4BF), modifier = Modifier.padding(8.dp).size(16.dp))
                         }
                         Spacer(Modifier.width(12.dp))
