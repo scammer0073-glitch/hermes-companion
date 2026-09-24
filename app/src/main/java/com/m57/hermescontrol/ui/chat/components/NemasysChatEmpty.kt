@@ -29,7 +29,13 @@ fun NemasysChatEmpty(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Surface(shape = RoundedCornerShape(18.dp), color = Color(0xFF111820), border = BorderStroke(1.dp, Color(0xFF1E2D44))) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = Color(0xFF0D0F12),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            shadowElevation = 0.dp,
+            tonalElevation = 0.dp,
+        ) {
             Row(Modifier.padding(horizontal = 14.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
                 Surface(shape = RoundedCornerShape(10.dp), color = Color(0xFF2DD4BF)) {
                     androidx.compose.foundation.layout.Box(Modifier.size(28.dp), contentAlignment = Alignment.Center) {
