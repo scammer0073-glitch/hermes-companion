@@ -320,6 +320,7 @@ fun StatCard(
             CardDefaults.cardColors(
                 containerColor = Color(0xFF0D0F12),
             ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
             modifier = Modifier.padding(spacing.md),
