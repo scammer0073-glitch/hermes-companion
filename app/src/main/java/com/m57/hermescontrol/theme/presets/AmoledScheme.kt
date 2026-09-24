@@ -43,7 +43,7 @@ val AmoledTheme = buildThemeDarkOnly(
         surfaceVariant = NCardHover, onSurfaceVariant = NMuted,
         surfaceContainerLowest = NBlack, surfaceContainerLow = NBlack,
         surfaceContainer = NCard, surfaceContainerHigh = NCardHover,
-        surfaceContainerHighest = Color(0xFF1A212C),
+        surfaceContainerHighest = NCard,
         inverseSurface = NText, inverseOnSurface = NBlack,
         inversePrimary = Color(0xFF0D2A24),
         outline = NBorderStrong, outlineVariant = NBorder,
