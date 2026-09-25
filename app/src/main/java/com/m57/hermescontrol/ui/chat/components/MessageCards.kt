@@ -508,9 +508,10 @@ fun ClarifyBubble(
                             label = { Text(option) },
                             colors =
                                 SuggestionChipDefaults.suggestionChipColors(
-                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                    labelColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                                    containerColor = Color(0xFF0D0F12),
+                                    labelColor = Color(0xFF2DD4BF),
                                 ),
+                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
                         )
                     }
                 }
