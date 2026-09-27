@@ -236,16 +236,31 @@ private fun MemoryProviderConfigContent(
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                        containerColor = Color(0xFF0D0F12),
                     ),
+                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = stringResource(R.string.memory_provider_setup_heading),
-                        style = MaterialTheme.typography.titleMedium,
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Box(
+                            modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                        )
+                        Text(
+                            text = stringResource(R.string.memory_provider_setup_heading).uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = stringResource(R.string.memory_provider_setup_hint),
