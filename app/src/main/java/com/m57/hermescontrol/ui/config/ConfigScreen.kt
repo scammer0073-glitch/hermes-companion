@@ -522,11 +522,13 @@ private fun FormEditor(
                             Text(
                                 text =
                                     if (isSearching) {
-                                        "No settings match your search."
+                                        "NO SETTINGS MATCH YOUR SEARCH"
                                     } else {
-                                        "No fields in this category."
+                                        "NO FIELDS IN THIS CATEGORY"
                                     },
-                                style = MaterialTheme.typography.bodySmall,
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                letterSpacing = 0.3.sp,
                                 color = Color(0xFF8B9AB0),
                             )
                         }
