@@ -344,8 +344,10 @@ private fun StatPill(
 ) {
     androidx.compose.material3.Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        color = color.copy(alpha = 0.12f),
+        shape = RoundedCornerShape(16.dp),
+        color = Color(0xFF0D0F12),
+        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        shadowElevation = 0.dp,
     ) {
         Column(
             modifier = Modifier.padding(12.dp),
