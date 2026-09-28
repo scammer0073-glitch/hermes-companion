@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.HistoryEdu
@@ -26,6 +29,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -276,8 +280,12 @@ fun LogsScreen(
                             modifier =
                                 Modifier
                                     .align(Alignment.BottomEnd)
-                                    .padding(16.dp),
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                    .padding(16.dp)
+                                    .border(BorderStroke(1.dp, Color(0xFF1E2D44)), RoundedCornerShape(16.dp)),
+                            shape = RoundedCornerShape(16.dp),
+                            containerColor = Color(0xFF0D0F12),
+                            contentColor = Color(0xFF2DD4BF),
+                            elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp),
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.KeyboardDoubleArrowDown,
