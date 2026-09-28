@@ -78,7 +78,8 @@ val DefaultTheme =
                 surfaceContainerLow = SlateDarkBg1,
                 // Nemasys Black card token for default dark-theme Card surfaces.
                 surfaceContainer = NemasysBlackCard,
-                surfaceContainerHigh = SlateDarkBg3,
+                // Nemasys Black keeps the remaining default card tier off gray.
+                surfaceContainerHigh = NemasysBlackCard,
                 surfaceContainerHighest = SlateDarkBg4,
                 inverseSurface = SlateDarkFg1,
                 inverseOnSurface = SlateDarkBg0,
