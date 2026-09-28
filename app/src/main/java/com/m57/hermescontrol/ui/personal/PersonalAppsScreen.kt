@@ -97,10 +97,12 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                                 )
                             }
                             Text(
-                                "No personal apps yet",
-                                color = Color.White,
+                                "NO PERSONAL APPS YET",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp,
+                                letterSpacing = 0.6.sp,
+                                color = Color(0xFF8B9AB0),
                                 textAlign = TextAlign.Center,
                             )
                             Text(
