@@ -154,14 +154,22 @@ fun BotPickerSheet(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center,
                             ) {
-                                Text(
-                                    text = "NO BOTS MATCH",
-                                    color = Color(0xFF8B9AB0),
-                                    fontFamily = FontFamily.Monospace,
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    letterSpacing = 0.6.sp,
-                                )
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Box(
+                                        Modifier
+                                            .size(6.dp)
+                                            .background(Color(0xFF2DD4BF), CircleShape),
+                                    )
+                                    Spacer(Modifier.width(6.dp))
+                                    Text(
+                                        text = "NO BOTS MATCH",
+                                        color = Color(0xFF8B9AB0),
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                    )
+                                }
                                 Spacer(Modifier.height(6.dp))
                                 Text(
                                     text = "Try a different search",
