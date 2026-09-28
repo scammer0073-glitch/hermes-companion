@@ -636,12 +636,32 @@ private fun EnvVarSection(
     val env = server.env ?: emptyMap()
 
     if (env.isEmpty() && !isEditing) {
-        Text(
-            text = stringResource(R.string.mcp_servers_env_no_vars),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(vertical = spacing.xs),
-        )
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = spacing.md, vertical = spacing.sm),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(spacing.sm),
+            ) {
+                Box(
+                    modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                )
+                Text(
+                    text = stringResource(R.string.mcp_servers_env_no_vars).uppercase(),
+                    style = MaterialTheme.typography.labelSmall.copy(
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        letterSpacing = 0.6.sp,
+                    ),
+                    color = Color(0xFF8B9AB0),
+                )
+            }
+        }
     } else {
         env.forEach { (key, value) ->
             Row(
