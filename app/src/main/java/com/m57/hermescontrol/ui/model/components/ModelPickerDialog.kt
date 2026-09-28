@@ -183,6 +183,38 @@ fun ModelPickerDialog(
                         modifier = Modifier.heightIn(max = 420.dp),
                         verticalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
+                        if (filteredPinned.isEmpty() && filteredProvidersWithModels.isEmpty()) {
+                            item(key = "empty-models") {
+                                Surface(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    shape = RoundedCornerShape(16.dp),
+                                    color = Color(0xFF0D0F12),
+                                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                ) {
+                                    Row(
+                                        modifier = Modifier.padding(16.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                    ) {
+                                        Box(
+                                            Modifier
+                                                .size(6.dp)
+                                                .clip(CircleShape)
+                                                .background(Color(0xFF2DD4BF)),
+                                        )
+                                        Spacer(Modifier.width(8.dp))
+                                        Text(
+                                            text = "NO MATCHING MODELS",
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = 0.6.sp,
+                                            color = Color(0xFF8B9AB0),
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
                         // ── Pinned section ──
                         if (filteredPinned.isNotEmpty()) {
                             item(key = "pinned-header") {
