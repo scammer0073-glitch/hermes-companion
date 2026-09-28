@@ -2,6 +2,7 @@ package com.m57.hermescontrol.ui.config
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -894,6 +895,12 @@ private fun SearchableSelectField(
             val filtered = options.filter { it.contains(query, ignoreCase = true) }
             if (filtered.isEmpty()) {
                 DropdownMenuItem(
+                    modifier =
+                        Modifier
+                            .padding(horizontal = 4.dp, vertical = 2.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color(0xFF0D0F12))
+                            .border(BorderStroke(1.dp, Color(0xFF1E2D44)), RoundedCornerShape(16.dp)),
                     text = {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
