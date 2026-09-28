@@ -115,7 +115,13 @@ fun HermesConnectHelperCard(
                 val state = results[t.url]
                 val dot = when (state) { true -> Color(0xFF2DD4BF); false -> Color(0xFFEF4444); null -> Color(0xFF1E2D44) }
                 val label = when (state) { true -> "reachable"; false -> "offline"; null -> "tap Probe" }
-                Surface(shape = RoundedCornerShape(12.dp), color = Color(0xFF111820), border = BorderStroke(1.dp, Color(0xFF1E2D44))) {
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = Color(0xFF0D0F12),
+                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
+                ) {
                     Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
                         Box(Modifier.size(10.dp).background(dot, CircleShape))
                         Spacer(Modifier.width(10.dp))
