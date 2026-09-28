@@ -305,11 +305,35 @@ private fun SelfImprovementSection(graph: LearningGraphResponse?) {
             Spacer(modifier = Modifier.height(8.dp))
 
             if (graph == null || graph.nodes.isEmpty()) {
-                Text(
-                    text = stringResource(R.string.memory_self_improvement_no_activity),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    color = Color(0xFF0D0F12),
+                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    tonalElevation = 0.dp,
+                    shadowElevation = 0.dp,
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(Color(0xFF2DD4BF)),
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(R.string.memory_self_improvement_no_activity).uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = Color(0xFF8B9AB0),
+                        )
+                    }
+                }
             } else {
                 val skillNodes = graph.nodes.filter { it.kind == "skill" }
                 val memoryNodes = graph.nodes.filter { it.kind == "memory" }
