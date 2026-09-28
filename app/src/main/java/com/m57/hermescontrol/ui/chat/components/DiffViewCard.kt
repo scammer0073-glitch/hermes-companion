@@ -54,10 +54,10 @@ import com.m57.hermescontrol.theme.CodeDiffDeleteBg
 import com.m57.hermescontrol.theme.CodeDiffDeleteText
 import com.m57.hermescontrol.theme.CodeDiffHunkBg
 import com.m57.hermescontrol.theme.CodeDiffHunkText
-import com.m57.hermescontrol.theme.CodeTerminalBg
-import com.m57.hermescontrol.theme.CodeTerminalBorder
 import com.m57.hermescontrol.theme.CodeTerminalMuted
 import com.m57.hermescontrol.theme.CodeTerminalText
+import com.m57.hermescontrol.theme.NemasysCard
+import com.m57.hermescontrol.theme.NemasysCardBorder
 import kotlinx.coroutines.delay
 
 enum class DiffLineType {
@@ -192,9 +192,9 @@ fun DiffViewCard(
             modifier
                 .fillMaxWidth()
                 .testTag("diff_view_card"),
-        shape = RoundedCornerShape(8.dp),
-        color = CodeTerminalBg,
-        border = BorderStroke(1.dp, CodeTerminalBorder),
+        shape = RoundedCornerShape(16.dp),
+        color = NemasysCard,
+        border = BorderStroke(1.dp, NemasysCardBorder),
     ) {
         Column(modifier = Modifier.animateContentSize()) {
             // Header bar
