@@ -716,13 +716,15 @@ private fun AchievementCard(
 private fun Surface(
     modifier: Modifier = Modifier,
     shape: RoundedCornerShape,
-    color: Color = MaterialTheme.colorScheme.surface,
+    color: Color = Color(0xFF0D0F12),
     content: @Composable () -> Unit,
 ) {
     androidx.compose.material3.Surface(
         modifier = modifier,
         shape = shape,
         color = color,
+        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        shadowElevation = 0.dp,
         content = content,
     )
 }
