@@ -90,6 +90,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.theme.LocalSpacing
+import com.m57.hermescontrol.theme.NemasysCard
+import com.m57.hermescontrol.theme.NemasysCardBorder
 import com.m57.hermescontrol.ui.chat.MediaImageStore
 import com.m57.hermescontrol.ui.common.ActionProgressDialog
 import com.m57.hermescontrol.ui.common.EmptyState
@@ -718,10 +720,13 @@ private fun LazyListScope.curatorSection(
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                border = BorderStroke(1.dp, NemasysCardBorder),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                        containerColor = NemasysCard,
                     ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Column(modifier = Modifier.padding(spacing.md)) {
                     // Status
