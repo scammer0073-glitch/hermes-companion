@@ -828,8 +828,11 @@ private fun CatalogSection(
                             }
                             Spacer(Modifier.height(6.dp))
                             Text(
-                                text = stringResource(R.string.mcp_servers_catalog_empty),
-                                style = MaterialTheme.typography.bodySmall,
+                                text = stringResource(R.string.mcp_servers_catalog_empty).uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
                                 color = Color(0xFF8B9AB0),
                             )
                         }
