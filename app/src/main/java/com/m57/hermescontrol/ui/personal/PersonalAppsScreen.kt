@@ -288,9 +288,12 @@ fun PersonalAppDetailScreen(appId: String, onOpenDrawer: (() -> Unit)? = null) {
                                             )
                                         }
                                         Text(
-                                            "No food yet — chat to log",
+                                            "NO FOOD YET, CHAT TO LOG",
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = 0.6.sp,
                                             color = Color(0xFF8B9AB0),
-                                            fontSize = 12.sp,
                                             textAlign = TextAlign.Center,
                                         )
                                     }
