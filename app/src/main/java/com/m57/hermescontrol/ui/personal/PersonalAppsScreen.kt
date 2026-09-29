@@ -164,7 +164,16 @@ fun PersonalAppDetailScreen(appId: String, onOpenDrawer: (() -> Unit)? = null) {
             if (app == null) { Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = Color(0xFF2DD4BF)) }; return@Column }
             if (tab==0) {
                 LazyColumn(Modifier.weight(1f).padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    items(app.food) { f -> Card(shape = RoundedCornerShape(12.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)), border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44))) { Text(f.text, modifier = Modifier.padding(12.dp), color = Color.White, fontSize = 13.sp) } }
+                    items(app.food) { f ->
+                        Card(
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        ) {
+                            Text(f.text, modifier = Modifier.padding(12.dp), color = Color.White, fontSize = 13.sp)
+                        }
+                    }
                     items(app.sleep) { s ->
                         Card(
                             shape = RoundedCornerShape(16.dp),
