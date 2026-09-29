@@ -328,6 +328,8 @@ private fun ModelItemCard(
                 width = 1.dp,
                 color = Color(0xFF1E2D44),
             ),
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
     ) {
         Row(
             modifier = Modifier.padding(start = 12.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
