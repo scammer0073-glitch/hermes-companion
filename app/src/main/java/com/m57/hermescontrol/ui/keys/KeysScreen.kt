@@ -808,11 +808,9 @@ private fun RestartBanner(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, statusColors.warning.copy(alpha = 0.4f)),
-        colors =
-            CardDefaults.cardColors(
-                containerColor = statusColors.warningContainer,
-            ),
+        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier =
