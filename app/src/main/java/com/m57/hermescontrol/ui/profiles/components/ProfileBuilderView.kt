@@ -870,8 +870,11 @@ private fun ReviewStep(
                     }
                 } else {
                     Text(
-                        text = stringResource(R.string.profiles_builder_review_mcp_none),
-                        style = MaterialTheme.typography.bodyMedium,
+                        text = stringResource(R.string.profiles_builder_review_mcp_none).uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        letterSpacing = 0.6.sp,
+                        color = Color(0xFF8B9AB0),
                     )
                 }
             }
