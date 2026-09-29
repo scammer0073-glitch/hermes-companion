@@ -3,6 +3,7 @@ package com.m57.hermescontrol.ui.achievements
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -46,9 +48,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
@@ -269,17 +273,31 @@ fun AchievementsScreen(
 
                     // Achievement count label
                     item(key = "count_label") {
-                        Text(
-                            text =
-                                stringResource(
-                                    R.string.achievements_count_label,
-                                    filteredAchievements.size,
-                                    state.totalCount,
-                                ),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        Row(
                             modifier = Modifier.padding(top = 4.dp),
-                        )
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(6.dp)
+                                    .clip(androidx.compose.foundation.shape.CircleShape)
+                                    .background(Color(0xFF2DD4BF)),
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                text =
+                                    stringResource(
+                                        R.string.achievements_count_label,
+                                        filteredAchievements.size,
+                                        state.totalCount,
+                                    ).uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = Color(0xFF8B9AB0),
+                            )
+                        }
                     }
 
                     // Achievement cards
