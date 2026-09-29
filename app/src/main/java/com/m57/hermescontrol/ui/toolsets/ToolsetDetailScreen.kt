@@ -386,11 +386,33 @@ private fun ToolsetProviderCard(
                     }
 
                     if (provider.envVars.isEmpty()) {
-                        Text(
-                            text = noKeysText,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                androidx.compose.foundation.layout.Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .background(Color(0xFF2DD4BF), androidx.compose.foundation.shape.CircleShape),
+                                )
+                                Spacer(Modifier.width(8.dp))
+                                Text(
+                                    text = noKeysText.uppercase(),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = Color(0xFF8B9AB0),
+                                )
+                            }
+                        }
                     } else {
                         provider.envVars.forEach { envVar ->
                             ToolsetEnvVarRow(
