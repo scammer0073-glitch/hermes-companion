@@ -172,9 +172,12 @@ fun BotPickerSheet(
                                 }
                                 Spacer(Modifier.height(6.dp))
                                 Text(
-                                    text = "Try a different search",
-                                    color = Color(0xFF5A6B84),
-                                    fontSize = 12.sp,
+                                    text = "TRY A DIFFERENT SEARCH",
+                                    color = Color(0xFF8B9AB0),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
                                 )
                             }
                         }
