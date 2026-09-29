@@ -80,7 +80,8 @@ val DefaultTheme =
                 surfaceContainer = NemasysBlackCard,
                 // Nemasys Black keeps the remaining default card tier off gray.
                 surfaceContainerHigh = NemasysBlackCard,
-                surfaceContainerHighest = SlateDarkBg4,
+                // Nemasys Black keeps the highest default card tier off gray.
+                surfaceContainerHighest = NemasysBlackCard,
                 inverseSurface = SlateDarkFg1,
                 inverseOnSurface = SlateDarkBg0,
                 inversePrimary = SlateFadedTeal,
