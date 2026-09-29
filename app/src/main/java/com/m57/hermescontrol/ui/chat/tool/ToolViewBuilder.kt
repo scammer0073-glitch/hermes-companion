@@ -1798,7 +1798,7 @@ object ToolViewBuilder {
                 if (degraded) lines += "\n⚠️ No citations — answer based on model's knowledge"
                 lines.joinToString("\n")
             }
-            else -> "No results"
+            else -> "NO RESULTS"
         }
     }
 
