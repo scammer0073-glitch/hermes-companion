@@ -151,8 +151,10 @@ fun ToolsetsScreen(
                                     )
                                 }
                                 Spacer(modifier = Modifier.height(8.dp))
-                                Text(text = state.errorMessage ?: "", color = MaterialTheme.colorScheme.error)
-                                Spacer(modifier = Modifier.height(16.dp))
+                                state.errorMessage?.takeIf { it.isNotBlank() }?.let { message ->
+                                    Text(text = message, color = MaterialTheme.colorScheme.error)
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                }
                                 IconButton(onClick = { viewModel.loadToolsets() }) {
                                     Icon(
                                         imageVector = Icons.Filled.Refresh,
