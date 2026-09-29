@@ -2,6 +2,7 @@ package com.m57.hermescontrol.ui.chat.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoAwesome
@@ -50,7 +51,19 @@ fun NemasysChatEmpty(
             }
         }
         Spacer(Modifier.height(18.dp))
-        Text("Start a conversation", fontWeight = FontWeight.Black, fontSize = 22.sp, color = Color.White, textAlign = TextAlign.Center)
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+            Surface(shape = CircleShape, color = Color(0xFF2DD4BF), modifier = Modifier.size(6.dp)) {}
+            Spacer(Modifier.width(6.dp))
+            Text(
+                "START A CONVERSATION",
+                fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.6.sp,
+                color = Color(0xFF8B9AB0),
+                textAlign = TextAlign.Center,
+            )
+        }
         Text("Try one of these — or just type", color = Color(0xFF8B9AB0), fontSize = 13.sp, textAlign = TextAlign.Center)
         Spacer(Modifier.height(16.dp))
         val prompts = listOf(
