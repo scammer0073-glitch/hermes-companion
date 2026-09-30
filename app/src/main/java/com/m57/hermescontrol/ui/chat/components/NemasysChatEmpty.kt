@@ -64,7 +64,29 @@ fun NemasysChatEmpty(
                 textAlign = TextAlign.Center,
             )
         }
-        Text("Try one of these — or just type", color = Color(0xFF8B9AB0), fontSize = 13.sp, textAlign = TextAlign.Center)
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = Color(0xFF0D0F12),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            shadowElevation = 0.dp,
+            tonalElevation = 0.dp,
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Surface(shape = CircleShape, color = Color(0xFF2DD4BF), modifier = Modifier.size(6.dp)) {}
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    "TRY ONE OF THESE OR JUST TYPE",
+                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = Color(0xFF8B9AB0),
+                )
+            }
+        }
         Spacer(Modifier.height(16.dp))
         val prompts = listOf(
             Triple(Icons.Filled.Code, "Explain this repo", "Walk me through the architecture"),
