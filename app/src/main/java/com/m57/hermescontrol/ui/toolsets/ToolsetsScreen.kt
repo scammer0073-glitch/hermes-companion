@@ -187,8 +187,9 @@ fun ToolsetsScreen(
                                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                     ) {
                                         Row(
-                                            modifier = Modifier.padding(16.dp),
+                                            modifier = Modifier.fillMaxWidth().padding(16.dp),
                                             verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.Center,
                                         ) {
                                             Box(
                                                 Modifier
