@@ -117,7 +117,7 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
             } else {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     items(apps, key = { it.id }) { app ->
-                        Card(onClick = { NavigationController.navigateTo(PersonalAppDetailKey(app.id)) }, shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)), border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44))) {
+                        Card(onClick = { NavigationController.navigateTo(PersonalAppDetailKey(app.id)) }, shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)), border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)), elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)) {
                             Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Box(Modifier.size(44.dp).clip(RoundedCornerShape(12.dp)).background(Color(0xFF14302C)), contentAlignment = Alignment.Center) { Text(app.icon, fontSize = 20.sp) }
                                 Spacer(Modifier.width(12.dp))
