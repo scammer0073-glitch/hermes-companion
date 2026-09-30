@@ -76,7 +76,13 @@ fun LandingScreen(
             Spacer(Modifier.height(12.dp))
             Text(stringResource(R.string.landing_subtitle), style = MaterialTheme.typography.bodyLarge.copy(color = Color(0xFF8B9AB0), lineHeight = 24.sp))
             Spacer(Modifier.height(22.dp))
-            Surface(shape = RoundedCornerShape(16.dp), color = Color(0xFF111820), border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44))) {
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = Color(0xFF0D0F12),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+                shadowElevation = 0.dp,
+                tonalElevation = 0.dp,
+            ) {
                 Row(Modifier.fillMaxWidth().padding(14.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Column {
                         Text("Nemasys Hub", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Color.White)
