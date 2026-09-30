@@ -287,17 +287,31 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
                 color = Color.White,
                 modifier = Modifier.padding(top = 6.dp),
             )
-            Text(
-                text =
-                    if (subscription.logged_in == true) {
-                        stringResource(R.string.billing_no_active_plan)
-                    } else {
-                        stringResource(R.string.billing_login_required)
-                    },
-                style = MaterialTheme.typography.bodySmall,
-                color = Color(0xFF8B9AB0),
+            Row(
                 modifier = Modifier.padding(top = 4.dp),
-            )
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF2DD4BF)),
+                )
+                Text(
+                    text =
+                        if (subscription.logged_in == true) {
+                            stringResource(R.string.billing_no_active_plan)
+                        } else {
+                            stringResource(R.string.billing_login_required)
+                        }.uppercase(),
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = Color(0xFF8B9AB0),
+                )
+            }
         }
     }
 }
