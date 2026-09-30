@@ -270,7 +270,7 @@ fun ChatInputBar(
                                             Text(
                                                 text = placeholderText,
                                                 style = MaterialTheme.typography.bodyMedium,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                                                color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
                                             )
                                         }
                                         innerTextField()
