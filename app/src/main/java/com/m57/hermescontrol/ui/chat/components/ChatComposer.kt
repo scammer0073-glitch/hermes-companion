@@ -111,8 +111,8 @@ fun ChatInputBar(
                 Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp, vertical = 8.dp),
-            shape = RoundedCornerShape(26.dp),
-            shadowElevation = 12.dp,
+            shape = RoundedCornerShape(16.dp),
+            shadowElevation = 0.dp,
             color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
             border =
                 BorderStroke(
