@@ -53,6 +53,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.res.stringResource
@@ -60,6 +61,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -189,14 +191,44 @@ fun ProfilesScreen(
                         if (state.isLoading && state.profiles.isEmpty()) {
                             CircularProgressIndicator()
                         } else if (state.errorMessage != null && state.profiles.isEmpty()) {
-                            Column(
-                                modifier = Modifier.padding(16.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
+                            Card(
+                                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
-                                Text(text = state.errorMessage ?: "", color = MaterialTheme.colorScheme.error)
-                                Spacer(modifier = Modifier.height(16.dp))
-                                Button(onClick = { viewModel.loadProfiles() }) {
-                                    Text(stringResource(R.string.action_retry))
+                                Column(
+                                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Box(
+                                            Modifier
+                                                .size(6.dp)
+                                                .clip(CircleShape)
+                                                .background(Color(0xFF2DD4BF)),
+                                        )
+                                        Spacer(Modifier.width(6.dp))
+                                        Text(
+                                            text = "PROFILES UNAVAILABLE",
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = 0.6.sp,
+                                            color = Color(0xFF8B9AB0),
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Text(
+                                        text = state.errorMessage ?: "",
+                                        color = MaterialTheme.colorScheme.error,
+                                        textAlign = TextAlign.Center,
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Button(onClick = { viewModel.loadProfiles() }) {
+                                        Text(stringResource(R.string.action_retry))
+                                    }
                                 }
                             }
                         } else {
