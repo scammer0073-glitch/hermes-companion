@@ -841,14 +841,14 @@ private fun RestartBanner(
                 colors =
                     ButtonDefaults.buttonColors(
                         containerColor = statusColors.warning,
-                        contentColor = MaterialTheme.colorScheme.surface,
+                        contentColor = Color(0xFF0D0F12),
                     ),
             ) {
                 if (isRestarting) {
                     CircularProgressIndicator(
                         modifier = Modifier.size(16.dp),
                         strokeWidth = 2.dp,
-                        color = MaterialTheme.colorScheme.surface,
+                        color = Color(0xFF0D0F12),
                     )
                 } else {
                     Icon(
