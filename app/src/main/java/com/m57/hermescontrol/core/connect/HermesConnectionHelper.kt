@@ -18,8 +18,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -95,12 +97,25 @@ fun HermesConnectHelperCard(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
         border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Filled.VpnKey, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(18.dp))
-                Spacer(Modifier.width(8.dp))
-                Text("Hermes wrapper — one-tap connect", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF2DD4BF)),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    "HERMES WRAPPER • ONE-TAP CONNECT",
+                    color = Color(0xFF8B9AB0),
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 11.sp,
+                    letterSpacing = 0.6.sp,
+                )
                 Spacer(Modifier.weight(1f))
                 if (installed) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.background(Color(0x332DD4BF), RoundedCornerShape(50)).padding(horizontal = 8.dp, vertical = 3.dp)) {
