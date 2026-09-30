@@ -2,6 +2,7 @@ package com.m57.hermescontrol.ui.chat.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -285,8 +286,9 @@ private fun InspectionItemCard(indicator: SubagentIndicator) {
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(Color(0xFF13171C))
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color(0xFF0D0F12))
+                            .border(BorderStroke(1.dp, Color(0xFF1E2D44)), RoundedCornerShape(16.dp))
                             .padding(8.dp),
                     verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
