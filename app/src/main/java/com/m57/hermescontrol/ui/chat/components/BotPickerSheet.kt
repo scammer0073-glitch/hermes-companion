@@ -163,7 +163,7 @@ fun BotPickerSheet(
                                     Spacer(Modifier.width(6.dp))
                                     Text(
                                         text = "NO BOTS MATCH",
-                                        color = Color(0xFF8B9AB0),
+                                        color = Color(0xFFE6EDF3),
                                         fontFamily = FontFamily.Monospace,
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
