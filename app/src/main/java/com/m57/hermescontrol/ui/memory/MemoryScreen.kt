@@ -185,10 +185,25 @@ private fun MemoryContent(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     if (memory.active.isNullOrBlank()) {
-                        Text(
-                            text = stringResource(R.string.memory_builtin),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(0xFF2DD4BF)),
+                            )
+                            Text(
+                                text = stringResource(R.string.memory_builtin).uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = Color(0xFF8B9AB0),
+                            )
+                        }
                     } else {
                         Text(
                             text = stringResource(R.string.memory_active, memory.active),
