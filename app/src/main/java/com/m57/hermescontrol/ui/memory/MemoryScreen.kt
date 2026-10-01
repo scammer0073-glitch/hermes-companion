@@ -220,8 +220,12 @@ private fun MemoryContent(
                                     files.memory?.let { formatBytes(it) } ?: "?",
                                     files.user?.let { formatBytes(it) } ?: "?",
                                 ),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            style =
+                                MaterialTheme.typography.bodySmall.copy(
+                                    color = Color(0xFF8B9AB0),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                ),
                         )
                     }
 
