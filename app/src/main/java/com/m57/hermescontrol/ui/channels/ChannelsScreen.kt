@@ -303,13 +303,17 @@ private fun GatewayOfflineBanner(gatewayCommand: String) {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Surface(
-                color = LocalHermesStatusColors.current.warningContainer,
-                shape = RoundedCornerShape(4.dp),
+                color = Color(0xFF0D0F12),
+                shape = RoundedCornerShape(16.dp),
+                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                tonalElevation = 0.dp,
+                shadowElevation = 0.dp,
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
                     text = "  $gatewayCommand",
                     style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
                 )
             }
         }
