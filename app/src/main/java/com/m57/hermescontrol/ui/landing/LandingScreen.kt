@@ -142,7 +142,7 @@ private fun LandingCapability(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.border(1.dp, Color(0xFF1E2D44), RoundedCornerShape(18.dp)).background(Color(0xFF111820), RoundedCornerShape(18.dp)).padding(horizontal = 10.dp, vertical = 16.dp),
+        modifier = modifier.border(1.dp, Color(0xFF1E2D44), RoundedCornerShape(16.dp)).background(Color(0xFF0D0F12), RoundedCornerShape(16.dp)).padding(horizontal = 10.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
