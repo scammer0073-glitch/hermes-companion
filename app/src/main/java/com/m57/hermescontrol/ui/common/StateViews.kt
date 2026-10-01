@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalSpacing
+import com.m57.hermescontrol.theme.NemasysCard
+import com.m57.hermescontrol.theme.NemasysCardBorder
 
 @Composable
 fun LoadingState(modifier: Modifier = Modifier, subtitle: String? = null) {
@@ -81,8 +83,18 @@ fun EmptyState(title: String, subtitle: String? = null, icon: ImageVector = Icon
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.fillMaxWidth().padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                Box(Modifier.size(64.dp).clip(CircleShape).background(Color(0xFF111820)), contentAlignment = Alignment.Center) {
-                    Icon(icon, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(28.dp))
+                Surface(
+                    modifier = Modifier.size(64.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    color = NemasysCard,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, NemasysCardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
+                    contentColor = Color(0xFFE6EDF3),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(icon, null, tint = Color(0xFFE6EDF3), modifier = Modifier.size(28.dp))
+                    }
                 }
                 Spacer(Modifier.height(14.dp))
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
