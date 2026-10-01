@@ -149,7 +149,7 @@ fun PairingScreen(
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
                                         letterSpacing = 0.6.sp,
-                                        color = Color(0xFF8B9AB0),
+                                        color = Color(0xFFE6EDF3),
                                     )
                                 }
                             }
