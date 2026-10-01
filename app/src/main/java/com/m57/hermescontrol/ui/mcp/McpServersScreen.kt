@@ -362,8 +362,8 @@ private fun AddServerSection(
                 onClick = { viewModel.toggleAddForm() },
                 colors =
                     ButtonDefaults.textButtonColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        containerColor = Color(0xFF2DD4BF),
+                        contentColor = Color(0xFF001018),
                     ),
             ) {
                 Text(if (state.showAddForm) "Hide" else "New")
