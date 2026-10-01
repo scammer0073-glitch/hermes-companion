@@ -339,7 +339,7 @@ internal fun SystemBubble(
                 style =
                     MaterialTheme.typography.bodySmall.copy(
                         fontStyle = FontStyle.Italic,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = Color(0xFF8B9AB0),
                     ),
             )
         }
