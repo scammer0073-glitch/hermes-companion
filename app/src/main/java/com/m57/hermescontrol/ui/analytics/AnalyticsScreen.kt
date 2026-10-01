@@ -528,14 +528,20 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
-                        text = entries.firstOrNull()?.day ?: "",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = entries.firstOrNull()?.day ?: "NO DATA",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = Color(0xFF8B9AB0),
                     )
                     Text(
-                        text = entries.lastOrNull()?.day ?: "",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = entries.lastOrNull()?.day ?: "NO DATA",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = Color(0xFF8B9AB0),
                     )
                 }
             }
