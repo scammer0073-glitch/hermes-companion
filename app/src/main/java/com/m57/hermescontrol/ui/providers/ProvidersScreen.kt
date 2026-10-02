@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.providers
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -363,8 +364,10 @@ private fun ExternalFlowContent(provider: OAuthProvider) {
         )
         provider.cliCommand.takeIf { it.isNotBlank() }?.let { cmd ->
             Surface(
-                color = LocalHermesStatusColors.current.infoContainer,
-                shape = RoundedCornerShape(4.dp),
+                color = Color(0xFF0D0F12),
+                shape = RoundedCornerShape(16.dp),
+                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                shadowElevation = 0.dp,
             ) {
                 Text(
                     text = "  $cmd",
