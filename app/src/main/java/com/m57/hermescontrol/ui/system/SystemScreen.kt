@@ -1681,10 +1681,13 @@ private fun LazyListScope.actionLogSection(
     item {
         Card(
             modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    containerColor = NemasysCard,
                 ),
+            border = BorderStroke(1.dp, NemasysCardBorder),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
                 // Action title
