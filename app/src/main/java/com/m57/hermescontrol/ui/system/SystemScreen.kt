@@ -1132,10 +1132,13 @@ private fun LazyListScope.operationsSection(
     item {
         Card(
             modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
             colors =
                 CardDefaults.cardColors(
                     containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
                 ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
                 // Operation buttons row 1
