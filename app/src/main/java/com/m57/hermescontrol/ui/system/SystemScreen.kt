@@ -1696,10 +1696,19 @@ private fun LazyListScope.actionLogSection(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(spacing.sm),
                 ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFF2DD4BF)),
+                    )
                     Text(
-                        text = state.activeAction ?: "",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
+                        text = (state.activeAction ?: "ACTION LOG").uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = Color(0xFFE6EDF3),
                         modifier = Modifier.weight(1f),
                     )
                     val actionLog = state.actionLog
