@@ -124,6 +124,31 @@ fun NemasysChatEmpty(
             }
         }
         Spacer(Modifier.height(14.dp))
-        Text("Tip: / for commands • @ to mention files • self-host free, Hub from ₹199", color = Color(0xFF5A6B84), fontSize = 10.sp, textAlign = TextAlign.Center)
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            color = Color(0xFF0D0F12),
+            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            shadowElevation = 0.dp,
+            tonalElevation = 0.dp,
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 9.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Surface(shape = CircleShape, color = Color(0xFF2DD4BF), modifier = Modifier.size(6.dp)) {}
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    "TIP: / FOR COMMANDS • @ TO MENTION FILES • SELF-HOST FREE, HUB FROM ₹199",
+                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.4.sp,
+                    color = Color(0xFF8B9AB0),
+                    textAlign = TextAlign.Center,
+                )
+            }
+        }
     }
 }
