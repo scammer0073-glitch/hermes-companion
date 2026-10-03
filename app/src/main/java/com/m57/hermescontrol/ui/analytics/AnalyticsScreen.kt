@@ -533,7 +533,7 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFF8B9AB0),
+                        color = if (entries.isEmpty()) Color(0xFFE6EDF3) else Color(0xFF8B9AB0),
                     )
                     Text(
                         text = entries.lastOrNull()?.day ?: "NO DATA",
@@ -541,7 +541,7 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFF8B9AB0),
+                        color = if (entries.isEmpty()) Color(0xFFE6EDF3) else Color(0xFF8B9AB0),
                     )
                 }
             }
