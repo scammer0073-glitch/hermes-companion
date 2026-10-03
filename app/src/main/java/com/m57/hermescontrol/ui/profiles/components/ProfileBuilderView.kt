@@ -390,12 +390,7 @@ private fun ModelStep(
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             colors =
                                 CardDefaults.cardColors(
-                                    containerColor =
-                                        if (isSelected) {
-                                            Color(0xFF14302C)
-                                        } else {
-                                            Color(0xFF0D0F12)
-                                        },
+                                    containerColor = Color(0xFF0D0F12),
                                 ),
                         ) {
                             Row(
