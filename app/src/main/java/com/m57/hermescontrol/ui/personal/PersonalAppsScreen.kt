@@ -211,11 +211,17 @@ fun PersonalAppDetailScreen(appId: String, onOpenDrawer: (() -> Unit)? = null) {
                                         color = Color(0xFF8B9AB0),
                                     )
                                 }
-                                Box(
-                                    Modifier.size(48.dp).clip(CircleShape).background(Color(0xFF111820)),
-                                    contentAlignment = Alignment.Center,
+                                Surface(
+                                    modifier = Modifier.size(48.dp),
+                                    shape = RoundedCornerShape(16.dp),
+                                    color = Color(0xFF0D0F12),
+                                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                    tonalElevation = 0.dp,
+                                    shadowElevation = 0.dp,
                                 ) {
-                                    Icon(Icons.Filled.Mic, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(22.dp))
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(Icons.Filled.Mic, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(22.dp))
+                                    }
                                 }
                                 Text(
                                     text = "Type or speak: ate 2 eggs 8am, slept 11:30-6:45",
