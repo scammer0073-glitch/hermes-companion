@@ -7,6 +7,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -86,7 +87,8 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                                 Modifier
                                     .size(64.dp)
                                     .clip(CircleShape)
-                                    .background(Color(0xFF111820)),
+                                    .background(Color(0xFF0D0F12))
+                                    .then(Modifier.border(1.dp, Color(0xFF1E2D44), CircleShape)),
                                 contentAlignment = Alignment.Center,
                             ) {
                                 Icon(
