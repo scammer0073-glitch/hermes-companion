@@ -763,8 +763,8 @@ private fun CatalogSection(
                 },
                 colors =
                     ButtonDefaults.textButtonColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        containerColor = Color(0xFF0D0F12),
+                        contentColor = Color(0xFF2DD4BF),
                     ),
             ) {
                 Text(if (catalogExpanded.value) "Hide" else "Browse")
