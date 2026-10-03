@@ -1,6 +1,7 @@
 package com.m57.hermescontrol.ui.chat.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -45,7 +47,18 @@ fun NemasysChatEmpty(
                 }
                 Spacer(Modifier.width(10.dp))
                 Column {
-                    Text(botName, fontWeight = FontWeight.Bold, color = Color.White, fontSize = 13.sp)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            botName.uppercase(),
+                            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            letterSpacing = 0.6.sp,
+                        )
+                    }
                     Text("Ask anything — tools, memory, cron, all here", color = Color(0xFF8B9AB0), fontSize = 11.sp)
                 }
             }
