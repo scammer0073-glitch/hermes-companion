@@ -19,7 +19,7 @@ object TokenRefreshAuthenticator : Authenticator {
         // retry, issue #470). Stamping a Bearer header would 401 again, and the
         // SPA token refresher only works in loopback mode — so bail out and let
         // safeApiCall() route to AuthSessionState.requireSignIn().
-        if (AuthManager.isGatedMode()) return null
+        if (AuthManager.isGatedMode() || NativeSessionAuth.hasSession()) return null
 
         // Loopback mode: a dashboard restart invalidates the saved ephemeral
         // token. First reuse a token another request may already have refreshed;

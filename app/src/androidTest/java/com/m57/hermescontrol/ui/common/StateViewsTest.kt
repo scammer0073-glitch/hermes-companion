@@ -1,13 +1,16 @@
 package com.m57.hermescontrol.ui.common
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,11 +30,13 @@ class StateViewsTest {
     // ── LoadingState ────────────────────────────────────────────────────
 
     @Test
-    fun loadingState_displaysCenteredSpinner() {
+    fun loadingState_displaysSkeleton() {
         composeTestRule.setContent { LoadingState() }
 
         composeTestRule.onNodeWithTag("loading_state").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("loading_spinner").assertIsDisplayed()
+        val skeletonBars = composeTestRule.onAllNodesWithTag("loading_skeleton")
+        skeletonBars.assertCountEquals(6)
+        repeat(6) { skeletonBars[it].assertIsDisplayed() }
     }
 
     // ── ErrorState ──────────────────────────────────────────────────────
@@ -57,7 +62,7 @@ class StateViewsTest {
         composeTestRule.onNodeWithTag("error_retry_button").assertIsDisplayed()
         composeTestRule.onNodeWithTag("error_retry_button").assertHasClickAction()
         composeTestRule.onNodeWithTag("error_retry_button").performClick()
-        assert(retryClicked) { "Retry callback was not invoked on click" }
+        assertTrue("Retry callback was not invoked on click", retryClicked)
     }
 
     @Test
@@ -74,7 +79,7 @@ class StateViewsTest {
         val title = "No items"
         composeTestRule.setContent { EmptyState(title = title) }
 
-        composeTestRule.onNodeWithText(title).assertIsDisplayed()
+        composeTestRule.onNodeWithText(title, ignoreCase = true).assertIsDisplayed()
     }
 
     @Test
@@ -105,7 +110,7 @@ class StateViewsTest {
         composeTestRule.onNodeWithTag("empty_state_action").assertIsDisplayed()
         composeTestRule.onNodeWithTag("empty_state_action").assertHasClickAction()
         composeTestRule.onNodeWithTag("empty_state_action").performClick()
-        assert(actionClicked) { "Action callback was not invoked on click" }
+        assertTrue("Action callback was not invoked on click", actionClicked)
     }
 
     @Test

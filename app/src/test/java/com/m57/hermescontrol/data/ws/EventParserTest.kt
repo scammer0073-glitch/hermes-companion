@@ -29,6 +29,39 @@ private fun createJsonRpcResponse(
     )
 
 class EventParserTest {
+    @Test
+    fun serverRequestWithIdIsNotMistakenForAnRpcResult() {
+        val response =
+            createJsonRpcResponse(
+                "2.0",
+                "srq-123",
+                method = "sudo",
+                params = mapOf("session_id" to "s", "command" to "apt install"),
+            )
+        val event = EventParser.parse(response)
+        assertTrue(event is WsEvent.ServerRequest)
+        event as WsEvent.ServerRequest
+        assertEquals("srq-123", event.id)
+        assertEquals("sudo", event.method)
+        assertEquals("s", event.params["session_id"])
+    }
+
+    @Test
+    fun requestCancelPreservesTheServerRequestId() {
+        val response =
+            createJsonRpcResponse(
+                "2.0",
+                null,
+                method = "event",
+                params =
+                    mapOf(
+                        "type" to "request.cancel",
+                        "payload" to mapOf("id" to "srq-123", "method" to "sudo", "reason" to "timeout"),
+                    ),
+            )
+        assertEquals(WsEvent.RequestCancelled("srq-123"), EventParser.parse(response))
+    }
+
     @Before
     fun setUp() {
         mockkStatic(android.util.Log::class)

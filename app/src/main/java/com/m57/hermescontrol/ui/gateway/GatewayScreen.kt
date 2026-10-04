@@ -35,7 +35,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -45,6 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
 import com.m57.hermescontrol.ui.common.NavIcon
@@ -127,8 +127,8 @@ fun GatewayScreen(
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(16.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
                                 Column(
@@ -145,7 +145,7 @@ fun GatewayScreen(
                                                 .size(6.dp)
                                                 .clip(CircleShape)
                                                 .background(
-                                                    if (isRunning) Color(0xFF2DD4BF) else statusColors.error,
+                                                    if (isRunning) NemasysPalette.Accent else statusColors.error,
                                                 ),
                                         )
                                         Spacer(Modifier.width(6.dp))
@@ -155,7 +155,7 @@ fun GatewayScreen(
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Bold,
                                             letterSpacing = 0.6.sp,
-                                            color = Color(0xFF8B9AB0),
+                                            color = NemasysPalette.Muted,
                                         )
                                     }
                                     Text(
@@ -169,13 +169,13 @@ fun GatewayScreen(
                                             },
                                         style = MaterialTheme.typography.headlineSmall,
                                         fontWeight = FontWeight.Bold,
-                                        color = if (isRunning) Color(0xFF2DD4BF) else statusColors.error,
+                                        color = if (isRunning) NemasysPalette.Accent else statusColors.error,
                                     )
                                     status?.version?.let {
                                         Text(
                                             text = stringResource(R.string.gateway_label_version, it),
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = Color(0xFF8B9AB0),
+                                            color = NemasysPalette.Muted,
                                         )
                                     }
                                 }
@@ -185,8 +185,8 @@ fun GatewayScreen(
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(16.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
                                 Column(
@@ -201,7 +201,7 @@ fun GatewayScreen(
                                             Modifier
                                                 .size(6.dp)
                                                 .clip(CircleShape)
-                                                .background(Color(0xFF2DD4BF)),
+                                                .background(NemasysPalette.Accent),
                                         )
                                         Spacer(Modifier.width(6.dp))
                                         Text(
@@ -210,7 +210,7 @@ fun GatewayScreen(
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Bold,
                                             letterSpacing = 0.6.sp,
-                                            color = Color(0xFF8B9AB0),
+                                            color = NemasysPalette.Muted,
                                         )
                                     }
 
@@ -276,8 +276,8 @@ fun GatewayScreen(
                                     Card(
                                         modifier = Modifier.fillMaxWidth(),
                                         shape = RoundedCornerShape(16.dp),
-                                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                     ) {
                                         Column(
@@ -292,16 +292,19 @@ fun GatewayScreen(
                                                     Modifier
                                                         .size(6.dp)
                                                         .clip(CircleShape)
-                                                        .background(Color(0xFF2DD4BF)),
+                                                        .background(NemasysPalette.Accent),
                                                 )
                                                 Spacer(Modifier.width(6.dp))
                                                 Text(
-                                                    text = stringResource(R.string.gateway_sec_active_platforms).uppercase(),
+                                                    text =
+                                                        stringResource(
+                                                            R.string.gateway_sec_active_platforms,
+                                                        ).uppercase(),
                                                     fontFamily = FontFamily.Monospace,
                                                     fontSize = 11.sp,
                                                     fontWeight = FontWeight.Bold,
                                                     letterSpacing = 0.6.sp,
-                                                    color = Color(0xFF8B9AB0),
+                                                    color = NemasysPalette.Muted,
                                                 )
                                             }
 

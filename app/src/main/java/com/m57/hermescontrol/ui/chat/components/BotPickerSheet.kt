@@ -1,8 +1,8 @@
 package com.m57.hermescontrol.ui.chat.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -42,7 +42,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -53,6 +52,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.ProfileInfo
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.LoadingState
 import com.m57.hermescontrol.ui.profiles.ProfilesViewModel
@@ -94,7 +94,7 @@ fun BotPickerSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+        containerColor = NemasysPalette.Card,
     ) {
         Column(
             modifier =
@@ -129,15 +129,15 @@ fun BotPickerSheet(
                 shape = RoundedCornerShape(16.dp),
                 colors =
                     OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = Color(0xFF0D0F12),
-                        unfocusedContainerColor = Color(0xFF0D0F12),
-                        focusedBorderColor = Color(0xFF2DD4BF),
-                        unfocusedBorderColor = Color(0xFF1E2D44),
-                        cursorColor = Color(0xFF2DD4BF),
-                        focusedLeadingIconColor = Color(0xFF2DD4BF),
-                        unfocusedLeadingIconColor = Color(0xFF8B9AB0),
-                        focusedPlaceholderColor = Color(0xFF8B9AB0),
-                        unfocusedPlaceholderColor = Color(0xFF8B9AB0),
+                        focusedContainerColor = NemasysPalette.Card,
+                        unfocusedContainerColor = NemasysPalette.Card,
+                        focusedBorderColor = NemasysPalette.Accent,
+                        unfocusedBorderColor = NemasysPalette.CardBorder,
+                        cursorColor = NemasysPalette.Accent,
+                        focusedLeadingIconColor = NemasysPalette.Accent,
+                        unfocusedLeadingIconColor = NemasysPalette.Muted,
+                        focusedPlaceholderColor = NemasysPalette.Muted,
+                        unfocusedPlaceholderColor = NemasysPalette.Muted,
                     ),
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -157,8 +157,8 @@ fun BotPickerSheet(
                         Surface(
                             modifier = Modifier.fillMaxWidth().height(180.dp),
                             shape = RoundedCornerShape(16.dp),
-                            color = Color(0xFF0D0F12),
-                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            color = NemasysPalette.Card,
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             shadowElevation = 0.dp,
                             tonalElevation = 0.dp,
                         ) {
@@ -171,12 +171,12 @@ fun BotPickerSheet(
                                     Box(
                                         Modifier
                                             .size(6.dp)
-                                            .background(Color(0xFF2DD4BF), CircleShape),
+                                            .background(NemasysPalette.Accent, CircleShape),
                                     )
                                     Spacer(Modifier.width(6.dp))
                                     Text(
                                         text = "NO BOTS MATCH",
-                                        color = Color(0xFFE6EDF3),
+                                        color = NemasysPalette.Text,
                                         fontFamily = FontFamily.Monospace,
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
@@ -186,7 +186,7 @@ fun BotPickerSheet(
                                 Spacer(Modifier.height(6.dp))
                                 Text(
                                     text = "TRY A DIFFERENT SEARCH",
-                                    color = Color(0xFF8B9AB0),
+                                    color = NemasysPalette.Muted,
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
@@ -216,7 +216,7 @@ fun BotPickerSheet(
                     }
                 }
             }
-            HorizontalDivider(color = androidx.compose.ui.graphics.Color(0xFF1E2D44))
+            HorizontalDivider(color = NemasysPalette.CardBorder)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -247,9 +247,22 @@ internal fun BotPickerRow(
     Surface(
         onClick = onClick,
         shape = RoundedCornerShape(16.dp),
-        color = if (isActive) androidx.compose.ui.graphics.Color(0xFF14302C) else androidx.compose.ui.graphics.Color(0xFF0D0F12),
-        contentColor = androidx.compose.ui.graphics.Color.White,
-        border = androidx.compose.foundation.BorderStroke(1.dp, if (isActive) androidx.compose.ui.graphics.Color(0xFF2DD4BF) else androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        color =
+            if (isActive) {
+                NemasysPalette.AccentContainer
+            } else {
+                NemasysPalette.Card
+            },
+        contentColor = NemasysPalette.TextBright,
+        border =
+            androidx.compose.foundation.BorderStroke(
+                1.dp,
+                if (isActive) {
+                    NemasysPalette.Accent
+                } else {
+                    NemasysPalette.CardBorder
+                },
+            ),
     ) {
         Row(
             modifier =
@@ -258,22 +271,32 @@ internal fun BotPickerRow(
                     .padding(horizontal = 10.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            if (isActive) androidx.compose.foundation.layout.Box(Modifier.size(width = 3.dp, height = 28.dp).background(androidx.compose.ui.graphics.Color(0xFF2DD4BF), androidx.compose.foundation.shape.RoundedCornerShape(2.dp)))
+            if (isActive) {
+                androidx.compose.foundation.layout.Box(
+                    Modifier.size(
+                        width = 3.dp,
+                        height = 28.dp,
+                    ).background(
+                        NemasysPalette.Accent,
+                        androidx.compose.foundation.shape.RoundedCornerShape(2.dp),
+                    ),
+                )
+            }
             if (isActive) androidx.compose.foundation.layout.Spacer(Modifier.width(8.dp))
             Surface(
                 modifier = Modifier.size(44.dp),
                 shape = CircleShape,
                 color =
                     if (isActive) {
-                        androidx.compose.ui.graphics.Color(0xFF2DD4BF)
+                        NemasysPalette.Accent
                     } else {
-                        androidx.compose.ui.graphics.Color(0xFF1A232F)
+                        NemasysPalette.ShimmerHighlight
                     },
                 contentColor =
                     if (isActive) {
-                        androidx.compose.ui.graphics.Color(0xFF001018)
+                        NemasysPalette.OnAccent
                     } else {
-                        androidx.compose.ui.graphics.Color.White
+                        NemasysPalette.TextBright
                     },
             ) {
                 Box(contentAlignment = Alignment.Center) {
@@ -309,7 +332,7 @@ internal fun BotPickerRow(
                 Icon(
                     imageVector = Icons.Filled.Check,
                     contentDescription = stringResource(R.string.profiles_content_desc_active),
-                    tint = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
+                    tint = NemasysPalette.Accent,
                 )
             }
         }

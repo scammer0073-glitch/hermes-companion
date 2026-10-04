@@ -145,7 +145,10 @@ object ChatWsEventReducer {
             is WsEvent.SessionInfo -> ReducerResult(state = state, streamingState = streamingState)
 
             // RpcResult is handled by the ViewModel (needs pending request context)
-            is WsEvent.RpcResult -> ReducerResult(state = state, streamingState = streamingState)
+            is WsEvent.RpcResult,
+            is WsEvent.ServerRequest,
+            is WsEvent.RequestCancelled,
+            -> ReducerResult(state = state, streamingState = streamingState)
 
             // ApprovalRequest is handled by the ViewModel (needs active session + WS client)
             is WsEvent.ApprovalRequest -> ReducerResult(state = state, streamingState = streamingState)

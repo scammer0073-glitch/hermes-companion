@@ -267,7 +267,9 @@ fun FullBleedChatList(
                                             } else {
                                                 FullBleedSystemEvent(
                                                     message = sysMessage,
-                                                    onRespondApproval = viewModel::respondToApproval,
+                                                    onRespondApproval = { action ->
+                                                        viewModel.respondToApproval(action, requestId = sysMessage.id)
+                                                    },
                                                 )
                                             }
                                         }

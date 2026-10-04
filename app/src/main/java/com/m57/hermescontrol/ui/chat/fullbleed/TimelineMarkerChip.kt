@@ -18,13 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.ChatMessage
 
 /**
@@ -88,8 +88,8 @@ internal fun TimelineMarkerChip(
     ) {
         Surface(
             shape = RoundedCornerShape(16.dp),
-            color = Color(0xFF0D0F12),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            color = NemasysPalette.Card,
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             tonalElevation = 0.dp,
             shadowElevation = 0.dp,
             modifier = Modifier.testTag("timeline_marker"),
@@ -104,7 +104,7 @@ internal fun TimelineMarkerChip(
                         Modifier
                             .size(5.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                            .background(NemasysPalette.Accent),
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
@@ -112,7 +112,7 @@ internal fun TimelineMarkerChip(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF2DD4BF),
+                    color = NemasysPalette.Accent,
                 )
             }
         }

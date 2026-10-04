@@ -102,7 +102,7 @@ object ApiClient {
         val authInterceptor =
             Interceptor { chain ->
                 val request = chain.request()
-                if (AuthManager.isGatedMode()) {
+                if (AuthManager.isGatedMode() || NativeSessionAuth.hasSession()) {
                     // Cookie in the shared jar is the only valid REST credential.
                     return@Interceptor chain.proceed(request)
                 }
@@ -123,6 +123,14 @@ object ApiClient {
             OkHttpProvider
                 .base
                 .newBuilder()
+                .addInterceptor(NativeBearerInterceptor)
+                .apply {
+                    if (NativeSessionAuth.hasSession()) {
+                        cookieJar(okhttp3.CookieJar.NO_COOKIES)
+                        followRedirects(false)
+                        followSslRedirects(false)
+                    }
+                }
                 .addInterceptor(authInterceptor)
                 .addInterceptor(ProfileScopeInterceptor)
                 .addInterceptor(logging)

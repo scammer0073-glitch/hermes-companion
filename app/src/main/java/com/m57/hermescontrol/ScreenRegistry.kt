@@ -4,10 +4,10 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.AccountBalanceWallet
+import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Devices
@@ -32,16 +32,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation3.runtime.NavKey
 import com.m57.hermescontrol.ui.common.NeurologyIcon
+import com.m57.hermescontrol.ui.personal.PersonalAppsScreen
 import com.m57.hermescontrol.ui.achievements.AchievementsScreen as AchievementsScreenContent
 import com.m57.hermescontrol.ui.analytics.AnalyticsScreen as AnalyticsScreenContent
 import com.m57.hermescontrol.ui.billing.BillingScreen as BillingScreenContent
-import com.m57.hermescontrol.ui.hub.NemasysHubScreen as NemasysHubScreenContent
 import com.m57.hermescontrol.ui.channels.ChannelsScreen as ChannelsScreenContent
 import com.m57.hermescontrol.ui.chat.ChatScreen as ChatScreenContent
 import com.m57.hermescontrol.ui.config.ConfigScreen as ConfigScreenContent
 import com.m57.hermescontrol.ui.cron.CronJobsScreen as CronJobsScreenContent
 import com.m57.hermescontrol.ui.files.FilesScreen as FilesScreenContent
 import com.m57.hermescontrol.ui.gateway.GatewayScreen as GatewayScreenContent
+import com.m57.hermescontrol.ui.hub.NemasysHubScreen as NemasysHubScreenContent
 import com.m57.hermescontrol.ui.kanban.KanbanScreen as KanbanScreenContent
 import com.m57.hermescontrol.ui.keys.KeysScreen as KeysScreenContent
 import com.m57.hermescontrol.ui.logs.LogsScreen as LogsScreenContent
@@ -49,7 +50,6 @@ import com.m57.hermescontrol.ui.mcp.McpServersScreen as McpServersScreenContent
 import com.m57.hermescontrol.ui.memory.MemoryScreen as MemoryScreenContent
 import com.m57.hermescontrol.ui.model.ModelScreen as ModelScreenContent
 import com.m57.hermescontrol.ui.pairing.PairingScreen as PairingScreenContent
-import com.m57.hermescontrol.ui.personal.PersonalAppsScreen
 import com.m57.hermescontrol.ui.plugins.PluginsScreen as PluginsScreenContent
 import com.m57.hermescontrol.ui.process.ProcessesScreen as ProcessesScreenContent
 import com.m57.hermescontrol.ui.profiles.ProfilesScreen as ProfilesScreenContent

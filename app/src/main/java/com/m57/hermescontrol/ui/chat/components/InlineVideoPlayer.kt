@@ -20,12 +20,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 
 /**
  * Minimal inline Video Thumbnail component for chat bubbles and markdown blocks (issue #722).
@@ -45,61 +45,61 @@ fun InlineVideoPlayer(
                 .clickable { onFullScreenClick() }
                 .testTag("inline_video_player"),
         shape = RoundedCornerShape(16.dp),
-        color = Color(0xFF0D0F12),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        color = NemasysPalette.Card,
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         tonalElevation = 0.dp,
         shadowElevation = 0.dp,
     ) {
         Box {
-        // Play icon badge in center
-        Surface(
-            shape = CircleShape,
-            color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.65f),
-            modifier =
-                Modifier
-                    .align(Alignment.Center)
-                    .size(56.dp)
-                    .testTag("video_play_overlay"),
-        ) {
-            Box(contentAlignment = Alignment.Center) {
-                Icon(
-                    imageVector = Icons.Filled.PlayArrow,
-                    contentDescription = stringResource(R.string.video_play),
-                    tint = MaterialTheme.colorScheme.inverseOnSurface,
-                    modifier = Modifier.size(36.dp),
-                )
-            }
-        }
-
-        // VIDEO label badge in bottom-right corner
-        Box(
-            modifier =
-                Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(8.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.6f),
-                        shape = RoundedCornerShape(16.dp),
-                    ).padding(horizontal = 8.dp, vertical = 4.dp),
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            // Play icon badge in center
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.65f),
+                modifier =
+                    Modifier
+                        .align(Alignment.Center)
+                        .size(56.dp)
+                        .testTag("video_play_overlay"),
             ) {
-                Icon(
-                    imageVector = Icons.Filled.PlayArrow,
-                    contentDescription = "Video",
-                    modifier = Modifier.size(14.dp),
-                    tint = MaterialTheme.colorScheme.inverseOnSurface,
-                )
-                Text(
-                    text = " VIDEO",
-                    color = MaterialTheme.colorScheme.inverseOnSurface,
-                    fontSize = 10.sp,
-                    style = MaterialTheme.typography.labelSmall,
-                )
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Filled.PlayArrow,
+                        contentDescription = stringResource(R.string.video_play),
+                        tint = MaterialTheme.colorScheme.inverseOnSurface,
+                        modifier = Modifier.size(36.dp),
+                    )
+                }
+            }
+
+            // VIDEO label badge in bottom-right corner
+            Box(
+                modifier =
+                    Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(8.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.6f),
+                            shape = RoundedCornerShape(16.dp),
+                        ).padding(horizontal = 8.dp, vertical = 4.dp),
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.PlayArrow,
+                        contentDescription = "Video",
+                        modifier = Modifier.size(14.dp),
+                        tint = MaterialTheme.colorScheme.inverseOnSurface,
+                    )
+                    Text(
+                        text = " VIDEO",
+                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        fontSize = 10.sp,
+                        style = MaterialTheme.typography.labelSmall,
+                    )
+                }
             }
         }
-    }
     }
 }
 
