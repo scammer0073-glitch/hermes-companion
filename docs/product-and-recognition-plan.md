@@ -44,7 +44,7 @@ The official contribution guide prioritizes bug fixes, platform support, securit
 Suggested sequence, not official requirements:
 
 1. Repair the fork's CI and prepare an installable, consistently branded release with reproducible compatibility evidence.
-2. Send broadly useful Android fixes to Hy4ri/hermes-mobile in small PRs, following that repository's `CONTRIBUTING.md`. Keep personal hosting and tracker changes separate so upstream can assess them independently.
+2. Send broadly useful Android fixes to Hy4ri/hermes-mobile in small PRs, following that repository's `CONTRIBUTING.md` and targeting `dev`. Keep personal hosting and tracker changes separate so upstream can assess them independently.
 3. Ask Hermes maintainers which native Android authentication contract they support and whether a community-client listing belongs in their docs. Start with a design discussion rather than a large code-import PR.
 4. If maintainers express interest, agree on ownership, maintainers, signing/distribution, compatibility policy, support boundaries and branding. Then submit the specific change they request.
 
@@ -66,3 +66,11 @@ Official community destinations documented by Hermes are [Nous Research Discord]
 > Hello Hermes maintainers — I maintain `scammer0073-glitch/hermes-companion`, an Android fork of M57/Hy4ri's Hermes Mobile, with original attribution preserved. I am working on CI reliability, self-hosted onboarding and documented compatibility with current Hermes. The repair branch implements the documented native PKCE broker; real Android/Portal validation is still pending, and I am not presenting the app as official. Would an Android compatibility review and a community-client documentation proposal be useful? I can provide a tested release, a brief demo and an exact version matrix once verified. I would also appreciate your guidance on branding and maintenance expectations before discussing endorsement.
 
 Before sending, replace future promises with links to the actual green run, APK, demo and version matrix. Do not claim tests or OAuth support that have not been completed.
+
+## Upstream submission update (2026-10-04)
+
+Focused fixes and a separate Bot Screen tutorial have been submitted; see [the contribution record](upstream-contributions.md).
+Hermes Agent currently disables GitHub Discussions. Its documentation PR is a concrete review route;
+use an issue for a new design proposal after checking for duplicates.
+Hermes Mobile's OAuth issue #639 was closed as `not_planned`; the native PKCE work remains in this fork.
+Do not describe these submissions as accepted upstream or as official endorsement.
