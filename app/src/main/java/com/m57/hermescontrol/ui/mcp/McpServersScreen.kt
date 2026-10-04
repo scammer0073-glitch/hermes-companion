@@ -44,6 +44,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
@@ -608,7 +609,38 @@ private fun ServerCard(
                     Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.action_delete))
                 }
             }
-            Text("MCP restart is unavailable in this app.", style = MaterialTheme.typography.bodySmall)
+            Surface(
+                modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                shape = RoundedCornerShape(16.dp),
+                color = NemasysPalette.Card,
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                tonalElevation = 0.dp,
+                shadowElevation = 0.dp,
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        "MCP RESTART IS UNAVAILABLE IN THIS APP.",
+                        style =
+                            MaterialTheme.typography.bodySmall.copy(
+                                color = NemasysPalette.Muted,
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 11.sp,
+                                letterSpacing = 0.6.sp,
+                            ),
+                    )
+                }
+            }
 
             // Env vars toggle
             TextButton(
