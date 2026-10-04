@@ -485,7 +485,7 @@ private fun ExpandedToolContent(
 
             // ── Plain detail body ──
             if (view.detail.isNotBlank() && view.inlineDiff == null) {
-                if (view.detail == "No skills found") {
+                if (view.detail == "No skills found" || view.detail == "No matching tools") {
                     Surface(
                         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                         shape = RoundedCornerShape(16.dp),
@@ -506,7 +506,7 @@ private fun ExpandedToolContent(
                             )
                             Spacer(Modifier.width(6.dp))
                             Text(
-                                text = "NO SKILLS FOUND",
+                                text = view.detail.uppercase(),
                                 style =
                                     MaterialTheme.typography.bodySmall.copy(
                                         color = NemasysPalette.Muted,
