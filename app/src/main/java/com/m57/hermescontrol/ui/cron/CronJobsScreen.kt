@@ -60,6 +60,7 @@ import com.m57.hermescontrol.data.model.CronBlueprintField
 import com.m57.hermescontrol.data.model.CronJob
 import com.m57.hermescontrol.data.model.DeliveryTarget
 import com.m57.hermescontrol.theme.LocalSpacing
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.ExposedDropdownField
@@ -137,8 +138,11 @@ fun CronJobsScreen(
                             onClick = { selectedJob = job },
                             modifier = Modifier.fillMaxWidth(),
                             shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
-                            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                            colors =
+                                CardDefaults.cardColors(
+                                    containerColor = NemasysPalette.Card,
+                                ),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
                             Column(modifier = Modifier.padding(spacing.md)) {
@@ -361,8 +365,8 @@ fun CronJobEditorDialog(
                     .fillMaxSize()
                     .padding(16.dp),
             shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
-            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             HermesScaffold(

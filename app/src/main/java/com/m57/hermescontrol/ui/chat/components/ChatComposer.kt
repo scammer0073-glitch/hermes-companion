@@ -63,6 +63,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.Attachment
 import com.m57.hermescontrol.data.ws.CommandBlocklist
 import com.m57.hermescontrol.data.ws.CommandCatalog
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.ChatInputPolicy
 
 /**
@@ -113,11 +114,18 @@ fun ChatInputBar(
                     .padding(horizontal = 12.dp, vertical = 8.dp),
             shape = RoundedCornerShape(16.dp),
             shadowElevation = 0.dp,
-            color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+            color = NemasysPalette.Card,
             border =
                 BorderStroke(
                     width = 1.dp,
-                    color = if (isFocused) androidx.compose.ui.graphics.Color(0xFF2DD4BF).copy(alpha=0.9f) else androidx.compose.ui.graphics.Color(0xFF1E2D44),
+                    color =
+                        if (isFocused) {
+                            androidx.compose.ui.graphics.Color(
+                                0xFF2DD4BF,
+                            ).copy(alpha = 0.9f)
+                        } else {
+                            NemasysPalette.CardBorder
+                        },
                 ),
             tonalElevation = 0.dp,
         ) {
@@ -149,8 +157,8 @@ fun ChatInputBar(
                                     .fillMaxWidth()
                                     .padding(horizontal = 12.dp, vertical = 4.dp),
                             shape = RoundedCornerShape(16.dp),
-                            color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
-                            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                            color = NemasysPalette.Card,
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             tonalElevation = 0.dp,
                         ) {
                             LazyColumn(
@@ -248,12 +256,12 @@ fun ChatInputBar(
                                         width = 1.dp,
                                         color =
                                             if (isFocused) {
-                                                androidx.compose.ui.graphics.Color(0xFF2DD4BF)
+                                                NemasysPalette.Accent
                                             } else {
-                                                androidx.compose.ui.graphics.Color(0xFF1E2D44)
+                                                NemasysPalette.CardBorder
                                             },
                                     ),
-                                color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                                color = NemasysPalette.Card,
                                 tonalElevation = 0.dp,
                                 shadowElevation = 0.dp,
                                 modifier = Modifier.fillMaxWidth(),
@@ -270,7 +278,7 @@ fun ChatInputBar(
                                             Text(
                                                 text = placeholderText,
                                                 style = MaterialTheme.typography.bodyMedium,
-                                                color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                                                color = NemasysPalette.Muted,
                                             )
                                         }
                                         innerTextField()
@@ -390,8 +398,8 @@ fun AttachmentChip(
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        color = Color(0xFF0D0F12),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        color = NemasysPalette.Card,
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         tonalElevation = 0.dp,
         shadowElevation = 0.dp,
     ) {

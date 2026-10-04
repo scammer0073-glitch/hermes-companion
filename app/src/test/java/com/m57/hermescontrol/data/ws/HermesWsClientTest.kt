@@ -6,6 +6,7 @@ import com.m57.hermescontrol.data.remote.CleartextPolicy
 import com.m57.hermescontrol.data.remote.CookieManager
 import com.m57.hermescontrol.data.remote.DashboardSessionTokenRefresher
 import com.m57.hermescontrol.data.remote.NetworkMonitor
+import com.m57.hermescontrol.data.remote.OkHttpProvider
 import com.m57.hermescontrol.data.remote.ServerEndpoint
 import com.m57.hermescontrol.data.remote.buildFakePersistentCookieJar
 import com.m57.hermescontrol.data.session.ActiveSessionHolder
@@ -41,6 +42,56 @@ import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
 
 class HermesWsClientTest {
+    @Test
+    fun serverRequestResponsePreservesIdAndHasNoMethod() {
+        val socket = mockk<WebSocket>(relaxed = true)
+        every { socket.send(any<String>()) } returns true
+        val socketField = HermesWsClient::class.java.getDeclaredField("webSocket")
+        socketField.isAccessible = true
+        socketField.set(HermesWsClient, socket)
+        val connectedField = HermesWsClient::class.java.getDeclaredField("connected")
+        connectedField.isAccessible = true
+        (connectedField.get(HermesWsClient) as java.util.concurrent.atomic.AtomicBoolean).set(true)
+        val generationField = HermesWsClient::class.java.getDeclaredField("connectionGeneration")
+        generationField.isAccessible = true
+        val generation = (generationField.get(HermesWsClient) as AtomicInteger).get()
+        val requestsField = HermesWsClient::class.java.getDeclaredField("serverRequestGenerations")
+        requestsField.isAccessible = true
+        @Suppress("UNCHECKED_CAST")
+        val requests = requestsField.get(HermesWsClient) as java.util.concurrent.ConcurrentHashMap<String, Int>
+        requests["srq-password"] = generation
+
+        assertTrue(HermesWsClient.respondToServerRequest("srq-password", mapOf("value" to "test-secret")))
+        verify {
+            socket.send(
+                match<String> { frame ->
+                    val response =
+                        OkHttpProvider.json.decodeFromString<JsonRpcResponse>(
+                            frame,
+                        )
+                    !frame.contains("\"method\"") && !frame.contains("\"error\"") &&
+                        response.id == "srq-password" && response.result?.toAny() ==
+                        mapOf(
+                            "value" to "test-secret",
+                        )
+                },
+            )
+        }
+        verify(exactly = 0) { Log.d(any(), match<String> { it.contains("test-secret") }) }
+        assertFalse(HermesWsClient.respondToServerRequest("srq-password", mapOf("value" to "test-secret")))
+        requests["srq-stale"] = generation - 1
+        assertFalse(HermesWsClient.respondToServerRequest("srq-stale", mapOf("value" to "test-secret")))
+    }
+
+    @Test
+    fun disconnectedServerResponseDoesNotQueueCredentials() {
+        assertFalse(HermesWsClient.respondToServerRequest("srq-password", mapOf("value" to "test-secret")))
+        val queueField = HermesWsClient::class.java.getDeclaredField("messageQueue")
+        queueField.isAccessible = true
+        val queue = queueField.get(HermesWsClient) as java.util.concurrent.ConcurrentLinkedQueue<*>
+        assertTrue(queue.isEmpty())
+    }
+
     private lateinit var mockWebServer: MockWebServer
 
     @Before

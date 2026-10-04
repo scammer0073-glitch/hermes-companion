@@ -1,5 +1,9 @@
-<h1 align="center">Hermes Mobile</h1>
-<p align="center"><strong>Native Android companion app for your Hermes AI agent.</strong></p>
+<h1 align="center">Hermes Companion</h1>
+<p align="center"><strong>Community Android companion for Hermes Agent.</strong></p>
+
+This repository is an independently maintained community fork of
+[Hy4ri/hermes-mobile](https://github.com/Hy4ri/hermes-mobile), originally created by M57 (Hy4ri).
+It is not an official Nous Research or Hermes Agent app. Upstream license and copyright credits are preserved.
 
 <div align="center">
   <br>
@@ -11,26 +15,21 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/Hy4ri/hermes-mobile/releases/latest"><img src="https://img.shields.io/github/v/release/Hy4ri/hermes-mobile?color=6750A4&label=Latest%20Release&logo=github" alt="Latest Release"></a>
-  <img src="https://img.shields.io/github/actions/workflow/status/Hy4ri/hermes-mobile/android.yml?branch=main&label=CI&logo=githubactions" alt="CI">
+  <a href="https://github.com/scammer0073-glitch/hermes-companion/releases"><img src="https://img.shields.io/github/v/release/scammer0073-glitch/hermes-companion?color=6750A4&label=Fork%20Release&logo=github" alt="Fork Release"></a>
+  <img src="https://img.shields.io/github/actions/workflow/status/scammer0073-glitch/hermes-companion/android.yml?branch=main&label=CI&logo=githubactions" alt="CI">
   <img src="https://img.shields.io/badge/minSdk-26-brightgreen" alt="minSdk 26">
   <img src="https://img.shields.io/badge/targetSdk-36-brightgreen" alt="targetSdk 36">
 </p>
 
-<p align="center">
-  <a href="https://f-droid.org/packages/com.m57.hermescontrol/">
-    <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="65"/>
-  </a>
-  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fadd%2Fhttps%3A%2F%2Fgithub.com%2FHy4ri%2Fhermes-mobile">
-    <img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="65"/>
-  </a>
-</p>
+This fork has no published releases yet. Build from source using the instructions below;
+future binaries will be listed on [this fork's releases page](https://github.com/scammer0073-glitch/hermes-companion/releases).
+The inherited F-Droid listing and Obtainium source distribute the upstream app, not this fork.
 
 ---
 
 ## Overview
 
-**Hermes Mobile** is the native Android client for [Hermes Agent](https://hermes-agent.nousresearch.com). It connects securely to your local Hermes gateway (REST API and WebSocket TUI Gateway) over LAN, giving you pocket control over your AI assistant.
+**Hermes Companion** is a community Android client for [Hermes Agent](https://hermes-agent.nousresearch.com). It connects to your local Hermes gateway (REST API and WebSocket TUI Gateway) over LAN, giving you pocket control over your AI assistant.
 
 ---
 
@@ -71,8 +70,8 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Hy4ri/hermes-mobile.git
-   cd hermes-mobile
+   git clone https://github.com/scammer0073-glitch/hermes-companion.git
+   cd hermes-companion
    ```
 2. **Build the debug APK:**
    ```bash
@@ -118,7 +117,25 @@ Tap **Sign in** on the landing screen and enter the dashboard host and port. The
 | **Token only** | Dashboard on same machine (loopback) | **Token** — grab from `~/.hermes/dashboard-token.txt` or `~/.hermes/.env` (`HERMES_DASHBOARD_SESSION_TOKEN`). The app can also auto-extract it from the dashboard page |
 | **Basic auth** | Dashboard on LAN with password gate  | **Username** + **Password** (default `admin` / `hermes`). The app logs in, gets a session cookie, and mints a WebSocket ticket automatically                           |
 
-> The app communicates over plain HTTP — it's designed for **trusted local networks only**. Do not expose your Hermes gateway to untrusted networks.
+> Cleartext HTTP is available for trusted local/VPN deployments. Use HTTPS and the appropriate OAuth provider for a public or hosted dashboard.
+
+### Hosted and OAuth gateways
+
+For a gateway using Nous Portal or Hermes's self-hosted OIDC provider, enter its **HTTPS dashboard URL**
+(including any reverse-proxy path prefix), probe the connection, and choose **Sign in with browser**.
+Complete authentication in your system browser and return to the app. The gateway must advertise
+`native_pkce` in `/api/status`; update Hermes if this capability is unavailable. You can cancel the
+pending sign-in, and it expires after ten minutes.
+
+The native flow uses PKCE and state validation with a temporary callback bound only to
+`127.0.0.1`. Gateway bearer sessions and rotating refresh tokens are stored in encrypted preferences
+for the specific connection profile and dashboard URL. REST calls and freshly minted WebSocket
+tickets use that session; browser cookies are not copied into the app.
+
+Self-hosted password login remains available on a trusted LAN/VPN. Hosted OAuth requires HTTPS.
+The native broker implementation has contract/security tests; a complete Android device + real
+Nous Portal sign-in still needs verification before claiming release-tested hosted support.
+See the [official native sign-in contract](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/guides/desktop-native-signin.md).
 
 ### Connection profiles
 
@@ -164,6 +181,10 @@ app/src/main/java/com/m57/hermescontrol/
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for our branch workflow, code style guidelines, and PR checklist.
 
 For developer-specific details, code conventions, and project architecture notes, refer to [AGENTS.md](AGENTS.md).
+
+See the [Hermes compatibility review](docs/hermes-compatibility-review.md) for current protocol findings
+and the [product and recognition plan](docs/product-and-recognition-plan.md) for improvement priorities
+and the route toward upstream collaboration.
 
 ---
 

@@ -24,12 +24,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.HookEntry
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.StatusBadge
 import com.m57.hermescontrol.ui.common.StatusBadgeType
 
@@ -42,8 +42,8 @@ internal fun HookCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
