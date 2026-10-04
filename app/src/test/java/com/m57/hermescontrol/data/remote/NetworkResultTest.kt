@@ -1,10 +1,16 @@
 package com.m57.hermescontrol.data.remote
 
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runCurrent
+import kotlinx.coroutines.test.runTest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Test
 import retrofit2.Response
 import java.io.IOException
@@ -195,5 +201,44 @@ class NetworkResultTest {
             assertTrue(unknownError.message.contains("An unexpected error occurred"))
             assertTrue(unknownError.message.contains("Unexpected error"))
             assertEquals(1, callCount) // Should not retry for unknown exceptions
+        }
+
+    @Test
+    fun testSafeApiCall_propagatesCancellationWithoutRetry() =
+        runBlocking {
+            val cancellation = CancellationException("Request canceled")
+            var calls = 0
+            try {
+                safeApiCall<String> {
+                    calls++
+                    throw cancellation
+                }
+                fail("Canceled request must not become a network result")
+            } catch (actual: CancellationException) {
+                assertSame(cancellation, actual)
+            }
+            assertEquals(1, calls)
+        }
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    @Test
+    fun testSafeApiCall_cancellationDuringHttpBackoffDoesNotReturnFailure() =
+        runTest {
+            var calls = 0
+            var returnedResult = false
+            val request =
+                async {
+                    safeApiCall<String> {
+                        calls++
+                        Response.error(503, "Unavailable".toResponseBody())
+                    }
+                    returnedResult = true
+                }
+            runCurrent() // First response has arrived; retry is suspended in backoff.
+            request.cancel()
+            request.join()
+            assertTrue(request.isCancelled)
+            assertEquals(1, calls)
+            assertTrue("Cancellation must stop caller result handling", !returnedResult)
         }
 }

@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.data.remote
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -120,6 +121,9 @@ suspend inline fun <reified T> safeApiCall(
                 }
                 return NetworkResult.Failure(mapHttpError(code, errorBody))
             }
+        } catch (e: CancellationException) {
+            // Issue #15: cancellation must stop caller result handling, not become a network error.
+            throw e
         } catch (e: IOException) {
             lastException = e
             if (attempt == retries || !isRetryable(e)) {
