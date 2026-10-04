@@ -320,7 +320,7 @@ private fun SelfImprovementSection(graph: LearningGraphResponse?) {
             Text(
                 text = stringResource(R.string.memory_self_improvement_desc),
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = NemasysPalette.Muted,
             )
             Spacer(modifier = Modifier.height(8.dp))
 
