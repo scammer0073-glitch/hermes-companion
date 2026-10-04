@@ -472,7 +472,12 @@ private fun McpStep(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Box(
-                        Modifier.size(48.dp).clip(CircleShape).background(NemasysPalette.RaisedSurface),
+                        modifier =
+                            Modifier
+                                .size(48.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Card)
+                                .border(BorderStroke(1.dp, NemasysPalette.CardBorder), CircleShape),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(Icons.Default.Delete, null, tint = NemasysPalette.Accent, modifier = Modifier.size(24.dp))
