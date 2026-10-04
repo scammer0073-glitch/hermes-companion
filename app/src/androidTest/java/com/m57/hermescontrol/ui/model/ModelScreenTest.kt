@@ -59,7 +59,7 @@ class ModelScreenTest {
             )
         }
 
-        composeTestRule.onNodeWithText("Pinned Models").assertDoesNotExist()
+        composeTestRule.onNodeWithText("Pinned Models", ignoreCase = true).assertDoesNotExist()
     }
 
     @Test
@@ -94,7 +94,7 @@ class ModelScreenTest {
             )
         }
 
-        composeTestRule.onNodeWithText("Pinned Models").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Pinned Models", ignoreCase = true).assertIsDisplayed()
         composeTestRule.onNodeWithText("gpt-4").assertIsDisplayed()
     }
 }

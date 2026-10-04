@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.theme.LocalSpacing
+import com.m57.hermescontrol.theme.NemasysPalette
 
 // ── SectionHeader — sticky-ish section label for grouped content ────────
 
@@ -62,12 +63,22 @@ fun SectionHeader(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            androidx.compose.foundation.layout.Box(Modifier.size(4.dp).background(androidx.compose.ui.graphics.Color(0xFF2DD4BF), androidx.compose.foundation.shape.CircleShape))
+        Row(
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            androidx.compose.foundation.layout.Box(
+                Modifier.size(
+                    4.dp,
+                ).background(
+                    NemasysPalette.Accent,
+                    androidx.compose.foundation.shape.CircleShape,
+                ),
+            )
             Text(
                 text = title.uppercase(),
                 style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.6.sp, fontSize = 11.sp),
-                color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                color = NemasysPalette.Muted,
                 fontWeight = FontWeight.Bold,
             )
         }
@@ -104,14 +115,14 @@ fun StatusBadge(
             }
 
             StatusBadgeType.NEUTRAL -> {
-                Color(0xFF0D0F12) to
+                NemasysPalette.Card to
                     MaterialTheme.colorScheme.onSurfaceVariant
             }
         }
     Surface(
         modifier = modifier,
         shape = if (status == StatusBadgeType.NEUTRAL) RoundedCornerShape(16.dp) else RoundedCornerShape(8.dp),
-        border = if (status == StatusBadgeType.NEUTRAL) BorderStroke(1.dp, Color(0xFF1E2D44)) else null,
+        border = if (status == StatusBadgeType.NEUTRAL) BorderStroke(1.dp, NemasysPalette.CardBorder) else null,
         color = bgColor,
     ) {
         Row(
@@ -156,11 +167,11 @@ fun ToggleRow(
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors =
             CardDefaults.cardColors(
-                containerColor = Color(0xFF0D0F12),
+                containerColor = NemasysPalette.Card,
             ),
     ) {
         Row(
@@ -180,7 +191,7 @@ fun ToggleRow(
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
-                        tint = Color(0xFF2DD4BF),
+                        tint = NemasysPalette.Accent,
                     )
                 }
                 Column(modifier = Modifier.weight(1f)) {
@@ -223,11 +234,11 @@ fun SearchBar(
                 .fillMaxWidth()
                 .height(40.dp)
                 .background(
-                    color = Color(0xFF0D0F12),
+                    color = NemasysPalette.Card,
                     shape = RoundedCornerShape(16.dp),
                 ).border(
                     width = 1.dp,
-                    color = Color(0xFF1E2D44),
+                    color = NemasysPalette.CardBorder,
                     shape = RoundedCornerShape(16.dp),
                 ).padding(horizontal = 12.dp),
         singleLine = true,
@@ -315,10 +326,10 @@ fun StatCard(
     Card(
         modifier = modifier,
         shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
         colors =
             CardDefaults.cardColors(
-                containerColor = Color(0xFF0D0F12),
+                containerColor = NemasysPalette.Card,
             ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
@@ -374,13 +385,13 @@ fun InfoRow(
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, letterSpacing = 0.3.sp),
-            color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+            color = NemasysPalette.Muted,
             fontWeight = FontWeight.Medium,
         )
         Text(
             text = value,
             style = MaterialTheme.typography.bodyMedium.copy(fontSize = 13.sp),
-            color = androidx.compose.ui.graphics.Color.White,
+            color = NemasysPalette.TextBright,
             fontWeight = FontWeight.Medium,
         )
     }

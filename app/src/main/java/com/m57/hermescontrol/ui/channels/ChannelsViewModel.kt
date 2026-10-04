@@ -2,11 +2,13 @@ package com.m57.hermescontrol.ui.channels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.m57.hermescontrol.data.local.AuthManager
 import com.m57.hermescontrol.data.model.MessagingPlatform
 import com.m57.hermescontrol.data.model.MessagingPlatformUpdate
 import com.m57.hermescontrol.data.model.TelegramOnboardingApplyRequest
 import com.m57.hermescontrol.data.model.TelegramOnboardingStartRequest
 import com.m57.hermescontrol.data.model.TelegramOnboardingStartResponse
+import com.m57.hermescontrol.data.model.disconnectRequest
 import com.m57.hermescontrol.data.remote.ApiClient
 import com.m57.hermescontrol.data.remote.safeApiCall
 import com.m57.hermescontrol.data.ws.ChangeEvents
@@ -20,6 +22,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 enum class OnboardingPhase {
     IDLE,
@@ -155,30 +158,47 @@ class ChannelsViewModel :
         )
     }
 
-    /** Remove an entire platform. */
+    /** Disconnect a catalog platform by disabling it and clearing its configured credentials. */
     fun removePlatform(platformId: String) {
         _uiState.update { it.copy(removingId = platformId) }
         safeLaunchLoad(
             apiCall = {
                 safeApiCall {
-                    ApiClient.hermesApi.removeMessagingPlatform(platformId)
+                    val profile = AuthManager.activeProfileId.value
+                    val api = ApiClient.hermesApi
+                    val current = api.getMessagingPlatforms(profile)
+                    if (!current.isSuccessful) {
+                        Response.error<Unit>(
+                            current.code(),
+                            current.errorBody() ?: error("Could not read platform credentials"),
+                        )
+                    } else {
+                        val platform =
+                            current.body()?.platforms?.firstOrNull { it.id == platformId }
+                                ?: error("Platform is not available in the selected profile")
+                        val update = platform.disconnectRequest(profile)
+                        check(
+                            AuthManager.activeProfileId.value == profile,
+                        ) { "Profile changed; retry disconnect in the selected profile" }
+                        api.configurePlatform(platformId, update)
+                    }
                 }
             },
             onStart = {},
             onSuccess = {
                 _uiState.update { state ->
                     state.copy(
-                        platforms = state.platforms.filter { it.id != platformId },
                         removingId = null,
-                        toastMessage = "Platform removed",
+                        toastMessage = "Platform disconnected and credentials cleared",
                     )
                 }
+                loadPlatforms()
             },
             onError = { error ->
                 _uiState.update {
                     it.copy(
                         removingId = null,
-                        toastMessage = "Failed to remove: $error",
+                        toastMessage = "Failed to disconnect: $error",
                     )
                 }
             },

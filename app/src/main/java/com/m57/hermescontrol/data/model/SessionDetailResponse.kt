@@ -25,6 +25,7 @@ import kotlinx.serialization.Serializable
 data class SessionDetailResponse(
     val session_id: String? = null,
     val session_key: String? = null,
+    val system_prompt: String? = null,
     /** Cumulative prompt tokens for the session (lifetime accounting). */
     val input_tokens: Long? = null,
     val output_tokens: Long? = null,

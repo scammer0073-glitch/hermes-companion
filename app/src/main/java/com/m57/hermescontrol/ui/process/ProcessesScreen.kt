@@ -45,6 +45,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.ProcessInfo
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -162,10 +163,10 @@ private fun ProcessCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         colors =
             CardDefaults.cardColors(
-                containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                containerColor = NemasysPalette.Card,
             ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {

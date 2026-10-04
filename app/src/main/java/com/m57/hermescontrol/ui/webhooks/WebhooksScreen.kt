@@ -14,10 +14,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -46,17 +46,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.WebhookSubscription
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.DetailDialog
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
@@ -274,8 +273,8 @@ fun WebhooksScreen(
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
                             Row(
@@ -406,8 +405,8 @@ private fun SubscriptionCard(
     Card(
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
@@ -431,7 +430,7 @@ private fun SubscriptionCard(
                         Modifier
                             .size(6.dp)
                             .clip(CircleShape)
-                            .background(if (isEnabled) Color(0xFF2DD4BF) else Color(0xFF334155)),
+                            .background(if (isEnabled) NemasysPalette.Accent else NemasysPalette.SubtleBorder),
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
@@ -440,9 +439,9 @@ private fun SubscriptionCard(
                         fontWeight = FontWeight.SemiBold,
                         color =
                             if (isEnabled) {
-                                Color.White
+                                NemasysPalette.TextBright
                             } else {
-                                Color.White.copy(alpha = 0.6f)
+                                NemasysPalette.TextBright.copy(alpha = 0.6f)
                             },
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -453,7 +452,7 @@ private fun SubscriptionCard(
                             imageVector = Icons.Filled.Lock,
                             contentDescription = stringResource(R.string.webhooks_secret_configured),
                             modifier = Modifier.size(14.dp),
-                            tint = Color(0xFF2DD4BF),
+                            tint = NemasysPalette.Accent,
                         )
                     }
                     // Delivery target badge
@@ -501,7 +500,7 @@ private fun SubscriptionCard(
                     Text(
                         text = desc,
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                     )
                 }
             }
@@ -535,7 +534,7 @@ private fun SubscriptionCard(
                     MaterialTheme.typography.bodySmall.copy(
                         fontFamily = FontFamily.Monospace,
                     ),
-                color = Color(0xFF8B9AB0),
+                color = NemasysPalette.Muted,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
