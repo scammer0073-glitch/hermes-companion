@@ -75,11 +75,16 @@ internal fun AboutSection(
 
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "https://github.com/Hy4ri/hermes-mobile",
+            text = "https://github.com/scammer0073-glitch/hermes-companion",
             style =
                 MaterialTheme.typography.bodySmall.copy(
                     color = MaterialTheme.colorScheme.primary,
                 ),
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = "Community fork of Hy4ri/hermes-mobile by M57 (Hy4ri). Apache 2.0.",
+            style = MaterialTheme.typography.bodySmall,
         )
     }
 }

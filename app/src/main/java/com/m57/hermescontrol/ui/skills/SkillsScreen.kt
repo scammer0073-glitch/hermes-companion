@@ -59,7 +59,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -80,6 +79,7 @@ import com.m57.hermescontrol.data.model.SkillHubSource
 import com.m57.hermescontrol.data.model.SkillScanFinding
 import com.m57.hermescontrol.data.model.SkillScanResponse
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.DetailDialog
 import com.m57.hermescontrol.ui.common.DetailRow
 import com.m57.hermescontrol.ui.common.EmptyState
@@ -406,8 +406,8 @@ private fun SkillCard(
     Card(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp).clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -939,9 +939,9 @@ private fun ScanResultCard(result: SkillScanResponse) {
         shape = RoundedCornerShape(16.dp),
         colors =
             CardDefaults.cardColors(
-                containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                containerColor = NemasysPalette.Card,
             ),
-        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
@@ -1035,8 +1035,8 @@ private fun ScanResultCard(result: SkillScanResponse) {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
@@ -1046,7 +1046,7 @@ private fun ScanResultCard(result: SkillScanResponse) {
                             Box(
                                 Modifier
                                     .size(6.dp)
-                                    .background(Color(0xFF2DD4BF), CircleShape),
+                                    .background(NemasysPalette.Accent, CircleShape),
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
@@ -1055,7 +1055,7 @@ private fun ScanResultCard(result: SkillScanResponse) {
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFF8B9AB0),
+                                color = NemasysPalette.Muted,
                             )
                         }
                     }
@@ -1152,9 +1152,9 @@ private fun HubSkillCard(
         shape = RoundedCornerShape(16.dp),
         colors =
             CardDefaults.cardColors(
-                containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                containerColor = NemasysPalette.Card,
             ),
-        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
@@ -1249,10 +1249,10 @@ fun SkillPreviewDialog(
                     .fillMaxSize()
                     .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = Color(0xFF0D0F12),
+                    containerColor = NemasysPalette.Card,
                 ),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
@@ -1346,8 +1346,8 @@ fun SkillEditorDialog(
                     .fillMaxSize()
                     .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             HermesScaffold(

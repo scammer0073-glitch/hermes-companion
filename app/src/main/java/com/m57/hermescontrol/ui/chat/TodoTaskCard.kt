@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 
 @Composable
 internal fun TodoTaskCard(
@@ -65,8 +66,8 @@ internal fun TodoTaskCard(
         Card(
             onClick = { expanded = !expanded },
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(
@@ -80,7 +81,7 @@ internal fun TodoTaskCard(
                     if (isRunning) {
                         CircularProgressIndicator(
                             modifier = Modifier.size(16.dp),
-                            color = Color(0xFF2DD4BF),
+                            color = NemasysPalette.Accent,
                             strokeWidth = 2.dp,
                         )
                     } else {
@@ -88,7 +89,7 @@ internal fun TodoTaskCard(
                             Modifier
                                 .size(6.dp)
                                 .clip(CircleShape)
-                                .background(Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                         )
                     }
                     Text(
@@ -97,7 +98,7 @@ internal fun TodoTaskCard(
                         fontSize = 11.sp,
                         letterSpacing = 0.6.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                         modifier = Modifier.weight(1f),
                     )
                     Icon(

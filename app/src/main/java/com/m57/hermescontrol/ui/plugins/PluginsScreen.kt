@@ -14,10 +14,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.InstallDesktop
@@ -47,7 +47,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -60,6 +59,7 @@ import com.m57.hermescontrol.NavigationController
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.PluginInfo
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.DetailDialog
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
@@ -234,8 +234,8 @@ private fun ProviderSelectionSection(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -244,7 +244,7 @@ private fun ProviderSelectionSection(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
@@ -253,7 +253,7 @@ private fun ProviderSelectionSection(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Spacer(modifier = Modifier.height(4.dp))
@@ -351,8 +351,8 @@ private fun InstallSection(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -361,7 +361,7 @@ private fun InstallSection(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
@@ -370,7 +370,7 @@ private fun InstallSection(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Spacer(modifier = Modifier.height(4.dp))
@@ -462,8 +462,8 @@ private fun PluginCard(
     Card(
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -634,8 +634,8 @@ private fun OrphanPluginCard(
     Card(
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(

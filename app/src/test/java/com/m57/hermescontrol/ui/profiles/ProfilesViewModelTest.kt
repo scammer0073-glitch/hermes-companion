@@ -50,6 +50,16 @@ import retrofit2.Response
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProfilesViewModelTest {
+    @Test
+    fun `cloneProfile uses creation with source profile`() {
+        coEvery { mockApi.createProfile(any()) } returns Response.success(Unit)
+        val vm = createViewModel()
+        vm.cloneProfile("source", "copy")
+        testDispatcher.scheduler.advanceUntilIdle()
+        coVerify { mockApi.createProfile(match { it.name == "copy" && it.clone_from == "source" }) }
+        assertTrue(vm.uiState.value.toastMessage!!.contains("cloned successfully"))
+    }
+
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var mockApi: HermesApiService
     private var storedPinnedModels: MutableList<PinnedModel> = mutableListOf()

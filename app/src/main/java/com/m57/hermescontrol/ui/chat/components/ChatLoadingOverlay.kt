@@ -25,13 +25,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 
 /** Full-screen semi-transparent overlay shown during initial session load. */
 @Composable
@@ -51,10 +51,10 @@ fun ChatLoadingOverlay(isLoading: Boolean) {
         ) {
             Card(
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = Color(0xFF0D0F12),
+                        containerColor = NemasysPalette.Card,
                     ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
@@ -63,7 +63,7 @@ fun ChatLoadingOverlay(isLoading: Boolean) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     CircularProgressIndicator(
-                        color = Color(0xFF2DD4BF),
+                        color = NemasysPalette.Accent,
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -71,12 +71,12 @@ fun ChatLoadingOverlay(isLoading: Boolean) {
                             Modifier
                                 .size(6.dp)
                                 .clip(CircleShape)
-                                .background(Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = stringResource(R.string.chat_status_connecting).uppercase(),
-                            color = Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                             fontFamily = FontFamily.Monospace,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,

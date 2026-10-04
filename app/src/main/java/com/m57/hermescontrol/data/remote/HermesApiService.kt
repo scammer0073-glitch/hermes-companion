@@ -12,7 +12,6 @@ import com.m57.hermescontrol.data.model.BackupTriggerRequest
 import com.m57.hermescontrol.data.model.BulkDeleteRequest
 import com.m57.hermescontrol.data.model.BulkDeleteResponse
 import com.m57.hermescontrol.data.model.CheckpointsResponse
-import com.m57.hermescontrol.data.model.CloneProfileRequest
 import com.m57.hermescontrol.data.model.ConfigSchemaResponse
 import com.m57.hermescontrol.data.model.ConfigUpdateRequest
 import com.m57.hermescontrol.data.model.CreateCronJobRequest
@@ -53,6 +52,7 @@ import com.m57.hermescontrol.data.model.McpCatalogResponse
 import com.m57.hermescontrol.data.model.McpOAuthFlowResponse
 import com.m57.hermescontrol.data.model.McpServer
 import com.m57.hermescontrol.data.model.McpServerToggleRequest
+import com.m57.hermescontrol.data.model.McpServersReplaceRequest
 import com.m57.hermescontrol.data.model.McpServersResponse
 import com.m57.hermescontrol.data.model.MemoryProviderConfigResponse
 import com.m57.hermescontrol.data.model.MemoryProviderConfigUpdateRequest
@@ -95,7 +95,6 @@ import com.m57.hermescontrol.data.model.ScanStatus
 import com.m57.hermescontrol.data.model.SessionDetailResponse
 import com.m57.hermescontrol.data.model.SessionListResponse
 import com.m57.hermescontrol.data.model.SessionMessagesResponse
-import com.m57.hermescontrol.data.model.SessionPromptResponse
 import com.m57.hermescontrol.data.model.SessionRenameRequest
 import com.m57.hermescontrol.data.model.SessionSearchResponse
 import com.m57.hermescontrol.data.model.SessionStatsResponse
@@ -243,13 +242,6 @@ interface HermesApiService {
     suspend fun getLatestDescendant(
         @Path("id", encoded = true) sessionId: String,
     ): Response<LatestDescendantResponse>
-
-    @GET("api/sessions/{id}/prompt")
-    suspend fun getSessionPrompt(
-        // Preserve slashes in session IDs — backend generates IDs containing '/' characters (issue #468).
-        // Contract: The server-generated sessionId must only contain URL-safe characters (no ?, #, or spaces).
-        @Path("id", encoded = true) sessionId: String,
-    ): Response<SessionPromptResponse>
 
     @GET("api/sessions/{id}")
     suspend fun getSessionDetail(
@@ -407,12 +399,6 @@ interface HermesApiService {
         @Body body: UpdateProfileModelRequest,
     ): Response<Unit>
 
-    @POST("api/profiles/{name}/clone")
-    suspend fun cloneProfile(
-        @Path("name") name: String,
-        @Body body: CloneProfileRequest,
-    ): Response<Unit>
-
     @PUT("api/profiles/{name}/description")
     suspend fun updateProfileDescription(
         @Path("name") name: String,
@@ -500,6 +486,12 @@ interface HermesApiService {
     @GET("api/config")
     suspend fun getConfig(): Response<Map<String, JsonElement>>
 
+    @GET("api/config")
+    suspend fun getSavedConfig(
+        @Query("profile") profile: String? = null,
+        @Query("include_defaults") includeDefaults: Boolean = false,
+    ): Response<Map<String, JsonElement>>
+
     @GET("api/config/schema")
     suspend fun getConfigSchema(): Response<ConfigSchemaResponse>
 
@@ -535,15 +527,9 @@ interface HermesApiService {
         @Body body: AddMcpServerRequest,
     ): Response<McpServer>
 
-    @PUT("api/mcp/servers/{name}")
-    suspend fun updateMcpServer(
-        @Path("name") name: String,
-        @Body body: Map<String, Any>,
-    ): Response<McpServer>
-
-    @POST("api/mcp/servers/{name}/restart")
-    suspend fun restartMcpServer(
-        @Path("name") name: String,
+    @PUT("api/mcp/servers")
+    suspend fun replaceMcpServers(
+        @Body body: McpServersReplaceRequest,
     ): Response<Unit>
 
     @POST("api/mcp/servers/{name}/auth")
@@ -675,11 +661,6 @@ interface HermesApiService {
     suspend fun testMessagingPlatform(
         @Path("platform_id") platformId: String,
     ): Response<MessagingPlatformTestResult>
-
-    @DELETE("api/messaging/platforms/{platform_id}")
-    suspend fun removeMessagingPlatform(
-        @Path("platform_id") platformId: String,
-    ): Response<Unit>
 
     @POST("api/messaging/telegram/onboarding/start")
     suspend fun startTelegramOnboarding(

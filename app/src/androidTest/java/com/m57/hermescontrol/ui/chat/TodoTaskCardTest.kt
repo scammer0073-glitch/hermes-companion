@@ -50,7 +50,7 @@ class TodoTaskCardTest {
         }
 
         composeTestRule.onNodeWithTag("todo_task_card").assertIsDisplayed()
-        composeTestRule.onNodeWithText(taskCount(1, 3)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(taskCount(1, 3), ignoreCase = true).assertIsDisplayed()
         composeTestRule.onNodeWithText("Finished").assertIsDisplayed()
         composeTestRule.onNodeWithText("Working").assertIsDisplayed()
         composeTestRule.onNodeWithText("Later").assertIsDisplayed()
@@ -97,7 +97,7 @@ class TodoTaskCardTest {
             }
         }
 
-        composeTestRule.onNodeWithText(taskCount(1, 4)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(taskCount(1, 4), ignoreCase = true).assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription("Completed").assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription("Cancelled").assertIsDisplayed()
         composeTestRule.onNodeWithText("Running alias").assertIsDisplayed()

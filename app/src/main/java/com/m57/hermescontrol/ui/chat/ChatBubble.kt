@@ -61,8 +61,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
@@ -74,6 +74,7 @@ import com.m57.hermescontrol.theme.DarkOnSurface
 import com.m57.hermescontrol.theme.HermesStatusColors
 import com.m57.hermescontrol.theme.LightOnSurface
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.theme.onColorFor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -235,7 +236,12 @@ fun ChatBubble(
                                             DateFormat.is24HourFormat(LocalContext.current),
                                         ),
                                     color = userBubbleTextColor.copy(alpha = 0.58f),
-                                    style = MaterialTheme.typography.labelSmall.copy(fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace, fontSize = 10.sp, letterSpacing = 0.3.sp),
+                                    style =
+                                        MaterialTheme.typography.labelSmall.copy(
+                                            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                            fontSize = 10.sp,
+                                            letterSpacing = 0.3.sp,
+                                        ),
                                 )
                             }
                         }
@@ -273,10 +279,10 @@ private fun SelfImprovementReviewCard(
                 .padding(horizontal = 12.dp, vertical = 4.dp)
                 .testTag("self_improvement_review_card"),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         colors =
             CardDefaults.cardColors(
-                containerColor = Color(0xFF0D0F12),
+                containerColor = NemasysPalette.Card,
             ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
@@ -286,7 +292,7 @@ private fun SelfImprovementReviewCard(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
@@ -295,7 +301,7 @@ private fun SelfImprovementReviewCard(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Spacer(Modifier.height(4.dp))
@@ -329,8 +335,8 @@ internal fun SystemBubble(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Text(
@@ -339,7 +345,7 @@ internal fun SystemBubble(
                 style =
                     MaterialTheme.typography.bodySmall.copy(
                         fontStyle = FontStyle.Italic,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                     ),
             )
         }

@@ -1,6 +1,8 @@
 package com.m57.hermescontrol.ui.authlogin
 
 import android.app.Application
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -11,12 +13,19 @@ import com.m57.hermescontrol.data.local.AuthManager
 import com.m57.hermescontrol.data.remote.ApiClient
 import com.m57.hermescontrol.data.remote.AuthPayloads
 import com.m57.hermescontrol.data.remote.CleartextPolicy
+import com.m57.hermescontrol.data.remote.NativeAuthClient
+import com.m57.hermescontrol.data.remote.NativeLoopbackListener
+import com.m57.hermescontrol.data.remote.NativeSessionAuth
 import com.m57.hermescontrol.data.remote.OkHttpProvider
 import com.m57.hermescontrol.data.remote.ServerEndpoint
 import com.m57.hermescontrol.data.remote.await
 import com.m57.hermescontrol.data.remote.safeApiCall
 import com.m57.hermescontrol.data.ws.HermesWsClient
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,8 +57,7 @@ enum class DashboardAuthMode {
     /**
      * Dashboard uses OAuth via Nous Portal (gated `0.0.0.0` bind).
      *
-     * TODO: implement the OAuth browser flow + WS ticket minting. Until then the
-     * UI renders a "coming soon" state and blocks connect. Tracked in issue #639.
+     * Uses gateway-brokered native PKCE in the system browser when advertised.
      */
     OAUTH,
 }
@@ -63,6 +71,7 @@ data class AuthLoginUiState(
     val isLoading: Boolean = false,
     val probing: Boolean = false,
     val authMode: DashboardAuthMode? = null,
+    val nativeAuthSupported: Boolean = false,
     val connectionSuccess: Boolean = false,
     val errorMessage: String? = null,
     val loggedInProfiles: List<ConnectionProfile> = emptyList(),
@@ -78,6 +87,7 @@ class AuthLoginViewModel(
             ),
         )
     val uiState: StateFlow<AuthLoginUiState> = _uiState.asStateFlow()
+    private var connectJob: Job? = null
 
     init {
         loadLoggedInProfiles()
@@ -108,6 +118,7 @@ class AuthLoginViewModel(
         com.m57.hermescontrol.data.remote.OkHttpProvider.probe
 
     fun onBaseUrlChange(value: String) {
+        cancelConnect()
         val trimmed = value.trim()
         val warning =
             runCatching {
@@ -118,7 +129,15 @@ class AuthLoginViewModel(
 
     /** Reset ephemeral connection state (called when screen leaves composition). */
     fun clearConnectionState() {
+        cancelConnect()
         _uiState.update { it.copy(connectionSuccess = false, errorMessage = null, isLoading = false) }
+    }
+
+    fun cancelConnect() {
+        connectJob?.cancel()
+        connectJob = null
+        NativeSessionAuth.cancelPendingLogin = null
+        _uiState.update { it.copy(isLoading = false) }
     }
 
     fun onTokenChange(value: String) {
@@ -161,6 +180,7 @@ class AuthLoginViewModel(
                 it.copy(
                     probing = false,
                     authMode = result?.authMode,
+                    nativeAuthSupported = result?.nativeAuthSupported ?: false,
                     token = result?.extractedToken ?: it.token,
                     errorMessage =
                         if (result == null) {
@@ -179,6 +199,7 @@ class AuthLoginViewModel(
     private data class ProbeResult(
         val authMode: DashboardAuthMode,
         val extractedToken: String? = null,
+        val nativeAuthSupported: Boolean = false,
     )
 
     /**
@@ -187,7 +208,7 @@ class AuthLoginViewModel(
      * - Gate down (loopback / `--insecure`): caller decides TOKEN_ONLY vs ALL
      *   based on whether the SPA embedded a token, so this returns a sentinel
      *   [DashboardAuthMode.ALL] placeholder that [probeDashboardInternal] refines.
-     * - Gate up (non-loopback): pick from the provider list (oauth > basic).
+     * - Gate up (non-loopback): browser providers take precedence over basic.
      *
      * Internal + pure so it is unit-testable without a live server.
      */
@@ -200,7 +221,8 @@ class AuthLoginViewModel(
             DashboardAuthMode.ALL
         } else {
             when {
-                providers.contains("oauth") -> DashboardAuthMode.OAUTH
+                // Current Hermes exposes plugin names, not the legacy "oauth" label.
+                providers.any { it in setOf("oauth", "nous", "self-hosted") } -> DashboardAuthMode.OAUTH
                 providers.contains("basic") -> DashboardAuthMode.BASIC_AUTH
                 else -> DashboardAuthMode.BASIC_AUTH // gate up, unknown provider → basic fallback
             }
@@ -234,6 +256,7 @@ class AuthLoginViewModel(
 
         val authRequired: Boolean
         val providers: List<String>
+        val nativeSupported: Boolean
         try {
             val node = OkHttpProvider.json.parseToJsonElement(statusJson).jsonObject
             authRequired = node["auth_required"]?.jsonPrimitive?.content?.toBooleanStrictOrNull() ?: false
@@ -242,6 +265,7 @@ class AuthLoginViewModel(
                     ?.jsonArray
                     ?.mapNotNull { it.jsonPrimitive.content }
                     .orEmpty()
+            nativeSupported = node["auth_flows"]?.jsonArray?.any { it.jsonPrimitive.content == "native_pkce" } == true
         } catch (e: Exception) {
             Log.w(TAG, "Status parse failed: ${e.message}")
             return null
@@ -274,7 +298,7 @@ class AuthLoginViewModel(
         }
 
         // Gate engaged (non-loopback bind). Derive from the provider list.
-        return ProbeResult(authMode = deriveAuthMode(authRequired, providers))
+        return ProbeResult(authMode = deriveAuthMode(authRequired, providers), nativeAuthSupported = nativeSupported)
     }
 
     /**
@@ -294,62 +318,129 @@ class AuthLoginViewModel(
             runCatching { ServerEndpoint.parseForBuild(state.baseUrl) }.getOrNull()
                 ?: return
 
+        if (state.authMode == DashboardAuthMode.OAUTH) {
+            connectNative(endpoint)
+            return
+        }
+
         _uiState.update { it.copy(isLoading = true, errorMessage = null) }
 
-        viewModelScope.launch {
-            val result =
-                withContext(Dispatchers.IO) {
-                    when (state.authMode) {
-                        DashboardAuthMode.TOKEN_ONLY -> {
-                            val token = connectTokenOnly(endpoint, state.token)
-                            if (token != null) ConnectResult(wsCredential = token) else null
-                        }
-
-                        DashboardAuthMode.BASIC_AUTH -> {
-                            connectBasicAuth(endpoint, state.username, state.password)
-                        }
-
-                        DashboardAuthMode.ALL -> {
-                            connectBasicAuth(endpoint, state.username, state.password)
-                        }
-
-                        DashboardAuthMode.OAUTH -> {
-                            // TODO(issue #639): implement OAuth browser flow + WS ticket minting.
-                            _uiState.update {
-                                it.copy(
-                                    isLoading = false,
-                                    errorMessage = app.getString(R.string.auth_login_error_oauth_unsupported),
-                                )
+        connectJob =
+            viewModelScope.launch {
+                val result =
+                    withContext(Dispatchers.IO) {
+                        when (state.authMode) {
+                            DashboardAuthMode.TOKEN_ONLY -> {
+                                val token = connectTokenOnly(endpoint, state.token)
+                                if (token != null) ConnectResult(wsCredential = token) else null
                             }
-                            null
-                        }
 
-                        null -> {
-                            null
+                            DashboardAuthMode.BASIC_AUTH -> {
+                                connectBasicAuth(endpoint, state.username, state.password)
+                            }
+
+                            DashboardAuthMode.ALL -> {
+                                connectBasicAuth(endpoint, state.username, state.password)
+                            }
+
+                            DashboardAuthMode.OAUTH -> {
+                                null
+                            }
+
+                            null -> {
+                                null
+                            }
                         }
                     }
-                }
 
-            if (result != null) {
-                AuthManager.setBaseUrl(state.baseUrl)
-                AuthManager.setToken(result.wsCredential)
-                if (state.authMode == DashboardAuthMode.TOKEN_ONLY) {
-                    // Loopback mode — no session cookie; ensure any stale one
-                    // is cleared so the jar only sends the Bearer token.
-                    AuthManager.setSessionCookie(null)
-                    AuthManager.setWsAuthParam("token")
-                } else {
-                    // Gated (BASIC_AUTH / ALL): the session cookie was captured
-                    // automatically by the shared CookieJar during the login
-                    // call (issue #470), so we keep it and switch the WS auth
-                    // param to the ticket minted above.
-                    AuthManager.setWsAuthParam("ticket")
+                if (result != null) {
+                    AuthManager.setNativeSession(null)
+                    AuthManager.setBaseUrl(state.baseUrl)
+                    AuthManager.setToken(result.wsCredential)
+                    if (state.authMode == DashboardAuthMode.TOKEN_ONLY) {
+                        // Loopback mode — no session cookie; ensure any stale one
+                        // is cleared so the jar only sends the Bearer token.
+                        AuthManager.setSessionCookie(null)
+                        AuthManager.setWsAuthParam("token")
+                    } else {
+                        // Gated (BASIC_AUTH / ALL): the session cookie was captured
+                        // automatically by the shared CookieJar during the login
+                        // call (issue #470), so we keep it and switch the WS auth
+                        // param to the ticket minted above.
+                        AuthManager.setWsAuthParam("ticket")
+                    }
+                    ApiClient.rebuild()
+                    HermesWsClient.connect()
+                    _uiState.update { it.copy(isLoading = false, connectionSuccess = true) }
                 }
-                ApiClient.rebuild()
-                HermesWsClient.connect()
-                _uiState.update { it.copy(isLoading = false, connectionSuccess = true) }
             }
+    }
+
+    private fun connectNative(endpoint: ServerEndpoint) {
+        val state = _uiState.value
+        if (!state.nativeAuthSupported) {
+            _uiState.update {
+                it.copy(
+                    errorMessage = "This gateway does not advertise native sign-in. Update Hermes first.",
+                )
+            }
+            return
         }
+        if (!endpoint.baseUrl.isHttps) {
+            _uiState.update { it.copy(errorMessage = "Browser sign-in requires an HTTPS dashboard URL.") }
+            return
+        }
+        cancelConnect()
+        _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+        val profileId = AuthManager.getSelectedProfileId()
+        val revision = AuthManager.getNativeAuthRevision()
+        connectJob =
+            viewModelScope.launch {
+                val activeJob = currentCoroutineContext()[Job]!!
+                NativeSessionAuth.cancelPendingLogin = { activeJob.cancel() }
+                try {
+                    val verifier = NativeAuthClient.randomSecret()
+                    val nonce = NativeAuthClient.randomSecret()
+                    val session =
+                        withContext(Dispatchers.IO) {
+                            NativeLoopbackListener(nonce).use { listener ->
+                                val url = NativeAuthClient.authorizeUrl(endpoint, verifier, nonce, listener.redirectUri)
+                                withContext(Dispatchers.Main) {
+                                    app.startActivity(
+                                        Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse(url),
+                                        ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                                    )
+                                }
+                                NativeAuthClient().exchange(endpoint, listener.awaitCode(), verifier)
+                            }
+                        }
+                    currentCoroutineContext().ensureActive()
+                    if (profileId != AuthManager.getSelectedProfileId() || _uiState.value.baseUrl != state.baseUrl ||
+                        revision != AuthManager.getNativeAuthRevision()
+                    ) {
+                        return@launch
+                    }
+                    if (!AuthManager.completeNativeSignIn(profileId, revision, session)) return@launch
+                    ApiClient.rebuild()
+                    HermesWsClient.connect()
+                    _uiState.update { it.copy(connectionSuccess = true) }
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (_: Exception) {
+                    _uiState.update {
+                        it.copy(
+                            errorMessage = "Browser sign-in did not complete. Check the gateway and retry.",
+                        )
+                    }
+                } finally {
+                    if (connectJob == activeJob) {
+                        NativeSessionAuth.cancelPendingLogin = null
+                        _uiState.update { it.copy(isLoading = false) }
+                    }
+                }
+            }
     }
 
     /**
