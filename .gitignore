@@ -21,6 +21,9 @@ ktlint
 
 # Local workspace artifacts and logs
 *.py
+!scripts/**/*.py
+__pycache__/
+*.py[cod]
 .kotlin/
 kls_database.db
 HERMES-COMPANION-QUICKSTART.md

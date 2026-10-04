@@ -65,6 +65,9 @@ jobs:
       - name: Add local bin to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
+      - name: Check release version mapping
+        run: python3 -m unittest discover -s scripts/tests -p 'test_release_version.py'
+
       - name: Run ktlintCheck
         run: ./gradlew ktlintCheck
 
