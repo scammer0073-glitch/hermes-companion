@@ -22,10 +22,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 
 /**
  * Floating action button shown when the message list is not following the
@@ -65,10 +65,13 @@ fun BoxScope.ChatScrollToBottomFab(
         ) {
             FloatingActionButton(
                 onClick = onScrollToBottom,
-                modifier = Modifier.size(40.dp).border(BorderStroke(1.dp, Color(0xFF1E2D44)), RoundedCornerShape(16.dp)),
+                modifier =
+                    Modifier.size(
+                        40.dp,
+                    ).border(BorderStroke(1.dp, NemasysPalette.CardBorder), RoundedCornerShape(16.dp)),
                 shape = RoundedCornerShape(16.dp),
-                containerColor = Color(0xFF0D0F12),
-                contentColor = Color(0xFF2DD4BF),
+                containerColor = NemasysPalette.Card,
+                contentColor = NemasysPalette.Accent,
                 elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             ) {
                 Icon(

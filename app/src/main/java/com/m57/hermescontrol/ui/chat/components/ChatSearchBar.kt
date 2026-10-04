@@ -25,11 +25,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 
 @Composable
 fun CompactSearchInput(
@@ -48,11 +48,11 @@ fun CompactSearchInput(
             modifier
                 .height(40.dp)
                 .background(
-                    color = Color(0xFF0D0F12),
+                    color = NemasysPalette.Card,
                     shape = RoundedCornerShape(16.dp),
                 ).border(
                     width = 1.dp,
-                    color = if (isError) errorColor else Color(0xFF1E2D44),
+                    color = if (isError) errorColor else NemasysPalette.CardBorder,
                     shape = RoundedCornerShape(16.dp),
                 ).padding(horizontal = 12.dp),
         singleLine = true,

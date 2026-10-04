@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +19,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -43,7 +43,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -54,6 +53,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalSpacing
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -204,7 +204,7 @@ fun LogsScreen(
                         modifier =
                             Modifier
                                 .fillMaxSize()
-                                .background(androidx.compose.ui.graphics.Color(0xFF0D0F12)),
+                                .background(NemasysPalette.Card),
                         contentPadding =
                             PaddingValues(
                                 horizontal = spacing.md,
@@ -281,10 +281,10 @@ fun LogsScreen(
                                 Modifier
                                     .align(Alignment.BottomEnd)
                                     .padding(16.dp)
-                                    .border(BorderStroke(1.dp, Color(0xFF1E2D44)), RoundedCornerShape(16.dp)),
+                                    .border(BorderStroke(1.dp, NemasysPalette.CardBorder), RoundedCornerShape(16.dp)),
                             shape = RoundedCornerShape(16.dp),
-                            containerColor = Color(0xFF0D0F12),
-                            contentColor = Color(0xFF2DD4BF),
+                            containerColor = NemasysPalette.Card,
+                            contentColor = NemasysPalette.Accent,
                             elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp),
                         ) {
                             Icon(

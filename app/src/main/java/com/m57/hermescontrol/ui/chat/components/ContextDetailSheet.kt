@@ -87,56 +87,56 @@ fun ContextDetailSheet(
                     fontWeight = FontWeight.SemiBold,
                 )
 
-            // Big used / full header
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Bottom,
-            ) {
-                Text(
-                    text = formatTokens(used),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = barColor,
-                )
-                Text(
-                    text = "of ${formatTokens(full)}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
+                // Big used / full header
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Bottom,
+                ) {
+                    Text(
+                        text = formatTokens(used),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = barColor,
+                    )
+                    Text(
+                        text = "of ${formatTokens(full)}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
 
-            // Progress bar
-            Box(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .height(8.dp)
-                        .background(
-                            color = NemasysCard,
-                            shape = RoundedCornerShape(4.dp),
-                        )
-                        .border(
-                            width = 1.dp,
-                            color = NemasysCardBorder,
-                            shape = RoundedCornerShape(4.dp),
-                        ),
-            ) {
+                // Progress bar
                 Box(
                     modifier =
                         Modifier
-                            .fillMaxWidth(fraction)
+                            .fillMaxWidth()
                             .height(8.dp)
-                            .background(color = barColor, shape = RoundedCornerShape(4.dp)),
-                )
-            }
+                            .background(
+                                color = NemasysCard,
+                                shape = RoundedCornerShape(4.dp),
+                            )
+                            .border(
+                                width = 1.dp,
+                                color = NemasysCardBorder,
+                                shape = RoundedCornerShape(4.dp),
+                            ),
+                ) {
+                    Box(
+                        modifier =
+                            Modifier
+                                .fillMaxWidth(fraction)
+                                .height(8.dp)
+                                .background(color = barColor, shape = RoundedCornerShape(4.dp)),
+                    )
+                }
                 Text(
                     text = "$pct% of context window used",
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
 
-            // Breakdown rows
+                // Breakdown rows
                 ContextRow(label = stringResource(R.string.context_prompt_input), value = breakdown.inputTokens)
                 ContextRow(label = stringResource(R.string.context_completion_output), value = breakdown.outputTokens)
                 ContextRow(label = stringResource(R.string.context_cache_read), value = breakdown.cacheReadTokens)

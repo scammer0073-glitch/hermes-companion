@@ -71,7 +71,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
@@ -91,6 +90,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.EnvVarConfig
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -556,8 +556,8 @@ private fun EnvVarCard(
                 .fillMaxWidth()
                 .animateContentSize(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -714,8 +714,8 @@ private fun EnvVarCard(
             } else {
                 Surface(
                     shape = RoundedCornerShape(16.dp),
-                    color = Color(0xFF0D0F12),
-                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    color = NemasysPalette.Card,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                     shadowElevation = 0.dp,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
@@ -808,8 +808,8 @@ private fun RestartBanner(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -841,14 +841,14 @@ private fun RestartBanner(
                 colors =
                     ButtonDefaults.buttonColors(
                         containerColor = statusColors.warning,
-                        contentColor = Color(0xFF0D0F12),
+                        contentColor = NemasysPalette.Card,
                     ),
             ) {
                 if (isRestarting) {
                     CircularProgressIndicator(
                         modifier = Modifier.size(16.dp),
                         strokeWidth = 2.dp,
-                        color = Color(0xFF0D0F12),
+                        color = NemasysPalette.Card,
                     )
                 } else {
                     Icon(

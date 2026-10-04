@@ -253,7 +253,7 @@ tasks.register("checkColorLiterals") {
     doLast {
         val offenders = mutableListOf<Pair<String, Int>>()
         srcDir.asFile.walkTopDown().filter { it.isFile && it.extension == "kt" }.forEach { file ->
-            if (exemptions.any { file.absolutePath.contains(it) }) return@forEach
+            if (exemptions.any { file.invariantSeparatorsPath.contains(it) }) return@forEach
             file.useLines { lines ->
                 lines.forEachIndexed { idx, raw ->
                     val line = raw.trim()
