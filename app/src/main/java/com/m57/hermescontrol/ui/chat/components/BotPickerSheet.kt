@@ -29,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -127,6 +128,18 @@ fun BotPickerSheet(
                 },
                 placeholder = { Text(stringResource(R.string.bots_picker_search)) },
                 shape = RoundedCornerShape(16.dp),
+                colors =
+                    OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color(0xFF0D0F12),
+                        unfocusedContainerColor = Color(0xFF0D0F12),
+                        focusedBorderColor = Color(0xFF2DD4BF),
+                        unfocusedBorderColor = Color(0xFF1E2D44),
+                        cursorColor = Color(0xFF2DD4BF),
+                        focusedLeadingIconColor = Color(0xFF2DD4BF),
+                        unfocusedLeadingIconColor = Color(0xFF8B9AB0),
+                        focusedPlaceholderColor = Color(0xFF8B9AB0),
+                        unfocusedPlaceholderColor = Color(0xFF8B9AB0),
+                    ),
             )
             Spacer(modifier = Modifier.height(8.dp))
             when {
