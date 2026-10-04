@@ -489,7 +489,8 @@ private fun ExpandedToolContent(
                     view.detail == "No skills found" ||
                         view.detail == "No matching tools" ||
                         view.detail == "No cron jobs" ||
-                        view.detail == "No cron jobs scheduled"
+                        view.detail == "No cron jobs scheduled" ||
+                        view.detail == "No content available"
                 ) {
                     Surface(
                         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
