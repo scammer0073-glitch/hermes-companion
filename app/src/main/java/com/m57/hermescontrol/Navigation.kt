@@ -47,9 +47,11 @@ import com.m57.hermescontrol.data.local.AuthManager
 import com.m57.hermescontrol.data.ws.ConnectionStatus
 import com.m57.hermescontrol.data.ws.HermesWsClient
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.DisableDrawerGestures
 import com.m57.hermescontrol.ui.common.DrawerGestureController
 import com.m57.hermescontrol.ui.common.LocalDrawerGestureController
+import com.m57.hermescontrol.ui.personal.PersonalAppDetailScreen
 import com.m57.hermescontrol.ui.plugins.MemoryProviderDetailScreen
 import com.m57.hermescontrol.ui.settings.SettingsAboutPage
 import com.m57.hermescontrol.ui.settings.SettingsAppearancePage
@@ -58,7 +60,6 @@ import com.m57.hermescontrol.ui.settings.SettingsChatPage
 import com.m57.hermescontrol.ui.settings.SettingsConnectionPage
 import com.m57.hermescontrol.ui.settings.SettingsLanguagePage
 import com.m57.hermescontrol.ui.settings.SettingsViewModel
-import com.m57.hermescontrol.ui.personal.PersonalAppDetailScreen
 import com.m57.hermescontrol.ui.toolsets.ToolsetDetailScreen
 import kotlinx.coroutines.launch
 import com.m57.hermescontrol.ui.authlogin.AuthLoginScreen as AuthLoginScreenContent
@@ -202,8 +203,8 @@ fun MainNavigation(sessionId: String? = null) {
             drawerContent = {
                 ModalDrawerSheet(
                     modifier = Modifier.verticalScroll(rememberScrollState()),
-                    drawerContainerColor = androidx.compose.ui.graphics.Color(0xFF0A0E14),
-                    drawerContentColor = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
+                    drawerContainerColor = NemasysPalette.Background,
+                    drawerContentColor = NemasysPalette.Text,
                 ) {
                     val connectionStatus by HermesWsClient.connectionStatus.collectAsState()
                     val statusColor =
@@ -274,9 +275,9 @@ fun MainNavigation(sessionId: String? = null) {
                                     },
                                     colors =
                                         NavigationDrawerItemDefaults.colors(
-                                            selectedContainerColor = androidx.compose.ui.graphics.Color(0xFF14302C),
-                                            selectedTextColor = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
-                                            selectedIconColor = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
+                                            selectedContainerColor = NemasysPalette.AccentContainer,
+                                            selectedTextColor = NemasysPalette.Text,
+                                            selectedIconColor = NemasysPalette.Accent,
                                             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                         ),

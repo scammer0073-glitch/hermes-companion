@@ -54,6 +54,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.MessagingPlatform
 import com.m57.hermescontrol.data.model.MessagingPlatformUpdate
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.channels.ConfigureForm
 
 private enum class StatusRole { SUCCESS, WARNING, ERROR, NEUTRAL }
@@ -124,8 +125,8 @@ internal fun PlatformCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -135,7 +136,7 @@ internal fun PlatformCard(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
@@ -144,7 +145,7 @@ internal fun PlatformCard(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Spacer(modifier = Modifier.height(10.dp))
@@ -169,7 +170,7 @@ internal fun PlatformCard(
                         Text(
                             text = platform.name,
                             style = MaterialTheme.typography.titleMedium,
-                            color = Color(0xFFE6EDF3),
+                            color = NemasysPalette.Text,
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -197,7 +198,7 @@ internal fun PlatformCard(
                 Text(
                     text = platform.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
 
@@ -220,7 +221,7 @@ internal fun PlatformCard(
                 OutlinedButton(
                     onClick = onTest,
                     enabled = !isTesting,
-                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 ) {
                     if (isTesting) {
                         CircularProgressIndicator(
@@ -232,16 +233,17 @@ internal fun PlatformCard(
                     Text(
                         text = stringResource(R.string.channels_action_test),
                         style = MaterialTheme.typography.labelSmall,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                     )
                 }
 
                 Button(
                     onClick = { showConfigureForm = !showConfigureForm },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF2DD4BF),
-                        contentColor = Color(0xFF001018),
-                    ),
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            containerColor = NemasysPalette.Accent,
+                            contentColor = NemasysPalette.OnAccent,
+                        ),
                 ) {
                     Text(
                         text =
@@ -280,10 +282,11 @@ internal fun PlatformCard(
                 Spacer(modifier = Modifier.height(8.dp))
                 Button(
                     onClick = onStartOnboarding,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF2DD4BF),
-                        contentColor = Color(0xFF001018),
-                    ),
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            containerColor = NemasysPalette.Accent,
+                            contentColor = NemasysPalette.OnAccent,
+                        ),
                 ) {
                     Icon(
                         imageVector = Icons.Filled.QrCode,
@@ -324,7 +327,7 @@ internal fun PlatformCard(
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
                 ) {
-                    Text("Remove")
+                    Text("Disconnect")
                 }
             },
             dismissButton = {

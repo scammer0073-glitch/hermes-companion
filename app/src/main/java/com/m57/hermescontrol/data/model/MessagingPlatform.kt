@@ -57,6 +57,11 @@ data class MessagingPlatformUpdate(
     val profile: String? = null,
 )
 
+fun MessagingPlatform.disconnectRequest(profile: String? = null): MessagingPlatformUpdate {
+    val fields = envVars ?: error("Platform credential fields are unavailable; reconnect and try again")
+    return MessagingPlatformUpdate(enabled = false, clearEnv = fields.map { it.key }.distinct(), profile = profile)
+}
+
 @Serializable
 data class MessagingPlatformTestResult(
     val ok: Boolean,

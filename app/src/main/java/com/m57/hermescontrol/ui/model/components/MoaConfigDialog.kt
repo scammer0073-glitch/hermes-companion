@@ -39,7 +39,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -47,6 +46,7 @@ import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.MoaConfigPreset
 import com.m57.hermescontrol.data.model.MoaModelSlot
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.SearchBar
 
 @Composable
@@ -246,8 +246,8 @@ private fun MoaConfigEditor(
             androidx.compose.material3.Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Row(
@@ -258,7 +258,7 @@ private fun MoaConfigEditor(
                         Modifier
                             .size(6.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                            .background(NemasysPalette.Accent),
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
@@ -267,7 +267,7 @@ private fun MoaConfigEditor(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFFE6EDF3),
+                        color = NemasysPalette.Text,
                     )
                 }
             }

@@ -1,14 +1,21 @@
 package com.m57.hermescontrol.data.remote
 
+import com.m57.hermescontrol.data.model.CreateProfileRequest
+import com.m57.hermescontrol.data.model.MessagingPlatformUpdate
 import com.m57.hermescontrol.data.model.OAuthSubmitRequest
 import com.m57.hermescontrol.data.model.SessionMessage
 import com.m57.hermescontrol.data.model.StatusResponse
+import com.m57.hermescontrol.data.model.replaceMcpEnvValue
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -25,6 +32,75 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
  * canned JSON responses, and asserts the parsed response objects.
  */
 class HermesApiServiceMockWebServerTest {
+    @Test
+    fun cloneUsesProfileCreationWithAnExplicitSourceAndSkillFlags() =
+        runBlocking {
+            mockServer.enqueue(MockResponse().setResponseCode(200).setBody("{}"))
+            val clone =
+                CreateProfileRequest(
+                    name = "copy",
+                    clone_from = "source",
+                    no_skills = true,
+                    keep_skills = listOf("chosen"),
+                )
+            assertTrue(api.createProfile(clone).isSuccessful)
+            val request = mockServer.takeRequest()
+            assertEquals("POST", request.method)
+            assertEquals("/api/profiles", request.path)
+            val body = OkHttpProvider.json.parseToJsonElement(request.body.readUtf8()) as JsonObject
+            assertEquals(JsonPrimitive("source"), body["clone_from"])
+            assertEquals(JsonPrimitive(true), body["no_skills"])
+            assertEquals(JsonArray(listOf(JsonPrimitive("chosen"))), body["keep_skills"])
+        }
+
+    @Test
+    fun mcpReplacementUsesTheFullMapRouteAndSavedConfigRead() =
+        runBlocking {
+            mockServer.enqueue(
+                MockResponse().setResponseCode(200)
+                    .setBody("""{"mcp_servers":{"one":{"command":"tool","env":{"OLD":"value"}}}}"""),
+            )
+            val config = api.getSavedConfig("work").body()!!
+            val read = mockServer.takeRequest()
+            assertEquals("/api/config?profile=work&include_defaults=false", read.path)
+            mockServer.enqueue(MockResponse().setResponseCode(200).setBody("{\"ok\":true}"))
+            api.replaceMcpServers(replaceMcpEnvValue(config, "one", "OLD", null, "work"))
+            val write = mockServer.takeRequest()
+            assertEquals("PUT", write.method)
+            assertEquals("/api/mcp/servers", write.path)
+            val body = write.body.readUtf8()
+            assertTrue(body.contains("\"servers\""))
+            assertTrue(body.contains("\"profile\":\"work\""))
+            assertFalse(body.contains("\"OLD\""))
+        }
+
+    @Test
+    fun disconnectUsesPlatformPutWithDisableAndClearEnv() =
+        runBlocking {
+            mockServer.enqueue(MockResponse().setResponseCode(200).setBody("{\"ok\":true}"))
+            val disconnect =
+                MessagingPlatformUpdate(enabled = false, clearEnv = listOf("TELEGRAM_BOT_TOKEN"), profile = "work")
+            api.configurePlatform("telegram", disconnect)
+            val request = mockServer.takeRequest()
+            assertEquals("PUT", request.method)
+            assertEquals("/api/messaging/platforms/telegram", request.path)
+            val body = request.body.readUtf8()
+            assertTrue(body.contains("\"enabled\":false"))
+            assertTrue(body.contains("\"clear_env\":[\"TELEGRAM_BOT_TOKEN\"]"))
+        }
+
+    @Test
+    fun sessionDetailParsesStoredSystemPromptWithoutInventingPromptRoute() =
+        runBlocking {
+            mockServer.enqueue(
+                MockResponse().setResponseCode(
+                    200,
+                ).setBody("{\"id\":\"session-1\",\"system_prompt\":\"Stored instructions\"}"),
+            )
+            assertEquals("Stored instructions", api.getSessionDetail("session-1").body()?.system_prompt)
+            assertEquals("/api/sessions/session-1", mockServer.takeRequest().path)
+        }
+
     private lateinit var mockServer: MockWebServer
     private lateinit var api: HermesApiService
 

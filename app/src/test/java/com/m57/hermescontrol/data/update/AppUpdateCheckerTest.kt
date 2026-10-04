@@ -1,5 +1,10 @@
 package com.m57.hermescontrol.data.update
 
+import kotlinx.coroutines.test.runTest
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -9,9 +14,38 @@ import org.junit.Test
 
 /**
  * Pure logic of the in-app updater (issue #867): version comparison and
- * GitHub release JSON parsing. No Android/network dependencies.
+ * GitHub release JSON parsing, plus fork update routing with an intercepted HTTP response.
  */
 class AppUpdateCheckerTest {
+    @Test
+    fun fetchLatestRelease_usesForkRepositoryAndHandlesNoPublishedReleases() =
+        runTest {
+            var requestedUrl: String? = null
+            var acceptHeader: String? = null
+            val client =
+                OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        val request = chain.request()
+                        requestedUrl = request.url.toString()
+                        acceptHeader = request.header("Accept")
+                        Response.Builder()
+                            .request(request)
+                            .protocol(Protocol.HTTP_1_1)
+                            .code(404)
+                            .message("Not Found")
+                            .body("""{"message":"Not Found"}""".toResponseBody())
+                            .build()
+                    }
+                    .build()
+
+            assertNull(AppUpdateChecker(client).fetchLatestRelease())
+            assertEquals(
+                "https://api.github.com/repos/scammer0073-glitch/hermes-companion/releases/latest",
+                requestedUrl,
+            )
+            assertEquals("application/vnd.github+json", acceptHeader)
+        }
+
     // ── Version comparison ──────────────────────────────────────────────
 
     @Test
