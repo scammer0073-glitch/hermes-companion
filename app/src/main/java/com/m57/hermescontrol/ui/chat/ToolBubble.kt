@@ -63,6 +63,7 @@ import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.HermesStatusColors
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.components.DiffViewCard
 import com.m57.hermescontrol.ui.chat.tool.ToolView
 import com.m57.hermescontrol.ui.chat.tool.ToolViewBuilder
@@ -130,8 +131,8 @@ internal fun ToolBubble(
 
     var expanded by remember { mutableStateOf(false) }
     var showRawJson by remember { mutableStateOf(false) }
-    val chipColor = Color(0xFF0D0F12)
-    val contentColor = Color(0xFFE6EDF3)
+    val chipColor = NemasysPalette.Card
+    val contentColor = NemasysPalette.Text
     val statusColors = LocalHermesStatusColors.current
 
     val view =
@@ -163,7 +164,7 @@ internal fun ToolBubble(
             onClick = { expanded = !expanded },
             colors = CardDefaults.cardColors(containerColor = chipColor),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(
@@ -519,14 +520,14 @@ private fun HeaderRow(
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Box(
-            Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+            Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent),
         )
         // Status icon or spinner
         if (message.toolStatus == ToolStatus.RUNNING) {
             CircularProgressIndicator(
                 modifier = Modifier.size(14.dp),
                 strokeWidth = 2.dp,
-                color = Color(0xFF2DD4BF),
+                color = NemasysPalette.Accent,
             )
         } else {
             val icon =
@@ -555,7 +556,7 @@ private fun HeaderRow(
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             letterSpacing = 0.6.sp,
-            color = Color(0xFF8B9AB0),
+            color = NemasysPalette.Muted,
         )
     }
 }
@@ -627,8 +628,8 @@ private fun CopyButton(
     ) {
         Surface(
             shape = RoundedCornerShape(16.dp),
-            color = Color(0xFF0D0F12),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            color = NemasysPalette.Card,
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             shadowElevation = 0.dp,
         ) {
             IconButton(

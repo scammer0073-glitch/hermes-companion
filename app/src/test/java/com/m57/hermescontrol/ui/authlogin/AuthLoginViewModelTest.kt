@@ -134,6 +134,26 @@ class AuthLoginViewModelTest {
     }
 
     @Test
+    fun `deriveAuthMode current browser providers return OAUTH`() {
+        for (provider in listOf("nous", "self-hosted")) {
+            assertEquals(
+                DashboardAuthMode.OAUTH,
+                viewModel.deriveAuthMode(authRequired = true, providers = listOf(provider)),
+            )
+        }
+    }
+
+    @Test
+    fun `deriveAuthMode current browser providers take precedence over basic`() {
+        for (provider in listOf("nous", "self-hosted")) {
+            assertEquals(
+                DashboardAuthMode.OAUTH,
+                viewModel.deriveAuthMode(authRequired = true, providers = listOf("basic", provider)),
+            )
+        }
+    }
+
+    @Test
     fun `deriveAuthMode basic provider returns BASIC_AUTH`() {
         assertEquals(
             DashboardAuthMode.BASIC_AUTH,

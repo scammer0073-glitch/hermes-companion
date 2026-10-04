@@ -58,6 +58,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.Achievement
 import com.m57.hermescontrol.data.model.RecentUnlock
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -281,7 +282,7 @@ fun AchievementsScreen(
                                 Modifier
                                     .size(6.dp)
                                     .clip(androidx.compose.foundation.shape.CircleShape)
-                                    .background(Color(0xFF2DD4BF)),
+                                    .background(NemasysPalette.Accent),
                             )
                             Spacer(Modifier.width(6.dp))
                             Text(
@@ -295,7 +296,7 @@ fun AchievementsScreen(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFF8B9AB0),
+                                color = NemasysPalette.Muted,
                             )
                         }
                     }
@@ -363,8 +364,8 @@ private fun StatPill(
     androidx.compose.material3.Surface(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        color = Color(0xFF0D0F12),
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        color = NemasysPalette.Card,
+        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
         shadowElevation = 0.dp,
     ) {
         Column(
@@ -507,8 +508,8 @@ private fun RecentUnlockCard(
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -560,8 +561,8 @@ private fun AchievementCard(
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
+        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
@@ -667,7 +668,7 @@ private fun AchievementCard(
                             .height(6.dp)
                             .clip(RoundedCornerShape(3.dp)),
                     color = MaterialTheme.colorScheme.tertiary,
-                    trackColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    trackColor = NemasysPalette.Card,
                 )
             }
 
@@ -713,8 +714,8 @@ private fun AchievementCard(
                     androidx.compose.material3.Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        color = Color(0xFF0D0F12),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        color = NemasysPalette.Card,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
                         shadowElevation = 0.dp,
                     ) {
                         Text(
@@ -734,14 +735,14 @@ private fun AchievementCard(
 private fun Surface(
     modifier: Modifier = Modifier,
     shape: RoundedCornerShape,
-    color: Color = Color(0xFF0D0F12),
+    color: Color = NemasysPalette.Card,
     content: @Composable () -> Unit,
 ) {
     androidx.compose.material3.Surface(
         modifier = modifier,
         shape = shape,
         color = color,
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
         shadowElevation = 0.dp,
         content = content,
     )

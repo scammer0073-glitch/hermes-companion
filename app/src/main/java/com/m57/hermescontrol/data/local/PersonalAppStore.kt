@@ -15,13 +15,20 @@ data class FoodEntry(val id: String, val text: String, val timeMillis: Long, val
 data class SleepEntry(val id: String, val bedMillis: Long, val wakeMillis: Long)
 
 @Serializable
-data class PersonalApp(val id: String, val name: String, val icon: String = "\u2764", val createdAt: Long, val food: List<FoodEntry> = emptyList(), val sleep: List<SleepEntry> = emptyList())
+data class PersonalApp(
+    val id: String,
+    val name: String,
+    val icon: String = "\u2764",
+    val createdAt: Long,
+    val food: List<FoodEntry> = emptyList(),
+    val sleep: List<SleepEntry> = emptyList(),
+)
 
 object PersonalAppStore {
     private const val PREF = "personal_apps"
     private const val KEY = "personal_apps_json"
     private val json = Json { ignoreUnknownKeys = true }
-    private val _flow = MutableStateFlow<List<PersonalApp>>(emptyList())
+    private val appsState = MutableStateFlow<List<PersonalApp>>(emptyList())
     private var inited = false
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE)
@@ -31,33 +38,52 @@ object PersonalAppStore {
         return runCatching { json.decodeFromString<List<PersonalApp>>(s) }.getOrElse { emptyList() }
     }
 
-    private fun saveSync(ctx: Context, apps: List<PersonalApp>) {
+    private fun saveSync(
+        ctx: Context,
+        apps: List<PersonalApp>,
+    ) {
         prefs(ctx).edit().putString(KEY, json.encodeToString(apps)).apply()
-        _flow.value = apps
+        appsState.value = apps
     }
 
     fun flow(ctx: Context): Flow<List<PersonalApp>> {
         if (!inited) {
-            _flow.value = load(ctx)
+            appsState.value = load(ctx)
             inited = true
         }
-        return _flow
+        return appsState
     }
 
-    suspend fun save(ctx: Context, apps: List<PersonalApp>) { saveSync(ctx, apps) }
+    suspend fun save(
+        ctx: Context,
+        apps: List<PersonalApp>,
+    ) {
+        saveSync(ctx, apps)
+    }
 
-    suspend fun addApp(ctx: Context, app: PersonalApp) {
-        val cur = _flow.value.ifEmpty { load(ctx) }
+    suspend fun addApp(
+        ctx: Context,
+        app: PersonalApp,
+    ) {
+        val cur = appsState.value.ifEmpty { load(ctx) }
         saveSync(ctx, cur + app)
     }
 
-    suspend fun addFood(ctx: Context, appId: String, entry: FoodEntry) {
-        val cur = _flow.value.ifEmpty { load(ctx) }
+    suspend fun addFood(
+        ctx: Context,
+        appId: String,
+        entry: FoodEntry,
+    ) {
+        val cur = appsState.value.ifEmpty { load(ctx) }
         saveSync(ctx, cur.map { if (it.id == appId) it.copy(food = it.food + entry) else it })
     }
 
-    suspend fun addSleep(ctx: Context, appId: String, entry: SleepEntry) {
-        val cur = _flow.value.ifEmpty { load(ctx) }
+    suspend fun addSleep(
+        ctx: Context,
+        appId: String,
+        entry: SleepEntry,
+    ) {
+        val cur = appsState.value.ifEmpty { load(ctx) }
         saveSync(ctx, cur.map { if (it.id == appId) it.copy(sleep = it.sleep + entry) else it })
     }
 }

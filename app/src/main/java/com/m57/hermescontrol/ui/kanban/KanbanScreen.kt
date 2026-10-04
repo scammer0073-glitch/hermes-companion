@@ -41,6 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -49,12 +50,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.KanbanTask
+import com.m57.hermescontrol.theme.NemasysPalette
+import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
 import com.m57.hermescontrol.ui.common.NavIcon
 import com.m57.hermescontrol.ui.common.SearchBar
 import com.m57.hermescontrol.ui.common.SkeletonListState
-import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ToastEffect
 
 private const val DEFAULT_COLUMN = "todo"
@@ -151,9 +153,17 @@ fun KanbanScreen(
                             }
 
                             if (state.selectedBoard == null) {
-                                EmptyState(title = "No boards yet", subtitle = "Boards organize your work — create one to start", icon = androidx.compose.material.icons.Icons.Filled.Add)
+                                EmptyState(
+                                    title = "No boards yet",
+                                    subtitle = "Boards organize your work — create one to start",
+                                    icon = androidx.compose.material.icons.Icons.Filled.Add,
+                                )
                             } else if (state.columns.isEmpty()) {
-                                EmptyState(title = "No columns", subtitle = "This board has no columns yet — add one to track work", icon = androidx.compose.material.icons.Icons.Filled.Person)
+                                EmptyState(
+                                    title = "No columns",
+                                    subtitle = "This board has no columns yet — add one to track work",
+                                    icon = androidx.compose.material.icons.Icons.Filled.Person,
+                                )
                             } else {
                                 Row(
                                     modifier =
@@ -197,20 +207,80 @@ fun KanbanScreen(
                                                     .width(280.dp)
                                                     .fillMaxSize(),
                                         ) {
-                                            Row(Modifier.fillMaxWidth().padding(bottom = 10.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween) { androidx.compose.material3.Text(colName.replaceFirstChar { it.uppercase() }, style = androidx.compose.material3.MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = androidx.compose.ui.graphics.Color.White); androidx.compose.material3.Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp), color = androidx.compose.ui.graphics.Color(0xFF14302C)) { androidx.compose.material3.Text("${colTasks.size}", modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp), style = androidx.compose.material3.MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = androidx.compose.ui.graphics.Color(0xFF2DD4BF)) } }
+                                            Row(
+                                                Modifier.fillMaxWidth().padding(bottom = 10.dp),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.SpaceBetween,
+                                            ) {
+                                                androidx.compose.material3.Text(
+                                                    colName.replaceFirstChar {
+                                                        it.uppercase()
+                                                    },
+                                                    style = MaterialTheme.typography.titleSmall,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = NemasysPalette.TextBright,
+                                                )
+                                                androidx.compose.material3.Surface(
+                                                    shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
+                                                    color = NemasysPalette.AccentContainer,
+                                                ) {
+                                                    androidx.compose.material3.Text(
+                                                        "${colTasks.size}",
+                                                        modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp),
+                                                        style = MaterialTheme.typography.labelSmall,
+                                                        fontWeight = FontWeight.Bold,
+                                                        color = NemasysPalette.Accent,
+                                                    )
+                                                }
+                                            }
 
                                             if (colTasks.isEmpty()) {
-                                                androidx.compose.material3.Surface(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), color = androidx.compose.ui.graphics.Color(0xFF0D0F12), border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)), shadowElevation = 0.dp, tonalElevation = 0.dp) { Row(Modifier.fillMaxWidth().padding(vertical = 18.dp), horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) { androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Add, null, tint = androidx.compose.ui.graphics.Color(0xFF2DD4BF), modifier = Modifier.size(14.dp)); androidx.compose.foundation.layout.Spacer(Modifier.width(6.dp)); androidx.compose.material3.Text("DROP TASKS HERE", fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace, fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 0.6.sp, color = androidx.compose.ui.graphics.Color(0xFFE6EDF3)) } }
+                                                androidx.compose.material3.Surface(
+                                                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                                                    shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+                                                    color = NemasysPalette.Card,
+                                                    border =
+                                                        androidx.compose.foundation.BorderStroke(
+                                                            1.dp,
+                                                            NemasysPalette.CardBorder,
+                                                        ),
+                                                    shadowElevation = 0.dp,
+                                                    tonalElevation = 0.dp,
+                                                ) {
+                                                    Row(
+                                                        Modifier.fillMaxWidth().padding(vertical = 18.dp),
+                                                        horizontalArrangement = Arrangement.Center,
+                                                        verticalAlignment = Alignment.CenterVertically,
+                                                    ) {
+                                                        androidx.compose.material3.Icon(
+                                                            androidx.compose.material.icons.Icons.Filled.Add,
+                                                            null,
+                                                            tint = NemasysPalette.Accent,
+                                                            modifier = Modifier.size(14.dp),
+                                                        )
+                                                        androidx.compose.foundation.layout.Spacer(Modifier.width(6.dp))
+                                                        androidx.compose.material3.Text(
+                                                            "DROP TASKS HERE",
+                                                            fontFamily = FontFamily.Monospace,
+                                                            fontSize = 11.sp,
+                                                            fontWeight = FontWeight.Bold,
+                                                            letterSpacing = 0.6.sp,
+                                                            color = NemasysPalette.Text,
+                                                        )
+                                                    }
+                                                }
                                             } else {
                                                 LazyColumn(
                                                     modifier = Modifier.weight(1f),
                                                     verticalArrangement = Arrangement.spacedBy(8.dp),
                                                 ) {
                                                     items(colTasks, key = { it.id }) { task ->
-                                                        androidx.compose.foundation.layout.Box(Modifier.animateItem()) { TaskCard(
-                                                            task = task,
-                                                            onTaskClick = { taskForActions = it },
-                                                        ) }
+                                                        androidx.compose.foundation.layout.Box(Modifier.animateItem()) {
+                                                            TaskCard(
+                                                                task = task,
+                                                                onTaskClick = { taskForActions = it },
+                                                            )
+                                                        }
                                                     }
                                                 }
                                             }
@@ -283,7 +353,27 @@ fun TaskCard(
     onTaskClick: (KanbanTask) -> Unit,
 ) {
     val haptic = androidx.compose.ui.platform.LocalHapticFeedback.current
-    androidx.compose.material3.Card(onClick = { haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress); onTaskClick(task) }, modifier = Modifier.fillMaxWidth(), shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp), colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)), border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)), elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 0.dp)) {
+    androidx.compose.material3.Card(
+        onClick = {
+            haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
+            onTaskClick(task)
+        },
+        modifier = Modifier.fillMaxWidth(),
+        shape =
+            androidx.compose.foundation.shape.RoundedCornerShape(
+                16.dp,
+            ),
+        colors =
+            androidx.compose.material3.CardDefaults.cardColors(
+                containerColor = NemasysPalette.Card,
+            ),
+        border =
+            androidx.compose.foundation.BorderStroke(
+                1.dp,
+                NemasysPalette.CardBorder,
+            ),
+        elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 0.dp),
+    ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(text = task.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(4.dp))

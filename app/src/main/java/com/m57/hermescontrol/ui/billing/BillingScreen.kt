@@ -30,7 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +41,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.SubscriptionCurrent
 import com.m57.hermescontrol.data.model.SubscriptionStateResponse
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
 import com.m57.hermescontrol.ui.common.LoadingState
@@ -142,15 +142,15 @@ private fun BillingContent(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Text(
                         text = state.errorMessage,
                         modifier = Modifier.padding(12.dp),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color(0xFFE6EDF3),
+                        color = NemasysPalette.Text,
                     )
                 }
             }
@@ -161,15 +161,15 @@ private fun BillingContent(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Text(
                         text = state.actionMessage,
                         modifier = Modifier.padding(12.dp),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color(0xFFE6EDF3),
+                        color = NemasysPalette.Text,
                     )
                 }
             }
@@ -192,8 +192,8 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -202,7 +202,7 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
@@ -211,14 +211,14 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Text(
                 text = subscription.tier_name ?: stringResource(R.string.billing_free_plan),
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
-                color = Color.White,
+                color = NemasysPalette.TextBright,
                 modifier = Modifier.padding(top = 6.dp),
             )
             if (subscription.credits_remaining != null) {
@@ -229,7 +229,7 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                             subscription.credits_remaining,
                         ),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                     modifier = Modifier.padding(top = 4.dp),
                 )
             }
@@ -237,7 +237,7 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                 Text(
                     text = stringResource(R.string.billing_renews, subscription.cycle_ends_at),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                     modifier = Modifier.padding(top = 4.dp),
                 )
             }
@@ -245,7 +245,7 @@ private fun PlanCard(subscription: SubscriptionCurrent) {
                 Text(
                     text = subscription.pending_downgrade_display,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                     modifier = Modifier.padding(top = 4.dp),
                 )
             }
@@ -258,8 +258,8 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -268,7 +268,7 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
@@ -277,14 +277,14 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Text(
                 text = stringResource(R.string.billing_free_plan),
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
-                color = Color.White,
+                color = NemasysPalette.TextBright,
                 modifier = Modifier.padding(top = 6.dp),
             )
             Row(
@@ -296,7 +296,7 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Text(
                     text =
@@ -309,7 +309,7 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
         }
@@ -327,8 +327,8 @@ private fun UsageBarRow(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
@@ -342,7 +342,7 @@ private fun UsageBarRow(
                         Modifier
                             .size(6.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                            .background(NemasysPalette.Accent),
                     )
                     Spacer(Modifier.width(6.dp))
                     Text(
@@ -351,7 +351,7 @@ private fun UsageBarRow(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -359,7 +359,7 @@ private fun UsageBarRow(
                 Text(
                     text = summary,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             LinearProgressIndicator(
@@ -370,8 +370,8 @@ private fun UsageBarRow(
                         .padding(top = 8.dp)
                         .height(8.dp)
                         .clip(RoundedCornerShape(4.dp)),
-                color = Color(0xFF2DD4BF),
-                trackColor = Color(0xFF1E2D44),
+                color = NemasysPalette.Accent,
+                trackColor = NemasysPalette.CardBorder,
             )
         }
     }
@@ -387,7 +387,7 @@ private fun SectionTitle(text: String) {
             Modifier
                 .size(6.dp)
                 .clip(CircleShape)
-                .background(Color(0xFF2DD4BF)),
+                .background(NemasysPalette.Accent),
         )
         Spacer(Modifier.width(6.dp))
         Text(
@@ -396,7 +396,7 @@ private fun SectionTitle(text: String) {
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             letterSpacing = 0.6.sp,
-            color = Color(0xFF8B9AB0),
+            color = NemasysPalette.Muted,
         )
     }
 }

@@ -2,6 +2,15 @@ package com.m57.hermescontrol.data.ws
 
 /** Parsed WebSocket events emitted by [HermesWsClient]. */
 sealed class WsEvent {
+    /** Peer JSON-RPC request, distinct from a result even though both carry an id. */
+    data class ServerRequest(
+        val id: String,
+        val method: String,
+        val params: Map<String, Any?>,
+    ) : WsEvent()
+
+    data class RequestCancelled(val id: String) : WsEvent()
+
     // ── Gateway lifecycle ────────────────────────────────────────────────
 
     data class GatewayReady(

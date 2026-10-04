@@ -12,9 +12,9 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -39,6 +39,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -49,7 +50,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.SuggestionChipDefaults
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -85,6 +85,7 @@ import com.m57.hermescontrol.theme.CodePunctuation
 import com.m57.hermescontrol.theme.CodeString
 import com.m57.hermescontrol.theme.CodeTerminalMuted
 import com.m57.hermescontrol.theme.CodeTerminalText
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.SubagentIndicator
 import kotlinx.coroutines.delay
 
@@ -139,9 +140,9 @@ fun ReasoningCard(
                     },
                 )
                 .testTag("reasoning_card"),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
@@ -150,7 +151,7 @@ fun ReasoningCard(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
@@ -159,7 +160,7 @@ fun ReasoningCard(
                     fontSize = 11.sp,
                     letterSpacing = 0.6.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                     modifier = Modifier.weight(1f),
                 )
                 if (copied) {
@@ -173,7 +174,7 @@ fun ReasoningCard(
                 Icon(
                     imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
                     contentDescription = if (expanded) "Collapse reasoning" else "Expand reasoning",
-                    tint = Color(0xFF8B9AB0),
+                    tint = NemasysPalette.Muted,
                     modifier = Modifier.size(18.dp),
                 )
             }
@@ -273,8 +274,8 @@ fun CodeBlockCard(
                 .fillMaxWidth()
                 .testTag("code_block"),
         shape = RoundedCornerShape(16.dp),
-        color = Color(0xFF0D0F12),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        color = NemasysPalette.Card,
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
     ) {
         Column {
             // Header row: language badge (left) + copy button (right)
@@ -282,7 +283,13 @@ fun CodeBlockCard(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Box(Modifier.size(8.dp).clip(androidx.compose.foundation.shape.CircleShape).background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)))
+                Box(
+                    Modifier.size(
+                        8.dp,
+                    ).clip(
+                        androidx.compose.foundation.shape.CircleShape,
+                    ).background(NemasysPalette.Accent),
+                )
                 Spacer(Modifier.width(8.dp))
                 if (!language.isNullOrBlank()) {
                     Text(
@@ -457,11 +464,11 @@ fun ClarifyBubble(
                 .padding(horizontal = 24.dp, vertical = 4.dp)
                 .testTag("clarify_bubble"),
         shape = RoundedCornerShape(16.dp),
-        color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+        color = NemasysPalette.Card,
         border =
             BorderStroke(
                 width = 1.dp,
-                color = androidx.compose.ui.graphics.Color(0xFF1E2D44),
+                color = NemasysPalette.CardBorder,
             ),
     ) {
         Column(
@@ -478,7 +485,7 @@ fun ClarifyBubble(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Text(
                     text = "CLARIFY",
@@ -486,14 +493,14 @@ fun ClarifyBubble(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Spacer(Modifier.height(10.dp))
             Text(
                 text = text,
                 style = MaterialTheme.typography.bodyMedium,
-                color = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
+                color = NemasysPalette.Text,
             )
             if (options.isNotEmpty()) {
                 Spacer(Modifier.height(10.dp))
@@ -508,10 +515,10 @@ fun ClarifyBubble(
                             label = { Text(option) },
                             colors =
                                 SuggestionChipDefaults.suggestionChipColors(
-                                    containerColor = Color(0xFF0D0F12),
-                                    labelColor = Color(0xFF2DD4BF),
+                                    containerColor = NemasysPalette.Card,
+                                    labelColor = NemasysPalette.Accent,
                                 ),
-                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         )
                     }
                 }
@@ -539,8 +546,8 @@ fun ClarifyBubble(
                     enabled = typedText.isNotBlank(),
                     colors =
                         ButtonDefaults.buttonColors(
-                            containerColor = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
-                            contentColor = androidx.compose.ui.graphics.Color(0xFF001018),
+                            containerColor = NemasysPalette.Accent,
+                            contentColor = NemasysPalette.OnAccent,
                         ),
                 ) {
                     Text("Send")
@@ -570,8 +577,8 @@ fun SubagentCard(
     Surface(
         modifier = modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 2.dp).testTag("subagent_card"),
         shape = RoundedCornerShape(16.dp),
-        color = Color(0xFF0D0F12),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        color = NemasysPalette.Card,
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
@@ -585,7 +592,7 @@ fun SubagentCard(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Text(
                     text = if (isComplete) "SUBAGENT \u00B7 COMPLETE" else "SUBAGENT \u00B7 RUNNING",
@@ -593,7 +600,7 @@ fun SubagentCard(
                     fontSize = 11.sp,
                     letterSpacing = 0.6.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Row(
@@ -605,7 +612,7 @@ fun SubagentCard(
                     CircularProgressIndicator(
                         modifier = Modifier.size(16.dp),
                         strokeWidth = 2.dp,
-                        color = Color(0xFF2DD4BF),
+                        color = NemasysPalette.Accent,
                     )
                 }
                 Spacer(Modifier.width(8.dp))
@@ -620,7 +627,7 @@ fun SubagentCard(
                 Text(
                     text = displayText,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFFE6EDF3),
+                    color = NemasysPalette.Text,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
