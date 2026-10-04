@@ -72,7 +72,7 @@ open class AppUpdateChecker(
     private val client: OkHttpClient = OkHttpProvider.base,
 ) {
     /**
-     * Fetch the latest release metadata. Returns null when there is no
+     * Fetch this community fork's latest release metadata. Returns null when there is no
      * release yet (404) or the body can't be parsed. Throws [IOException]
      * on network failure so the caller can surface a friendly error.
      */
@@ -81,7 +81,7 @@ open class AppUpdateChecker(
             val request =
                 Request
                     .Builder()
-                    .url("https://api.github.com/repos/Hy4ri/hermes-mobile/releases/latest")
+                    .url("https://api.github.com/repos/scammer0073-glitch/hermes-companion/releases/latest")
                     .header("Accept", "application/vnd.github+json")
                     .build()
             client.newCall(request).execute().use { response ->

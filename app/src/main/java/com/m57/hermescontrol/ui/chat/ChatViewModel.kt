@@ -30,6 +30,7 @@ import com.m57.hermescontrol.data.ws.CommandBlocklist
 import com.m57.hermescontrol.data.ws.CommandCatalog
 import com.m57.hermescontrol.data.ws.ConnectionStatus
 import com.m57.hermescontrol.data.ws.HermesWsClient
+import com.m57.hermescontrol.data.ws.JsonRpcError
 import com.m57.hermescontrol.data.ws.WsEvent
 import com.m57.hermescontrol.data.ws.WsMethods
 import com.m57.hermescontrol.data.ws.toJsonElement
@@ -531,7 +532,11 @@ class ChatViewModel(
      */
     var initialSessionId: String? = null
 
+    private val serverRequests = linkedMapOf<String, WsEvent.ServerRequest>()
+    private val serverClarifyAnswers = mutableMapOf<String, MutableMap<String, String?>>()
+
     init {
+        wsClient.setServerRequestConsumerAttached(true)
         refreshSettings()
         refreshMaxToolCallsPerTurn()
 
@@ -562,6 +567,26 @@ class ChatViewModel(
                     // fire with a stale id and 4001 "session not found";
                     // handleGatewayReady rebinds it on the re-resume.
                     runtimeSessionId = null
+                    val pendingIds = serverRequests.keys.toSet()
+                    serverRequests.clear()
+                    serverClarifyAnswers.clear()
+                    _uiState.update { state ->
+                        state.copy(
+                            clarifyRequest = state.clarifyRequest?.takeUnless { it.clarifyId in pendingIds },
+                            sudoPrompt = state.sudoPrompt?.takeUnless { it.requestId in pendingIds },
+                            secretPrompt = state.secretPrompt?.takeUnless { it.requestId in pendingIds },
+                            messages =
+                                state.messages.map {
+                                    if (it.id in pendingIds) {
+                                        it.copy(
+                                            approvalInfo = null,
+                                        )
+                                    } else {
+                                        it
+                                    }
+                                },
+                        )
+                    }
                     // Fail any in-flight awaited RPCs so callers don't hang
                     // across the disconnect (delegated to HermesWsClient, issue #526).
                     wsClient.rejectAllPending()
@@ -685,7 +710,175 @@ class ChatViewModel(
         }
     }
 
+    private fun handleServerRequest(event: WsEvent.ServerRequest) {
+        val sessionId = event.params["session_id"] as? String
+        if (sessionId.isNullOrBlank()) {
+            wsClient.respondToServerRequest(event.id, error = JsonRpcError(-32602, "session_id is required"))
+            return
+        }
+        if (!isCurrentSession(sessionId)) {
+            wsClient.respondToServerRequest(
+                event.id,
+                error = JsonRpcError(4404, "This chat is not shown on this device"),
+            )
+            return
+        }
+        if (event.method !in setOf("clarify", "approval", "sudo", "secret")) {
+            val windowOwned =
+                event.method in
+                    setOf(
+                        "preview.read",
+                        "preview.act",
+                        "terminal.read",
+                        "window.read",
+                        "tour",
+                    )
+            wsClient.respondToServerRequest(
+                event.id,
+                error = JsonRpcError(if (windowOwned) 4404 else -32601, "Request is not supported on Android"),
+            )
+            return
+        }
+        val replay = serverRequests.put(event.id, event) != null
+        when (event.method) {
+            "clarify" -> {
+                val answers = serverClarifyAnswers.getOrPut(event.id) { mutableMapOf() }
+                (event.params["answers"] as? Map<*, *>)?.forEach { (qid, answer) ->
+                    if (qid is String) answers[qid] = answer as? String
+                }
+                showServerClarify()
+            }
+
+            "approval" -> {
+                if (!replay) {
+                    val command = event.params["command"] as? String
+                    val description = event.params["description"] as? String
+                    val summary =
+                        description?.takeIf { it.isNotBlank() }
+                            ?: command?.takeIf { it.isNotBlank() }
+                            ?: "Unknown command"
+                    val commandContext =
+                        command?.takeIf { it.isNotBlank() && it != summary }?.let { "\n\n$it" }.orEmpty()
+                    val message =
+                        ChatMessage(
+                            id = event.id,
+                            role = MessageRole.SYSTEM,
+                            content = "⚠️ **Approval Required**\n$summary$commandContext",
+                            approvalInfo =
+                                ApprovalInfo(
+                                    command = command,
+                                    description = description,
+                                    patternKeys = null,
+                                ),
+                        )
+                    _uiState.update { it.copy(messages = it.messages + message, isAgentTyping = false) }
+                }
+            }
+
+            "sudo", "secret" -> showServerValuePrompts()
+        }
+    }
+
+    private fun showServerValuePrompts() {
+        val sudo = serverRequests.values.firstOrNull { it.method == "sudo" }
+        val secret = serverRequests.values.firstOrNull { it.method == "secret" }
+        _uiState.update {
+            it.copy(
+                sudoPrompt = sudo?.let { request -> SudoPromptUi(request.id, request.params["session_id"] as? String) },
+                secretPrompt =
+                    secret?.let {
+                            request ->
+                        SecretPromptUi(request.id, request.params["session_id"] as? String)
+                    },
+                isAgentTyping = false,
+            )
+        }
+    }
+
+    private fun showServerClarify() {
+        val request = serverRequests.values.firstOrNull { it.method == "clarify" } ?: return
+        val answers = serverClarifyAnswers.getOrPut(request.id) { mutableMapOf() }
+        val questions = (request.params["questions"] as? List<*>)?.filterIsInstance<Map<*, *>>().orEmpty()
+        val question = questions.firstOrNull { (it["qid"] as? String) !in answers }
+        if (question == null) {
+            finishServerRequest(request.id, mapOf("answers" to answers.toMap()))
+            return
+        }
+        val options = (question["choices"] as? List<*>)?.filterIsInstance<String>().orEmpty()
+        _uiState.update {
+            it.copy(
+                clarifyRequest =
+                    ClarifyUi(
+                        question["question"] as? String ?: "Clarification requested",
+                        options,
+                        request.id,
+                    ),
+                isAgentTyping = false,
+            )
+        }
+    }
+
+    private fun finishServerRequest(
+        id: String,
+        result: Map<String, Any?>,
+    ): Boolean {
+        if (!wsClient.respondToServerRequest(id, result)) {
+            _uiState.update { it.copy(errorMessage = "Connection lost. Reconnect before answering this request.") }
+            return false
+        }
+        clearServerRequest(id)
+        return true
+    }
+
+    private fun clearServerRequest(id: String) {
+        val request = serverRequests.remove(id) ?: return
+        serverClarifyAnswers.remove(id)
+        _uiState.update { state ->
+            state.copy(
+                clarifyRequest = state.clarifyRequest?.takeUnless { it.clarifyId == id },
+                sudoPrompt = state.sudoPrompt?.takeUnless { it.requestId == id },
+                secretPrompt = state.secretPrompt?.takeUnless { it.requestId == id },
+                messages = state.messages.map { if (it.id == id) it.copy(approvalInfo = null) else it },
+            )
+        }
+        if (request.method == "clarify") showServerClarify()
+        if (request.method == "sudo" || request.method == "secret") showServerValuePrompts()
+    }
+
+    private fun reconcileServerRequests(frames: List<Map<*, *>>) {
+        val openIds = frames.mapNotNull { it["id"] as? String }.toSet()
+        val staleIds = serverRequests.keys.filter { it !in openIds }.toSet()
+        staleIds.forEach {
+            serverRequests.remove(it)
+            serverClarifyAnswers.remove(it)
+        }
+        _uiState.update { state ->
+            state.copy(
+                clarifyRequest = state.clarifyRequest?.takeUnless { it.clarifyId in staleIds },
+                sudoPrompt = state.sudoPrompt?.takeUnless { it.requestId in staleIds },
+                secretPrompt = state.secretPrompt?.takeUnless { it.requestId in staleIds },
+                messages = state.messages.map { if (it.id in staleIds) it.copy(approvalInfo = null) else it },
+            )
+        }
+        frames.forEach { frame ->
+            val requestId = frame["id"] as? String ?: return@forEach
+            val requestMethod = frame["method"] as? String ?: return@forEach
+
+            @Suppress("UNCHECKED_CAST")
+            val requestParams = frame["params"] as? Map<String, Any?> ?: return@forEach
+            handleServerRequest(WsEvent.ServerRequest(requestId, requestMethod, requestParams))
+        }
+    }
+
     private fun handleWsEvent(event: WsEvent) {
+        if (event is WsEvent.ServerRequest) {
+            handleServerRequest(event)
+            return
+        }
+        if (event is WsEvent.RequestCancelled) {
+            clearServerRequest(event.id)
+            return
+        }
         // RpcError is reduced before ViewModel request handling. Drop stale
         // session errors here so the shared reducer cannot clear loading or
         // surface an error for a newly selected session.
@@ -1072,6 +1265,11 @@ class ChatViewModel(
                 }
                 // Mirror the active runtime session id app-wide (issue #532).
                 ActiveSessionHolder.set(runtimeSessionId ?: sessionId, sessionId)
+                (
+                    resultMap?.get(
+                        "open_requests",
+                    ) as? List<*>
+                )?.filterIsInstance<Map<*, *>>()?.let(::reconcileServerRequests)
                 addSystemMessage("Session resumed")
                 fetchContextUsage()
                 val generation = request?.generation ?: sessionGeneration
@@ -2135,6 +2333,8 @@ class ChatViewModel(
         resumedGeneration = -1L
         hydratedGeneration = -1L
         runtimeSessionId = null
+        serverRequests.clear()
+        serverClarifyAnswers.clear()
         ActiveSessionHolder.clear()
         loadedMessageOffset = 0
         latestPaging = false
@@ -3228,6 +3428,10 @@ class ChatViewModel(
     fun dismissClarify() {
         val sessionId = _uiState.value.currentSessionId ?: return
         val clarifyId = _uiState.value.clarifyRequest?.clarifyId
+        if (clarifyId != null && serverRequests.containsKey(clarifyId)) {
+            finishServerRequest(clarifyId, emptyMap())
+            return
+        }
         _uiState.update { it.copy(clarifyRequest = null) }
 
         addSystemMessage("Clarify dismissed — no answer sent", persist = true)
@@ -3254,6 +3458,19 @@ class ChatViewModel(
     fun respondToClarify(option: String) {
         val sessionId = _uiState.value.currentSessionId ?: return
         val clarifyId = _uiState.value.clarifyRequest?.clarifyId
+        val serverRequest = serverRequests[clarifyId]
+        if (serverRequest != null) {
+            val answers = serverClarifyAnswers.getOrPut(serverRequest.id) { mutableMapOf() }
+            val questions = (serverRequest.params["questions"] as? List<*>)?.filterIsInstance<Map<*, *>>().orEmpty()
+            val qid = questions.firstOrNull { (it["qid"] as? String) !in answers }?.get("qid") as? String
+            if (qid == null) {
+                finishServerRequest(serverRequest.id, mapOf("answers" to answers.toMap()))
+                return
+            }
+            answers[qid] = option
+            showServerClarify()
+            return
+        }
         _uiState.update { it.copy(clarifyRequest = null) }
 
         val userMessage =
@@ -3329,10 +3546,26 @@ class ChatViewModel(
         }
     }
 
-    fun respondToApproval(action: String) {
+    fun respondToApproval(
+        action: String,
+        requestId: String? = null,
+    ) {
         val state = _uiState.value
-        val approvalMsg = state.messages.lastOrNull { it.approvalInfo != null } ?: return
+        val approvalMsg =
+            if (requestId == null) {
+                state.messages.lastOrNull { it.approvalInfo != null }
+            } else {
+                state.messages.firstOrNull { it.id == requestId && it.approvalInfo != null }
+            } ?: return
         val sessionId = state.currentSessionId ?: return
+        val serverRequest = serverRequests[approvalMsg.id]
+        if (serverRequest != null) {
+            val choices = (serverRequest.params["choices"] as? List<*>)?.filterIsInstance<String>().orEmpty()
+            val choice = if (action == "approve") "once" else action
+            if (choices.isNotEmpty() && choice !in choices) return
+            finishServerRequest(serverRequest.id, mapOf("choice" to choice))
+            return
+        }
 
         // Clear buttons immediately
         _uiState.update { s ->
@@ -3392,10 +3625,20 @@ class ChatViewModel(
     }
 
     fun dismissSudo() {
+        val requestId = _uiState.value.sudoPrompt?.requestId
+        if (requestId != null && serverRequests.containsKey(requestId)) {
+            finishServerRequest(requestId, mapOf("value" to ""))
+            return
+        }
         _uiState.update { it.copy(sudoPrompt = null) }
     }
 
     fun dismissSecret() {
+        val requestId = _uiState.value.secretPrompt?.requestId
+        if (requestId != null && serverRequests.containsKey(requestId)) {
+            finishServerRequest(requestId, mapOf("value" to ""))
+            return
+        }
         _uiState.update { it.copy(secretPrompt = null) }
     }
 
@@ -3407,6 +3650,10 @@ class ChatViewModel(
         val prompt = _uiState.value.sudoPrompt ?: return
         val sessionId = prompt.sessionId ?: _uiState.value.currentSessionId ?: return
         if (password.isBlank()) return
+        if (prompt.requestId != null && serverRequests.containsKey(prompt.requestId)) {
+            finishServerRequest(prompt.requestId, mapOf("value" to password))
+            return
+        }
 
         _uiState.update { it.copy(sudoPrompt = null) }
 
@@ -3432,6 +3679,10 @@ class ChatViewModel(
         val prompt = _uiState.value.secretPrompt ?: return
         val sessionId = prompt.sessionId ?: _uiState.value.currentSessionId ?: return
         if (value.isBlank()) return
+        if (prompt.requestId != null && serverRequests.containsKey(prompt.requestId)) {
+            finishServerRequest(prompt.requestId, mapOf("value" to value))
+            return
+        }
 
         _uiState.update { it.copy(secretPrompt = null) }
 
@@ -3658,6 +3909,7 @@ class ChatViewModel(
 
     override fun onCleared() {
         super.onCleared()
+        wsClient.setServerRequestConsumerAttached(false)
         // PERF-16: Don't disconnect the global HermesWsClient singleton when
         // leaving the Chat screen — it's used by background notification reply.
     }

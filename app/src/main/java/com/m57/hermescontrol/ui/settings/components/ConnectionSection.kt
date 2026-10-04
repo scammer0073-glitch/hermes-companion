@@ -37,7 +37,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
@@ -47,6 +46,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.config.resolveBaseUrl
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.settings.SectionCard
 import com.m57.hermescontrol.ui.settings.SettingsUiState
 import com.m57.hermescontrol.ui.settings.SettingsViewModel
@@ -69,7 +69,7 @@ internal fun ConnectionSection(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Text(
                     text = stringResource(R.string.settings_saved_profiles, state.profiles.size).uppercase(),
@@ -77,7 +77,7 @@ internal fun ConnectionSection(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
@@ -91,12 +91,12 @@ internal fun ConnectionSection(
                             .padding(vertical = 2.dp)
                             .clickable(role = Role.Button) { viewModel.selectProfile(profile.id) },
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                     border =
                         if (isActive) {
-                            BorderStroke(1.dp, Color(0xFF2DD4BF))
+                            BorderStroke(1.dp, NemasysPalette.Accent)
                         } else {
-                            BorderStroke(1.dp, Color(0xFF1E2D44))
+                            BorderStroke(1.dp, NemasysPalette.CardBorder)
                         },
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
@@ -111,12 +111,12 @@ internal fun ConnectionSection(
                                     MaterialTheme.typography.bodyMedium.copy(
                                         fontWeight = if (isActive) FontWeight.Bold else FontWeight.Medium,
                                     ),
-                                color = Color.White,
+                                color = NemasysPalette.TextBright,
                             )
                             Text(
                                 text = profile.resolveBaseUrl(state.baseUrl),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = Color(0xFF8B9AB0),
+                                color = NemasysPalette.Muted,
                             )
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(0.dp)) {
@@ -127,7 +127,7 @@ internal fun ConnectionSection(
                                     imageVector = Icons.Filled.Edit,
                                     contentDescription = stringResource(R.string.settings_action_edit_profile),
                                     modifier = Modifier.size(18.dp),
-                                    tint = Color(0xFF8B9AB0),
+                                    tint = NemasysPalette.Muted,
                                 )
                             }
                             IconButton(
@@ -136,7 +136,7 @@ internal fun ConnectionSection(
                                 Icon(
                                     imageVector = Icons.Filled.Close,
                                     contentDescription = stringResource(R.string.content_desc_delete_profile),
-                                    tint = Color(0xFF8B9AB0),
+                                    tint = NemasysPalette.Muted,
                                     modifier = Modifier.size(18.dp),
                                 )
                             }
@@ -151,8 +151,8 @@ internal fun ConnectionSection(
         OutlinedButton(
             onClick = viewModel::openAddProfile,
             modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF2DD4BF)),
-            border = BorderStroke(1.dp, Color(0xFF2DD4BF).copy(alpha = 0.5f)),
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = NemasysPalette.Accent),
+            border = BorderStroke(1.dp, NemasysPalette.Accent.copy(alpha = 0.5f)),
         ) {
             Icon(
                 imageVector = Icons.Filled.Add,
@@ -201,8 +201,8 @@ internal fun TestResultCard(testResult: String?) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 if (result.isBlank()) {
@@ -214,7 +214,7 @@ internal fun TestResultCard(testResult: String?) {
                             Modifier
                                 .size(6.dp)
                                 .clip(CircleShape)
-                                .background(Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                         )
                         Spacer(Modifier.width(6.dp))
                         Text(
@@ -223,7 +223,7 @@ internal fun TestResultCard(testResult: String?) {
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 0.6.sp,
-                            color = Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                         )
                     }
                 } else {

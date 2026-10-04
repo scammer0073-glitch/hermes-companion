@@ -15,6 +15,9 @@ import com.m57.hermescontrol.data.config.resolvedPort
 import com.m57.hermescontrol.data.model.PinnedModel
 import com.m57.hermescontrol.data.remote.CleartextPolicy
 import com.m57.hermescontrol.data.remote.CookieManager
+import com.m57.hermescontrol.data.remote.NativeAuthSession
+import com.m57.hermescontrol.data.remote.NativeSessionAuth
+import com.m57.hermescontrol.data.remote.OkHttpProvider
 import com.m57.hermescontrol.data.remote.ServerEndpoint
 import com.m57.hermescontrol.data.session.ActiveSessionHolder
 import com.m57.hermescontrol.theme.ThemePreference
@@ -32,6 +35,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.encodeToString
 
 /**
  * Singleton that manages encrypted storage of the Hermes dashboard token
@@ -207,9 +211,25 @@ object AuthManager {
             } ?: throw IllegalStateException("AuthManager initialization timed out after 2 seconds.")
         }
 
+    @Synchronized
     fun setWsAuthParam(param: String) {
+        require(param == "token" || param == "ticket")
+        val profileId = getSelectedProfileId()
+        if (profileId != null && prefsDeferred != null) {
+            requirePrefs().edit().putString("ws_auth_$profileId", param).apply()
+        }
         serverStore.update { it.copy(wsAuthParam = param) }
     }
+
+    private fun profileWsAuthParam(profileId: String?): String? {
+        if (profileId == null || prefsDeferred == null) return null
+        return requirePrefs().getString("ws_auth_$profileId", null)?.takeIf { it == "token" || it == "ticket" }
+    }
+
+    fun getWsAuthParam(): String =
+        profileWsAuthParam(getSelectedProfileId())
+            ?: serverStore.getLatestState().wsAuthParam.takeIf { it == "ticket" || it == "token" }
+            ?: "token"
 
     /**
      * True when the active connection profile authenticated against a gated
@@ -226,7 +246,7 @@ object AuthManager {
      * every REST tab (skills/cron/config/...) while the WS chat (ticket auth)
      * kept working.
      */
-    fun isGatedMode(): Boolean = serverStore.getLatestState().wsAuthParam == "ticket"
+    fun isGatedMode(): Boolean = getWsAuthParam() == "ticket"
 
     // ── Session Cookie (for gated/dashboard REST API) ────────────────────
 
@@ -271,7 +291,18 @@ object AuthManager {
 
     fun getConnectionProfiles(): List<ConnectionProfile> = serverStore.getLatestState().connectionProfiles
 
+    @Synchronized
     fun saveConnectionProfiles(profiles: List<ConnectionProfile>) {
+        val previous = serverStore.getLatestState().connectionProfiles
+        if (profiles != previous) nativeAuthRevision++
+        if (prefsDeferred != null) {
+            val removed = previous.map { it.id }.toSet() - profiles.map { it.id }.toSet()
+            if (removed.isNotEmpty()) {
+                val editor = requirePrefs().edit()
+                removed.forEach { editor.remove("ws_auth_$it").remove("native_auth_$it") }
+                editor.apply()
+            }
+        }
         serverStore.update { it.copy(connectionProfiles = profiles) }
     }
 
@@ -355,11 +386,76 @@ object AuthManager {
 
     fun getProfileToken(profileId: String): String? = requirePrefs().getString("token_$profileId", null)
 
+    @Volatile private var nativeAuthRevision = 0L
+
+    fun getNativeAuthRevision(): Long = nativeAuthRevision
+
+    @Synchronized
+    fun getNativeSession(): NativeAuthSession? {
+        val profileId = getSelectedProfileId() ?: return null
+        val raw = requirePrefs().getString("native_auth_$profileId", null) ?: return null
+        val session = runCatching { OkHttpProvider.json.decodeFromString<NativeAuthSession>(raw) }.getOrNull()
+        return session?.takeIf { it.baseUrl == endpointForBuild().baseUrl.toString() }
+    }
+
+    @Synchronized
+    fun setNativeSession(session: NativeAuthSession?) {
+        val profileId = getSelectedProfileId() ?: return
+        require(session == null || session.baseUrl == endpointForBuild().baseUrl.toString())
+        val editor = requirePrefs().edit()
+        if (session == null) {
+            editor.remove("native_auth_$profileId")
+        } else {
+            editor.putString("native_auth_$profileId", OkHttpProvider.json.encodeToString(session))
+        }
+        editor.apply()
+        nativeAuthRevision++
+    }
+
+    /** Compare-and-set prevents refresh results resurrecting a logged-out or switched session. */
+    @Synchronized
+    fun replaceNativeSession(
+        profileId: String?,
+        previous: NativeAuthSession,
+        replacement: NativeAuthSession?,
+        expectedRevision: Long,
+    ): Boolean {
+        if (nativeAuthRevision != expectedRevision) return false
+        if (profileId != getSelectedProfileId()) return false
+        val current = getNativeSession() ?: return false
+        if (current.accessToken != previous.accessToken || current.refreshToken != previous.refreshToken) return false
+        setNativeSession(replacement)
+        return true
+    }
+
+    @Synchronized
+    fun completeNativeSignIn(
+        profileId: String?,
+        expectedRevision: Long,
+        session: NativeAuthSession,
+    ): Boolean {
+        if (profileId != getSelectedProfileId() || nativeAuthRevision != expectedRevision) return false
+        setBaseUrl(session.baseUrl)
+        setNativeSession(session)
+        setSessionCookie(null)
+        setToken(session.accessToken)
+        setWsAuthParam("ticket")
+        return true
+    }
+
     fun setProfileToken(
         profileId: String,
         token: String?,
     ) {
-        requirePrefs().edit().putString("token_$profileId", token).apply()
+        synchronized(this) {
+            val editor = requirePrefs().edit().putString("token_$profileId", token)
+            if (token == null) {
+                nativeAuthRevision++
+                editor.remove("native_auth_$profileId")
+                NativeSessionAuth.cancelRefresh()
+            }
+            editor.apply()
+        }
         if (getSelectedProfileId() == profileId) {
             if (token == null) ActiveSessionHolder.clear()
             // B7 (Jul 08 2026, kanban t_470): sync in-memory cachedToken
@@ -377,11 +473,14 @@ object AuthManager {
         return if (id.isNullOrBlank()) null else id
     }
 
+    @Synchronized
     fun setSelectedProfileId(id: String?) {
         if (getSelectedProfileId() != id?.takeIf { it.isNotBlank() }) {
+            nativeAuthRevision++
             ActiveSessionHolder.clear()
         }
-        serverStore.update { it.copy(selectedProfileId = id) }
+        val mode = profileWsAuthParam(id)
+        serverStore.update { it.copy(selectedProfileId = id, wsAuthParam = mode ?: it.wsAuthParam) }
         // Keep contextFlow truthful: the base URL resolves per selected
         // profile, so a connection-profile switch must re-emit the NEW
         // server's URL (previously stale — reactive consumers saw the old
@@ -531,6 +630,7 @@ object AuthManager {
 
     fun endpointForBuild(): ServerEndpoint = ServerEndpoint.parseForBuild(getBaseUrl())
 
+    @Synchronized
     fun setBaseUrl(baseUrl: String) {
         val normalized =
             ServerEndpoint
@@ -539,6 +639,7 @@ object AuthManager {
                     CleartextPolicy.ALLOW_WITH_WARNING,
                 ).baseUrl
                 .toString()
+        if (normalized != getBaseUrl()) nativeAuthRevision++
         _baseUrlFlow.value = normalized
         val selectedId =
             getSelectedProfileId() ?: run {
@@ -609,8 +710,7 @@ object AuthManager {
 
     /** Canonical WebSocket URL with an encoded token or short-lived ticket. */
     fun wsUrl(): String {
-        val raw = serverStore.getLatestState().wsAuthParam
-        val authParam = if (raw.isBlank()) "token" else raw
+        val authParam = getWsAuthParam()
         return endpointForBuild().webSocketUrl(
             authParameter = authParam,
             credential = getToken().orEmpty(),

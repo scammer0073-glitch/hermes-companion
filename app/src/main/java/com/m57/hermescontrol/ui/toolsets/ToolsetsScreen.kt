@@ -41,7 +41,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -52,6 +51,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.NavigationController
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.ToolsetDetailKey
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -125,8 +125,8 @@ fun ToolsetsScreen(
                         Card(
                             modifier = Modifier.padding(16.dp),
                             shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
                             Column(
@@ -138,7 +138,7 @@ fun ToolsetsScreen(
                                         Modifier
                                             .size(6.dp)
                                             .clip(CircleShape)
-                                            .background(Color(0xFF2DD4BF)),
+                                            .background(NemasysPalette.Accent),
                                     )
                                     Spacer(Modifier.width(6.dp))
                                     Text(
@@ -147,7 +147,7 @@ fun ToolsetsScreen(
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
                                         letterSpacing = 0.6.sp,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                 }
                                 Spacer(modifier = Modifier.height(8.dp))
@@ -159,7 +159,7 @@ fun ToolsetsScreen(
                                     Icon(
                                         imageVector = Icons.Filled.Refresh,
                                         contentDescription = stringResource(R.string.action_retry),
-                                        tint = Color(0xFF2DD4BF),
+                                        tint = NemasysPalette.Accent,
                                     )
                                 }
                             }
@@ -182,8 +182,12 @@ fun ToolsetsScreen(
                                     Card(
                                         modifier = Modifier.fillMaxWidth(),
                                         shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-                                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
-                                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                        border =
+                                            androidx.compose.foundation.BorderStroke(
+                                                1.dp,
+                                                NemasysPalette.CardBorder,
+                                            ),
+                                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                     ) {
                                         Row(
@@ -195,7 +199,7 @@ fun ToolsetsScreen(
                                                 Modifier
                                                     .size(6.dp)
                                                     .clip(androidx.compose.foundation.shape.CircleShape)
-                                                    .background(Color(0xFF2DD4BF)),
+                                                    .background(NemasysPalette.Accent),
                                             )
                                             Spacer(Modifier.width(8.dp))
                                             Text(
@@ -204,7 +208,7 @@ fun ToolsetsScreen(
                                                 fontSize = 11.sp,
                                                 fontWeight = FontWeight.Bold,
                                                 letterSpacing = 0.6.sp,
-                                                color = Color(0xFFE6EDF3),
+                                                color = NemasysPalette.Muted,
                                             )
                                         }
                                     }
@@ -226,8 +230,8 @@ fun ToolsetsScreen(
                                                 },
                                             ),
                                     shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-                                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
-                                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                 ) {
                                     Row(

@@ -40,7 +40,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -53,7 +52,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.EnvVarField
 import com.m57.hermescontrol.data.model.MessagingPlatform
 import com.m57.hermescontrol.data.model.MessagingPlatformUpdate
-import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.channels.components.PlatformCard
 import com.m57.hermescontrol.ui.channels.components.TelegramOnboardingDialog
 import com.m57.hermescontrol.ui.common.EmptyState
@@ -233,8 +232,8 @@ private fun RestartBanner(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -254,7 +253,11 @@ private fun RestartBanner(
             Button(
                 onClick = onRestart,
                 enabled = !isRestarting,
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = Color(0xFF2DD4BF), contentColor = Color(0xFF001018)),
+                colors =
+                    androidx.compose.material3.ButtonDefaults.buttonColors(
+                        containerColor = NemasysPalette.Accent,
+                        contentColor = NemasysPalette.OnAccent,
+                    ),
             ) {
                 if (isRestarting) {
                     CircularProgressIndicator(
@@ -280,8 +283,8 @@ private fun GatewayOfflineBanner(gatewayCommand: String) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
@@ -303,9 +306,9 @@ private fun GatewayOfflineBanner(gatewayCommand: String) {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Surface(
-                color = Color(0xFF0D0F12),
+                color = NemasysPalette.Card,
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 tonalElevation = 0.dp,
                 shadowElevation = 0.dp,
                 modifier = Modifier.fillMaxWidth(),
@@ -440,8 +443,8 @@ private fun AdminSection(envPath: String) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(
@@ -452,7 +455,7 @@ private fun AdminSection(envPath: String) {
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
@@ -461,7 +464,7 @@ private fun AdminSection(envPath: String) {
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
             Spacer(modifier = Modifier.height(10.dp))
@@ -470,13 +473,13 @@ private fun AdminSection(envPath: String) {
                     imageVector = Icons.Filled.Info,
                     contentDescription = null,
                     modifier = Modifier.size(14.dp),
-                    tint = Color(0xFF8B9AB0),
+                    tint = NemasysPalette.Muted,
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = stringResource(R.string.channels_creds_path_format, envPath),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
         }

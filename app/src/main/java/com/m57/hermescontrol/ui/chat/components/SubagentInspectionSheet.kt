@@ -32,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -41,6 +40,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.SubagentIndicator
 import com.m57.hermescontrol.ui.chat.TodoItem
 
@@ -104,8 +104,8 @@ fun SubagentInspectionSheet(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Row(
@@ -116,7 +116,7 @@ fun SubagentInspectionSheet(
                             Modifier
                                 .size(6.dp)
                                 .clip(androidx.compose.foundation.shape.CircleShape)
-                                .background(Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                         )
                         Spacer(Modifier.width(8.dp))
                         Text(
@@ -125,7 +125,7 @@ fun SubagentInspectionSheet(
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 0.6.sp,
-                            color = Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                         )
                     }
                 }
@@ -206,8 +206,8 @@ private fun TodoInspectionCard(todo: TodoItem) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -247,8 +247,8 @@ private fun InspectionItemCard(indicator: SubagentIndicator) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
@@ -287,17 +287,20 @@ private fun InspectionItemCard(indicator: SubagentIndicator) {
                         Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(16.dp))
-                            .background(Color(0xFF0D0F12))
-                            .border(BorderStroke(1.dp, Color(0xFF1E2D44)), RoundedCornerShape(16.dp))
+                            .background(NemasysPalette.Card)
+                            .border(BorderStroke(1.dp, NemasysPalette.CardBorder), RoundedCornerShape(16.dp))
                             .padding(8.dp),
                     verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
                         androidx.compose.foundation.layout.Box(
                             Modifier
                                 .size(6.dp)
                                 .clip(androidx.compose.foundation.shape.CircleShape)
-                                .background(Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                         )
                         Text(
                             text = stringResource(R.string.subagent_live_transcript).uppercase(),
@@ -305,7 +308,7 @@ private fun InspectionItemCard(indicator: SubagentIndicator) {
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 0.6.sp,
-                            color = Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                         )
                     }
                     indicator.logs.forEach { logLine ->

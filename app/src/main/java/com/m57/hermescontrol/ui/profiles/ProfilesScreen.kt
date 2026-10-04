@@ -53,7 +53,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.res.stringResource
@@ -67,6 +66,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -194,8 +194,8 @@ fun ProfilesScreen(
                             Card(
                                 modifier = Modifier.fillMaxWidth().padding(16.dp),
                                 shape = RoundedCornerShape(16.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
                                 Column(
@@ -207,7 +207,7 @@ fun ProfilesScreen(
                                             Modifier
                                                 .size(6.dp)
                                                 .clip(CircleShape)
-                                                .background(Color(0xFF2DD4BF)),
+                                                .background(NemasysPalette.Accent),
                                         )
                                         Spacer(Modifier.width(6.dp))
                                         Text(
@@ -216,7 +216,7 @@ fun ProfilesScreen(
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Bold,
                                             letterSpacing = 0.6.sp,
-                                            color = Color(0xFF8B9AB0),
+                                            color = NemasysPalette.Muted,
                                         )
                                     }
                                     Spacer(modifier = Modifier.height(8.dp))
@@ -245,7 +245,14 @@ fun ProfilesScreen(
                                         singleLine = true,
                                         placeholder = { Text(stringResource(R.string.bots_picker_search)) },
                                         shape = RoundedCornerShape(16.dp),
-                                        colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(focusedBorderColor = androidx.compose.ui.graphics.Color(0xFF2DD4BF), unfocusedBorderColor = androidx.compose.ui.graphics.Color(0xFF1E2D44), focusedContainerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12), unfocusedContainerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
+                                        colors =
+                                            androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                                                focusedBorderColor = NemasysPalette.Accent,
+                                                unfocusedBorderColor = NemasysPalette.CardBorder,
+                                                focusedContainerColor = NemasysPalette.Card,
+                                                unfocusedContainerColor =
+                                                    NemasysPalette.Card,
+                                            ),
                                     )
                                 }
                                 val visibleProfiles =
@@ -262,8 +269,15 @@ fun ProfilesScreen(
                                         Card(
                                             modifier = Modifier.fillMaxWidth(),
                                             shape = RoundedCornerShape(16.dp),
-                                            colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
-                                            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                                            colors =
+                                                CardDefaults.cardColors(
+                                                    containerColor = NemasysPalette.Card,
+                                                ),
+                                            border =
+                                                BorderStroke(
+                                                    1.dp,
+                                                    NemasysPalette.CardBorder,
+                                                ),
                                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                         ) {
                                             Row(
@@ -272,7 +286,11 @@ fun ProfilesScreen(
                                                 horizontalArrangement = Arrangement.Center,
                                             ) {
                                                 Box(
-                                                    Modifier.size(6.dp).clip(CircleShape).background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                                                    Modifier.size(
+                                                        6.dp,
+                                                    ).clip(
+                                                        CircleShape,
+                                                    ).background(NemasysPalette.Accent),
                                                 )
                                                 Spacer(Modifier.width(8.dp))
                                                 Text(
@@ -281,7 +299,7 @@ fun ProfilesScreen(
                                                     fontSize = 11.sp,
                                                     fontWeight = FontWeight.Bold,
                                                     letterSpacing = 0.6.sp,
-                                                    color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                                                    color = NemasysPalette.Muted,
                                                 )
                                             }
                                         }
@@ -296,9 +314,9 @@ fun ProfilesScreen(
                                             CardDefaults.cardColors(
                                                 containerColor =
                                                     if (isActive) {
-                                                        androidx.compose.ui.graphics.Color(0xFF14302C)
+                                                        NemasysPalette.AccentContainer
                                                     } else {
-                                                        androidx.compose.ui.graphics.Color(0xFF0D0F12)
+                                                        NemasysPalette.Card
                                                     },
                                             ),
                                         border =
@@ -306,9 +324,9 @@ fun ProfilesScreen(
                                                 width = 1.dp,
                                                 color =
                                                     if (isActive) {
-                                                        androidx.compose.ui.graphics.Color(0xFF2DD4BF)
+                                                        NemasysPalette.Accent
                                                     } else {
-                                                        androidx.compose.ui.graphics.Color(0xFF1E2D44)
+                                                        NemasysPalette.CardBorder
                                                     },
                                             ),
                                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
@@ -329,7 +347,7 @@ fun ProfilesScreen(
                                                     Modifier
                                                         .size(6.dp)
                                                         .clip(CircleShape)
-                                                        .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                                                        .background(NemasysPalette.Accent),
                                                 )
                                                 Spacer(Modifier.width(6.dp))
                                                 androidx.compose.material3.Text(
@@ -338,7 +356,7 @@ fun ProfilesScreen(
                                                     fontSize = 11.sp,
                                                     fontWeight = FontWeight.Bold,
                                                     letterSpacing = 0.6.sp,
-                                                    color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                                                    color = NemasysPalette.Muted,
                                                 )
                                             }
                                             Spacer(Modifier.height(10.dp))
@@ -354,7 +372,7 @@ fun ProfilesScreen(
                                                         if (isActive) {
                                                             MaterialTheme.colorScheme.primary
                                                         } else {
-                                                            androidx.compose.ui.graphics.Color(0xFF0D0F12)
+                                                            NemasysPalette.Card
                                                         },
                                                     contentColor =
                                                         if (isActive) {
@@ -977,8 +995,11 @@ fun ProfilesScreen(
                                 Modifier
                                     .fillMaxWidth()
                                     .clip(RoundedCornerShape(16.dp))
-                                    .background(androidx.compose.ui.graphics.Color(0xFF0D0F12))
-                                    .border(BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)), RoundedCornerShape(16.dp))
+                                    .background(NemasysPalette.Card)
+                                    .border(
+                                        BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                        RoundedCornerShape(16.dp),
+                                    )
                                     .padding(12.dp),
                         ) {
                             Text(

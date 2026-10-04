@@ -29,7 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -37,6 +36,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 
 /**
  * Full-screen overlay shown when a session resume has exhausted its bounded
@@ -63,10 +63,10 @@ fun ChatResumeErrorOverlay(
         ) {
             Card(
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = Color(0xFF0D0F12),
+                        containerColor = NemasysPalette.Card,
                     ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
@@ -76,11 +76,11 @@ fun ChatResumeErrorOverlay(
                 ) {
                     // mono 11sp uppercase header with teal dot
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                        Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
                         Spacer(Modifier.width(6.dp))
                         Text(
                             text = stringResource(R.string.chat_resume_error_title).uppercase(),
-                            color = Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.SemiBold,
                             fontFamily = FontFamily.Monospace,
@@ -89,13 +89,13 @@ fun ChatResumeErrorOverlay(
                     }
                     Spacer(modifier = Modifier.height(14.dp))
                     Box(
-                        modifier = Modifier.size(48.dp).clip(CircleShape).background(Color(0xFF2A1212)),
+                        modifier = Modifier.size(48.dp).clip(CircleShape).background(NemasysPalette.ErrorContainer),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Warning,
                             contentDescription = null,
-                            tint = Color(0xFFFF4D4D),
+                            tint = NemasysPalette.Error,
                             modifier = Modifier.size(22.dp),
                         )
                     }
@@ -103,13 +103,17 @@ fun ChatResumeErrorOverlay(
                     Text(
                         text = errorMessage.orEmpty(),
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                         textAlign = TextAlign.Center,
                     )
                     Spacer(modifier = Modifier.height(18.dp))
                     Button(
                         onClick = onRetry,
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2DD4BF), contentColor = Color(0xFF001018)),
+                        colors =
+                            ButtonDefaults.buttonColors(
+                                containerColor = NemasysPalette.Accent,
+                                contentColor = NemasysPalette.OnAccent,
+                            ),
                         shape = RoundedCornerShape(12.dp),
                     ) {
                         Text(stringResource(R.string.action_retry), fontWeight = FontWeight.Bold)

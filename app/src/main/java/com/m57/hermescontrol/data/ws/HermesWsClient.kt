@@ -5,6 +5,7 @@ import androidx.annotation.VisibleForTesting
 import com.m57.hermescontrol.BuildConfig
 import com.m57.hermescontrol.data.local.AuthManager
 import com.m57.hermescontrol.data.remote.DashboardSessionTokenRefresher
+import com.m57.hermescontrol.data.remote.NativeSessionAuth
 import com.m57.hermescontrol.data.remote.NetworkMonitor
 import com.m57.hermescontrol.data.remote.OkHttpProvider
 import com.m57.hermescontrol.data.session.ActiveSessionHolder
@@ -57,6 +58,14 @@ enum class ConnectionStatus {
  * as well as direct callbacks.
  */
 object HermesWsClient {
+    @Volatile
+    private var serverRequestConsumerAttached = false
+    private val serverRequestGenerations = ConcurrentHashMap<String, Int>()
+
+    fun setServerRequestConsumerAttached(attached: Boolean) {
+        serverRequestConsumerAttached = attached
+    }
+
     private const val TAG = "HermesWsClient"
 
     // ── Backoff settings ─────────────────────────────────────────────────
@@ -442,13 +451,15 @@ object HermesWsClient {
     /** POST /api/auth/ws-ticket (cookie-auth'd via the shared CookieJar) and parse the ticket. */
     private fun requestWsTicket(): TicketRequestResult {
         try {
-            val client = OkHttpProvider.probe
-            val request =
-                Request
-                    .Builder()
-                    .url(AuthManager.endpointForBuild().resolve("api/auth/ws-ticket").toString())
-                    .post("{}".toRequestBody())
-                    .build()
+            val nativeSession = NativeSessionAuth.hasSession()
+            val nativeProfileId = AuthManager.getSelectedProfileId()
+            val ticketEndpoint = AuthManager.endpointForBuild()
+            val client =
+                if (nativeSession) {
+                    OkHttpProvider.probe.newBuilder().cookieJar(okhttp3.CookieJar.NO_COOKIES).build()
+                } else {
+                    OkHttpProvider.probe
+                }
 
             // Run the ENTIRE call on Dispatchers.IO — execute() already hops,
             // but ResponseBody.string() reads the socket on the CALLING
@@ -456,9 +467,30 @@ object HermesWsClient {
             // read throws NetworkOnMainThreadException and the mint fails.
             val (code, body) =
                 kotlinx.coroutines.runBlocking(Dispatchers.IO) {
-                    client.newCall(request).execute().use { resp ->
-                        resp.code to resp.body?.string()
+                    var bearer = if (nativeSession) NativeSessionAuth.accessToken() else null
+                    if (nativeSession && bearer == null) return@runBlocking 401 to null
+
+                    fun mint(): Pair<Int, String?> {
+                        if (nativeSession && (
+                                nativeProfileId != AuthManager.getSelectedProfileId() ||
+                                    ticketEndpoint.baseUrl != AuthManager.endpointForBuild().baseUrl
+                            )
+                        ) {
+                            return 401 to null
+                        }
+                        val builder =
+                            Request.Builder()
+                                .url(ticketEndpoint.resolve("api/auth/ws-ticket"))
+                                .post("{}".toRequestBody())
+                        bearer?.let { builder.header("Authorization", "Bearer $it") }
+                        return client.newCall(builder.build()).execute().use { resp -> resp.code to resp.body.string() }
                     }
+                    var result = mint()
+                    if (nativeSession && result.first == 401) {
+                        bearer = NativeSessionAuth.accessToken(true, bearer)
+                        if (bearer != null) result = mint()
+                    }
+                    result
                 }
 
             if (body != null && code in 200..299) {
@@ -635,7 +667,7 @@ object HermesWsClient {
                 params = decoratedParams.mapValues { it.value.toJsonElement() },
             )
         val json = OkHttpProvider.json.encodeToString(request)
-        if (BuildConfig.DEBUG) Log.d(TAG, "→ $json")
+        if (BuildConfig.DEBUG) Log.d(TAG, "Sending RPC $method ($id)")
         var reconnect = false
         synchronized(outboundLock) {
             if (method == WsMethods.PROMPT_SUBMIT) {
@@ -668,6 +700,31 @@ object HermesWsClient {
         }
         if (reconnect) connect()
         return id
+    }
+
+    /** Reply to a server request on this connection; never queue or log credentials. */
+    fun respondToServerRequest(
+        id: String,
+        result: Map<String, Any?> = emptyMap(),
+        error: JsonRpcError? = null,
+    ): Boolean {
+        val frame =
+            JsonRpcResponse(
+                jsonrpc = "2.0",
+                id = id,
+                result = if (error == null) result.toJsonElement() else null,
+                error = error,
+            )
+        val json = OkHttpProvider.json.encodeToString(frame)
+        return synchronized(outboundLock) {
+            val socket = webSocket ?: return@synchronized false
+            if (!connected.get() || serverRequestGenerations[id] != connectionGeneration.get()) {
+                return@synchronized false
+            }
+            if (!socket.send(json)) return@synchronized false
+            serverRequestGenerations.remove(id)
+            true
+        }
     }
 
     private fun isRetryableMessage(json: String): Boolean {
@@ -764,6 +821,7 @@ object HermesWsClient {
         val generation =
             synchronized(outboundLock) {
                 if (intentionalClose.get()) return
+                serverRequestGenerations.clear()
                 connectionGeneration.incrementAndGet()
             }
         if (!refreshWsTicketIfNeeded(generation)) {
@@ -868,7 +926,7 @@ object HermesWsClient {
                         markQueuedMessageSent(msg)
                         continue
                     }
-                    if (BuildConfig.DEBUG) Log.d(TAG, "→ (queued) $msg")
+                    if (BuildConfig.DEBUG) Log.d(TAG, "Sending queued RPC")
                     if (!webSocket.send(msg)) {
                         recoverRejectedSocket(webSocket)
                         break
@@ -885,7 +943,7 @@ object HermesWsClient {
             text: String,
         ) {
             if (!isCurrent() || HermesWsClient.webSocket !== webSocket) return
-            if (BuildConfig.DEBUG) Log.d(TAG, "← $text")
+            if (BuildConfig.DEBUG) Log.d(TAG, "Received WebSocket frame")
             lastPongTimestamp = System.currentTimeMillis()
             // Resolve any in-flight `request()` awaiting this RPC result/error
             // (issue #526) before fanning the parsed event out to collectors.
@@ -901,11 +959,30 @@ object HermesWsClient {
                         parsed
                     }
                 } catch (e: Exception) {
-                    Log.e(TAG, "Failed to parse message", e)
+                    Log.e(TAG, "Failed to parse message: ${e.javaClass.simpleName}")
                     WsEvent.Unknown(text)
                 }
             when (event) {
+                is WsEvent.ServerRequest -> {
+                    serverRequestGenerations[event.id] = generation
+                    if (!serverRequestConsumerAttached) {
+                        respondToServerRequest(
+                            event.id,
+                            error = JsonRpcError(4404, "Open this chat on Android to answer requests"),
+                        )
+                        return
+                    }
+                }
+
+                is WsEvent.GatewayReady -> {
+                    send(WsMethods.CLIENT_CAPABILITIES, mapOf("server_requests" to true))
+                }
+
                 is WsEvent.RpcResult -> {
+                    val result = event.result as? Map<*, *>
+                    (result?.get("open_requests") as? List<*>)?.filterIsInstance<Map<*, *>>()?.forEach { frame ->
+                        (frame["id"] as? String)?.let { serverRequestGenerations[it] = generation }
+                    }
                     synchronized(outboundLock) { pendingPromptSubmits.remove(event.id) }
                     removeQueuedMessage(event.id)
                     resolvePending(event.id, event.result, null)
@@ -923,6 +1000,8 @@ object HermesWsClient {
                     resolvePending(event.id, null, event.error)
                     disconnectIfIdleInBackground()
                 }
+
+                is WsEvent.RequestCancelled -> serverRequestGenerations.remove(event.id)
 
                 else -> Unit
             }
