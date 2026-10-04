@@ -36,7 +36,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -45,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.ModelProvider
 import com.m57.hermescontrol.data.model.PinnedModel
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.LoadingState
 import com.m57.hermescontrol.ui.common.SearchBar
 
@@ -73,7 +73,7 @@ fun ModelPickerDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         shape = RoundedCornerShape(16.dp),
-        containerColor = Color(0xFF0D0F12),
+        containerColor = NemasysPalette.Card,
         tonalElevation = 0.dp,
         title = {
             Row(
@@ -110,8 +110,8 @@ fun ModelPickerDialog(
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        color = Color(0xFF0D0F12),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        color = NemasysPalette.Card,
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         tonalElevation = 0.dp,
                         shadowElevation = 0.dp,
                     ) {
@@ -123,7 +123,7 @@ fun ModelPickerDialog(
                                 Modifier
                                     .size(6.dp)
                                     .clip(CircleShape)
-                                    .background(Color(0xFF2DD4BF)),
+                                    .background(NemasysPalette.Accent),
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
@@ -132,7 +132,7 @@ fun ModelPickerDialog(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFFE6EDF3),
+                                color = NemasysPalette.Text,
                             )
                         }
                     }
@@ -188,8 +188,8 @@ fun ModelPickerDialog(
                                 Surface(
                                     modifier = Modifier.fillMaxWidth(),
                                     shape = RoundedCornerShape(16.dp),
-                                    color = Color(0xFF0D0F12),
-                                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                    color = NemasysPalette.Card,
+                                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                                     tonalElevation = 0.dp,
                                     shadowElevation = 0.dp,
                                 ) {
@@ -201,7 +201,7 @@ fun ModelPickerDialog(
                                             Modifier
                                                 .size(6.dp)
                                                 .clip(CircleShape)
-                                                .background(Color(0xFF2DD4BF)),
+                                                .background(NemasysPalette.Accent),
                                         )
                                         Spacer(Modifier.width(8.dp))
                                         Text(
@@ -210,7 +210,7 @@ fun ModelPickerDialog(
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Bold,
                                             letterSpacing = 0.6.sp,
-                                            color = Color(0xFF8B9AB0),
+                                            color = NemasysPalette.Muted,
                                         )
                                     }
                                 }
@@ -225,14 +225,14 @@ fun ModelPickerDialog(
                                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                                     modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
                                 ) {
-                                    Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                                    Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
                                     Text(
                                         text = "PINNED",
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.SemiBold,
                                         fontFamily = FontFamily.Monospace,
                                         letterSpacing = 0.8.sp,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                 }
                             }
@@ -262,20 +262,20 @@ fun ModelPickerDialog(
                                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                                     modifier = Modifier.padding(top = 12.dp, bottom = 6.dp),
                                 ) {
-                                    Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                                    Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
                                     Text(
                                         text = provider.name.uppercase(),
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.SemiBold,
                                         fontFamily = FontFamily.Monospace,
                                         letterSpacing = 0.8.sp,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                     Spacer(modifier = Modifier.weight(1f))
                                     Text(
                                         text = "${models.size} models",
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                 }
                             }
@@ -322,11 +322,11 @@ private fun ModelItemCard(
                 .clip(RoundedCornerShape(16.dp))
                 .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
-        color = Color(0xFF0D0F12),
+        color = NemasysPalette.Card,
         border =
             BorderStroke(
                 width = 1.dp,
-                color = Color(0xFF1E2D44),
+                color = NemasysPalette.CardBorder,
             ),
         tonalElevation = 0.dp,
         shadowElevation = 0.dp,
@@ -354,9 +354,9 @@ private fun ModelItemCard(
                         contentDescription = if (isPinned) "Unpin model" else "Pin model",
                         tint =
                             if (isPinned) {
-                                Color(0xFF2DD4BF)
+                                NemasysPalette.Accent
                             } else {
-                                Color(0xFF8B9AB0).copy(alpha = 0.6f)
+                                NemasysPalette.Muted.copy(alpha = 0.6f)
                             },
                         modifier = Modifier.size(16.dp),
                     )

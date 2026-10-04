@@ -20,6 +20,11 @@ object EventParser {
     ): WsEvent {
         // ── RPC response (has id) ────────────────────────────────────────
         val id = response.id
+        if (id != null && response.method != null) {
+            @Suppress("UNCHECKED_CAST")
+            val params = response.params?.toAny() as? Map<String, Any?> ?: emptyMap()
+            return WsEvent.ServerRequest(id, response.method, params)
+        }
         if (id != null) {
             return if (response.error != null) {
                 WsEvent.RpcError(id, response.error)
@@ -40,6 +45,11 @@ object EventParser {
         val sessionId = params["session_id"] as? String ?: payload?.get("session_id") as? String
 
         return when (eventType) {
+            "request.cancel" -> {
+                val requestId = payload?.get("id") as? String ?: return WsEvent.Unknown(rawJson)
+                WsEvent.RequestCancelled(requestId)
+            }
+
             "gateway.ready" -> {
                 WsEvent.GatewayReady(payload)
             }

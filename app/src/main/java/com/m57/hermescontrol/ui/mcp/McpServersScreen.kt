@@ -1,6 +1,7 @@
 package com.m57.hermescontrol.ui.mcp
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -57,7 +57,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -73,6 +72,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.McpCatalogEntry
 import com.m57.hermescontrol.data.model.McpServer
 import com.m57.hermescontrol.theme.LocalSpacing
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.DetailDialog
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
@@ -178,8 +178,8 @@ fun McpServersScreen(
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(16.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {
                                 Column(modifier = Modifier.padding(spacing.md)) {
@@ -188,7 +188,7 @@ fun McpServersScreen(
                                             Modifier
                                                 .size(6.dp)
                                                 .clip(CircleShape)
-                                                .background(Color(0xFF2DD4BF)),
+                                                .background(NemasysPalette.Accent),
                                         )
                                         Spacer(Modifier.width(6.dp))
                                         Text(
@@ -197,14 +197,14 @@ fun McpServersScreen(
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Bold,
                                             letterSpacing = 0.6.sp,
-                                            color = Color(0xFF8B9AB0),
+                                            color = NemasysPalette.Muted,
                                         )
                                     }
                                     Spacer(Modifier.height(6.dp))
                                     Text(
                                         text = stringResource(R.string.mcp_no_match, query),
                                         style = MaterialTheme.typography.bodySmall,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                 }
                             }
@@ -321,7 +321,7 @@ private fun McpSectionHeader(
             Modifier
                 .fillMaxWidth()
                 .background(
-                    color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    color = NemasysPalette.Card,
                     shape = RoundedCornerShape(12.dp),
                 ).padding(horizontal = spacing.md, vertical = spacing.sm),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -362,8 +362,8 @@ private fun AddServerSection(
                 onClick = { viewModel.toggleAddForm() },
                 colors =
                     ButtonDefaults.textButtonColors(
-                        containerColor = Color(0xFF2DD4BF),
-                        contentColor = Color(0xFF001018),
+                        containerColor = NemasysPalette.Accent,
+                        contentColor = NemasysPalette.OnAccent,
                     ),
             ) {
                 Text(if (state.showAddForm) "Hide" else "New")
@@ -375,8 +375,8 @@ private fun AddServerSection(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
@@ -503,8 +503,8 @@ private fun ServerCard(
     Card(
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
         shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.fillMaxWidth().padding(spacing.md)) {
@@ -596,6 +596,7 @@ private fun ServerCard(
                 }
                 FilledTonalButton(
                     onClick = { viewModel.restartServer(server.name) },
+                    enabled = false,
                     modifier = Modifier.weight(1f),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
                 ) {
@@ -607,6 +608,7 @@ private fun ServerCard(
                     Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.action_delete))
                 }
             }
+            Text("MCP restart is unavailable in this app.", style = MaterialTheme.typography.bodySmall)
 
             // Env vars toggle
             TextButton(
@@ -639,8 +641,8 @@ private fun EnvVarSection(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Row(
@@ -649,16 +651,17 @@ private fun EnvVarSection(
                 horizontalArrangement = Arrangement.spacedBy(spacing.sm),
             ) {
                 Box(
-                    modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                    modifier = Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent),
                 )
                 Text(
                     text = stringResource(R.string.mcp_servers_env_no_vars).uppercase(),
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 11.sp,
-                        letterSpacing = 0.6.sp,
-                    ),
-                    color = Color(0xFF8B9AB0),
+                    style =
+                        MaterialTheme.typography.labelSmall.copy(
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            letterSpacing = 0.6.sp,
+                        ),
+                    color = NemasysPalette.Muted,
                 )
             }
         }
@@ -804,8 +807,8 @@ private fun CatalogSection(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Column(modifier = Modifier.padding(spacing.md)) {
@@ -814,7 +817,7 @@ private fun CatalogSection(
                                     Modifier
                                         .size(6.dp)
                                         .clip(CircleShape)
-                                        .background(Color(0xFF2DD4BF)),
+                                        .background(NemasysPalette.Accent),
                                 )
                                 Spacer(Modifier.width(6.dp))
                                 Text(
@@ -823,7 +826,7 @@ private fun CatalogSection(
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     letterSpacing = 0.6.sp,
-                                    color = Color(0xFF8B9AB0),
+                                    color = NemasysPalette.Muted,
                                 )
                             }
                             Spacer(Modifier.height(6.dp))
@@ -833,7 +836,7 @@ private fun CatalogSection(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFF8B9AB0),
+                                color = NemasysPalette.Muted,
                             )
                         }
                     }
@@ -868,8 +871,8 @@ private fun CatalogEntryCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(spacing.md)) {

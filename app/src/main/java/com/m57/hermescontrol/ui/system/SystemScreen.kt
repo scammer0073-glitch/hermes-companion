@@ -92,6 +92,7 @@ import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.theme.LocalSpacing
 import com.m57.hermescontrol.theme.NemasysCard
 import com.m57.hermescontrol.theme.NemasysCardBorder
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.MediaImageStore
 import com.m57.hermescontrol.ui.common.ActionProgressDialog
 import com.m57.hermescontrol.ui.common.EmptyState
@@ -434,10 +435,10 @@ private fun LazyListScope.hostSection(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                        containerColor = NemasysPalette.Card,
                     ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
@@ -633,10 +634,10 @@ private fun LazyListScope.portalSection(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                        containerColor = NemasysPalette.Card,
                     ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
@@ -831,10 +832,10 @@ private fun LazyListScope.gatewaySection(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                        containerColor = NemasysPalette.Card,
                     ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
@@ -1000,9 +1001,9 @@ private fun LazyListScope.credentialsSection(
             shape = RoundedCornerShape(16.dp),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    containerColor = NemasysPalette.Card,
                 ),
-            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
@@ -1069,8 +1070,8 @@ private fun LazyListScope.credentialsSection(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
@@ -1081,7 +1082,7 @@ private fun LazyListScope.credentialsSection(
                                 Modifier
                                     .size(6.dp)
                                     .clip(CircleShape)
-                                    .background(Color(0xFF2DD4BF)),
+                                    .background(NemasysPalette.Accent),
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
@@ -1090,7 +1091,7 @@ private fun LazyListScope.credentialsSection(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFF8B9AB0),
+                                color = NemasysPalette.Muted,
                             )
                         }
                     }
@@ -1133,10 +1134,10 @@ private fun LazyListScope.operationsSection(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    containerColor = NemasysPalette.Card,
                 ),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
@@ -1545,8 +1546,8 @@ private fun LazyListScope.shellHooksSection(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Row(
@@ -1557,7 +1558,7 @@ private fun LazyListScope.shellHooksSection(
                         Modifier
                             .size(6.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                            .background(NemasysPalette.Accent),
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
@@ -1567,7 +1568,7 @@ private fun LazyListScope.shellHooksSection(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFFE6EDF3),
+                        color = NemasysPalette.Text,
                     )
                 }
             }
@@ -1738,8 +1739,8 @@ private fun LazyListScope.actionLogSection(
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(16.dp),
-                            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
                             Column(modifier = Modifier.padding(spacing.sm)) {
@@ -1748,7 +1749,7 @@ private fun LazyListScope.actionLogSection(
                                         Modifier
                                             .size(6.dp)
                                             .clip(CircleShape)
-                                            .background(Color(0xFF2DD4BF)),
+                                            .background(NemasysPalette.Accent),
                                     )
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Text(
@@ -1757,7 +1758,7 @@ private fun LazyListScope.actionLogSection(
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
                                         letterSpacing = 0.6.sp,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                 }
                                 Spacer(modifier = Modifier.height(8.dp))
@@ -1766,14 +1767,14 @@ private fun LazyListScope.actionLogSection(
                                         text = line,
                                         style = MaterialTheme.typography.bodySmall,
                                         fontFamily = FontFamily.Monospace,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                 }
                                 if (lines.size > 20) {
                                     Text(
                                         text = stringResource(R.string.system_more_lines, lines.size - 20),
                                         style = MaterialTheme.typography.bodySmall,
-                                        color = Color(0xFF8B9AB0),
+                                        color = NemasysPalette.Muted,
                                     )
                                 }
                             }

@@ -46,7 +46,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -59,6 +58,7 @@ import com.m57.hermescontrol.data.model.McpServerConfigInput
 import com.m57.hermescontrol.data.model.ModelProvider
 import com.m57.hermescontrol.theme.NemasysCard
 import com.m57.hermescontrol.theme.NemasysCardBorder
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.profiles.ProfilesUiState
 import com.m57.hermescontrol.ui.profiles.ProfilesViewModel
 
@@ -257,7 +257,7 @@ fun ProfileBuilderView(
                                 provider = selectedProvider.ifBlank { null },
                                 model = selectedModel.ifBlank { null },
                                 mcp_servers = mcpServers.ifEmpty { null },
-                                keep_skills = if (useDefaultSkills) null else false,
+                                no_skills = !useDefaultSkills,
                                 hub_skills = addedHubSkills.ifEmpty { null },
                             )
                         viewModel.createProfile(req, onSuccess = onCancel)
@@ -365,13 +365,16 @@ private fun ModelStep(
         if (selectedProvider.isNotBlank()) {
             val providerObj = providers.find { it.slug == selectedProvider }
             providerObj?.models?.let { models ->
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Box(Modifier.size(4.dp).background(Color(0xFF2DD4BF), CircleShape))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Box(Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape))
                     Text(
                         text = stringResource(R.string.profiles_builder_title_model).uppercase(),
                         style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.6.sp, fontSize = 11.sp),
                         fontFamily = FontFamily.Monospace,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                         fontWeight = FontWeight.Bold,
                     )
                 }
@@ -386,15 +389,19 @@ private fun ModelStep(
                                     .fillMaxWidth()
                                     .clickable { onModelChange(modelName) },
                             shape = RoundedCornerShape(16.dp),
-                            border = BorderStroke(1.dp, if (isSelected) Color(0xFF2DD4BF) else Color(0xFF1E2D44)),
+                            border =
+                                BorderStroke(
+                                    1.dp,
+                                    if (isSelected) NemasysPalette.Accent else NemasysPalette.CardBorder,
+                                ),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             colors =
                                 CardDefaults.cardColors(
                                     containerColor =
                                         if (isSelected) {
-                                            Color(0xFF14302C)
+                                            NemasysPalette.AccentContainer
                                         } else {
-                                            Color(0xFF0D0F12)
+                                            NemasysPalette.Card
                                         },
                                 ),
                         ) {
@@ -409,13 +416,13 @@ private fun ModelStep(
                                 Text(
                                     text = modelName,
                                     style = MaterialTheme.typography.bodyLarge,
-                                    color = Color.White,
+                                    color = NemasysPalette.TextBright,
                                 )
                                 if (isSelected) {
                                     Icon(
                                         imageVector = Icons.Default.Check,
                                         contentDescription = "Selected",
-                                        tint = Color(0xFF2DD4BF),
+                                        tint = NemasysPalette.Accent,
                                     )
                                 }
                             }
@@ -456,20 +463,23 @@ private fun McpStep(
             Card(
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Column(
                     modifier = Modifier.fillMaxWidth().padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Box(Modifier.size(48.dp).clip(CircleShape).background(Color(0xFF111820)), contentAlignment = Alignment.Center) {
-                        Icon(Icons.Default.Delete, null, tint = Color(0xFF2DD4BF), modifier = Modifier.size(24.dp))
+                    Box(
+                        Modifier.size(48.dp).clip(CircleShape).background(NemasysPalette.RaisedSurface),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(Icons.Default.Delete, null, tint = NemasysPalette.Accent, modifier = Modifier.size(24.dp))
                     }
                     Spacer(Modifier.height(12.dp))
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                        Box(Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)))
+                        Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = stringResource(R.string.profiles_builder_mcp_none).uppercase(),
@@ -477,7 +487,7 @@ private fun McpStep(
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 0.6.sp,
-                            color = Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                         )
                     }
                 }
@@ -719,10 +729,11 @@ private fun ReviewStep(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
                     Box(
-                        modifier = Modifier
-                            .size(5.dp)
-                            .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                        modifier =
+                            Modifier
+                                .size(5.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
                     )
                     Text(
                         text = stringResource(R.string.profiles_builder_review_name),
@@ -730,7 +741,7 @@ private fun ReviewStep(
                         fontSize = 11.sp,
                         letterSpacing = 0.8.sp,
                         fontWeight = FontWeight.Medium,
-                        color = Color(0xFF2DD4BF),
+                        color = NemasysPalette.Accent,
                     )
                 }
                 Text(
@@ -757,8 +768,8 @@ private fun ReviewStep(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -798,10 +809,11 @@ private fun ReviewStep(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
                     Box(
-                        modifier = Modifier
-                            .size(5.dp)
-                            .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                        modifier =
+                            Modifier
+                                .size(5.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
                     )
                     Text(
                         text = stringResource(R.string.profiles_builder_review_skills_title).uppercase(),
@@ -809,7 +821,7 @@ private fun ReviewStep(
                         fontSize = 11.sp,
                         letterSpacing = 0.8.sp,
                         fontWeight = FontWeight.Medium,
-                        color = Color(0xFF2DD4BF),
+                        color = NemasysPalette.Accent,
                     )
                 }
                 if (useDefaultSkills) {
@@ -847,10 +859,11 @@ private fun ReviewStep(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
                     Box(
-                        modifier = Modifier
-                            .size(5.dp)
-                            .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                        modifier =
+                            Modifier
+                                .size(5.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
                     )
                     Text(
                         text = stringResource(R.string.profiles_builder_review_mcp_title).uppercase(),
@@ -858,7 +871,7 @@ private fun ReviewStep(
                         fontSize = 11.sp,
                         letterSpacing = 0.8.sp,
                         fontWeight = FontWeight.Medium,
-                        color = Color(0xFF2DD4BF),
+                        color = NemasysPalette.Accent,
                     )
                 }
                 if (mcpServers.isNotEmpty()) {
@@ -874,7 +887,7 @@ private fun ReviewStep(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 11.sp,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                     )
                 }
             }

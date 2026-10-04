@@ -10,6 +10,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.key
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -119,16 +120,20 @@ fun ChatLifecycleEffects(
 
     // Sudo / secret prompt dialogs (issue #524)
     sudoPrompt?.let { prompt ->
-        SudoPromptDialog(
-            onConfirm = viewModel::respondToSudo,
-            onDismiss = viewModel::dismissSudo,
-        )
+        key(prompt.sessionId, prompt.requestId) {
+            SudoPromptDialog(
+                onConfirm = viewModel::respondToSudo,
+                onDismiss = viewModel::dismissSudo,
+            )
+        }
     }
 
     secretPrompt?.let { prompt ->
-        SecretPromptDialog(
-            onConfirm = viewModel::respondToSecret,
-            onDismiss = viewModel::dismissSecret,
-        )
+        key(prompt.sessionId, prompt.requestId) {
+            SecretPromptDialog(
+                onConfirm = viewModel::respondToSecret,
+                onDismiss = viewModel::dismissSecret,
+            )
+        }
     }
 }

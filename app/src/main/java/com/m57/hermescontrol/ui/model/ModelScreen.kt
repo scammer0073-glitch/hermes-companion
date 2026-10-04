@@ -28,7 +28,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.filled.PushPin
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.PushPin
 import androidx.compose.material3.AlertDialog
@@ -54,7 +53,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -65,6 +63,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.NavigationController
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.SettingsConnection
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -322,8 +321,8 @@ private fun ModelSettingsSection(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
@@ -335,7 +334,7 @@ private fun ModelSettingsSection(
                     Modifier
                         .size(6.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF2DD4BF)),
+                        .background(NemasysPalette.Accent),
                 )
                 Text(
                     text = stringResource(R.string.model_settings).uppercase(),
@@ -343,12 +342,12 @@ private fun ModelSettingsSection(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
                 Text(
                     text = stringResource(R.string.model_new_sessions),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
 
@@ -360,7 +359,7 @@ private fun ModelSettingsSection(
                     Icon(
                         Icons.Filled.Star,
                         contentDescription = null,
-                        tint = Color(0xFF8B9AB0),
+                        tint = NemasysPalette.Muted,
                         modifier = Modifier.size(16.dp),
                     )
                 },
@@ -378,7 +377,7 @@ private fun ModelSettingsSection(
                     Icon(
                         Icons.Filled.Build,
                         contentDescription = null,
-                        tint = Color(0xFF8B9AB0),
+                        tint = NemasysPalette.Muted,
                         modifier = Modifier.size(16.dp),
                     )
                 },
@@ -401,7 +400,7 @@ private fun ModelSettingsSection(
                     Icon(
                         Icons.Filled.Psychology,
                         contentDescription = null,
-                        tint = Color(0xFF8B9AB0),
+                        tint = NemasysPalette.Muted,
                         modifier = Modifier.size(16.dp),
                     )
                 },
@@ -440,12 +439,12 @@ private fun SettingsRow(
                     text = label,
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium,
-                    color = Color.White,
+                    color = NemasysPalette.TextBright,
                 )
                 Text(
                     text = value,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF8B9AB0),
+                    color = NemasysPalette.Muted,
                 )
             }
         }
@@ -453,8 +452,12 @@ private fun SettingsRow(
             onClick = onAction,
             enabled = actionEnabled,
             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF2DD4BF)),
-            border = BorderStroke(1.dp, if (actionEnabled) Color(0xFF2DD4BF).copy(alpha = 0.5f) else Color(0xFF1E2D44)),
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = NemasysPalette.Accent),
+            border =
+                BorderStroke(
+                    1.dp,
+                    if (actionEnabled) NemasysPalette.Accent.copy(alpha = 0.5f) else NemasysPalette.CardBorder,
+                ),
         ) {
             Text(actionLabel, style = MaterialTheme.typography.labelSmall)
         }
@@ -578,8 +581,8 @@ private fun PinnedSectionCard(
     Card(
         modifier = Modifier.fillMaxWidth().animateContentSize().padding(bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         onClick = onToggleExpanded,
     ) {
@@ -597,12 +600,12 @@ private fun PinnedSectionCard(
                         Modifier
                             .size(6.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF2DD4BF)),
+                            .background(NemasysPalette.Accent),
                     )
                     Icon(
                         imageVector = Icons.Filled.PushPin,
                         contentDescription = null,
-                        tint = Color(0xFF8B9AB0),
+                        tint = NemasysPalette.Muted,
                         modifier = Modifier.size(16.dp),
                     )
                     Text(
@@ -611,7 +614,7 @@ private fun PinnedSectionCard(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                     )
                 }
 
@@ -634,11 +637,11 @@ private fun PinnedSectionCard(
                             onClick = { onModelClick(pinned.providerSlug, pinned.modelName) },
                             modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                             shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                             border =
                                 BorderStroke(
                                     width = 1.dp,
-                                    color = if (isActive) Color(0xFF2DD4BF) else Color(0xFF1E2D44),
+                                    color = if (isActive) NemasysPalette.Accent else NemasysPalette.CardBorder,
                                 ),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
@@ -718,8 +721,8 @@ private fun ProviderCard(
         modifier = Modifier.fillMaxWidth(),
         onClick = onToggleExpand,
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
@@ -736,7 +739,7 @@ private fun ProviderCard(
                         Modifier
                             .size(6.dp)
                             .clip(CircleShape)
-                            .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                            .background(NemasysPalette.Accent),
                     )
                     Text(
                         text = provider.name.uppercase(),
@@ -744,7 +747,7 @@ private fun ProviderCard(
                         fontWeight = FontWeight.SemiBold,
                         fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                         letterSpacing = 0.8.sp,
-                        color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                     )
                 }
 
@@ -755,14 +758,14 @@ private fun ProviderCard(
                         fontWeight = FontWeight.Bold,
                         fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                         letterSpacing = 0.6.sp,
-                        color = androidx.compose.ui.graphics.Color(0xFF2DD4BF),
+                        color = NemasysPalette.Accent,
                     )
                 }
             }
             Text(
                 text = stringResource(R.string.model_label_slug, provider.slug),
                 style = MaterialTheme.typography.bodySmall,
-                color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                color = NemasysPalette.Muted,
                 modifier = Modifier.padding(top = 2.dp),
             )
 
@@ -788,7 +791,7 @@ private fun ProviderCard(
                             Modifier
                                 .size(6.dp)
                                 .clip(CircleShape)
-                                .background(androidx.compose.ui.graphics.Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                         )
                         Text(
                             text = stringResource(R.string.model_label_available).uppercase(),
@@ -796,7 +799,7 @@ private fun ProviderCard(
                             fontWeight = FontWeight.SemiBold,
                             fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                             letterSpacing = 0.8.sp,
-                            color = androidx.compose.ui.graphics.Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                         )
                     }
 
@@ -812,8 +815,8 @@ private fun ProviderCard(
                         Card(
                             modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                             shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                            border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
                             Row(
@@ -821,7 +824,7 @@ private fun ProviderCard(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Box(
-                                    Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                                    Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent),
                                 )
                                 Spacer(Modifier.width(6.dp))
                                 Text(
@@ -830,7 +833,7 @@ private fun ProviderCard(
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     letterSpacing = 0.6.sp,
-                                    color = Color(0xFF8B9AB0),
+                                    color = NemasysPalette.Muted,
                                 )
                             }
                         }
@@ -843,11 +846,11 @@ private fun ProviderCard(
                                 onClick = { onModelClick(provider.slug, model) },
                                 modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                                 shape = RoundedCornerShape(16.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+                                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                                 border =
                                     BorderStroke(
                                         width = 1.dp,
-                                        color = if (isActive) Color(0xFF2DD4BF) else Color(0xFF1E2D44),
+                                        color = if (isActive) NemasysPalette.Accent else NemasysPalette.CardBorder,
                                     ),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             ) {

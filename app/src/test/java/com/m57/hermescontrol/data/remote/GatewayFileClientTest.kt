@@ -78,8 +78,13 @@ class GatewayFileClientTest {
 
     @Test
     fun `normalizePath expands tilde`() {
-        val home = System.getenv("HOME") ?: "/home/test"
-        assertEquals("$home/foo.png", GatewayFileClient.normalizePath("~/foo.png"))
+        val home = System.getenv("HOME")
+        if (home == null) {
+            // Host paths must not invent a home when the environment does not provide one.
+            assertNull(GatewayFileClient.normalizePath("~/foo.png"))
+        } else {
+            assertEquals("$home/foo.png", GatewayFileClient.normalizePath("~/foo.png"))
+        }
     }
 
     @Test

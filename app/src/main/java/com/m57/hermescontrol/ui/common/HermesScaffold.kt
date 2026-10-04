@@ -35,6 +35,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.theme.NemasysPalette
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -204,10 +205,10 @@ fun HermesScaffold(
                 },
                 colors =
                     TopAppBarDefaults.topAppBarColors(
-                        containerColor = androidx.compose.ui.graphics.Color(0xFF0A0E14),
-                        titleContentColor = androidx.compose.ui.graphics.Color.White,
-                        navigationIconContentColor = androidx.compose.ui.graphics.Color.White,
-                        actionIconContentColor = androidx.compose.ui.graphics.Color(0xFFE6EDF3),
+                        containerColor = NemasysPalette.Background,
+                        titleContentColor = NemasysPalette.TextBright,
+                        navigationIconContentColor = NemasysPalette.TextBright,
+                        actionIconContentColor = NemasysPalette.Text,
                     ),
                 scrollBehavior = scrollBehavior,
             )
