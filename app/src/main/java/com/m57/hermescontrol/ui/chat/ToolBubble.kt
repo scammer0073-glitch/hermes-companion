@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -484,14 +485,49 @@ private fun ExpandedToolContent(
 
             // ── Plain detail body ──
             if (view.detail.isNotBlank() && view.inlineDiff == null) {
-                Text(
-                    text = view.detail,
-                    style =
-                        MaterialTheme.typography.bodySmall.copy(
-                            color = contentColor.copy(alpha = 0.9f),
-                            fontSize = 12.sp,
-                        ),
-                )
+                if (view.detail == "No skills found") {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        color = NemasysPalette.Card,
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        tonalElevation = 0.dp,
+                        shadowElevation = 0.dp,
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(NemasysPalette.Accent),
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                text = "NO SKILLS FOUND",
+                                style =
+                                    MaterialTheme.typography.bodySmall.copy(
+                                        color = NemasysPalette.Muted,
+                                        fontFamily = FontFamily.Monospace,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 11.sp,
+                                        letterSpacing = 0.6.sp,
+                                    ),
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = view.detail,
+                        style =
+                            MaterialTheme.typography.bodySmall.copy(
+                                color = contentColor.copy(alpha = 0.9f),
+                                fontSize = 12.sp,
+                            ),
+                    )
+                }
             }
         }
 
