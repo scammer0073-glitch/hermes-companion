@@ -55,7 +55,8 @@ val AmoledTheme =
                 surfaceContainerLowest = NBlack,
                 surfaceContainerLow = NBlack,
                 surfaceContainer = NCard,
-                surfaceContainerHigh = NCardHover,
+                // Keep the high card tier Nemasys Black instead of gray hover fill.
+                surfaceContainerHigh = NCard,
                 surfaceContainerHighest = NCard,
                 inverseSurface = NText,
                 inverseOnSurface = NBlack,
