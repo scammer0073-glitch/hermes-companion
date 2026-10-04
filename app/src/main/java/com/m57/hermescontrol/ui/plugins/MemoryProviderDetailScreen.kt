@@ -23,7 +23,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.ui.draw.clip
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -38,7 +37,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -52,6 +51,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.MemoryProviderConfigResponse
 import com.m57.hermescontrol.data.model.MemoryProviderField
 import com.m57.hermescontrol.data.model.MemoryProviderSetupResult
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.ExposedDropdownField
@@ -154,9 +154,9 @@ private fun MemoryProviderConfigContent(
                 shape = RoundedCornerShape(16.dp),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = Color(0xFF0D0F12),
+                        containerColor = NemasysPalette.Card,
                     ),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -239,9 +239,9 @@ private fun MemoryProviderConfigContent(
                 shape = RoundedCornerShape(16.dp),
                 colors =
                     CardDefaults.cardColors(
-                        containerColor = Color(0xFF0D0F12),
+                        containerColor = NemasysPalette.Card,
                     ),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -250,7 +250,7 @@ private fun MemoryProviderConfigContent(
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                     ) {
                         Box(
-                            modifier = Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                            modifier = Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent),
                         )
                         Text(
                             text = stringResource(R.string.memory_provider_setup_heading).uppercase(),
@@ -321,8 +321,8 @@ private fun ProviderFieldRow(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -336,7 +336,7 @@ private fun ProviderFieldRow(
                     modifier = Modifier.weight(1f),
                 ) {
                     Box(
-                        Modifier.size(6.dp).clip(CircleShape).background(Color(0xFF2DD4BF)),
+                        Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent),
                     )
                     Spacer(Modifier.width(6.dp))
                     Text(
@@ -345,7 +345,7 @@ private fun ProviderFieldRow(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = Color(0xFF8B9AB0),
+                        color = NemasysPalette.Muted,
                         modifier = Modifier.weight(1f, fill = false),
                     )
                 }

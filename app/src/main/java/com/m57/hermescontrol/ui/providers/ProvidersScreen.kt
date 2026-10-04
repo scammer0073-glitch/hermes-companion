@@ -50,6 +50,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.OAuthProvider
 import com.m57.hermescontrol.data.model.OAuthStartResponse
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -158,8 +159,8 @@ private fun ProviderCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -364,9 +365,9 @@ private fun ExternalFlowContent(provider: OAuthProvider) {
         )
         provider.cliCommand.takeIf { it.isNotBlank() }?.let { cmd ->
             Surface(
-                color = Color(0xFF0D0F12),
+                color = NemasysPalette.Card,
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 shadowElevation = 0.dp,
             ) {
                 Text(

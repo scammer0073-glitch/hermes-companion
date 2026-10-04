@@ -89,6 +89,7 @@ import com.m57.hermescontrol.data.update.UpdateNoticeManager
 import com.m57.hermescontrol.data.ws.ConnectionStatus
 import com.m57.hermescontrol.data.ws.HermesWsClient
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.components.BotPickerSheet
 import com.m57.hermescontrol.ui.chat.components.ChatConnectionBanner
 import com.m57.hermescontrol.ui.chat.components.ChatInputBar
@@ -98,13 +99,13 @@ import com.m57.hermescontrol.ui.chat.components.ChatResumeErrorOverlay
 import com.m57.hermescontrol.ui.chat.components.ChatScrollToBottomFab
 import com.m57.hermescontrol.ui.chat.components.ContextDetailSheet
 import com.m57.hermescontrol.ui.chat.components.ContextUsageChip
+import com.m57.hermescontrol.ui.chat.components.NemasysChatEmpty
 import com.m57.hermescontrol.ui.chat.components.ReactionHeartsOverlay
 import com.m57.hermescontrol.ui.chat.components.ReloginDialog
 import com.m57.hermescontrol.ui.chat.components.SearchBarRow
 import com.m57.hermescontrol.ui.chat.components.SubagentInspectionSheet
 import com.m57.hermescontrol.ui.chat.components.rememberChatScrollController
 import com.m57.hermescontrol.ui.chat.components.tailContentKey
-import com.m57.hermescontrol.ui.chat.components.NemasysChatEmpty
 import com.m57.hermescontrol.ui.chat.fullbleed.FullBleedChatList
 import com.m57.hermescontrol.ui.common.ActionProgressDialog
 import com.m57.hermescontrol.ui.common.AutoScrollingTitleText
@@ -458,9 +459,9 @@ fun ChatScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Surface(
                         shape = RoundedCornerShape(16.dp),
-                        color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                        color = NemasysPalette.Card,
                         contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         tonalElevation = 0.dp,
                         shadowElevation = 0.dp,
                     ) {
@@ -476,9 +477,9 @@ fun ChatScreen(
                 Surface(
                     onClick = { showBotPicker = true },
                     shape = RoundedCornerShape(16.dp),
-                    color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    color = NemasysPalette.Card,
                     contentColor = MaterialTheme.colorScheme.onSurface,
-                    border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                     tonalElevation = 0.dp,
                     shadowElevation = 0.dp,
                 ) {
@@ -596,10 +597,10 @@ fun ChatScreen(
             ) {
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
-                    color = androidx.compose.ui.graphics.Color(0xFF0D0F12),
+                    color = NemasysPalette.Card,
                     tonalElevation = 0.dp,
                     shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1E2D44)),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 ) {
                     Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                         SearchBarRow(
@@ -650,31 +651,34 @@ fun ChatScreen(
                 // Full-bleed chat renderer (issue #866) — the single chat
                 // surface since the bubble renderer was removed.
                 if (state.messages.isEmpty() && !state.isLoading && streamingState.streamingMessage == null) {
-                    NemasysChatEmpty(botName = (activeBotId ?: "Hermes"), onPrompt = { p -> inputFieldValue = androidx.compose.ui.text.input.TextFieldValue(p) })
+                    NemasysChatEmpty(botName = (activeBotId ?: "Hermes"), onPrompt = {
+                            p ->
+                        inputFieldValue = androidx.compose.ui.text.input.TextFieldValue(p)
+                    })
                 } else {
                     FullBleedChatList(
-                    messages = state.messages,
-                    streamingMessage = streamingState.streamingMessage,
-                    searchState = searchState,
-                    typingEffectEnabled = state.typingEffectEnabled,
-                    typingEffectDelayMs = state.typingEffectDelayMs,
-                    maxToolCallsPerTurn = state.maxToolCallsPerTurn,
-                    isLoading = state.isLoading,
-                    isLoadingOlder = state.isLoadingOlder,
-                    isDark = isDark,
-                    listState = listState,
-                    scrollController = scrollController,
-                    lastAnimatedMessageId = lastAnimatedMessageId,
-                    onLastAnimatedMessageIdChange = { lastAnimatedMessageId = it },
-                    viewModel = viewModel,
-                    clarifyRequest = state.clarifyRequest,
-                    onRespondClarify = viewModel::respondToClarify,
-                    onDismissClarify = viewModel::dismissClarify,
-                    onSaveAttachment = onSaveAttachment,
-                    savingAttachmentPath = pendingSavePath ?: state.savingAttachmentPath,
-                    openingAttachmentPath = state.openingAttachmentPath,
-                    onImageClick = { viewingImage = it },
-                )
+                        messages = state.messages,
+                        streamingMessage = streamingState.streamingMessage,
+                        searchState = searchState,
+                        typingEffectEnabled = state.typingEffectEnabled,
+                        typingEffectDelayMs = state.typingEffectDelayMs,
+                        maxToolCallsPerTurn = state.maxToolCallsPerTurn,
+                        isLoading = state.isLoading,
+                        isLoadingOlder = state.isLoadingOlder,
+                        isDark = isDark,
+                        listState = listState,
+                        scrollController = scrollController,
+                        lastAnimatedMessageId = lastAnimatedMessageId,
+                        onLastAnimatedMessageIdChange = { lastAnimatedMessageId = it },
+                        viewModel = viewModel,
+                        clarifyRequest = state.clarifyRequest,
+                        onRespondClarify = viewModel::respondToClarify,
+                        onDismissClarify = viewModel::dismissClarify,
+                        onSaveAttachment = onSaveAttachment,
+                        savingAttachmentPath = pendingSavePath ?: state.savingAttachmentPath,
+                        openingAttachmentPath = state.openingAttachmentPath,
+                        onImageClick = { viewingImage = it },
+                    )
                 }
 
                 // Loading overlay

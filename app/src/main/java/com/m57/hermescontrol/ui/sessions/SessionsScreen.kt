@@ -10,8 +10,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +29,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -103,6 +103,7 @@ import com.m57.hermescontrol.data.model.SessionTreeItem
 import com.m57.hermescontrol.data.model.flattenSessionTree
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.theme.LocalSpacing
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -627,38 +628,40 @@ fun SessionsScreen(
                                         ) {
                                             items(sessionsToDisplay, key = { it.session.id }) { item ->
                                                 val session = item.session
-                                                androidx.compose.foundation.layout.Box(Modifier.animateItem()) { SearchResultCard(
-                                                    session = session,
-                                                    query = state.searchQuery,
-                                                    isSelecting = state.isSelecting,
-                                                    isSelected = session.id in state.selectedIds,
-                                                    isDeleting = session.id in state.deletingSessionIds,
-                                                    highlightBackground = primaryContainer,
-                                                    highlightForeground = onPrimaryContainer,
-                                                    onCardClick = {
-                                                        if (state.isSelecting) {
+                                                androidx.compose.foundation.layout.Box(Modifier.animateItem()) {
+                                                    SearchResultCard(
+                                                        session = session,
+                                                        query = state.searchQuery,
+                                                        isSelecting = state.isSelecting,
+                                                        isSelected = session.id in state.selectedIds,
+                                                        isDeleting = session.id in state.deletingSessionIds,
+                                                        highlightBackground = primaryContainer,
+                                                        highlightForeground = onPrimaryContainer,
+                                                        onCardClick = {
+                                                            if (state.isSelecting) {
+                                                                viewModel.toggleSessionSelection(session.id)
+                                                            } else {
+                                                                NavigationController.openChatSession(session.id)
+                                                            }
+                                                        },
+                                                        onToggleSelection = {
+                                                            viewModel.toggleSessionSelection(
+                                                                session.id,
+                                                            )
+                                                        },
+                                                        onSelect = {
+                                                            viewModel.toggleSelecting()
                                                             viewModel.toggleSessionSelection(session.id)
-                                                        } else {
-                                                            NavigationController.openChatSession(session.id)
-                                                        }
-                                                    },
-                                                    onToggleSelection = {
-                                                        viewModel.toggleSessionSelection(
-                                                            session.id,
-                                                        )
-                                                    },
-                                                    onSelect = {
-                                                        viewModel.toggleSelecting()
-                                                        viewModel.toggleSessionSelection(session.id)
-                                                    },
-                                                    onRename = {
-                                                        viewModel.openRenameDialog(
-                                                            session.id,
-                                                            session.title.orEmpty(),
-                                                        )
-                                                    },
-                                                    onDelete = { viewModel.requestDeleteSession(session.id) },
-                                                ) }
+                                                        },
+                                                        onRename = {
+                                                            viewModel.openRenameDialog(
+                                                                session.id,
+                                                                session.title.orEmpty(),
+                                                            )
+                                                        },
+                                                        onDelete = { viewModel.requestDeleteSession(session.id) },
+                                                    )
+                                                }
                                             }
                                         }
                                     }
@@ -717,8 +720,8 @@ fun SessionsScreen(
                                 Card(
                                     modifier = Modifier.fillMaxHeight(),
                                     shape = RoundedCornerShape(16.dp),
-                                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                     onClick = { viewModel.showPruneDialog() },
                                 ) {
@@ -793,39 +796,41 @@ fun SessionsScreen(
                             ) {
                                 items(sessionsToDisplay, key = { it.session.id }) { item ->
                                     val session = item.session
-                                    androidx.compose.foundation.layout.Box(Modifier.animateItem()) { SessionCard(
-                                        session = session,
-                                        displayTitle = item.displayTitle,
-                                        depth = item.depth,
-                                        branchStem = item.branchStem,
-                                        query = state.searchQuery,
-                                        isSelecting = state.isSelecting,
-                                        isSelected = session.id in state.selectedIds,
-                                        isDeleting = session.id in state.deletingSessionIds,
-                                        isPinned = session.pinned == true,
-                                        highlightBackground = primaryContainer,
-                                        highlightForeground = onPrimaryContainer,
-                                        onCardClick = {
-                                            if (state.isSelecting) {
+                                    androidx.compose.foundation.layout.Box(Modifier.animateItem()) {
+                                        SessionCard(
+                                            session = session,
+                                            displayTitle = item.displayTitle,
+                                            depth = item.depth,
+                                            branchStem = item.branchStem,
+                                            query = state.searchQuery,
+                                            isSelecting = state.isSelecting,
+                                            isSelected = session.id in state.selectedIds,
+                                            isDeleting = session.id in state.deletingSessionIds,
+                                            isPinned = session.pinned == true,
+                                            highlightBackground = primaryContainer,
+                                            highlightForeground = onPrimaryContainer,
+                                            onCardClick = {
+                                                if (state.isSelecting) {
+                                                    viewModel.toggleSessionSelection(session.id)
+                                                } else {
+                                                    NavigationController.openChatSession(session.id)
+                                                }
+                                            },
+                                            onToggleSelection = { viewModel.toggleSessionSelection(session.id) },
+                                            onSelect = {
+                                                viewModel.toggleSelecting()
                                                 viewModel.toggleSessionSelection(session.id)
-                                            } else {
-                                                NavigationController.openChatSession(session.id)
-                                            }
-                                        },
-                                        onToggleSelection = { viewModel.toggleSessionSelection(session.id) },
-                                        onSelect = {
-                                            viewModel.toggleSelecting()
-                                            viewModel.toggleSessionSelection(session.id)
-                                        },
-                                        onRename = {
-                                            viewModel.openRenameDialog(
-                                                session.id,
-                                                item.displayTitle,
-                                            )
-                                        },
-                                        onTogglePin = { viewModel.togglePin(session.id) },
-                                        onDelete = { viewModel.requestDeleteSession(session.id) },
-                                    ) }
+                                            },
+                                            onRename = {
+                                                viewModel.openRenameDialog(
+                                                    session.id,
+                                                    item.displayTitle,
+                                                )
+                                            },
+                                            onTogglePin = { viewModel.togglePin(session.id) },
+                                            onDelete = { viewModel.requestDeleteSession(session.id) },
+                                        )
+                                    }
                                 }
 
                                 // Load more
@@ -880,8 +885,8 @@ fun SessionsScreen(
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    color = Color(0xFF0D0F12),
-                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    color = NemasysPalette.Card,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                     shadowElevation = 0.dp,
                     tonalElevation = 0.dp,
                 ) {
@@ -1002,14 +1007,14 @@ private fun SessionCard(
                     onLongClick = { if (!isSelecting) menuExpanded = true },
                 ),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         border =
             if (isActive && !isSelecting) {
                 BorderStroke(2.dp, statusColors.success)
             } else if (isSelected) {
-                BorderStroke(2.dp, Color(0xFF2DD4BF))
+                BorderStroke(2.dp, NemasysPalette.Accent)
             } else {
-                BorderStroke(1.dp, Color(0xFF1E2D44))
+                BorderStroke(1.dp, NemasysPalette.CardBorder)
             },
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
@@ -1164,13 +1169,13 @@ private fun SearchResultCard(
         shape = RoundedCornerShape(16.dp),
         colors =
             CardDefaults.cardColors(
-                containerColor = Color(0xFF0D0F12),
+                containerColor = NemasysPalette.Card,
             ),
         border =
             if (isSelected) {
-                BorderStroke(2.dp, Color(0xFF2DD4BF))
+                BorderStroke(2.dp, NemasysPalette.Accent)
             } else {
-                BorderStroke(1.dp, Color(0xFF1E2D44))
+                BorderStroke(1.dp, NemasysPalette.CardBorder)
             },
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
@@ -1199,7 +1204,7 @@ private fun SearchResultCard(
                             Modifier
                                 .size(6.dp)
                                 .clip(CircleShape)
-                                .background(Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                         )
                         Text(
                             text = stringResource(R.string.sessions_search_match_label).uppercase(),
@@ -1207,14 +1212,14 @@ private fun SearchResultCard(
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 0.6.sp,
-                            color = Color(0xFF8B9AB0),
+                            color = NemasysPalette.Muted,
                         )
                         val srcIcon = sourceIcon(session.source)
                         if (srcIcon != null && !isSelecting) {
                             Icon(
                                 imageVector = srcIcon,
                                 contentDescription = sourceLabel(session.source),
-                                tint = Color(0xFF8B9AB0),
+                                tint = NemasysPalette.Muted,
                                 modifier = Modifier.size(14.dp),
                             )
                         }
@@ -1223,7 +1228,7 @@ private fun SearchResultCard(
                                 text = "· ${session.id.take(8)}",
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 11.sp,
-                                color = Color(0xFF8B9AB0),
+                                color = NemasysPalette.Muted,
                             )
                         }
                     }

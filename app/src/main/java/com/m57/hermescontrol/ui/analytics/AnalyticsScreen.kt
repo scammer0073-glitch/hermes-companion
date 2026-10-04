@@ -38,7 +38,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -54,6 +53,7 @@ import com.m57.hermescontrol.SkillsScreen
 import com.m57.hermescontrol.data.model.AnalyticsDailyEntry
 import com.m57.hermescontrol.data.model.ModelsAnalyticsModelEntry
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.common.EmptyState
 import com.m57.hermescontrol.ui.common.ErrorState
 import com.m57.hermescontrol.ui.common.HermesScaffold
@@ -152,8 +152,8 @@ private fun AnalyticsContent(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                    border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Box(
@@ -233,8 +233,8 @@ private fun AnalyticsContent(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
@@ -245,7 +245,7 @@ private fun AnalyticsContent(
                                 Modifier
                                     .size(6.dp)
                                     .clip(CircleShape)
-                                    .background(Color(0xFF2DD4BF)),
+                                    .background(NemasysPalette.Accent),
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
@@ -254,7 +254,7 @@ private fun AnalyticsContent(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFFE6EDF3),
+                                color = NemasysPalette.Text,
                             )
                         }
                     }
@@ -277,8 +277,8 @@ private fun AnalyticsContent(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
@@ -289,7 +289,7 @@ private fun AnalyticsContent(
                                 Modifier
                                     .size(6.dp)
                                     .clip(CircleShape)
-                                    .background(Color(0xFF2DD4BF)),
+                                    .background(NemasysPalette.Accent),
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
@@ -298,7 +298,7 @@ private fun AnalyticsContent(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFFE6EDF3),
+                                color = NemasysPalette.Text,
                             )
                         }
                     }
@@ -316,8 +316,8 @@ private fun AnalyticsContent(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
@@ -328,7 +328,7 @@ private fun AnalyticsContent(
                                 Modifier
                                     .size(6.dp)
                                     .clip(CircleShape)
-                                    .background(Color(0xFF2DD4BF)),
+                                    .background(NemasysPalette.Accent),
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
@@ -337,7 +337,7 @@ private fun AnalyticsContent(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.6.sp,
-                                color = Color(0xFFE6EDF3),
+                                color = NemasysPalette.Muted,
                             )
                         }
                     }
@@ -377,7 +377,7 @@ private fun SectionTitle(text: String) {
             Modifier
                 .size(6.dp)
                 .clip(CircleShape)
-                .background(Color(0xFF2DD4BF)),
+                .background(NemasysPalette.Accent),
         )
         Spacer(Modifier.width(6.dp))
         Text(
@@ -386,7 +386,7 @@ private fun SectionTitle(text: String) {
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             letterSpacing = 0.6.sp,
-            color = Color(0xFF8B9AB0),
+            color = NemasysPalette.Muted,
         )
     }
 }
@@ -396,9 +396,9 @@ private fun TotalsCard(totals: com.m57.hermescontrol.data.model.AnalyticsTotals)
     val status = LocalHermesStatusColors.current
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = androidx.compose.ui.graphics.Color(0xFF0D0F12)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -468,8 +468,8 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
@@ -483,15 +483,16 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                             Modifier
                                 .size(6.dp)
                                 .clip(CircleShape)
-                                .background(Color(0xFF2DD4BF)),
+                                .background(NemasysPalette.Accent),
                     )
                     Text(
                         text = stringResource(R.string.analytics_no_cost_data).uppercase(),
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            fontFamily = FontFamily.Monospace,
-                            letterSpacing = 0.6.sp,
-                        ),
-                        color = Color(0xFFE6EDF3),
+                        style =
+                            MaterialTheme.typography.labelSmall.copy(
+                                fontFamily = FontFamily.Monospace,
+                                letterSpacing = 0.6.sp,
+                            ),
+                        color = NemasysPalette.Text,
                     )
                 }
             } else {
@@ -523,58 +524,26 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                     }
                 }
                 Spacer(modifier = Modifier.height(6.dp))
-                if (entries.isEmpty()) {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-                        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(12.dp),
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Box(
-                                Modifier
-                                    .size(6.dp)
-                                    .clip(CircleShape)
-                                    .background(Color(0xFF2DD4BF)),
-                            )
-                            Spacer(Modifier.width(6.dp))
-                            Text(
-                                text = "NO DATA",
-                                fontFamily = FontFamily.Monospace,
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                letterSpacing = 0.6.sp,
-                                color = Color(0xFFE6EDF3),
-                            )
-                        }
-                    }
-                } else {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                    ) {
-                        Text(
-                            text = entries.first().day,
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 0.6.sp,
-                            color = Color(0xFF8B9AB0),
-                        )
-                        Text(
-                            text = entries.last().day,
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 0.6.sp,
-                            color = Color(0xFF8B9AB0),
-                        )
-                    }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text = entries.firstOrNull()?.day ?: "NO DATA",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Muted,
+                    )
+                    Text(
+                        text = entries.lastOrNull()?.day ?: "NO DATA",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Muted,
+                    )
                 }
             }
         }
@@ -587,8 +556,8 @@ private fun ModelRow(model: ModelsAnalyticsModelEntry) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
@@ -641,8 +610,8 @@ private fun ModelEntryRow(entry: com.m57.hermescontrol.data.model.AnalyticsModel
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -689,8 +658,8 @@ private fun SkillRow(skill: com.m57.hermescontrol.data.model.AnalyticsSkillEntry
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
@@ -729,8 +698,8 @@ private fun ToolRow(tool: com.m57.hermescontrol.data.model.AnalyticsToolUsage) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(

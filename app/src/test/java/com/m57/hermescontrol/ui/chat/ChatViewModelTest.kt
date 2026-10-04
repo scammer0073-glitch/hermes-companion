@@ -125,6 +125,8 @@ class ChatViewModelTest {
         mockkObject(AuthManager)
         every { AuthManager.getPinnedModels() } returns emptyList()
         mockkObject(HermesWsClient)
+        every { HermesWsClient.setServerRequestConsumerAttached(any()) } returns Unit
+        every { HermesWsClient.respondToServerRequest(any(), any(), any()) } returns true
         // Catch-all for unstubbed request() calls: the real implementation
         // registers a pending call and launches a 120s timeout job on the
         // singleton's real-IO wsScope. The timer outlives the test class,
@@ -251,6 +253,208 @@ class ChatViewModelTest {
     }
 
     // ── Slash command tests ──────────────────────────────────────────────────
+    @Test
+    fun serverSudoPromptRespondsWithOriginalIdAndValue() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            mockEventsFlow.emit(WsEvent.ServerRequest("srq-sudo", "sudo", mapOf("session_id" to sessionId)))
+            advanceUntilIdle()
+            assertEquals("srq-sudo", viewModel.uiState.value.sudoPrompt?.requestId)
+            viewModel.respondToSudo("test-password")
+            advanceUntilIdle()
+            verify { HermesWsClient.respondToServerRequest("srq-sudo", mapOf("value" to "test-password"), null) }
+            assertNull(viewModel.uiState.value.sudoPrompt)
+        }
+
+    @Test
+    fun dismissingServerSecretSendsAnEmptyValue() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            mockEventsFlow.emit(
+                WsEvent.ServerRequest(
+                    "srq-secret",
+                    "secret",
+                    mapOf("session_id" to sessionId, "env_var" to "API_KEY", "prompt" to "Enter key"),
+                ),
+            )
+            advanceUntilIdle()
+            viewModel.dismissSecret()
+            advanceUntilIdle()
+            verify { HermesWsClient.respondToServerRequest("srq-secret", mapOf("value" to ""), null) }
+            assertNull(viewModel.uiState.value.secretPrompt)
+        }
+
+    @Test
+    fun serverClarifyCollectsAnswersForEveryQuestion() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            mockEventsFlow.emit(
+                WsEvent.ServerRequest(
+                    "srq-clarify",
+                    "clarify",
+                    mapOf(
+                        "session_id" to sessionId,
+                        "questions" to
+                            listOf(
+                                mapOf("qid" to "q1", "question" to "First?", "choices" to listOf("A", "B")),
+                                mapOf("qid" to "q2", "question" to "Second?"),
+                            ),
+                    ),
+                ),
+            )
+            advanceUntilIdle()
+            assertEquals("First?", viewModel.uiState.value.clarifyRequest?.text)
+            viewModel.respondToClarify("A")
+            advanceUntilIdle()
+            assertEquals("Second?", viewModel.uiState.value.clarifyRequest?.text)
+            viewModel.respondToClarify("B")
+            advanceUntilIdle()
+            verify {
+                HermesWsClient.respondToServerRequest(
+                    "srq-clarify",
+                    mapOf("answers" to mapOf("q1" to "A", "q2" to "B")),
+                    null,
+                )
+            }
+            assertNull(viewModel.uiState.value.clarifyRequest)
+        }
+
+    @Test
+    fun serverRequestCancellationClearsOnlyTheMatchingPrompt() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            mockEventsFlow.emit(WsEvent.ServerRequest("srq-sudo", "sudo", mapOf("session_id" to sessionId)))
+            mockEventsFlow.emit(WsEvent.ServerRequest("srq-secret", "secret", mapOf("session_id" to sessionId)))
+            mockEventsFlow.emit(WsEvent.RequestCancelled("srq-sudo"))
+            advanceUntilIdle()
+            assertNull(viewModel.uiState.value.sudoPrompt)
+            assertEquals("srq-secret", viewModel.uiState.value.secretPrompt?.requestId)
+        }
+
+    @Test
+    fun failedServerResponseRetainsThePromptForReconnect() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            every { HermesWsClient.respondToServerRequest(any(), any(), any()) } returns false
+            mockEventsFlow.emit(WsEvent.ServerRequest("srq-sudo", "sudo", mapOf("session_id" to sessionId)))
+            advanceUntilIdle()
+            viewModel.respondToSudo("test-password")
+            advanceUntilIdle()
+            assertNotNull(viewModel.uiState.value.sudoPrompt)
+            assertNotNull(viewModel.uiState.value.errorMessage)
+        }
+
+    @Test
+    fun serverApprovalUsesOfferedChoiceAndOriginalId() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            mockEventsFlow.emit(
+                WsEvent.ServerRequest(
+                    "srq-approval",
+                    "approval",
+                    mapOf("session_id" to sessionId, "command" to "rm temp", "choices" to listOf("once", "deny")),
+                ),
+            )
+            advanceUntilIdle()
+            viewModel.respondToApproval("approve")
+            advanceUntilIdle()
+            verify { HermesWsClient.respondToServerRequest("srq-approval", mapOf("choice" to "once"), null) }
+            assertNull(viewModel.uiState.value.messages.last().approvalInfo)
+        }
+
+    @Test
+    fun unsupportedServerRequestGetsAnErrorInsteadOfWaiting() =
+        runTest(testDispatcher) {
+            val (_, sessionId) = createViewModelWithSession()
+            mockEventsFlow.emit(
+                WsEvent.ServerRequest("srq-preview", "unsupported.future.request", mapOf("session_id" to sessionId)),
+            )
+            advanceUntilIdle()
+            verify { HermesWsClient.respondToServerRequest("srq-preview", any(), match { it?.code == -32601 }) }
+        }
+
+    @Test
+    fun desktopWindowRequestsAreDeclinedWithoutConsumingDesktopResponse() =
+        runTest(testDispatcher) {
+            val (_, sessionId) = createViewModelWithSession()
+            mockEventsFlow.emit(WsEvent.ServerRequest("srq-preview", "preview.read", mapOf("session_id" to sessionId)))
+            advanceUntilIdle()
+            verify { HermesWsClient.respondToServerRequest("srq-preview", any(), match { it?.code == 4404 }) }
+        }
+
+    @Test
+    fun serverApprovalsRespondToTheTappedCardRatherThanTheNewestCard() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            for (id in listOf("srq-first", "srq-second")) {
+                mockEventsFlow.emit(
+                    WsEvent.ServerRequest(
+                        id,
+                        "approval",
+                        mapOf(
+                            "session_id" to sessionId,
+                            "command" to id,
+                            "description" to "",
+                            "choices" to listOf("once", "deny"),
+                        ),
+                    ),
+                )
+            }
+            advanceUntilIdle()
+            assertTrue(viewModel.uiState.value.messages.first { it.id == "srq-first" }.content.contains("srq-first"))
+            viewModel.respondToApproval("approve", requestId = "srq-first")
+            advanceUntilIdle()
+            verify { HermesWsClient.respondToServerRequest("srq-first", mapOf("choice" to "once"), null) }
+            verify(exactly = 0) { HermesWsClient.respondToServerRequest("srq-second", any(), any()) }
+            assertNull(viewModel.uiState.value.messages.first { it.id == "srq-first" }.approvalInfo)
+            assertNotNull(viewModel.uiState.value.messages.first { it.id == "srq-second" }.approvalInfo)
+        }
+
+    @Test
+    fun reconnectClearsStalePromptsAndReplaysAuthoritativeOpenRequests() =
+        runTest(testDispatcher) {
+            val (viewModel, sessionId) = createViewModelWithSession()
+            // A created session is persisted only after its first prompt starts.
+            mockEventsFlow.emit(WsEvent.MessageStart(sessionId))
+            mockEventsFlow.emit(WsEvent.ServerRequest("srq-old", "sudo", mapOf("session_id" to sessionId)))
+            advanceUntilIdle()
+            assertNotNull(viewModel.uiState.value.sudoPrompt)
+            mockConnectionStatus.value = ConnectionStatus.RECONNECTING
+            advanceUntilIdle()
+            assertNull(viewModel.uiState.value.sudoPrompt)
+            var resumeId = ""
+            every { HermesWsClient.send(WsMethods.SESSION_RESUME, any(), any()) } answers {
+                resumeId = "resume-protocol"
+                arg<((String) -> Unit)?>(2)?.invoke(resumeId)
+                resumeId
+            }
+            mockConnectionStatus.value = ConnectionStatus.CONNECTED
+            mockEventsFlow.emit(WsEvent.GatewayReady(null))
+            advanceUntilIdle()
+            assertEquals("resume-protocol", resumeId)
+            mockEventsFlow.emit(
+                WsEvent.RpcResult(
+                    resumeId,
+                    mapOf(
+                        "session_id" to sessionId,
+                        "open_requests" to
+                            listOf(
+                                mapOf(
+                                    "id" to "srq-new",
+                                    "method" to "sudo",
+                                    "params" to mapOf("session_id" to sessionId),
+                                ),
+                            ),
+                    ),
+                ),
+            )
+            advanceUntilIdle()
+            assertEquals("srq-new", viewModel.uiState.value.sudoPrompt?.requestId)
+            viewModel.respondToSudo("test-password")
+            advanceUntilIdle()
+            verify { HermesWsClient.respondToServerRequest("srq-new", mapOf("value" to "test-password"), null) }
+            verify(exactly = 0) { HermesWsClient.respondToServerRequest("srq-old", any(), any()) }
+        }
 
     @Test
     fun testSlashCommand_help_addsHelpMessage() =

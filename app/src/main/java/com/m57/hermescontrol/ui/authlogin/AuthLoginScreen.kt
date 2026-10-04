@@ -319,7 +319,7 @@ fun AuthLoginScreen(
                 )
             }
 
-            // OAuth "coming soon" notice — shown for OAUTH mode (issue #639)
+            // Native PKCE runs in the system browser, then returns through a loopback callback.
             AnimatedVisibility(
                 visible = state.authMode == DashboardAuthMode.OAUTH,
                 enter = fadeIn(),
@@ -330,7 +330,7 @@ fun AuthLoginScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     Text(
-                        text = stringResource(R.string.auth_login_oauth_coming_soon),
+                        text = "Continue in your browser, then return here. Sign-in expires after 10 minutes.",
                         style =
                             MaterialTheme.typography.bodyMedium.copy(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -370,7 +370,7 @@ fun AuthLoginScreen(
                 },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 shape = RoundedCornerShape(18.dp),
-                enabled = !state.isLoading && !state.probing && state.authMode != DashboardAuthMode.OAUTH,
+                enabled = !state.isLoading && !state.probing,
             ) {
                 if (state.isLoading) {
                     CircularProgressIndicator(
@@ -383,11 +383,16 @@ fun AuthLoginScreen(
                         text =
                             if (state.authMode == null) {
                                 stringResource(R.string.auth_login_action_probing)
+                            } else if (state.authMode == DashboardAuthMode.OAUTH) {
+                                "Sign in with browser"
                             } else {
                                 stringResource(R.string.auth_login_action_connect)
                             },
                     )
                 }
+            }
+            if (state.isLoading && state.authMode == DashboardAuthMode.OAUTH) {
+                androidx.compose.material3.TextButton(onClick = viewModel::cancelConnect) { Text("Cancel sign-in") }
             }
         }
     }

@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.ListAlt
@@ -43,6 +43,7 @@ import com.m57.hermescontrol.SettingsBehavior
 import com.m57.hermescontrol.SettingsChat
 import com.m57.hermescontrol.SettingsConnection
 import com.m57.hermescontrol.SettingsLanguage
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.theme.ThemePreference
 import com.m57.hermescontrol.ui.common.HermesScaffold
 import com.m57.hermescontrol.ui.common.NavIcon
@@ -151,8 +152,8 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column {
@@ -167,14 +168,14 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                         Icon(
                             imageVector = row.icon,
                             contentDescription = null,
-                            tint = Color(0xFF8B9AB0),
+                            tint = NemasysPalette.Muted,
                         )
                     },
                     headlineContent = {
                         Text(
                             text = row.label,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = Color(0xFFE6EDF3),
+                            color = NemasysPalette.Text,
                         )
                     },
                     supportingContent =
@@ -183,7 +184,7 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                                 Text(
                                     text = summary,
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = Color(0xFF8B9AB0),
+                                    color = NemasysPalette.Muted,
                                 )
                             }
                         },
@@ -191,14 +192,14 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                             contentDescription = null,
-                            tint = Color(0xFF8B9AB0),
+                            tint = NemasysPalette.Muted,
                         )
                     },
                 )
                 if (index < items.lastIndex) {
                     HorizontalDivider(
                         modifier = Modifier.padding(start = 56.dp, end = 16.dp),
-                        color = Color(0xFF1E2D44),
+                        color = NemasysPalette.CardBorder,
                     )
                 }
             }
@@ -229,8 +230,8 @@ internal fun SectionCard(content: @Composable () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
