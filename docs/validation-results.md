@@ -1,6 +1,21 @@
 # Validation results
 
-Reviewed 2026-10-03. Android build/test results are pending the final coordinated run.
+Updated 2026-10-04.
+
+## Android validation
+
+[PR #13](https://github.com/scammer0073-glitch/hermes-companion/pull/13) was merged after all checks passed on commit `5dc954ac1a6064692e12820a0c3aa7806a7aa6c0`:
+ktlint/color guard, Android Lint, unit/integration tests, instrumented tests, debug APK, release Kotlin compilation and CodeQL.
+Evidence: [Android CI run](https://github.com/scammer0073-glitch/hermes-companion/actions/runs/37200273075),
+[CodeQL run](https://github.com/scammer0073-glitch/hermes-companion/actions/runs/37200273082).
+Local Windows `ktlintCheck` and `checkColorLiterals` also passed after resolving the MCP text-color merge conflict.
+
+Dependency refreshes require compileSdk 37 for OkHttp 5.5 and CodeQL 2.27.1 for Kotlin 2.4.20.
+The changes preserve minSdk 26 and targetSdk 36. Each dependency PR is checked before merge;
+[PR #5](https://github.com/scammer0073-glitch/hermes-companion/pull/5) also combines the updates to verify their integration.
+
+These automated checks do not establish live Android-to-Portal sign-in or a hosted desktop service.
+See [upstream contributions](upstream-contributions.md) for submitted work and unverified gates.
 
 ## Live self-hosted transport smoke
 
