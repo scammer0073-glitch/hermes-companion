@@ -42,7 +42,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -130,15 +129,15 @@ fun BotPickerSheet(
                 shape = RoundedCornerShape(16.dp),
                 colors =
                     OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = Color(0xFF0D0F12),
-                        unfocusedContainerColor = Color(0xFF0D0F12),
-                        focusedBorderColor = Color(0xFF2DD4BF),
-                        unfocusedBorderColor = Color(0xFF1E2D44),
-                        cursorColor = Color(0xFF2DD4BF),
-                        focusedLeadingIconColor = Color(0xFF2DD4BF),
-                        unfocusedLeadingIconColor = Color(0xFF8B9AB0),
-                        focusedPlaceholderColor = Color(0xFF8B9AB0),
-                        unfocusedPlaceholderColor = Color(0xFF8B9AB0),
+                        focusedContainerColor = NemasysPalette.Card,
+                        unfocusedContainerColor = NemasysPalette.Card,
+                        focusedBorderColor = NemasysPalette.Accent,
+                        unfocusedBorderColor = NemasysPalette.CardBorder,
+                        cursorColor = NemasysPalette.Accent,
+                        focusedLeadingIconColor = NemasysPalette.Accent,
+                        unfocusedLeadingIconColor = NemasysPalette.Muted,
+                        focusedPlaceholderColor = NemasysPalette.Muted,
+                        unfocusedPlaceholderColor = NemasysPalette.Muted,
                     ),
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -250,9 +249,7 @@ internal fun BotPickerRow(
         shape = RoundedCornerShape(16.dp),
         color =
             if (isActive) {
-                androidx.compose.ui.graphics.Color(
-                    0xFF14302C,
-                )
+                NemasysPalette.AccentContainer
             } else {
                 NemasysPalette.Card
             },
@@ -261,9 +258,7 @@ internal fun BotPickerRow(
             androidx.compose.foundation.BorderStroke(
                 1.dp,
                 if (isActive) {
-                    androidx.compose.ui.graphics.Color(
-                        0xFF2DD4BF,
-                    )
+                    NemasysPalette.Accent
                 } else {
                     NemasysPalette.CardBorder
                 },

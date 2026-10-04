@@ -766,8 +766,8 @@ private fun CatalogSection(
                 },
                 colors =
                     ButtonDefaults.textButtonColors(
-                        containerColor = Color(0xFF0D0F12),
-                        contentColor = Color(0xFF2DD4BF),
+                        containerColor = NemasysPalette.Card,
+                        contentColor = NemasysPalette.Accent,
                     ),
             ) {
                 Text(if (catalogExpanded.value) "Hide" else "Browse")

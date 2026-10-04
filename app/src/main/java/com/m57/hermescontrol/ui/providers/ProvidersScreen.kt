@@ -365,9 +365,9 @@ private fun ExternalFlowContent(provider: OAuthProvider) {
         )
         provider.cliCommand.takeIf { it.isNotBlank() }?.let { cmd ->
             Surface(
-                color = Color(0xFF0D0F12),
+                color = NemasysPalette.Card,
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(1.dp, Color(0xFF1E2D44)),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 shadowElevation = 0.dp,
             ) {
                 Text(
