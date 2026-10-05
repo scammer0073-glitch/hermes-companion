@@ -55,10 +55,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.core.connect.HermesConnectHelperCard
+import com.m57.hermescontrol.theme.NemasysPalette
 
 @Composable
 fun AuthLoginScreen(
@@ -175,11 +177,23 @@ fun AuthLoginScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             if (state.loggedInProfiles.isNotEmpty()) {
-                Text(
-                    text = stringResource(R.string.auth_login_existing_profiles_title),
-                    style = MaterialTheme.typography.titleSmall,
-                    modifier = Modifier.padding(top = 8.dp),
-                )
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 8.dp)) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = stringResource(R.string.auth_login_existing_profiles_title).uppercase(),
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Text,
+                    )
+                }
                 state.loggedInProfiles.forEach { profile ->
                     androidx.compose.material3.OutlinedButton(
                         onClick = { viewModel.useExistingProfile(profile.id) },
