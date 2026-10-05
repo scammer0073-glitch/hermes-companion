@@ -1,6 +1,6 @@
 # Validation results
 
-Updated 2026-10-04.
+Updated 2026-10-05.
 
 ## Android validation
 
@@ -16,6 +16,19 @@ The changes preserve minSdk 26 and targetSdk 36. Each dependency PR is checked b
 
 These automated checks do not establish live Android-to-Portal sign-in or a hosted desktop service.
 See [upstream contributions](upstream-contributions.md) for submitted work and unverified gates.
+
+## Subsequent merged fixes
+
+[PR #17](https://github.com/scammer0073-glitch/hermes-companion/pull/17) preserves API coroutine cancellation;
+its two new regression cases failed before the fix and passed afterward. All 15 focused network-result tests
+passed locally, and all Android/CodeQL checks passed before merge.
+[PR #18](https://github.com/scammer0073-glitch/hermes-companion/pull/18) validates stable release tags and
+keeps version codes ordered across minor/major upgrades. All six Python mapping tests and the full CI gates passed.
+This validates release metadata; a signed release was not produced.
+
+The subsequent hourly UI changes caused ktlint failures in `ToolBubble.kt` and `PersonalAppsScreen.kt`.
+The update branch repairs those formatting errors with the repository's Gradle formatter, preserving their UI changes.
+Local `ktlintCheck` and `checkColorLiterals` passed. The update PR's CI records verification of the combined result.
 
 ## Live self-hosted transport smoke
 

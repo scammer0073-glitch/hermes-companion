@@ -10,8 +10,8 @@ This complements [README.md](README.md) (for humans) with agent-focused context.
 dashboard's REST API and WebSocket TUI Gateway (JSON-RPC 2.0) over a trusted LAN.
 
 - **Package:** `com.m57.hermescontrol`
-- **Min SDK 26 / Target SDK 36 / Compile SDK 36**
-- **Kotlin 2.4.10**, KSP 2.3.10 (standalone versioning, NOT `kotlinVersion-kspVersion`)
+- **Min SDK 26 / Target SDK 36 / Compile SDK 37**
+- **Kotlin 2.4.20**, KSP 2.3.12 (standalone versioning, NOT `kotlinVersion-kspVersion`)
 - **Jetpack Compose**, Room 2.7.x, Navigation3, OkHttp WebSocket, Retrofit, Kotlinx Serialization
 - **Auth:** `EncryptedSharedPreferences` (AES256-GCM), Bearer token (REST) + `?token=` (WS)
 
