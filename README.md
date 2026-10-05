@@ -176,6 +176,20 @@ app/src/main/java/com/m57/hermescontrol/
 
 ---
 
+## Release versioning
+
+Signed releases use stable tags `vMAJOR.MINOR.PATCH`, without leading zeros or prerelease suffixes.
+Minor and patch components must be between 0 and 999. The release workflow validates the tag
+before reading signing credentials and sets `versionCode = MAJOR * 1000000 + MINOR * 1000 + PATCH`.
+Codes must be positive and at most 2100000000. For example, `v1.99.0` produces 1099000 and
+`v2.0.0` produces 2000000, so a major upgrade keeps the Android version code increasing.
+Maintain semantic version order when publishing; this mapping does not authorize a rollback.
+
+Check the mapping locally with `python -m unittest discover -s scripts/tests -p test_release_version.py`.
+CI runs those tests on pull requests. A signed release still requires the configured keystore secrets.
+
+---
+
 ## Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for our branch workflow, code style guidelines, and PR checklist.
