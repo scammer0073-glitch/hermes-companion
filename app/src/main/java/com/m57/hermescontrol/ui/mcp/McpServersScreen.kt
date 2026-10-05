@@ -322,33 +322,38 @@ private fun McpSectionHeader(
     trailing: (@Composable () -> Unit)? = null,
 ) {
     val spacing = LocalSpacing.current
-    Row(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .background(
-                    color = NemasysPalette.Card,
-                    shape = RoundedCornerShape(12.dp),
-                ).padding(horizontal = spacing.md, vertical = spacing.sm),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        color = NemasysPalette.Card,
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        shadowElevation = 0.dp,
+        tonalElevation = 0.dp,
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier.size(18.dp),
-                tint = MaterialTheme.colorScheme.primary,
-            )
-            Spacer(modifier = Modifier.width(spacing.sm))
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                fontWeight = FontWeight.Bold,
-            )
+        Row(
+            modifier = Modifier.padding(horizontal = spacing.md, vertical = spacing.sm),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(NemasysPalette.Accent),
+                )
+                Spacer(modifier = Modifier.width(spacing.sm))
+                Text(
+                    text = title.uppercase(),
+                    color = NemasysPalette.Text,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                )
+            }
+            trailing?.invoke()
         }
-        trailing?.invoke()
     }
 }
 
