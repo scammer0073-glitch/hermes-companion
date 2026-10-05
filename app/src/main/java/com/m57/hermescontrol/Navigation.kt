@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
@@ -249,8 +250,7 @@ fun MainNavigation(sessionId: String? = null) {
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
                     for (section in DrawerSection.entries) {
-                        Text(
-                            text = stringResource(section.titleRes).uppercase(),
+                        Row(
                             modifier =
                                 Modifier.padding(
                                     start = 16.dp,
@@ -258,10 +258,23 @@ fun MainNavigation(sessionId: String? = null) {
                                     bottom = 4.dp,
                                     end = 16.dp,
                                 ),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            fontWeight = FontWeight.SemiBold,
-                        )
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(6.dp)
+                                    .background(NemasysPalette.Accent, CircleShape),
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                text = stringResource(section.titleRes).uppercase(),
+                                fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.Muted,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
                         ScreenRegistry.ALL_SCREENS
                             .filter { it.drawerSection == section }
                             .forEach { entry ->
