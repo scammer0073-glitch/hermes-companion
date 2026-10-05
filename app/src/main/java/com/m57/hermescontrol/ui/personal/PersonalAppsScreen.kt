@@ -89,7 +89,10 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                                         .size(64.dp)
                                         .clip(RoundedCornerShape(16.dp))
                                         .background(NemasysPalette.Card)
-                                        .border(BorderStroke(1.dp, NemasysPalette.CardBorder), RoundedCornerShape(16.dp)),
+                                        .border(
+                                            BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                            RoundedCornerShape(16.dp),
+                                        ),
                                     contentAlignment = Alignment.Center,
                                 ) {
                                     Icon(
