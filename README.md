@@ -163,11 +163,11 @@ app/src/main/java/com/m57/hermescontrol/
 
 ## Tech Stack
 
-- **Language:** Kotlin 2.4.10 with KSP 2.3.10 compiler plugin
+- **Language:** Kotlin 2.4.20 with KSP 2.3.12 compiler plugin
 - **UI & Layout:** Jetpack Compose (BOM 2026.03.01) & Material 3 / Material You
 - **Navigation:** Navigation3 (Compose-first Routing)
-- **Networking:** Retrofit 3.0.0, OkHttp 5.4.0, Kotlinx Serialization 1.11.0
-- **Database:** Room 2.7.1 with SQLCipher 4.17.0 encryption
+- **Networking:** Retrofit 3.0.0, OkHttp 5.5.0, Kotlinx Serialization 1.11.0
+- **Database:** Room 2.7.1 with SQLCipher 4.19.1 encryption
 - **Security:** `EncryptedSharedPreferences` (AES256-GCM), DataStore
 - **Theming:** 6 built-in presets (Default, Monochrome, Gruvbox, Catppuccin, AMOLED, Neon Noir) + Material You dynamic colors
 - **Image Loading:** Coil 2.7.0

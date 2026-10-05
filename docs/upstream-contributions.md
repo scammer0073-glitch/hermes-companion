@@ -1,6 +1,6 @@
 # Upstream contributions
 
-Submission record, 2026-10-04. The repositories receive separate, focused contributions:
+Submission record updated 2026-10-05. The repositories receive separate, focused contributions:
 
 | Project | Pull request | Change |
 | --- | --- | --- |
@@ -9,13 +9,14 @@ Submission record, 2026-10-04. The repositories receive separate, focused contri
 | Hermes Mobile (`dev`) | [#1472](https://github.com/Hy4ri/hermes-mobile/pull/1472) | Normalize Windows paths in the color guard; reproduced failure and corrected check pass |
 | Hermes Agent (`main`) | [#132744](https://github.com/NousResearch/hermes-agent/pull/132744) | Private Docker Bot Screen pilot and explicit worker/data cleanup boundaries |
 
-GitHub is the source of current review and CI status. Submission does not imply maintainer acceptance.
-The channel and MCP PRs include regression and Retrofit wire tests; local formatting passes.
-Their draft descriptions record incomplete device/live-gateway verification and test status.
+Hermes Mobile PRs #1470, #1471 and #1472 were approved by Hy4ri and merged into `dev` on 2026-10-04 UTC
+(2026-10-05 in India). All their CI checks passed. The channel and MCP PRs include regression and Retrofit
+wire tests. Specific live-gateway/device flows remain unverified; upstream acceptance does not establish those tests.
+GitHub is the source of current review and CI status for later changes.
 The documentation PR is a draft: configuration keys, CLI commands, links and persistence behavior were checked against source,
 but local website dependency installation stalled and no live Linux desktop pilot was run.
 
-## Review findings
+## Review findings from 2026-10-04
 
 Upstream mobile already contains profile cloning and removal of unsupported MCP restart/session prompt routes (#926),
 and server-to-client WebSocket request support (#1125/#1198). These were not resubmitted.
