@@ -53,7 +53,18 @@ fun NemasysChatEmpty(
                 }
                 Spacer(Modifier.width(10.dp))
                 Column {
-                    Text(botName, fontWeight = FontWeight.Bold, color = NemasysPalette.TextBright, fontSize = 13.sp)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Surface(shape = CircleShape, color = NemasysPalette.Accent, modifier = Modifier.size(6.dp)) {}
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            botName.uppercase(),
+                            color = NemasysPalette.TextBright,
+                            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                        )
+                    }
                     Text("Ask anything — tools, memory, cron, all here", color = NemasysPalette.Muted, fontSize = 11.sp)
                 }
             }
