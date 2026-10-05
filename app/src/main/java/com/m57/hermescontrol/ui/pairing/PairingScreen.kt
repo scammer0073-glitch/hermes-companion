@@ -246,11 +246,23 @@ private fun PendingCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = item.platform.uppercase(),
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = item.platform.uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Muted,
+                    )
+                }
                 item.userName?.takeIf { it.isNotBlank() }?.let { name ->
                     Text(
                         text = name,
