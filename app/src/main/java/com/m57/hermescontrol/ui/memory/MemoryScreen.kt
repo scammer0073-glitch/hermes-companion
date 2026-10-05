@@ -272,13 +272,26 @@ private fun MemoryContent(
         // Providers
         if (memory.providers.isNotEmpty()) {
             item {
-                Text(
-                    text = stringResource(R.string.memory_providers_heading).uppercase(),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                Row(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                )
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Text(
+                        text = stringResource(R.string.memory_providers_heading).uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Muted,
+                    )
+                }
             }
             items(memory.providers, key = { it.name }) { provider ->
                 MemoryProviderRow(
