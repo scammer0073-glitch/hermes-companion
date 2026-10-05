@@ -65,6 +65,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -203,9 +204,13 @@ fun McpServersScreen(
                                     }
                                     Spacer(Modifier.height(6.dp))
                                     Text(
-                                        text = stringResource(R.string.mcp_no_match, query),
-                                        style = MaterialTheme.typography.bodySmall,
+                                        text = stringResource(R.string.mcp_no_match, query).uppercase(),
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
                                         color = NemasysPalette.Muted,
+                                        textAlign = TextAlign.Center,
                                     )
                                 }
                             }
