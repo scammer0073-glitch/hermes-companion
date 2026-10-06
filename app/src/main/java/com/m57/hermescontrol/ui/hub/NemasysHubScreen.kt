@@ -178,7 +178,7 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
         } else if (featured) {
             NemasysPalette.SelectedSurface
         } else {
-            NemasysPalette.RaisedSurface
+            NemasysPalette.Card
         }
     val cardBorder = if (featured && !nemasysBlack) NemasysPalette.Accent else NemasysPalette.CardBorder
     Card(
