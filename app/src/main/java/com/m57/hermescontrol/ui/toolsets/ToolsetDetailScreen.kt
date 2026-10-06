@@ -713,8 +713,11 @@ private fun PostSetupRunner(
             val lines = activeState?.lines.orEmpty()
             if (activeState?.running == true || lines.isNotEmpty()) {
                 Surface(
-                    shape = MaterialTheme.shapes.small,
+                    shape = RoundedCornerShape(16.dp),
                     color = NemasysPalette.Card,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Column(
