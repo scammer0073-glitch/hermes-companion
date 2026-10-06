@@ -147,7 +147,7 @@ fun AuthLoginScreen(
                     Text(
                         text = stringResource(R.string.landing_brand_caption),
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = NemasysPalette.Muted,
                     )
                 }
             }
