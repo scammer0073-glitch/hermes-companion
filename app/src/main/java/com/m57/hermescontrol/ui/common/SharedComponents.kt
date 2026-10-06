@@ -115,8 +115,7 @@ fun StatusBadge(
             }
 
             StatusBadgeType.NEUTRAL -> {
-                NemasysPalette.Card to
-                    MaterialTheme.colorScheme.onSurfaceVariant
+                NemasysPalette.Card to NemasysPalette.Muted
             }
         }
     Surface(
