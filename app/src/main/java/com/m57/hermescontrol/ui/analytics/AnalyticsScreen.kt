@@ -27,6 +27,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -474,26 +475,36 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             if (maxCost <= 0.0) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    color = NemasysPalette.Card,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
                 ) {
-                    Box(
-                        modifier =
-                            Modifier
-                                .size(6.dp)
-                                .clip(CircleShape)
-                                .background(NemasysPalette.Accent),
-                    )
-                    Text(
-                        text = stringResource(R.string.analytics_no_cost_data).uppercase(),
-                        style =
-                            MaterialTheme.typography.labelSmall.copy(
-                                fontFamily = FontFamily.Monospace,
-                                letterSpacing = 0.6.sp,
-                            ),
-                        color = NemasysPalette.Text,
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Box(
+                            modifier =
+                                Modifier
+                                    .size(6.dp)
+                                    .clip(CircleShape)
+                                    .background(NemasysPalette.Accent),
+                        )
+                        Text(
+                            text = stringResource(R.string.analytics_no_cost_data).uppercase(),
+                            style =
+                                MaterialTheme.typography.labelSmall.copy(
+                                    fontFamily = FontFamily.Monospace,
+                                    letterSpacing = 0.6.sp,
+                                ),
+                            color = NemasysPalette.Text,
+                        )
+                    }
                 }
             } else {
                 val barHeight = 96.dp
