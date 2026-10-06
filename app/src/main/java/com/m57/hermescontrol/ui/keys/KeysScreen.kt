@@ -741,7 +741,7 @@ private fun EnvVarCard(
                                     if (config.isSet) {
                                         MaterialTheme.colorScheme.onSurface
                                     } else {
-                                        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                                        NemasysPalette.Muted
                                     },
                                 fontFamily = FontFamily.Monospace,
                                 maxLines = 1,
