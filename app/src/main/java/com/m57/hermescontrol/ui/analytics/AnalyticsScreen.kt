@@ -545,7 +545,7 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = NemasysPalette.Muted,
+                        color = if (entries.isEmpty()) NemasysPalette.Text else NemasysPalette.Muted,
                     )
                     Text(
                         text = entries.lastOrNull()?.day ?: "NO DATA",
@@ -553,7 +553,7 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.6.sp,
-                        color = NemasysPalette.Muted,
+                        color = if (entries.isEmpty()) NemasysPalette.Text else NemasysPalette.Muted,
                     )
                 }
             }
