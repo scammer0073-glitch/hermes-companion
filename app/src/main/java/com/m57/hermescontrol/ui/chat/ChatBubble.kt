@@ -509,8 +509,11 @@ internal fun InlineAttachment(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Surface(
-                    shape = RoundedCornerShape(10.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    shape = RoundedCornerShape(16.dp),
+                    color = NemasysPalette.Card,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    tonalElevation = 0.dp,
+                    shadowElevation = 0.dp,
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.InsertDriveFile,
