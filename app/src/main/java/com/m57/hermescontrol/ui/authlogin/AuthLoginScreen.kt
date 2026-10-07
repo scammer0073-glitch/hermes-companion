@@ -169,7 +169,7 @@ fun AuthLoginScreen(
                 modifier = Modifier.fillMaxWidth(),
                 style =
                     MaterialTheme.typography.bodyMedium.copy(
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = NemasysPalette.Muted,
                     ),
                 textAlign = TextAlign.Start,
             )
