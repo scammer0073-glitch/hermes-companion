@@ -450,7 +450,7 @@ private fun Metric(
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = NemasysPalette.Muted,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
