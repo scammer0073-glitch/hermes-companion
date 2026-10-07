@@ -53,7 +53,9 @@ internal fun TodoTaskCard(
     modifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(true) }
-    val contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    // Keep muted task metadata on the Nemasys Black card, reserving teal for the
+    // expandable control below.
+    val contentColor = NemasysPalette.Muted
     val completed = items.count { it.isCompleted }
 
     Box(
@@ -104,7 +106,7 @@ internal fun TodoTaskCard(
                     Icon(
                         imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
                         contentDescription = if (expanded) "Collapse tasks" else "Expand tasks",
-                        tint = contentColor.copy(alpha = 0.7f),
+                        tint = NemasysPalette.Accent,
                     )
                 }
 
