@@ -321,16 +321,22 @@ fun PersonalAppDetailScreen(
                                             color = NemasysPalette.Muted,
                                         )
                                     }
-                                    Box(
-                                        Modifier.size(48.dp).clip(CircleShape).background(NemasysPalette.RaisedSurface),
-                                        contentAlignment = Alignment.Center,
+                                    Surface(
+                                        modifier = Modifier.size(48.dp),
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = NemasysPalette.Card,
+                                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                        tonalElevation = 0.dp,
+                                        shadowElevation = 0.dp,
                                     ) {
-                                        Icon(
-                                            Icons.Filled.Mic,
-                                            null,
-                                            tint = NemasysPalette.Accent,
-                                            modifier = Modifier.size(22.dp),
-                                        )
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                Icons.Filled.Mic,
+                                                null,
+                                                tint = NemasysPalette.Text,
+                                                modifier = Modifier.size(22.dp),
+                                            )
+                                        }
                                     }
                                     Text(
                                         text = "Type or speak: ate 2 eggs 8am, slept 23:30-06:45",
