@@ -202,7 +202,7 @@ fun ToggleRow(
                         Text(
                             text = desc,
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                         )
                     }
                 }
