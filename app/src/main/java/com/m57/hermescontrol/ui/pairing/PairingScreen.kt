@@ -236,8 +236,8 @@ private fun PendingCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color(0xFF1E2D44)),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0F12)),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
