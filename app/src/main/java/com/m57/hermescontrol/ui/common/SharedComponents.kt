@@ -259,7 +259,7 @@ fun SearchBar(
                         Text(
                             text = placeholder,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                            color = NemasysPalette.Muted.copy(alpha = 0.6f),
                         )
                     }
                     innerTextField()
