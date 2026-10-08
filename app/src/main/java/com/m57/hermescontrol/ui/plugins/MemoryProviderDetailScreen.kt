@@ -196,7 +196,7 @@ private fun MemoryProviderConfigContent(
                                         setup.required_env.joinToString(", "),
                                     ),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = NemasysPalette.Muted,
                             )
                         }
                     }
