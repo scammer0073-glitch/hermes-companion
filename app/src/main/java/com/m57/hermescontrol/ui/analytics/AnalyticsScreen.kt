@@ -167,7 +167,7 @@ private fun AnalyticsContent(
                         Text(
                             text = stringResource(R.string.analytics_loading_usage),
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                         )
                     }
                 }
