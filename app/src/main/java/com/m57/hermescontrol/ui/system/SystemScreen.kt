@@ -1491,7 +1491,7 @@ private fun LazyListScope.checkpointsSection(
                     val sessionsCount = checkpoints.sessions?.size ?: 0
                     val totalBytes = checkpoints.total_bytes ?: 0L
                     InfoRow(
-                        label = "",
+                        label = "CHECKPOINTS",
                         value =
                             stringResource(
                                 R.string.system_checkpoints_summary,
