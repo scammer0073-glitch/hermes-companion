@@ -186,7 +186,7 @@ fun BotPickerSheet(
                                 Spacer(Modifier.height(6.dp))
                                 Text(
                                     text = "TRY A DIFFERENT SEARCH",
-                                    color = NemasysPalette.Muted,
+                                    color = NemasysPalette.Text,
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
