@@ -176,7 +176,8 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
         if (nemasysBlack) {
             NemasysPalette.Card
         } else if (featured) {
-            NemasysPalette.SelectedSurface
+            // Keep the featured plan on the Nemasys Black card surface; the accent border carries emphasis.
+            NemasysPalette.Card
         } else {
             NemasysPalette.Card
         }
