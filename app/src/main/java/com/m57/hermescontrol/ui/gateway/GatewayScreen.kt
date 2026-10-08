@@ -144,9 +144,7 @@ fun GatewayScreen(
                                             Modifier
                                                 .size(6.dp)
                                                 .clip(CircleShape)
-                                                .background(
-                                                    if (isRunning) NemasysPalette.Accent else statusColors.error,
-                                                ),
+                                                .background(NemasysPalette.Accent),
                                         )
                                         Spacer(Modifier.width(6.dp))
                                         Text(
