@@ -248,7 +248,7 @@ private fun ToolsetConfigContent(
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 0.6.sp,
-                            color = NemasysPalette.Muted,
+                            color = NemasysPalette.Text,
                         )
                     }
                 }
