@@ -141,7 +141,7 @@ fun PairingScreen(
                                         Modifier
                                             .size(6.dp)
                                             .clip(CircleShape)
-                                            .background(Color(0xFF2DD4BF)),
+                                            .background(NemasysPalette.Accent),
                                     )
                                     Spacer(Modifier.width(8.dp))
                                     Text(
