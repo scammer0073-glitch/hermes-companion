@@ -80,9 +80,12 @@ internal fun HookCard(
                 Spacer(modifier = Modifier.height(spacing.xs))
                 Row(horizontalArrangement = Arrangement.spacedBy(spacing.xs)) {
                     Text(
-                        text = hook.event ?: "",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary,
+                        text = (hook.event ?: "EVENT UNSPECIFIED").uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Muted,
                     )
                     hook.matcher?.let { matcher ->
                         Text(
