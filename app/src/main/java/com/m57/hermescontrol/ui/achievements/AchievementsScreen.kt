@@ -539,7 +539,7 @@ private fun RecentUnlockCard(
                 Text(
                     text = formatTimestamp(it),
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
             }
         }
