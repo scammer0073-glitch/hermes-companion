@@ -191,7 +191,21 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
     ) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(title, fontWeight = FontWeight.Bold, color = NemasysPalette.TextBright)
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(NemasysPalette.Accent),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text = title.uppercase(),
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = NemasysPalette.TextBright,
+                )
                 Spacer(Modifier.weight(1f))
                 Surface(
                     shape = RoundedCornerShape(50),
