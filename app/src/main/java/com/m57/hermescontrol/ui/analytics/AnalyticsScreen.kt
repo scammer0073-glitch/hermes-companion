@@ -539,25 +539,52 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    Text(
-                        text = entries.firstOrNull()?.day ?: "NO DATA",
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 0.6.sp,
-                        color = if (entries.isEmpty()) NemasysPalette.Text else NemasysPalette.Muted,
+                    DailyChartDayLabel(
+                        day = entries.firstOrNull()?.day,
+                        isEmpty = entries.isEmpty(),
                     )
-                    Text(
-                        text = entries.lastOrNull()?.day ?: "NO DATA",
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 0.6.sp,
-                        color = if (entries.isEmpty()) NemasysPalette.Text else NemasysPalette.Muted,
+                    DailyChartDayLabel(
+                        day = entries.lastOrNull()?.day,
+                        isEmpty = entries.isEmpty(),
                     )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun DailyChartDayLabel(
+    day: String?,
+    isEmpty: Boolean,
+) {
+    if (isEmpty) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = NemasysPalette.Card,
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+            shadowElevation = 0.dp,
+            tonalElevation = 0.dp,
+        ) {
+            Text(
+                text = "NO DATA",
+                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.6.sp,
+                color = NemasysPalette.Text,
+            )
+        }
+    } else {
+        Text(
+            text = day.orEmpty(),
+            fontFamily = FontFamily.Monospace,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 0.6.sp,
+            color = NemasysPalette.Muted,
+        )
     }
 }
 
