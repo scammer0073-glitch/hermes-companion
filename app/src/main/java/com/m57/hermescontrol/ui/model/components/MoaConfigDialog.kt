@@ -240,7 +240,7 @@ private fun MoaConfigEditor(
         Text(
             text = stringResource(R.string.moa_presets_note),
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = NemasysPalette.Muted,
         )
 
         if (effectivePreset == null) {
