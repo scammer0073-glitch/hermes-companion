@@ -491,6 +491,7 @@ private fun ExpandedToolContent(
                     view.detail == "No cron jobs" ||
                     view.detail == "No cron jobs scheduled" ||
                     view.detail == "No content available" ||
+                    view.detail == "No description available" ||
                     view.detail == "No terminal output" ||
                     view.detail == "NO RESULTS"
                 ) {
