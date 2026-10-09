@@ -3,6 +3,7 @@ package com.m57.hermescontrol.ui.model.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -307,11 +308,23 @@ private fun MoaConfigEditor(
         }
 
         // Default preset indicator
-        Text(
-            text = "Default: ${draft.default_preset.ifBlank { "(none)" }}",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Box(
+                Modifier
+                    .size(6.dp)
+                    .clip(CircleShape)
+                    .background(NemasysPalette.Accent),
+            )
+            Spacer(Modifier.width(6.dp))
+            Text(
+                text = "DEFAULT: ${draft.default_preset.ifBlank { "(NONE)" }}",
+                fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.6.sp,
+                color = NemasysPalette.Text,
+            )
+        }
 
         Spacer(modifier = Modifier.height(4.dp))
 
