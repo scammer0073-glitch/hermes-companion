@@ -63,7 +63,8 @@ val NordTheme =
                 onBackground = Nord6,
                 surface = Nord0,
                 onSurface = Nord6,
-                surfaceVariant = Nord1,
+                // Nemasys Black keeps dark Nord variant surfaces off the gray ramp.
+                surfaceVariant = Color(0xFF0D0F12),
                 onSurfaceVariant = Nord4,
                 surfaceContainerLowest = Nord0,
                 surfaceContainerLow = Nord1,
