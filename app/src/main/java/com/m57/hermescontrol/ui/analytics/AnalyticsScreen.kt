@@ -566,15 +566,26 @@ private fun DailyChartDayLabel(
             shadowElevation = 0.dp,
             tonalElevation = 0.dp,
         ) {
-            Text(
-                text = "NO DATA",
+            Row(
                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                fontFamily = FontFamily.Monospace,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 0.6.sp,
-                color = NemasysPalette.Text,
-            )
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(NemasysPalette.Accent),
+                )
+                Text(
+                    text = "NO DATA",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = NemasysPalette.Text,
+                )
+            }
         }
     } else {
         Text(
