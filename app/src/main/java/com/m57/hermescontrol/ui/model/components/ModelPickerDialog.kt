@@ -23,6 +23,8 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.PushPin
 import androidx.compose.material.icons.outlined.PushPin
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -107,13 +109,12 @@ fun ModelPickerDialog(
                         modifier = Modifier.fillMaxWidth(),
                     )
                 } else if (providers.isEmpty() && pinnedModels.isEmpty()) {
-                    Surface(
+                    Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        color = NemasysPalette.Card,
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                         border = BorderStroke(1.dp, NemasysPalette.CardBorder),
-                        tonalElevation = 0.dp,
-                        shadowElevation = 0.dp,
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
                             modifier = Modifier.padding(horizontal = 14.dp, vertical = 16.dp),
