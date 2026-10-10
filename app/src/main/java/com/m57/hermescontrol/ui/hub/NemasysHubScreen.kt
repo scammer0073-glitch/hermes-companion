@@ -95,7 +95,6 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
                 "Forever free",
                 listOf("All app features", "LAN + Tailscale", "Community help"),
                 Modifier.weight(1f),
-                nemasysBlack = true,
             )
             PriceCard(
                 "Hub Starter",
@@ -104,7 +103,6 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
                 listOf("1 instance, HTTPS", "5 bots, 50 crons", "Email support"),
                 Modifier.weight(1f),
                 featured = true,
-                nemasysBlack = true,
             )
         }
         PriceCard(
@@ -114,7 +112,6 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
             listOf("3 instances", "Unlimited bots/crons", "Custom domain + backups"),
             Modifier.fillMaxWidth(),
             featured = false,
-            nemasysBlack = true,
         )
         Button(
             onClick = { uri.openUri("https://scammer0073-glitch.github.io/hermes-companion/#pricing") },
@@ -170,18 +167,10 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
     feats: List<String>,
     mod: Modifier,
     featured: Boolean = false,
-    nemasysBlack: Boolean = false,
 ) {
-    val cardColor =
-        if (nemasysBlack) {
-            NemasysPalette.Card
-        } else if (featured) {
-            // Keep the featured plan on the Nemasys Black card surface; the accent border carries emphasis.
-            NemasysPalette.Card
-        } else {
-            NemasysPalette.Card
-        }
-    val cardBorder = if (featured && !nemasysBlack) NemasysPalette.Accent else NemasysPalette.CardBorder
+    // Pricing cards stay on the Nemasys Black surface; emphasis is carried by the border.
+    val cardColor = NemasysPalette.Card
+    val cardBorder = NemasysPalette.CardBorder
     Card(
         mod,
         shape = RoundedCornerShape(16.dp),
