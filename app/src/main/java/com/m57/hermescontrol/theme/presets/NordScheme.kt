@@ -68,7 +68,8 @@ val NordTheme =
                 onSurfaceVariant = Nord4,
                 surfaceContainerLowest = Nord0,
                 surfaceContainerLow = Nord1,
-                surfaceContainer = Nord2,
+                // Nemasys Black keeps Nord's default card container off the gray ramp.
+                surfaceContainer = Color(0xFF0D0F12),
                 surfaceContainerHigh = Nord3,
                 surfaceContainerHighest = Nord3,
                 inverseSurface = Nord6,
