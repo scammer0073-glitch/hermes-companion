@@ -102,15 +102,26 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                                         modifier = Modifier.size(28.dp),
                                     )
                                 }
-                                Text(
-                                    "NO PERSONAL APPS YET",
-                                    fontFamily = FontFamily.Monospace,
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    letterSpacing = 0.6.sp,
-                                    color = NemasysPalette.Text,
-                                    textAlign = TextAlign.Center,
-                                )
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                ) {
+                                    Box(
+                                        Modifier
+                                            .size(6.dp)
+                                            .clip(CircleShape)
+                                            .background(NemasysPalette.Accent),
+                                    )
+                                    Text(
+                                        "NO PERSONAL APPS YET",
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                        color = NemasysPalette.Text,
+                                        textAlign = TextAlign.Center,
+                                    )
+                                }
                                 Text(
                                     "Create Food and Sleep, Gym, etc.",
                                     color = NemasysPalette.Muted,
