@@ -270,8 +270,9 @@ fun FilesScreen(
                     Modifier
                         .align(Alignment.BottomEnd)
                         .padding(16.dp),
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                // Nemasys Black surfaces stay neutral; teal is reserved for this action.
+                containerColor = NemasysPalette.Accent,
+                contentColor = NemasysPalette.OnAccent,
             ) {
                 Icon(
                     imageVector = Icons.Filled.CreateNewFolder,
