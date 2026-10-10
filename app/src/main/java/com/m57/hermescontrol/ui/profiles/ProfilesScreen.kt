@@ -583,8 +583,22 @@ fun ProfilesScreen(
                                                                 R.string.profiles_label_provider,
                                                                 profile.provider ?: "None",
                                                             ),
-                                                        style = MaterialTheme.typography.bodySmall,
-                                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                        style =
+                                                            if (profile.provider == null) {
+                                                                MaterialTheme.typography.labelSmall.copy(
+                                                                    fontFamily = FontFamily.Monospace,
+                                                                    fontWeight = FontWeight.Bold,
+                                                                    letterSpacing = 0.6.sp,
+                                                                )
+                                                            } else {
+                                                                MaterialTheme.typography.bodySmall
+                                                            },
+                                                        color =
+                                                            if (profile.provider == null) {
+                                                                NemasysPalette.Text
+                                                            } else {
+                                                                MaterialTheme.colorScheme.onSurfaceVariant
+                                                            },
                                                     )
                                                     Text(
                                                         text =
