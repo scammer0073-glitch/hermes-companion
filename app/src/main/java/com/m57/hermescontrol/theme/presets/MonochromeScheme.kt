@@ -13,7 +13,7 @@ import com.m57.hermescontrol.theme.buildTheme
 private val MonoDarkFloor = Color(0xFF0A0A0A) // surfaceContainerLowest
 private val MonoDarkBg = Color(0xFF121212) // background, surface, containerLow, all "on*" ink
 private val MonoDarkContainer = Color(0xFF0D0F12) // surfaceContainer, Nemasys Black
-private val MonoDarkContainerHigh = Color(0xFF2A2A2A) // surfaceContainerHigh, surfaceVariant, status containers
+private val MonoDarkContainerHigh = Color(0xFF0D0F12) // surfaceContainerHigh, surfaceVariant, Nemasys Black cards
 private val MonoDarkContainerHighest = Color(0xFF363636) // surfaceContainerHighest, primaryContainer
 private val MonoDarkOutline = Color(0xFF808080)
 private val MonoDarkOutlineVariant = Color(0xFF404040)
