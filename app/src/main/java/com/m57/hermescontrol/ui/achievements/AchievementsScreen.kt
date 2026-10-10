@@ -3,6 +3,7 @@ package com.m57.hermescontrol.ui.achievements
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -483,15 +484,14 @@ private fun StateFilterRow(
                 selected = activeState == stateValue,
                 onClick = { onStateSelected(stateValue ?: "") },
                 label = { Text(label) },
+                shape = RoundedCornerShape(16.dp),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 colors =
                     FilterChipDefaults.filterChipColors(
-                        selectedContainerColor =
-                            when (stateValue) {
-                                "unlocked" -> MaterialTheme.colorScheme.primaryContainer
-                                "discovered" -> MaterialTheme.colorScheme.tertiaryContainer
-                                "secret" -> MaterialTheme.colorScheme.errorContainer
-                                else -> MaterialTheme.colorScheme.secondaryContainer
-                            },
+                        containerColor = NemasysPalette.Card,
+                        labelColor = NemasysPalette.Muted,
+                        selectedContainerColor = NemasysPalette.Card,
+                        selectedLabelColor = NemasysPalette.Accent,
                     ),
             )
         }
