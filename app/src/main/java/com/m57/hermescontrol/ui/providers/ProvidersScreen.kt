@@ -188,7 +188,7 @@ private fun ProviderCard(
                 Text(
                     text = providerStatusLabel(provider),
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
                 provider.status.sourceLabel?.let { label ->
                     Spacer(modifier = Modifier.height(2.dp))
