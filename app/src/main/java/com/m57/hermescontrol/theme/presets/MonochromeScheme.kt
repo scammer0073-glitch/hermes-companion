@@ -72,7 +72,8 @@ val MonochromeTheme =
                 surfaceVariant = MonoDarkContainerHigh,
                 onSurfaceVariant = MonoDarkTextDim,
                 surfaceContainerLowest = MonoDarkFloor,
-                surfaceContainerLow = MonoDarkBg,
+                // Nemasys Black keeps the low dark card tier off the gray ramp.
+                surfaceContainerLow = MonoDarkContainer,
                 surfaceContainer = MonoDarkContainer,
                 surfaceContainerHigh = MonoDarkContainerHigh,
                 surfaceContainerHighest = MonoDarkContainerHighest,
