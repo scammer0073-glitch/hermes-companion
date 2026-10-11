@@ -77,7 +77,8 @@ val CatppuccinTheme =
                 surfaceContainerLow = MochaMantle,
                 // Nemasys Black keeps the default dark card tier off the gray ramp.
                 surfaceContainer = Color(0xFF0D0F12),
-                surfaceContainerHigh = MochaSurface0,
+                // Nemasys Black keeps the dark high card tier off the gray ramp.
+                surfaceContainerHigh = Color(0xFF0D0F12),
                 surfaceContainerHighest = MochaSurface1,
                 inverseSurface = MochaText,
                 inverseOnSurface = MochaBase,
