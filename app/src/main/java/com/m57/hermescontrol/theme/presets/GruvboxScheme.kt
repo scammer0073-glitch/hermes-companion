@@ -74,7 +74,8 @@ val GruvboxTheme =
                 surfaceVariant = Color(0xFF0D0F12),
                 onSurfaceVariant = GruvboxDarkFg3,
                 surfaceContainerLowest = GruvboxDarkBg0,
-                surfaceContainerLow = GruvboxDarkBg1,
+                // Nemasys Black keeps the low dark card tier off the gray ramp.
+                surfaceContainerLow = Color(0xFF0D0F12),
                 // Nemasys Black keeps the default dark card tier off the gray ramp.
                 surfaceContainer = Color(0xFF0D0F12),
                 // Nemasys Black keeps the high dark card tier off the gray ramp.
