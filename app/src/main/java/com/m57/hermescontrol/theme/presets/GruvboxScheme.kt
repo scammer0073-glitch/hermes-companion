@@ -70,7 +70,8 @@ val GruvboxTheme =
                 onBackground = GruvboxDarkFg1,
                 surface = GruvboxDarkBg0,
                 onSurface = GruvboxDarkFg1,
-                surfaceVariant = GruvboxDarkBg1,
+                // Nemasys Black keeps dark Gruvbox variant surfaces off the gray ramp.
+                surfaceVariant = Color(0xFF0D0F12),
                 onSurfaceVariant = GruvboxDarkFg3,
                 surfaceContainerLowest = GruvboxDarkBg0,
                 surfaceContainerLow = GruvboxDarkBg1,
