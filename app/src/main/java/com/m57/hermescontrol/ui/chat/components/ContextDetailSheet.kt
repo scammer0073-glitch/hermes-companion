@@ -31,6 +31,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.theme.NemasysCard
 import com.m57.hermescontrol.theme.NemasysCardBorder
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.ContextBreakdown
 import kotlin.math.min
 
@@ -53,6 +54,9 @@ fun ContextDetailSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
+        containerColor = NemasysPalette.Card,
+        tonalElevation = 0.dp,
+        shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
     ) {
         val full = fullTokens ?: 0L
         val used = breakdown.inputTokens
