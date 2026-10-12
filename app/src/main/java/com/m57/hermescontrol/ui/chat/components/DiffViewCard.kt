@@ -195,6 +195,8 @@ fun DiffViewCard(
         shape = RoundedCornerShape(16.dp),
         color = NemasysCard,
         border = BorderStroke(1.dp, NemasysCardBorder),
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
     ) {
         Column(modifier = Modifier.animateContentSize()) {
             // Header bar
