@@ -353,6 +353,9 @@ fun SessionsScreen(
     if (state.showEmptyCleanupDialog) {
         AlertDialog(
             onDismissRequest = { viewModel.hideEmptyCleanupDialog() },
+            containerColor = NemasysPalette.Card,
+            shape = RoundedCornerShape(16.dp),
+            tonalElevation = 0.dp,
             title = { Text(stringResource(R.string.sessions_empty_cleanup_title)) },
             text = { Text(stringResource(R.string.sessions_empty_cleanup_message, state.emptyCount)) },
             confirmButton = {
