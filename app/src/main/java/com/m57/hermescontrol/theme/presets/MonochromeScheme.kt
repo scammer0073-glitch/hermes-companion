@@ -10,7 +10,7 @@ import com.m57.hermescontrol.theme.buildTheme
 // purely by lightness, not hue.
 // ---------------------------------------------------------------------
 
-private val MonoDarkFloor = Color(0xFF0A0A0A) // surfaceContainerLowest
+private val MonoDarkFloor = Color(0xFF0D0F12) // surfaceContainerLowest, Nemasys Black
 private val MonoDarkBg = Color(0xFF121212) // background, surface, containerLow, all "on*" ink
 private val MonoDarkContainer = Color(0xFF0D0F12) // surfaceContainer, Nemasys Black
 private val MonoDarkContainerHigh = Color(0xFF0D0F12) // surfaceContainerHigh, surfaceVariant, Nemasys Black cards
