@@ -317,7 +317,7 @@ private fun SelfImprovementReviewCard(
                     } else {
                         MaterialTheme.typography.bodyMedium
                     },
-                color = if (cleanText.isEmpty()) NemasysPalette.Muted else NemasysPalette.Text,
+                color = NemasysPalette.Text,
             )
         }
     }
