@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.kanban
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -121,11 +122,24 @@ fun KanbanScreen(
                     if (state.isLoading) {
                         CircularProgressIndicator()
                     } else if (state.errorMessage != null) {
-                        Text(
-                            text = state.errorMessage ?: "",
-                            color = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.padding(paddingValues),
-                        )
+                        androidx.compose.material3.Card(
+                            modifier = Modifier.padding(paddingValues).padding(16.dp),
+                            shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+                            colors =
+                                androidx.compose.material3.CardDefaults.cardColors(
+                                    containerColor = NemasysPalette.Card,
+                                ),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                            elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        ) {
+                            Text(
+                                text = state.errorMessage.orEmpty(),
+                                color = MaterialTheme.colorScheme.error,
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                modifier = Modifier.padding(16.dp),
+                            )
+                        }
                     } else {
                         Column(
                             modifier = Modifier.fillMaxSize(),
