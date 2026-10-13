@@ -8,6 +8,7 @@ package com.m57.hermescontrol.ui.keys
 import android.content.ClipData
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -334,9 +335,11 @@ fun KeysScreen(
                 modifier =
                     Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(16.dp),
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        .padding(16.dp)
+                        .border(BorderStroke(1.dp, NemasysPalette.CardBorder), RoundedCornerShape(16.dp)),
+                shape = RoundedCornerShape(16.dp),
+                containerColor = NemasysPalette.Card,
+                contentColor = NemasysPalette.Accent,
             ) {
                 Icon(
                     imageVector = Icons.Filled.Add,
