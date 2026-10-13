@@ -196,7 +196,11 @@ private fun AnalyticsContent(
         }
 
         item {
-            SecondaryTabRow(selectedTabIndex = selectedSectionTab) {
+            SecondaryTabRow(
+                selectedTabIndex = selectedSectionTab,
+                containerColor = NemasysPalette.Card,
+                contentColor = NemasysPalette.Text,
+            ) {
                 Tab(
                     selected = selectedSectionTab == 0,
                     onClick = { selectedSectionTab = 0 },
