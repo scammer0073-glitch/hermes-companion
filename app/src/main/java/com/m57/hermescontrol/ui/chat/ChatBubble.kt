@@ -306,9 +306,18 @@ private fun SelfImprovementReviewCard(
             }
             Spacer(Modifier.height(4.dp))
             Text(
-                text = cleanText,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
+                text = cleanText.ifEmpty { "NO REVIEW DETAILS" },
+                style =
+                    if (cleanText.isEmpty()) {
+                        MaterialTheme.typography.labelSmall.copy(
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                        )
+                    } else {
+                        MaterialTheme.typography.bodyMedium
+                    },
+                color = if (cleanText.isEmpty()) NemasysPalette.Muted else NemasysPalette.Text,
             )
         }
     }
