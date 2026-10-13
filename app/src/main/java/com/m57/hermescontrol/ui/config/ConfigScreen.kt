@@ -443,7 +443,11 @@ private fun FormEditor(
                             .padding(vertical = 4.dp),
                     shape = RoundedCornerShape(16.dp),
                     border = BorderStroke(1.dp, NemasysPalette.CardBorder),
-                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                    colors =
+                        CardDefaults.cardColors(
+                            containerColor = NemasysPalette.Card,
+                            contentColor = NemasysPalette.Text,
+                        ),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
