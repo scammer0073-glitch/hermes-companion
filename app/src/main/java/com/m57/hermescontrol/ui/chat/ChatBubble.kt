@@ -373,7 +373,8 @@ internal fun SystemBubble(
                             .testTag("approve_button"),
                     colors =
                         ButtonDefaults.filledTonalButtonColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            containerColor = NemasysPalette.Accent,
+                            contentColor = NemasysPalette.OnAccent,
                         ),
                 ) {
                     Icon(
