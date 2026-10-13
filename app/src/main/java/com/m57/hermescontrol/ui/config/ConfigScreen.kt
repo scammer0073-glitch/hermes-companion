@@ -476,8 +476,12 @@ private fun FormEditor(
                         }
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
-                            text = values[dotPath]?.let(::jsonText) ?: "",
-                            style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+                            text = values[dotPath]?.let(::jsonText) ?: "NO VALUE",
+                            style =
+                                MaterialTheme.typography.bodySmall.copy(
+                                    fontFamily = FontFamily.Monospace,
+                                    letterSpacing = 0.6.sp,
+                                ),
                             color = NemasysPalette.Muted,
                         )
                     }
