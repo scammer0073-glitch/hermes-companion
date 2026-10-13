@@ -94,8 +94,11 @@ private fun platformStateStyle(state: String): StateStyle {
 private fun StateBadge(state: String) {
     val style = platformStateStyle(state)
     Surface(
-        shape = RoundedCornerShape(4.dp),
-        color = style.color.copy(alpha = 0.15f),
+        shape = RoundedCornerShape(16.dp),
+        color = NemasysPalette.Card,
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        shadowElevation = 0.dp,
+        tonalElevation = 0.dp,
     ) {
         Text(
             text = style.label,
