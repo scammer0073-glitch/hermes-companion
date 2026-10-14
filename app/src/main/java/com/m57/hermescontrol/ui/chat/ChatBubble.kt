@@ -509,9 +509,11 @@ internal fun InlineAttachment(
     } else {
         // Non-image file — native save picker on the trailing action.
         Surface(
-            shape = RoundedCornerShape(12.dp),
-            color = textColor.copy(alpha = 0.08f),
-            border = BorderStroke(1.dp, textColor.copy(alpha = 0.16f)),
+            shape = RoundedCornerShape(16.dp),
+            color = NemasysPalette.Card,
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+            tonalElevation = 0.dp,
+            shadowElevation = 0.dp,
             modifier = clickable,
         ) {
             Row(
