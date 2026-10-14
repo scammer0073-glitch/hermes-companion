@@ -132,7 +132,6 @@ internal fun ToolBubble(
 
     var expanded by remember { mutableStateOf(false) }
     var showRawJson by remember { mutableStateOf(false) }
-    val chipColor = NemasysPalette.Card
     val contentColor = NemasysPalette.Text
     val statusColors = LocalHermesStatusColors.current
 
@@ -163,7 +162,11 @@ internal fun ToolBubble(
     ) {
         Card(
             onClick = { expanded = !expanded },
-            colors = CardDefaults.cardColors(containerColor = chipColor),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = NemasysPalette.Card,
+                    contentColor = NemasysPalette.Text,
+                ),
             shape = RoundedCornerShape(16.dp),
             border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
