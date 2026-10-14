@@ -274,7 +274,7 @@ private fun PendingCard(
                 Text(
                     text = item.userId ?: stringResource(R.string.pairing_label_unknown_user),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
