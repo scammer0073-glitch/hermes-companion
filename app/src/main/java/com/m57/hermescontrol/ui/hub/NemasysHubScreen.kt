@@ -43,12 +43,23 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
             )
             Spacer(Modifier.width(10.dp))
             Column {
-                Text(
-                    "Nemasys Hub",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Black,
-                    color = NemasysPalette.TextBright,
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        "NEMASYS HUB",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.TextBright,
+                    )
+                }
                 Text(
                     "Managed Hermes — no PC, no Tailscale, just a URL",
                     style = MaterialTheme.typography.labelMedium,
