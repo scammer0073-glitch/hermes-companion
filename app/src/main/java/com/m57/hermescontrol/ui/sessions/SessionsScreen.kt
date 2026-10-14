@@ -561,6 +561,13 @@ fun SessionsScreen(
                     FilledTonalButton(
                         onClick = { viewModel.requestEmptyCleanup() },
                         enabled = state.emptyCount > 0,
+                        colors =
+                            ButtonDefaults.filledTonalButtonColors(
+                                containerColor = NemasysPalette.Card,
+                                contentColor = NemasysPalette.Accent,
+                                disabledContainerColor = NemasysPalette.Card,
+                                disabledContentColor = NemasysPalette.Muted,
+                            ),
                         contentPadding = PaddingValues(horizontal = spacing.md, vertical = 8.dp),
                     ) {
                         Icon(
