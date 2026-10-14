@@ -272,6 +272,7 @@ fun ProfilesScreen(
                                             colors =
                                                 CardDefaults.cardColors(
                                                     containerColor = NemasysPalette.Card,
+                                                    contentColor = NemasysPalette.Text,
                                                 ),
                                             border =
                                                 BorderStroke(
