@@ -198,12 +198,26 @@ fun PluginsScreen(
                     if (state.orphanPlugins.isNotEmpty()) {
                         item(key = "orphan-header") {
                             Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = stringResource(R.string.plugins_orphan_heading),
-                                style = MaterialTheme.typography.titleSmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            Row(
                                 modifier = Modifier.padding(vertical = 8.dp),
-                            )
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .clip(CircleShape)
+                                        .background(NemasysPalette.Accent),
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                Text(
+                                    text = stringResource(R.string.plugins_orphan_heading).uppercase(),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = NemasysPalette.Muted,
+                                )
+                            }
                         }
                         items(state.orphanPlugins, key = { "orphan-${it.name}" }) { plugin ->
                             OrphanPluginCard(plugin = plugin, onClick = { showDetail = plugin })
