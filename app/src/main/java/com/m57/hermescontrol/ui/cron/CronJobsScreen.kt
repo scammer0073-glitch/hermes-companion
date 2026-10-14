@@ -50,6 +50,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -568,8 +569,12 @@ fun CronJobEditorDialog(
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = stringResource(R.string.cron_edit_field_no_agent),
-                                    style = MaterialTheme.typography.bodyMedium,
+                                    text = stringResource(R.string.cron_edit_field_no_agent).uppercase(),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = NemasysPalette.Text,
                                 )
                             }
 
