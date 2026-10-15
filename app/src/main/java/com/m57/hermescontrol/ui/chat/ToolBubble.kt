@@ -502,6 +502,7 @@ private fun ExpandedToolContent(
                         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                         shape = RoundedCornerShape(16.dp),
                         color = NemasysPalette.Card,
+                        contentColor = NemasysPalette.Text,
                         border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         tonalElevation = 0.dp,
                         shadowElevation = 0.dp,
