@@ -308,8 +308,9 @@ fun SessionsScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val spacing = LocalSpacing.current
     val statusColors = LocalHermesStatusColors.current
-    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
-    val onPrimaryContainer = MaterialTheme.colorScheme.onPrimaryContainer
+    // Selected session cards stay Nemasys Black; teal is reserved for the active border.
+    val primaryContainer = NemasysPalette.Card
+    val onPrimaryContainer = NemasysPalette.TextBright
 
     var pruneDays by remember { mutableStateOf("7") }
 
