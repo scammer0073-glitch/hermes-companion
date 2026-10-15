@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -84,18 +85,32 @@ fun LandingScreen(
                 }
                 Spacer(Modifier.weight(1f))
                 Surface(
-                    shape = RoundedCornerShape(50),
-                    color = NemasysPalette.SelectedSurface,
+                    shape = RoundedCornerShape(16.dp),
+                    color = NemasysPalette.Card,
                     border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
                 ) {
-                    Text(
-                        stringResource(R.string.landing_private_badge),
+                    Row(
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = NemasysPalette.Accent,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 0.6.sp,
-                    )
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            stringResource(R.string.landing_private_badge).uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = NemasysPalette.TextBright,
+                            letterSpacing = 0.6.sp,
+                        )
+                    }
                 }
             }
             Spacer(Modifier.height(36.dp))
