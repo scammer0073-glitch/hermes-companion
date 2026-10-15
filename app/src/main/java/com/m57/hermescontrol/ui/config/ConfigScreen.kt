@@ -475,14 +475,16 @@ private fun FormEditor(
                             )
                         }
                         Spacer(modifier = Modifier.height(6.dp))
+                        val valueText = values[dotPath]?.let(::jsonText)
                         Text(
-                            text = values[dotPath]?.let(::jsonText) ?: "NO VALUE",
+                            text = valueText ?: "NO VALUE",
                             style =
                                 MaterialTheme.typography.bodySmall.copy(
                                     fontFamily = FontFamily.Monospace,
                                     letterSpacing = 0.6.sp,
+                                    fontWeight = if (valueText == null) FontWeight.Bold else FontWeight.Normal,
                                 ),
-                            color = NemasysPalette.Muted,
+                            color = if (valueText == null) NemasysPalette.TextBright else NemasysPalette.Muted,
                         )
                     }
                 }
