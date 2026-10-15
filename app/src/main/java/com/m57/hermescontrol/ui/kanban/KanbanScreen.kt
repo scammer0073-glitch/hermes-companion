@@ -406,7 +406,7 @@ fun TaskCard(
                         imageVector = Icons.Filled.Person,
                         contentDescription = null,
                         modifier = Modifier.size(14.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        tint = NemasysPalette.Muted,
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
