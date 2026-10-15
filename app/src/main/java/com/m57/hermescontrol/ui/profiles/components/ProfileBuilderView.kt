@@ -348,14 +348,12 @@ private fun ModelStep(
                 OutlinedButton(
                     onClick = { onProviderChange(provider.slug) },
                     modifier = Modifier.weight(1f),
-                    colors =
-                        if (isSelected) {
-                            ButtonDefaults.outlinedButtonColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            )
-                        } else {
-                            ButtonDefaults.outlinedButtonColors()
-                        },
+                    shape = RoundedCornerShape(16.dp),
+                    border = BorderStroke(1.dp, if (isSelected) NemasysPalette.Accent else NemasysPalette.CardBorder),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = NemasysPalette.Card,
+                        contentColor = if (isSelected) NemasysPalette.Accent else NemasysPalette.Text,
+                    ),
                 ) {
                     Text(provider.name.uppercase())
                 }
