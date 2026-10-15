@@ -446,12 +446,17 @@ private fun DeviceCodeFlowContent(
         )
         start?.userCode?.let { code ->
             Surface(
-                color = LocalHermesStatusColors.current.infoContainer,
-                shape = RoundedCornerShape(4.dp),
+                color = NemasysPalette.Card,
+                contentColor = NemasysPalette.Text,
+                shape = RoundedCornerShape(16.dp),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                tonalElevation = 0.dp,
+                shadowElevation = 0.dp,
             ) {
                 Text(
                     text = "  $code",
                     style = MaterialTheme.typography.titleMedium.copy(fontFamily = FontFamily.Monospace),
+                    color = NemasysPalette.TextBright,
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                 )
             }
