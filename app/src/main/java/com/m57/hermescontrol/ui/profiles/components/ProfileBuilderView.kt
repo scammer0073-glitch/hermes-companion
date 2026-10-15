@@ -607,10 +607,12 @@ private fun AddMcpDialog(
                     OutlinedButton(
                         onClick = { transport = "sse" },
                         modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(16.dp),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         colors =
                             if (transport == "sse") {
                                 ButtonDefaults.outlinedButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                    containerColor = NemasysPalette.Card,
                                 )
                             } else {
                                 ButtonDefaults.outlinedButtonColors()
@@ -622,10 +624,12 @@ private fun AddMcpDialog(
                     OutlinedButton(
                         onClick = { transport = "stdio" },
                         modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(16.dp),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         colors =
                             if (transport == "stdio") {
                                 ButtonDefaults.outlinedButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                    containerColor = NemasysPalette.Card,
                                 )
                             } else {
                                 ButtonDefaults.outlinedButtonColors()
