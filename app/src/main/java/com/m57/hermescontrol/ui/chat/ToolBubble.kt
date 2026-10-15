@@ -522,7 +522,7 @@ private fun ExpandedToolContent(
                                 text = view.detail.uppercase(),
                                 style =
                                     MaterialTheme.typography.bodySmall.copy(
-                                        color = NemasysPalette.Text,
+                                        color = NemasysPalette.TextBright,
                                         fontFamily = FontFamily.Monospace,
                                         fontWeight = FontWeight.Bold,
                                         fontSize = 11.sp,
