@@ -241,6 +241,7 @@ internal fun InfoRow(
         Text(
             text = value,
             style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium),
+            color = NemasysPalette.TextBright,
         )
     }
 }
