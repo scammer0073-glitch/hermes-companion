@@ -58,7 +58,6 @@ import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -405,24 +404,31 @@ fun ProfilesScreen(
                                                         }
                                                     val isPlaceholder = profile.description.isNullOrBlank()
                                                     Spacer(modifier = Modifier.height(4.dp))
-                                                    Text(
-                                                        text = descriptionText,
-                                                        style = MaterialTheme.typography.bodyMedium,
-                                                        fontStyle =
-                                                            if (isPlaceholder) {
-                                                                FontStyle.Italic
-                                                            } else {
-                                                                FontStyle.Normal
-                                                            },
-                                                        color =
-                                                            if (isPlaceholder) {
-                                                                MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                                                    alpha = 0.6f,
-                                                                )
-                                                            } else {
-                                                                MaterialTheme.colorScheme.onSurfaceVariant
-                                                            },
-                                                    )
+                                                    if (isPlaceholder) {
+                                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                                            Box(
+                                                                Modifier
+                                                                    .size(6.dp)
+                                                                    .clip(CircleShape)
+                                                                    .background(NemasysPalette.Accent),
+                                                            )
+                                                            Spacer(Modifier.width(6.dp))
+                                                            Text(
+                                                                text = descriptionText.orEmpty().uppercase(),
+                                                                fontFamily = FontFamily.Monospace,
+                                                                fontSize = 11.sp,
+                                                                fontWeight = FontWeight.Bold,
+                                                                letterSpacing = 0.6.sp,
+                                                                color = NemasysPalette.Muted,
+                                                            )
+                                                        }
+                                                    } else {
+                                                        Text(
+                                                            text = descriptionText.orEmpty(),
+                                                            style = MaterialTheme.typography.bodyMedium,
+                                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                        )
+                                                    }
                                                     if (profile.description_auto == true) {
                                                         Spacer(modifier = Modifier.height(6.dp))
                                                         Box(
