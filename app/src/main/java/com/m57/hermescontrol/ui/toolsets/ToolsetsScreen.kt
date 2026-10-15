@@ -255,7 +255,7 @@ fun ToolsetsScreen(
                                                 Text(
                                                     text = it,
                                                     style = MaterialTheme.typography.bodyMedium,
-                                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    color = NemasysPalette.Muted,
                                                 )
                                             }
 
