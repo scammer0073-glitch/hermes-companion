@@ -141,7 +141,7 @@ fun DetailDialog(
                                 text = label,
                                 style = MaterialTheme.typography.labelSmall,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = NemasysPalette.Muted,
                             )
                             Text(
                                 text = value ?: "",
