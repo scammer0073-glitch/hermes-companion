@@ -329,7 +329,7 @@ private fun BreadcrumbBar(
                 Text(
                     text = "/",
                     style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
             }
             Text(
