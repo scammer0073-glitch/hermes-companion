@@ -305,20 +305,31 @@ private fun SelfImprovementReviewCard(
                 )
             }
             Spacer(Modifier.height(4.dp))
-            Text(
-                text = cleanText.ifEmpty { "NO REVIEW DETAILS" },
-                style =
-                    if (cleanText.isEmpty()) {
-                        MaterialTheme.typography.labelSmall.copy(
-                            fontFamily = FontFamily.Monospace,
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 0.6.sp,
-                        )
-                    } else {
-                        MaterialTheme.typography.bodyMedium
-                    },
-                color = NemasysPalette.Text,
-            )
+            if (cleanText.isEmpty()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = "NO REVIEW DETAILS",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Text,
+                    )
+                }
+            } else {
+                Text(
+                    text = cleanText,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = NemasysPalette.Text,
+                )
+            }
         }
     }
 }
