@@ -190,7 +190,7 @@ private fun AnalyticsContent(
                 Text(
                     text = stringResource(R.string.analytics_overview_desc),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
             }
         }
