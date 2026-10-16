@@ -65,7 +65,14 @@ fun NemasysChatEmpty(
                             letterSpacing = 0.6.sp,
                         )
                     }
-                    Text("Ask anything — tools, memory, cron, all here", color = NemasysPalette.Muted, fontSize = 11.sp)
+                    Text(
+                        "TOOLS • MEMORY • CRON • ALL HERE",
+                        color = NemasysPalette.Muted,
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.4.sp,
+                    )
                 }
             }
         }
