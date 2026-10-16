@@ -349,7 +349,7 @@ private fun StatsRow(
         StatPill(
             label = stringResource(R.string.achievements_stat_total),
             value = "$totalCount",
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = NemasysPalette.Muted,
             modifier = Modifier.weight(1f),
         )
     }
