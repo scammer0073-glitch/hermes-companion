@@ -506,7 +506,7 @@ private fun DailyCostChart(entries: List<AnalyticsDailyEntry>) {
                                     fontFamily = FontFamily.Monospace,
                                     letterSpacing = 0.6.sp,
                                 ),
-                            color = NemasysPalette.Text,
+                            color = NemasysPalette.TextBright,
                         )
                     }
                 }
