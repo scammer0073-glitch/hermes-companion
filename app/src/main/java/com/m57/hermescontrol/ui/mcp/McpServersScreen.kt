@@ -707,7 +707,7 @@ private fun EnvVarSection(
                             fontSize = 11.sp,
                             letterSpacing = 0.6.sp,
                         ),
-                    color = NemasysPalette.Text,
+                    color = NemasysPalette.TextBright,
                 )
             }
         }
