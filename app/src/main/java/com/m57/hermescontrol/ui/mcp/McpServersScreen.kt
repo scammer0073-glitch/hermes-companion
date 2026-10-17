@@ -876,7 +876,7 @@ private fun CatalogSection(
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     letterSpacing = 0.6.sp,
-                                    color = NemasysPalette.Text,
+                                    color = NemasysPalette.TextBright,
                                 )
                             }
                             Spacer(Modifier.height(6.dp))
