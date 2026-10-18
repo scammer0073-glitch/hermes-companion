@@ -176,7 +176,7 @@ fun BotPickerSheet(
                                     Spacer(Modifier.width(6.dp))
                                     Text(
                                         text = "NO BOTS MATCH",
-                                        color = NemasysPalette.Text,
+                                        color = NemasysPalette.TextBright,
                                         fontFamily = FontFamily.Monospace,
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
