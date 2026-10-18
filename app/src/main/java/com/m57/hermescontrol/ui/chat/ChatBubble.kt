@@ -306,22 +306,33 @@ private fun SelfImprovementReviewCard(
             }
             Spacer(Modifier.height(4.dp))
             if (cleanText.isEmpty()) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(
-                        Modifier
-                            .size(6.dp)
-                            .clip(CircleShape)
-                            .background(NemasysPalette.Accent),
-                    )
-                    Spacer(Modifier.width(6.dp))
-                    Text(
-                        text = "NO REVIEW DETAILS",
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 0.6.sp,
-                        color = NemasysPalette.Text,
-                    )
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = NemasysPalette.Card,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            text = "NO REVIEW DETAILS",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
+                        )
+                    }
                 }
             } else {
                 Text(
