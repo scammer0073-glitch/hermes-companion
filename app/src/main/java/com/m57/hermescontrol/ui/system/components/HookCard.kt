@@ -91,7 +91,7 @@ internal fun HookCard(
                         Text(
                             text = stringResource(R.string.system_hooks_matcher, matcher),
                             style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                         )
                     }
                 }
