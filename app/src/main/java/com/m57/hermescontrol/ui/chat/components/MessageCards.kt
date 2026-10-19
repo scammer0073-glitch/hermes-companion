@@ -579,6 +579,8 @@ fun SubagentCard(
         shape = RoundedCornerShape(16.dp),
         color = NemasysPalette.Card,
         border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        shadowElevation = 0.dp,
+        tonalElevation = 0.dp,
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
