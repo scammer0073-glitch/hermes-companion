@@ -41,11 +41,15 @@ fun NemasysChatEmpty(
                 Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Surface(shape = RoundedCornerShape(10.dp), color = NemasysPalette.Accent) {
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = NemasysPalette.CardBorder,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                ) {
                     androidx.compose.foundation.layout.Box(Modifier.size(28.dp), contentAlignment = Alignment.Center) {
                         androidx.compose.material3.Text(
                             "N",
-                            color = NemasysPalette.OnAccent,
+                            color = NemasysPalette.TextBright,
                             fontWeight = FontWeight.Black,
                             fontSize = 14.sp,
                         )
