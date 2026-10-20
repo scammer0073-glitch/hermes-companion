@@ -416,7 +416,7 @@ private fun TotalsCard(totals: com.m57.hermescontrol.data.model.AnalyticsTotals)
             Text(
                 text = stringResource(R.string.analytics_estimated_cost),
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = NemasysPalette.Muted,
             )
             Spacer(modifier = Modifier.height(12.dp))
             Row(
