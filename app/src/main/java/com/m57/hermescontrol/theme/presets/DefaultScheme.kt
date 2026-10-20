@@ -125,7 +125,8 @@ val DefaultTheme =
                 onBackground = SlateLightFg1,
                 surface = SlateLightBg0,
                 onSurface = SlateLightFg1,
-                surfaceVariant = SlateLightBg1,
+                // Keep the fallback variant aligned with the Nemasys Black card surface.
+                surfaceVariant = NemasysBlackCard,
                 onSurfaceVariant = SlateLightFg3,
                 surfaceContainerLowest = SlateLightBg0,
                 surfaceContainerLow = SlateLightBg1,
