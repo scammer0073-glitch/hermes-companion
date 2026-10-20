@@ -193,7 +193,7 @@ fun EmptyState(
                     Spacer(Modifier.height(6.dp))
                     Text(
                         subtitle,
-                        color = NemasysPalette.Muted,
+                        color = NemasysPalette.Text,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(horizontal = 12.dp),
