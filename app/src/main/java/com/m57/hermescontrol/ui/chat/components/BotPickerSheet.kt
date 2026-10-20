@@ -111,7 +111,7 @@ fun BotPickerSheet(
             Text(
                 text = stringResource(R.string.bots_picker_subtitle),
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = NemasysPalette.Text,
                 modifier = Modifier.padding(top = 4.dp, bottom = 12.dp),
             )
             OutlinedTextField(
