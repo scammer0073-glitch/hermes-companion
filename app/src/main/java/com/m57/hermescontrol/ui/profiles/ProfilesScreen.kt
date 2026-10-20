@@ -215,7 +215,7 @@ fun ProfilesScreen(
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Bold,
                                             letterSpacing = 0.6.sp,
-                                            color = NemasysPalette.Text,
+                                            color = NemasysPalette.TextBright,
                                         )
                                     }
                                     Spacer(modifier = Modifier.height(8.dp))
