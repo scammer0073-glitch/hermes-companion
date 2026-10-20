@@ -323,7 +323,7 @@ internal fun BotPickerRow(
                 Text(
                     text = subtitle,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
