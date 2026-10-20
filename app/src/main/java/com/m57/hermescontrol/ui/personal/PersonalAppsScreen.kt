@@ -445,6 +445,7 @@ fun PersonalAppDetailScreen(
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                         border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Column(Modifier.padding(16.dp)) {
                             Text("Sleep last 7 days", color = NemasysPalette.TextBright, fontWeight = FontWeight.Bold)
