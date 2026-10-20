@@ -71,7 +71,7 @@ fun NemasysChatEmpty(
                     }
                     Text(
                         "TOOLS • MEMORY • CRON • ALL HERE",
-                        color = NemasysPalette.Muted,
+                        color = NemasysPalette.Text,
                         fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
