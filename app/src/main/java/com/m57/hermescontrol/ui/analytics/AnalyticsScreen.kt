@@ -693,7 +693,7 @@ private fun ModelEntryRow(entry: com.m57.hermescontrol.data.model.AnalyticsModel
                             append(stringResource(R.string.analytics_sessions).lowercase())
                         },
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
             }
             Text(
