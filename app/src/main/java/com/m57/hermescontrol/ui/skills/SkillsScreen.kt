@@ -1178,7 +1178,7 @@ private fun HubSkillCard(
                 Text(
                     text = cat,
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
             }
 
