@@ -43,7 +43,7 @@ fun NemasysChatEmpty(
             ) {
                 Surface(
                     shape = RoundedCornerShape(10.dp),
-                    color = NemasysPalette.CardBorder,
+                    color = NemasysPalette.Card,
                     border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 ) {
                     androidx.compose.foundation.layout.Box(Modifier.size(28.dp), contentAlignment = Alignment.Center) {
