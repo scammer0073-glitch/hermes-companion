@@ -719,11 +719,41 @@ private fun EnvVarSection(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(text = key, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
-                    Text(
-                        text = if (value.length > 30) "${value.take(15)}…${value.takeLast(10)}" else value,
-                        style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
+                    if (value.isBlank()) {
+                        Surface(
+                            shape = RoundedCornerShape(16.dp),
+                            color = NemasysPalette.Card,
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                            shadowElevation = 0.dp,
+                            tonalElevation = 0.dp,
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Box(
+                                    modifier = Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent),
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "NO VALUE",
+                                    style = MaterialTheme.typography.labelSmall.copy(
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                    ),
+                                    color = NemasysPalette.TextBright,
+                                )
+                            }
+                        }
+                    } else {
+                        Text(
+                            text = if (value.length > 30) "${value.take(15)}…${value.takeLast(10)}" else value,
+                            style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
                 IconButton(onClick = { viewModel.removeEnvVar(server.name, key) }) {
                     Icon(Icons.Filled.Close, contentDescription = "Remove", modifier = Modifier.size(16.dp))
