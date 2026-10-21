@@ -987,7 +987,7 @@ private fun ScanResultCard(result: SkillScanResponse) {
                     Text(
                         text = result.trustLevel,
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = NemasysPalette.Muted,
                     )
                 }
                 Text(
@@ -998,7 +998,7 @@ private fun ScanResultCard(result: SkillScanResponse) {
                             result.findings.size,
                         ),
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
             }
 
