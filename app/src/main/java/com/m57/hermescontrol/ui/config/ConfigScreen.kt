@@ -476,16 +476,42 @@ private fun FormEditor(
                         }
                         Spacer(modifier = Modifier.height(6.dp))
                         val valueText = values[dotPath]?.let(::jsonText)
-                        Text(
-                            text = valueText ?: "NO VALUE",
-                            style =
-                                MaterialTheme.typography.bodySmall.copy(
-                                    fontFamily = FontFamily.Monospace,
-                                    letterSpacing = 0.6.sp,
-                                    fontWeight = if (valueText == null) FontWeight.Bold else FontWeight.Normal,
-                                ),
-                            color = if (valueText == null) NemasysPalette.TextBright else NemasysPalette.Muted,
-                        )
+                        if (valueText == null) {
+                            Surface(
+                                shape = RoundedCornerShape(16.dp),
+                                color = NemasysPalette.Card,
+                                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                shadowElevation = 0.dp,
+                                tonalElevation = 0.dp,
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Box(
+                                        Modifier
+                                            .size(6.dp)
+                                            .clip(CircleShape)
+                                            .background(NemasysPalette.Accent),
+                                    )
+                                    Spacer(Modifier.width(6.dp))
+                                    Text(
+                                        text = "NO VALUE",
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                        color = NemasysPalette.TextBright,
+                                    )
+                                }
+                            }
+                        } else {
+                            Text(
+                                text = valueText,
+                                style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+                                color = NemasysPalette.Muted,
+                            )
+                        }
                     }
                 }
             }
