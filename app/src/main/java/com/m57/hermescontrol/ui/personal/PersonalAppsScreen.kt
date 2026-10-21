@@ -124,7 +124,7 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                                 }
                                 Text(
                                     "Create Food and Sleep, Gym, etc.",
-                                    color = NemasysPalette.Muted,
+                                    color = NemasysPalette.TextBright,
                                     fontSize = 12.sp,
                                     textAlign = TextAlign.Center,
                                 )
