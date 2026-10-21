@@ -56,8 +56,6 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.CreateProfileRequest
 import com.m57.hermescontrol.data.model.McpServerConfigInput
 import com.m57.hermescontrol.data.model.ModelProvider
-import com.m57.hermescontrol.theme.NemasysCard
-import com.m57.hermescontrol.theme.NemasysCardBorder
 import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.profiles.ProfilesUiState
 import com.m57.hermescontrol.ui.profiles.ProfilesViewModel
@@ -133,12 +131,12 @@ fun ProfileBuilderView(
                             .weight(1f)
                             .height(4.dp)
                             .clip(RoundedCornerShape(16.dp))
-                            .border(1.dp, NemasysCardBorder, RoundedCornerShape(16.dp))
+                            .border(1.dp, NemasysPalette.CardBorder, RoundedCornerShape(16.dp))
                             .background(
                                 if (i <= step) {
                                     MaterialTheme.colorScheme.primary
                                 } else {
-                                    NemasysCard
+                                    NemasysPalette.Card
                                 },
                             ),
                 )
@@ -507,8 +505,8 @@ private fun McpStep(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = NemasysCard),
-                        border = BorderStroke(1.dp, NemasysCardBorder),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
@@ -726,8 +724,8 @@ private fun ReviewStep(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, NemasysCardBorder),
-            colors = CardDefaults.cardColors(containerColor = NemasysCard),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -806,8 +804,8 @@ private fun ReviewStep(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, NemasysCardBorder),
-            colors = CardDefaults.cardColors(containerColor = NemasysCard),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -856,8 +854,8 @@ private fun ReviewStep(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, NemasysCardBorder),
-            colors = CardDefaults.cardColors(containerColor = NemasysCard),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
