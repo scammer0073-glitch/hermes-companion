@@ -651,7 +651,7 @@ private fun ModelRow(model: ModelsAnalyticsModelEntry) {
                         append(model.api_calls)
                     },
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = NemasysPalette.Muted,
             )
         }
     }
