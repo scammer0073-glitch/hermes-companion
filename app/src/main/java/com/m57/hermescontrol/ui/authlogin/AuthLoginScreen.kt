@@ -347,7 +347,7 @@ fun AuthLoginScreen(
                         text = "Continue in your browser, then return here. Sign-in expires after 10 minutes.",
                         style =
                             MaterialTheme.typography.bodyMedium.copy(
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = NemasysPalette.Muted,
                             ),
                         textAlign = TextAlign.Start,
                     )
