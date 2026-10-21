@@ -183,7 +183,7 @@ fun ReasoningCard(
                     Text(
                         text = reasoningText,
                         style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = NemasysPalette.TextBright,
                         modifier =
                             Modifier
                                 .padding(top = 4.dp)
