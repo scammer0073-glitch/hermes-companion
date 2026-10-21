@@ -182,7 +182,7 @@ fun NemasysChatEmpty(
                 Spacer(Modifier.width(6.dp))
                 Text(
                     "TIP: / COMMANDS • @ FILES • SELF-HOST FREE • HUB FROM ₹199",
-                    color = NemasysPalette.Muted,
+                    color = NemasysPalette.TextBright,
                     fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
