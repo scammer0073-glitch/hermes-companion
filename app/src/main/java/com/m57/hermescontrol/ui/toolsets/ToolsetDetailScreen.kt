@@ -302,15 +302,7 @@ private fun ToolsetProviderCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-        colors =
-            CardDefaults.cardColors(
-                containerColor =
-                    if (expanded) {
-                        NemasysPalette.AccentContainer
-                    } else {
-                        NemasysPalette.Card
-                    },
-            ),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
         border = BorderStroke(1.dp, if (expanded) NemasysPalette.Accent else NemasysPalette.CardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
