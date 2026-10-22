@@ -42,9 +42,11 @@ fun NemasysChatEmpty(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Surface(
-                    shape = RoundedCornerShape(10.dp),
+                    shape = RoundedCornerShape(16.dp),
                     color = NemasysPalette.Card,
                     border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
                 ) {
                     androidx.compose.foundation.layout.Box(Modifier.size(28.dp), contentAlignment = Alignment.Center) {
                         androidx.compose.material3.Text(
