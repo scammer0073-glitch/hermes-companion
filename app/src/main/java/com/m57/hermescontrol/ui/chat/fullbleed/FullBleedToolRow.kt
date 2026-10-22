@@ -14,11 +14,12 @@ import com.m57.hermescontrol.ui.chat.ToolBubble
 /**
  * Tool-row treatment inside the full-bleed renderer (issue #866).
  *
- * ToolBubble is ALREADY a compact dimmed card (surfaceContainerHigh, 8dp
- * radius, collapsed summary with expand/copy/raw-json/risk-chip) — distinct
- * from agent prose by design. In full-bleed mode we reuse it verbatim so the
- * verified tool-rendering logic is never duplicated, adding only a 16dp
- * start indent so tool rows align with the full-bleed prose margin.
+ * ToolBubble is ALREADY a compact Nemasys Black card (#0D0F12, #1E2D44
+ * border, 16dp radius, zero elevation, collapsed summary with
+ * expand/copy/raw-json/risk-chip) — distinct from agent prose by design. In
+ * full-bleed mode we reuse it verbatim so the verified tool-rendering logic is
+ * never duplicated, adding only a 16dp start indent so tool rows align with
+ * the full-bleed prose margin.
  */
 @Composable
 internal fun FullBleedToolRow(
