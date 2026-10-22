@@ -166,6 +166,26 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Column {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+            ) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .background(NemasysPalette.Accent, CircleShape),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text = stringResource(R.string.screen_settings).uppercase(),
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = NemasysPalette.Muted,
+                )
+            }
+            HorizontalDivider(color = NemasysPalette.CardBorder)
             items.forEachIndexed { index, row ->
                 ListItem(
                     modifier =
