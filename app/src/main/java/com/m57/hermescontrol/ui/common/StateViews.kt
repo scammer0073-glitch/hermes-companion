@@ -192,10 +192,13 @@ fun EmptyState(
                 if (subtitle != null) {
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        subtitle,
-                        color = NemasysPalette.Text,
+                        subtitle.uppercase(),
+                        color = NemasysPalette.Muted,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.bodySmall,
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Medium,
+                        letterSpacing = 0.4.sp,
                         modifier = Modifier.padding(horizontal = 12.dp),
                     )
                 }
