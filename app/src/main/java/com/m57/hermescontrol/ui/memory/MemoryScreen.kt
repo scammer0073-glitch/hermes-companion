@@ -338,13 +338,16 @@ private fun SelfImprovementSection(graph: LearningGraphResponse?) {
             Spacer(modifier = Modifier.height(8.dp))
 
             if (graph == null || graph.nodes.isEmpty()) {
-                Surface(
+                Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    color = NemasysPalette.Card,
+                    colors =
+                        CardDefaults.cardColors(
+                            containerColor = NemasysPalette.Card,
+                            contentColor = NemasysPalette.Text,
+                        ),
                     border = BorderStroke(1.dp, NemasysPalette.CardBorder),
-                    tonalElevation = 0.dp,
-                    shadowElevation = 0.dp,
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 ) {
                     Row(
                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
