@@ -189,7 +189,11 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
     Card(
         mod,
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = cardColor),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = cardColor,
+                contentColor = NemasysPalette.Text,
+            ),
         border = androidx.compose.foundation.BorderStroke(1.dp, cardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
