@@ -1102,12 +1102,26 @@ private fun LazyListScope.credentialsSection(
                 }
 
                 state.credentials.forEach { provider ->
-                    Text(
-                        text = provider.provider ?: "?",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
+                    Row(
                         modifier = Modifier.padding(vertical = spacing.xs),
-                    )
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
+                        )
+                        Text(
+                            text = (provider.provider ?: "?").uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
+                        )
+                    }
                     provider.entries?.forEach { entry ->
                         CredentialEntryRow(
                             entry = entry,
