@@ -55,7 +55,11 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         Card(
                             shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                            colors =
+                                CardDefaults.cardColors(
+                                    containerColor = NemasysPalette.Card,
+                                    contentColor = NemasysPalette.Text,
+                                ),
                             border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
