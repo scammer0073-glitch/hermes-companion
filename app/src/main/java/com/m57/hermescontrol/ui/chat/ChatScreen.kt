@@ -462,7 +462,7 @@ fun ChatScreen(
                     Surface(
                         shape = RoundedCornerShape(16.dp),
                         color = NemasysPalette.Card,
-                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        contentColor = NemasysPalette.TextBright,
                         border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         tonalElevation = 0.dp,
                         shadowElevation = 0.dp,
