@@ -248,7 +248,11 @@ private fun MoaConfigEditor(
             androidx.compose.material3.Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                colors =
+                    androidx.compose.material3.CardDefaults.cardColors(
+                        containerColor = NemasysPalette.Card,
+                        contentColor = NemasysPalette.Text,
+                    ),
                 border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                 elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
