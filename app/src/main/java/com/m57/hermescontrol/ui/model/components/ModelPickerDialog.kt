@@ -341,7 +341,8 @@ private fun ModelItemCard(
                 text = modelName,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = NemasysPalette.TextBright,
+                // Keep model names on the Nemasys Black card at full contrast.
                 // No maxLines/ellipsis: a long model name wraps so the full
                 // name stays readable while the pin button keeps its spot.
                 modifier = Modifier.weight(1f),
