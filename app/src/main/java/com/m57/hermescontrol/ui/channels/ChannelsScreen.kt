@@ -19,7 +19,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -291,19 +290,28 @@ private fun GatewayOfflineBanner(gatewayCommand: String) {
             modifier = Modifier.fillMaxWidth().padding(12.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Filled.Warning,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(NemasysPalette.Accent),
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "The gateway is not running. Configure channels here, then start the gateway with:",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = "GATEWAY OFFLINE",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = NemasysPalette.TextBright,
                 )
             }
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(
+                text = "The gateway is not running. Configure channels here, then start the gateway with:",
+                style = MaterialTheme.typography.bodySmall,
+                color = NemasysPalette.Muted,
+            )
             Spacer(modifier = Modifier.height(8.dp))
             Surface(
                 color = NemasysPalette.Card,
