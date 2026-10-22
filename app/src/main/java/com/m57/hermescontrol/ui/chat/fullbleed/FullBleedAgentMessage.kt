@@ -2,6 +2,8 @@ package com.m57.hermescontrol.ui.chat.fullbleed
 
 import android.content.ClipData
 import android.text.format.DateFormat
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -32,10 +35,13 @@ import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.Attachment
+import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.ChatMessage
 import com.m57.hermescontrol.ui.chat.ImageViewerModel
 import com.m57.hermescontrol.ui.chat.InlineAttachment
@@ -168,18 +174,19 @@ internal fun AssistantTurnHeader(
         modifier = modifier.padding(bottom = 4.dp).testTag("fullbleed_agent_header"),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        Box(
+            Modifier
+                .size(6.dp)
+                .background(NemasysPalette.Accent, CircleShape),
+        )
+        Spacer(modifier = Modifier.width(6.dp))
         Text(
-            text = stringResource(R.string.fullbleed_role_agent),
-            style =
-                MaterialTheme.typography.labelMedium.copy(
-                    fontWeight = FontWeight.SemiBold,
-                ),
-            // Meta color (not primary): Nord's light mode reuses its
-            // pastel Frost accent as primary, which fails >= 3:1 on a
-            // light background. The header is metadata, so the dimmed
-            // meta token is both more correct and gate-compliant in
-            // every preset.
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            text = stringResource(R.string.fullbleed_role_agent).uppercase(),
+            fontFamily = FontFamily.Monospace,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 0.6.sp,
+            color = NemasysPalette.TextBright,
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
