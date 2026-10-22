@@ -187,7 +187,11 @@ fun ToolsetsScreen(
                                                 1.dp,
                                                 NemasysPalette.CardBorder,
                                             ),
-                                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                        colors =
+                                            CardDefaults.cardColors(
+                                                containerColor = NemasysPalette.Card,
+                                                contentColor = NemasysPalette.Text,
+                                            ),
                                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                                     ) {
                                         Row(
