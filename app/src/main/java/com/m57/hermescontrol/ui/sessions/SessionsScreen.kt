@@ -562,6 +562,8 @@ fun SessionsScreen(
                     FilledTonalButton(
                         onClick = { viewModel.requestEmptyCleanup() },
                         enabled = state.emptyCount > 0,
+                        shape = RoundedCornerShape(16.dp),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                         colors =
                             ButtonDefaults.filledTonalButtonColors(
                                 containerColor = NemasysPalette.Card,
@@ -569,6 +571,13 @@ fun SessionsScreen(
                                 disabledContainerColor = NemasysPalette.Card,
                                 disabledContentColor = NemasysPalette.Muted,
                             ),
+                        elevation = ButtonDefaults.filledTonalButtonElevation(
+                            defaultElevation = 0.dp,
+                            pressedElevation = 0.dp,
+                            focusedElevation = 0.dp,
+                            hoveredElevation = 0.dp,
+                            disabledElevation = 0.dp,
+                        ),
                         contentPadding = PaddingValues(horizontal = spacing.md, vertical = 8.dp),
                     ) {
                         Icon(
