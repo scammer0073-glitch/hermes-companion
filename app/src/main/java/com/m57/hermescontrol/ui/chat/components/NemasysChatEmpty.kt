@@ -161,7 +161,7 @@ fun NemasysChatEmpty(
                                 color = NemasysPalette.TextBright,
                                 fontSize = 13.sp,
                             )
-                            Text(sub, color = NemasysPalette.Text, fontSize = 11.sp)
+                            Text(sub, color = NemasysPalette.TextBright, fontSize = 11.sp)
                         }
                         Text("→", color = NemasysPalette.Accent, fontWeight = FontWeight.Bold)
                     }
