@@ -412,7 +412,7 @@ fun TaskCard(
                     Text(
                         text = assignee,
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = NemasysPalette.Muted,
                     )
                 }
             }
