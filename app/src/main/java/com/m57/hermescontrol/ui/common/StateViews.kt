@@ -24,8 +24,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.theme.LocalSpacing
-import com.m57.hermescontrol.theme.NemasysCard
-import com.m57.hermescontrol.theme.NemasysCardBorder
 import com.m57.hermescontrol.theme.NemasysPalette
 
 @Composable
@@ -165,8 +163,8 @@ fun EmptyState(
                 Surface(
                     modifier = Modifier.size(64.dp),
                     shape = RoundedCornerShape(16.dp),
-                    color = NemasysCard,
-                    border = androidx.compose.foundation.BorderStroke(1.dp, NemasysCardBorder),
+                    color = NemasysPalette.Card,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
                     shadowElevation = 0.dp,
                     tonalElevation = 0.dp,
                     contentColor = NemasysPalette.Text,
