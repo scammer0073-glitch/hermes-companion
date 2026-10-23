@@ -23,6 +23,8 @@ import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -534,14 +536,16 @@ private fun MoaSlotPicker(
                         }
                     }
                 } else {
-                    Surface(
+                    Card(
                         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                         shape = RoundedCornerShape(16.dp),
-                        color = NemasysPalette.Card,
-                        contentColor = NemasysPalette.TextBright,
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = NemasysPalette.Card,
+                                contentColor = NemasysPalette.TextBright,
+                            ),
                         border = BorderStroke(1.dp, NemasysPalette.CardBorder),
-                        shadowElevation = 0.dp,
-                        tonalElevation = 0.dp,
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(10.dp),
