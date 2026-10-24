@@ -161,7 +161,13 @@ fun NemasysChatEmpty(
                                 color = NemasysPalette.TextBright,
                                 fontSize = 13.sp,
                             )
-                            Text(sub, color = NemasysPalette.TextBright, fontSize = 11.sp)
+                            Text(
+                                sub.uppercase(),
+                                color = NemasysPalette.Text,
+                                fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                letterSpacing = 0.3.sp,
+                            )
                         }
                         Text("→", color = NemasysPalette.Accent, fontWeight = FontWeight.Bold)
                     }
