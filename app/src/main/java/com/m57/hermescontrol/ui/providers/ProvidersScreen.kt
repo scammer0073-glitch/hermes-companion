@@ -199,7 +199,7 @@ private fun ProviderCard(
                     Text(
                         text = stringResource(R.string.providers_via, label),
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        color = NemasysPalette.Muted.copy(alpha = 0.6f),
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
