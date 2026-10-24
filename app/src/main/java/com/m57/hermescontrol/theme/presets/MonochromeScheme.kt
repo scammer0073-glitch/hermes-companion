@@ -118,8 +118,9 @@ val MonochromeTheme =
                 onBackground = MonoLightTextBright,
                 surface = MonoLightBg,
                 onSurface = MonoLightTextBright,
-                surfaceVariant = MonoLightContainerHigh,
-                onSurfaceVariant = MonoLightTextDim,
+                // Keep the remaining light surface-variant card tier on Nemasys Black.
+                surfaceVariant = Color(0xFF0D0F12),
+                onSurfaceVariant = MonoLightTextBright,
                 surfaceContainerLowest = MonoLightCeiling,
                 surfaceContainerLow = MonoLightBg,
                 surfaceContainer = Color(0xFF0D0F12),
