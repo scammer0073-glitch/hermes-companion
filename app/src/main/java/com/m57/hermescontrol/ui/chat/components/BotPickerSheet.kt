@@ -23,6 +23,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.SmartToy
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -154,13 +156,12 @@ fun BotPickerSheet(
                 }
                 else -> {
                     if (filtered.isEmpty()) {
-                        Surface(
+                        Card(
                             modifier = Modifier.fillMaxWidth().height(180.dp),
                             shape = RoundedCornerShape(16.dp),
-                            color = NemasysPalette.Card,
+                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
                             border = BorderStroke(1.dp, NemasysPalette.CardBorder),
-                            shadowElevation = 0.dp,
-                            tonalElevation = 0.dp,
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                         ) {
                             Column(
                                 modifier = Modifier.fillMaxSize(),
