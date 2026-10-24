@@ -592,14 +592,25 @@ private fun DailyChartDayLabel(
             }
         }
     } else {
-        Text(
-            text = day?.takeIf { it.isNotBlank() } ?: "NO DATE",
-            fontFamily = FontFamily.Monospace,
-            fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = 0.6.sp,
-            color = NemasysPalette.Muted,
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            Box(
+                Modifier
+                    .size(6.dp)
+                    .clip(CircleShape)
+                    .background(NemasysPalette.Accent),
+            )
+            Text(
+                text = day?.takeIf { it.isNotBlank() } ?: "NO DATE",
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.6.sp,
+                color = NemasysPalette.TextBright,
+            )
+        }
     }
 }
 
