@@ -593,7 +593,7 @@ private fun DailyChartDayLabel(
         }
     } else {
         Text(
-            text = day.orEmpty(),
+            text = day?.takeIf { it.isNotBlank() } ?: "NO DATE",
             fontFamily = FontFamily.Monospace,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
