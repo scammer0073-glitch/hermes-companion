@@ -199,8 +199,10 @@ fun CronJobsScreen(
                                 Spacer(modifier = Modifier.height(spacing.xs))
                                 Text(
                                     text = job.scheduleText,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    color = NemasysPalette.Muted,
                                 )
                                 Spacer(modifier = Modifier.height(spacing.sm))
                                 Row(
