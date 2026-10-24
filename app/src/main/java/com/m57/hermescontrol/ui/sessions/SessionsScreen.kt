@@ -586,7 +586,14 @@ fun SessionsScreen(
                             modifier = Modifier.size(18.dp),
                         )
                         Spacer(modifier = Modifier.width(spacing.xs))
-                        Text(stringResource(R.string.sessions_empty_cleanup_desc))
+                        Text(
+                            text = stringResource(R.string.sessions_empty_cleanup_desc).uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.Accent,
+                        )
                     }
                 }
             }
