@@ -360,7 +360,7 @@ private fun ToolsetProviderCard(
                         Text(
                             text = it,
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                         )
                     }
 
@@ -374,7 +374,7 @@ private fun ToolsetProviderCard(
                         Text(
                             text = stringResource(R.string.toolset_nous_signin_hint),
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                         )
                     }
 
