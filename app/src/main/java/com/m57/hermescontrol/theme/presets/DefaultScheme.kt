@@ -130,7 +130,8 @@ val DefaultTheme =
                 onSurfaceVariant = SlateLightFg3,
                 surfaceContainerLowest = SlateLightBg0,
                 surfaceContainerLow = SlateLightBg1,
-                surfaceContainer = SlateLightBg2,
+                // Keep the fallback light container on the Nemasys Black card surface.
+                surfaceContainer = NemasysBlackCard,
                 surfaceContainerHigh = SlateLightBg3,
                 surfaceContainerHighest = SlateLightBg4,
                 inverseSurface = SlateLightFg1,
