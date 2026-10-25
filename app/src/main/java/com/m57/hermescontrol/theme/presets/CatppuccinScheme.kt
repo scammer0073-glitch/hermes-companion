@@ -132,7 +132,8 @@ val CatppuccinTheme =
                 surfaceContainerLow = Color(0xFF0D0F12),
                 // Keep the light container card tier on Nemasys Black.
                 surfaceContainer = Color(0xFF0D0F12),
-                surfaceContainerHigh = LatteSurface0,
+                // Keep the remaining light high card tier on Nemasys Black.
+                surfaceContainerHigh = Color(0xFF0D0F12),
                 surfaceContainerHighest = LatteSurface1,
                 inverseSurface = LatteText,
                 inverseOnSurface = LatteBase,
