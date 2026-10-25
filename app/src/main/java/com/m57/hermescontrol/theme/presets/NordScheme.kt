@@ -123,7 +123,7 @@ val NordTheme =
                 surfaceContainerLowest = Nord6,
                 // Keep one remaining light card container on Nemasys Black.
                 surfaceContainerLow = Color(0xFF0D0F12),
-                surfaceContainer = Nord5,
+                surfaceContainer = Color(0xFF0D0F12),
                 surfaceContainerHigh = Nord4,
                 surfaceContainerHighest = Nord4,
                 inverseSurface = Nord0,
