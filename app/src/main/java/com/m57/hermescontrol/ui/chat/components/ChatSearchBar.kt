@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.chat.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -21,13 +22,17 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.NemasysPalette
 
@@ -131,19 +136,24 @@ fun SearchBarRow(
                 } else {
                     "0/0"
                 }
-            Text(
-                text = countText,
-                style =
-                    MaterialTheme.typography.bodySmall.copy(
-                        color =
-                            if (isError) {
-                                MaterialTheme.colorScheme.error
-                            } else {
-                                MaterialTheme.colorScheme.onSurfaceVariant
-                            },
-                    ),
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = NemasysPalette.Card,
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                shadowElevation = 0.dp,
+                tonalElevation = 0.dp,
                 modifier = Modifier.padding(horizontal = 4.dp),
-            )
+            ) {
+                Text(
+                    text = countText.uppercase(),
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = if (isError) NemasysPalette.Accent else NemasysPalette.Muted,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp),
+                )
+            }
         }
         IconButton(
             onClick = onNavigateUp,
