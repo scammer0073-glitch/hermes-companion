@@ -135,7 +135,8 @@ val DefaultTheme =
                 surfaceContainer = NemasysBlackCard,
                 // Keep high-elevation light containers on the Nemasys Black card surface.
                 surfaceContainerHigh = NemasysBlackCard,
-                surfaceContainerHighest = SlateLightBg4,
+                // Keep the highest light container on the Nemasys Black card surface.
+                surfaceContainerHighest = NemasysBlackCard,
                 inverseSurface = SlateLightFg1,
                 inverseOnSurface = SlateLightBg0,
                 inversePrimary = SlateBrightTeal,
