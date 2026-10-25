@@ -124,7 +124,8 @@ val CatppuccinTheme =
                 onBackground = LatteText,
                 surface = LatteBase,
                 onSurface = LatteText,
-                surfaceVariant = LatteSurface0,
+                // Keep the light surface-variant card tier on Nemasys Black.
+                surfaceVariant = Color(0xFF0D0F12),
                 onSurfaceVariant = LatteSubtext0,
                 surfaceContainerLowest = LatteCrust,
                 surfaceContainerLow = LatteMantle,
