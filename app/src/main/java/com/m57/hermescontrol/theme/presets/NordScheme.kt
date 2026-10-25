@@ -126,7 +126,8 @@ val NordTheme =
                 surfaceContainer = Color(0xFF0D0F12),
                 // Keep the light high card tier on Nemasys Black.
                 surfaceContainerHigh = Color(0xFF0D0F12),
-                surfaceContainerHighest = Nord4,
+                // Keep the remaining light highest card tier on Nemasys Black.
+                surfaceContainerHighest = Color(0xFF0D0F12),
                 inverseSurface = Nord0,
                 inverseOnSurface = Nord6,
                 inversePrimary = Nord8,
