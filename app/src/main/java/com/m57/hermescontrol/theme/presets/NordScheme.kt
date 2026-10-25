@@ -117,7 +117,8 @@ val NordTheme =
                 onBackground = Nord0,
                 surface = Nord6,
                 onSurface = Nord0,
-                surfaceVariant = Nord5,
+                // Keep the light surface-variant card tier on Nemasys Black.
+                surfaceVariant = Color(0xFF0D0F12),
                 onSurfaceVariant = Nord2,
                 surfaceContainerLowest = Nord6,
                 surfaceContainerLow = Nord5,
