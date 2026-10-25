@@ -128,7 +128,8 @@ val GruvboxTheme =
                 surfaceVariant = Color(0xFF0D0F12),
                 onSurfaceVariant = GruvboxLightFg3,
                 surfaceContainerLowest = GruvboxLightBg0,
-                surfaceContainerLow = GruvboxLightBg1,
+                // Keep the remaining light low container on the Nemasys Black card surface.
+                surfaceContainerLow = Color(0xFF0D0F12),
                 surfaceContainer = GruvboxLightBg2,
                 surfaceContainerHigh = GruvboxLightBg3,
                 surfaceContainerHighest = GruvboxLightBg4,
