@@ -124,7 +124,8 @@ val GruvboxTheme =
                 onBackground = GruvboxLightFg1,
                 surface = GruvboxLightBg0,
                 onSurface = GruvboxLightFg1,
-                surfaceVariant = GruvboxLightBg1,
+                // Keep the remaining light surface-variant card tier on Nemasys Black.
+                surfaceVariant = Color(0xFF0D0F12),
                 onSurfaceVariant = GruvboxLightFg3,
                 surfaceContainerLowest = GruvboxLightBg0,
                 surfaceContainerLow = GruvboxLightBg1,
