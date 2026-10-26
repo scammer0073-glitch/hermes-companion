@@ -692,7 +692,7 @@ private fun TypingDot(delayMs: Int) {
         androidx.compose.material3.Surface(
             modifier = Modifier.size(8.dp),
             shape = CircleShape,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = NemasysPalette.Muted,
         ) {}
     }
 }
