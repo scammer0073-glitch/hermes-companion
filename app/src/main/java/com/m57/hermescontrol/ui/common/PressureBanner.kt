@@ -1,5 +1,6 @@
 package com.m57.hermescontrol.ui.common
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +21,7 @@ import com.m57.hermescontrol.R
 import com.m57.hermescontrol.data.model.DiskPressureStatus
 import com.m57.hermescontrol.data.model.MemoryPressureStatus
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
-import com.m57.hermescontrol.theme.onColorFor
+import com.m57.hermescontrol.theme.NemasysPalette
 
 /**
  * Worst-first severity of the host-health advisory (mirrors the desktop
@@ -72,13 +73,7 @@ fun PressureBanner(
     val critical =
         trigger == PressureTrigger.DISK_CRITICAL ||
             trigger == PressureTrigger.MEMORY_CRITICAL
-    val bgColor =
-        if (critical) {
-            statusColors.errorContainer
-        } else {
-            statusColors.warningContainer
-        }
-    val fgColor = onColorFor(bgColor)
+    val fgColor = if (critical) statusColors.error else statusColors.warning
 
     val message =
         when (trigger) {
@@ -102,8 +97,11 @@ fun PressureBanner(
 
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.medium,
-        color = bgColor,
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+        color = NemasysPalette.Card,
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        shadowElevation = 0.dp,
+        tonalElevation = 0.dp,
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
