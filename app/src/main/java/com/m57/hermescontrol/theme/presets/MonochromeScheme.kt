@@ -27,7 +27,8 @@ private val MonoDarkInfo = Color(0xFF808080) // info — same value as outline, 
 // Monochrome Light — the same ramp, inverted
 // ---------------------------------------------------------------------
 
-private val MonoLightCeiling = Color(0xFFFFFFFF) // surfaceContainerLowest
+// Keep the lightest container on the Nemasys Black card surface.
+private val MonoLightCeiling = Color(0xFF0D0F12) // surfaceContainerLowest
 private val MonoLightBg = Color(0xFFFAFAFA) // background, surface, containerLow, all "on*" ink
 private val MonoLightContainer = Color(0xFFF0F0F0) // surfaceContainer
 private val MonoLightContainerHigh = Color(0xFF0D0F12) // surfaceContainerHigh, Nemasys Black card tier
