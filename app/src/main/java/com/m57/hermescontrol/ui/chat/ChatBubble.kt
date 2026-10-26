@@ -374,15 +374,38 @@ internal fun SystemBubble(
             border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
-            Text(
-                text = message.content,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
-                style =
-                    MaterialTheme.typography.bodySmall.copy(
-                        fontStyle = FontStyle.Italic,
-                        color = NemasysPalette.Muted,
-                    ),
-            )
+            if (message.content.isBlank()) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = "NO MESSAGE CONTENT",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.TextBright,
+                    )
+                }
+            } else {
+                Text(
+                    text = message.content,
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                    style =
+                        MaterialTheme.typography.bodySmall.copy(
+                            fontStyle = FontStyle.Italic,
+                            color = NemasysPalette.Muted,
+                        ),
+                )
+            }
         }
 
         // Approval action buttons
