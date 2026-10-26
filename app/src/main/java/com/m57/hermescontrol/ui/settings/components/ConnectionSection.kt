@@ -91,7 +91,11 @@ internal fun ConnectionSection(
                             .padding(vertical = 2.dp)
                             .clickable(role = Role.Button) { viewModel.selectProfile(profile.id) },
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                    colors =
+                        CardDefaults.cardColors(
+                            containerColor = NemasysPalette.Card,
+                            contentColor = NemasysPalette.Text,
+                        ),
                     border =
                         if (isActive) {
                             BorderStroke(1.dp, NemasysPalette.Accent)
