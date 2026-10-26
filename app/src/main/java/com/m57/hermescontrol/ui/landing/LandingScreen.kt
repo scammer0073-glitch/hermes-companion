@@ -269,11 +269,17 @@ private fun LandingCapability(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Box(
-            Modifier.size(36.dp).clip(CircleShape).background(NemasysPalette.SelectedSurface),
-            contentAlignment = Alignment.Center,
+        Surface(
+            modifier = Modifier.size(36.dp),
+            shape = RoundedCornerShape(16.dp),
+            color = NemasysPalette.Card,
+            border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+            shadowElevation = 0.dp,
+            tonalElevation = 0.dp,
         ) {
-            Icon(icon, contentDescription = null, tint = NemasysPalette.Accent, modifier = Modifier.size(18.dp))
+            Box(contentAlignment = Alignment.Center) {
+                Icon(icon, contentDescription = null, tint = NemasysPalette.Accent, modifier = Modifier.size(18.dp))
+            }
         }
         Text(
             label,
