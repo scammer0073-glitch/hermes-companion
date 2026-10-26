@@ -314,23 +314,36 @@ private fun MoaConfigEditor(
             }
         }
 
-        // Default preset indicator
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(
-                Modifier
-                    .size(6.dp)
-                    .clip(CircleShape)
-                    .background(NemasysPalette.Accent),
-            )
-            Spacer(Modifier.width(6.dp))
-            Text(
-                text = "DEFAULT: ${draft.default_preset.ifBlank { "(NONE)" }}",
-                fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 0.6.sp,
-                color = NemasysPalette.Text,
-            )
+        // Default preset indicator, including the empty state, uses the Nemasys card surface.
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            color = NemasysPalette.Card,
+            contentColor = NemasysPalette.Text,
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+            tonalElevation = 0.dp,
+            shadowElevation = 0.dp,
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Box(
+                    Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(NemasysPalette.Accent),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text = "DEFAULT: ${draft.default_preset.ifBlank { "(NONE)" }}",
+                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = NemasysPalette.Text,
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(4.dp))
