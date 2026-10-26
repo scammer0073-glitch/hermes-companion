@@ -41,6 +41,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -441,11 +442,31 @@ private fun SettingsRow(
                     fontWeight = FontWeight.Medium,
                     color = NemasysPalette.TextBright,
                 )
-                Text(
-                    text = value,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = NemasysPalette.Muted,
-                )
+                if (value == "not loaded") {
+                    Surface(
+                        shape = RoundedCornerShape(16.dp),
+                        color = NemasysPalette.Card,
+                        contentColor = NemasysPalette.TextBright,
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        shadowElevation = 0.dp,
+                        tonalElevation = 0.dp,
+                    ) {
+                        Text(
+                            text = value.uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+                        )
+                    }
+                } else {
+                    Text(
+                        text = value,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = NemasysPalette.Muted,
+                    )
+                }
             }
         }
         OutlinedButton(
