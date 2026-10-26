@@ -128,7 +128,8 @@ val DefaultTheme =
                 // Keep the fallback variant aligned with the Nemasys Black card surface.
                 surfaceVariant = NemasysBlackCard,
                 onSurfaceVariant = SlateLightFg3,
-                surfaceContainerLowest = SlateLightBg0,
+                // Keep the lowest light container on the Nemasys Black card surface.
+                surfaceContainerLowest = NemasysBlackCard,
                 // Keep low-elevation light containers on the Nemasys Black card surface.
                 surfaceContainerLow = NemasysBlackCard,
                 // Keep the fallback light container on the Nemasys Black card surface.
