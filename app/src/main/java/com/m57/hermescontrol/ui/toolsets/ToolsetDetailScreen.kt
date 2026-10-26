@@ -721,9 +721,18 @@ private fun PostSetupRunner(
                                 .padding(10.dp),
                     ) {
                         Text(
-                            text = if (lines.isEmpty()) runningText else lines.joinToString("\n"),
+                            text =
+                                if (lines.isEmpty()) {
+                                    runningText.uppercase()
+                                } else {
+                                    lines.joinToString("\n")
+                                },
                             style = MaterialTheme.typography.bodySmall,
                             fontFamily = FontFamily.Monospace,
+                            fontSize = if (lines.isEmpty()) 11.sp else MaterialTheme.typography.bodySmall.fontSize,
+                            fontWeight = if (lines.isEmpty()) FontWeight.Bold else FontWeight.Normal,
+                            letterSpacing = if (lines.isEmpty()) 0.6.sp else 0.sp,
+                            color = if (lines.isEmpty()) NemasysPalette.Muted else NemasysPalette.Text,
                         )
                     }
                 }
