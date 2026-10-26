@@ -92,7 +92,7 @@ fun SettingsScreen(
                                         state.profiles.size,
                                     )
                                 } else {
-                                    null
+                                    "NO PROFILES"
                                 },
                             onClick = { NavigationController.navigateTo(SettingsConnection) },
                         ),
@@ -210,11 +210,30 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                     supportingContent =
                         row.summary?.let { summary ->
                             {
-                                Text(
-                                    text = summary,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = NemasysPalette.Muted,
-                                )
+                                if (summary == "NO PROFILES") {
+                                    Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                                        Box(
+                                            Modifier
+                                                .size(6.dp)
+                                                .background(NemasysPalette.Accent, CircleShape),
+                                        )
+                                        Spacer(Modifier.width(6.dp))
+                                        Text(
+                                            text = summary,
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = 0.6.sp,
+                                            color = NemasysPalette.TextBright,
+                                        )
+                                    }
+                                } else {
+                                    Text(
+                                        text = summary,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = NemasysPalette.Muted,
+                                    )
+                                }
                             }
                         },
                     trailingContent = {
