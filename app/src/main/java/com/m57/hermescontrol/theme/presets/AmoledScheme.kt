@@ -13,7 +13,7 @@ import com.m57.hermescontrol.theme.buildThemeDarkOnly
 
 private val NBlack = Color(0xFF000000)
 private val NCard = Color(0xFF0D0F12) // cards, sheets
-private val NCardHover = Color(0xFF13171C) // hover / high
+private val NCardHover = NCard // hover / high, Nemasys Black card tier
 private val NBorder = Color(0xFF1E2D44) // Nemasys Black card stroke
 private val NBorderStrong = Color(0xFF243146)
 private val NMuted = Color(0xFF7A8AA1) // secondary text
