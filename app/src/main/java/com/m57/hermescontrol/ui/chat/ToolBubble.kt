@@ -498,14 +498,16 @@ private fun ExpandedToolContent(
                     view.detail == "No terminal output" ||
                     view.detail == "NO RESULTS"
                 ) {
-                    Surface(
+                    Card(
                         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                         shape = RoundedCornerShape(16.dp),
-                        color = NemasysPalette.Card,
-                        contentColor = NemasysPalette.Text,
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = NemasysPalette.Card,
+                                contentColor = NemasysPalette.Text,
+                            ),
                         border = BorderStroke(1.dp, NemasysPalette.CardBorder),
-                        tonalElevation = 0.dp,
-                        shadowElevation = 0.dp,
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(12.dp),
