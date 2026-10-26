@@ -630,11 +630,13 @@ private fun AchievementCard(
             }
 
             // Description
-            achievement.description?.let {
+            achievement.description?.takeIf { it.isNotBlank() }?.let {
                 Text(
                     text = it,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    letterSpacing = 0.3.sp,
                 )
             }
 
