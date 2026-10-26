@@ -426,7 +426,7 @@ fun ProfilesScreen(
                                                         Text(
                                                             text = descriptionText.orEmpty(),
                                                             style = MaterialTheme.typography.bodyMedium,
-                                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                            color = NemasysPalette.Muted,
                                                         )
                                                     }
                                                     if (profile.description_auto == true) {
