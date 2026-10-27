@@ -357,9 +357,12 @@ fun PersonalAppDetailScreen(
                                         }
                                     }
                                     Text(
-                                        text = "Type or speak: ate 2 eggs 8am, slept 23:30-06:45",
+                                        text = "TYPE OR SPEAK: ATE 2 EGGS 8AM, SLEPT 23:30–06:45",
                                         color = NemasysPalette.Muted,
-                                        fontSize = 12.sp,
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        letterSpacing = 0.35.sp,
                                         textAlign = TextAlign.Center,
                                     )
                                 }
