@@ -921,9 +921,9 @@ private fun CatalogSection(
                                 text = stringResource(R.string.mcp_servers_catalog_empty).uppercase(),
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 11.sp,
-                                fontWeight = FontWeight.Medium,
-                                letterSpacing = 0.4.sp,
-                                color = NemasysPalette.Muted,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.TextBright,
                             )
                         }
                     }
