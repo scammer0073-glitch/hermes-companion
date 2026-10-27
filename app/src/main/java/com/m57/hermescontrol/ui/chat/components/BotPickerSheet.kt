@@ -162,7 +162,7 @@ fun BotPickerSheet(
                             colors =
                                 CardDefaults.cardColors(
                                     containerColor = NemasysPalette.Card,
-                                    contentColor = NemasysPalette.Text,
+                                    contentColor = NemasysPalette.TextBright,
                                 ),
                             border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
