@@ -723,7 +723,7 @@ private fun AchievementCard(
                         Text(
                             text = criteria,
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Text,
                             modifier = Modifier.padding(10.dp),
                         )
                     }
