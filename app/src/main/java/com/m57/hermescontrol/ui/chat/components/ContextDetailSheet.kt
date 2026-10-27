@@ -36,8 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
-import com.m57.hermescontrol.theme.NemasysCard
-import com.m57.hermescontrol.theme.NemasysCardBorder
 import com.m57.hermescontrol.theme.NemasysPalette
 import com.m57.hermescontrol.ui.chat.ContextBreakdown
 import kotlin.math.min
@@ -80,8 +78,8 @@ fun ContextDetailSheet(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = NemasysCard),
-            border = BorderStroke(1.dp, NemasysCardBorder),
+            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(
@@ -136,12 +134,12 @@ fun ContextDetailSheet(
                             .fillMaxWidth()
                             .height(8.dp)
                             .background(
-                                color = NemasysCard,
+                                color = NemasysPalette.Card,
                                 shape = RoundedCornerShape(4.dp),
                             )
                             .border(
                                 width = 1.dp,
-                                color = NemasysCardBorder,
+                                color = NemasysPalette.CardBorder,
                                 shape = RoundedCornerShape(4.dp),
                             ),
                 ) {
