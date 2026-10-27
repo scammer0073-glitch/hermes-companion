@@ -156,10 +156,12 @@ fun NemasysChatEmpty(
                         Spacer(Modifier.width(12.dp))
                         Column(Modifier.weight(1f)) {
                             Text(
-                                title,
-                                fontWeight = FontWeight.SemiBold,
+                                title.uppercase(),
+                                fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
                                 color = NemasysPalette.TextBright,
-                                fontSize = 13.sp,
                             )
                             Text(
                                 sub.uppercase(),
