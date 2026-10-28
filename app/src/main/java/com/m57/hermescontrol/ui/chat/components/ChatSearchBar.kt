@@ -77,9 +77,12 @@ fun CompactSearchInput(
                 Box(modifier = Modifier.weight(1f)) {
                     if (value.isEmpty()) {
                         Text(
-                            text = stringResource(R.string.chat_search_placeholder),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = NemasysPalette.Muted,
+                            text = stringResource(R.string.chat_search_placeholder).uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
                         )
                     }
                     innerTextField()
