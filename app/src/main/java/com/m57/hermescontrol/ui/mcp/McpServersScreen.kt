@@ -976,9 +976,11 @@ private fun CatalogEntryCard(
                     )
                     entry.source?.let {
                         Text(
-                            text = stringResource(R.string.mcp_servers_catalog_source, it),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            text = stringResource(R.string.mcp_servers_catalog_source, it).uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            letterSpacing = 0.3.sp,
+                            color = NemasysPalette.Muted,
                         )
                     }
                 }
