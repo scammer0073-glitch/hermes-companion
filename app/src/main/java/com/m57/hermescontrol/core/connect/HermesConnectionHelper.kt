@@ -139,7 +139,7 @@ fun HermesConnectHelperCard(
                 Spacer(Modifier.width(6.dp))
                 Text(
                     "HERMES WRAPPER • ONE-TAP CONNECT",
-                    color = NemasysPalette.Muted,
+                    color = NemasysPalette.TextBright,
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.Bold,
                     fontSize = 11.sp,
