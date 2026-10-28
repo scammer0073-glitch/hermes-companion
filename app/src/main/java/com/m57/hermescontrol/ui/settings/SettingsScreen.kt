@@ -31,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -211,21 +212,32 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                         row.summary?.let { summary ->
                             {
                                 if (summary == "NO PROFILES") {
-                                    Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-                                        Box(
-                                            Modifier
-                                                .size(6.dp)
-                                                .background(NemasysPalette.Accent, CircleShape),
-                                        )
-                                        Spacer(Modifier.width(6.dp))
-                                        Text(
-                                            text = summary,
-                                            fontFamily = FontFamily.Monospace,
-                                            fontSize = 11.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            letterSpacing = 0.6.sp,
-                                            color = NemasysPalette.TextBright,
-                                        )
+                                    Surface(
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = NemasysPalette.Card,
+                                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                        shadowElevation = 0.dp,
+                                        tonalElevation = 0.dp,
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                                        ) {
+                                            Box(
+                                                Modifier
+                                                    .size(6.dp)
+                                                    .background(NemasysPalette.Accent, CircleShape),
+                                            )
+                                            Spacer(Modifier.width(6.dp))
+                                            Text(
+                                                text = summary,
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                                color = NemasysPalette.TextBright,
+                                            )
+                                        }
                                     }
                                 } else {
                                     Text(
