@@ -646,7 +646,7 @@ private fun ServerCard(
                         "MCP RESTART IS UNAVAILABLE IN THIS APP.",
                         style =
                             MaterialTheme.typography.bodySmall.copy(
-                                color = NemasysPalette.Muted,
+                                color = NemasysPalette.TextBright,
                                 fontFamily = FontFamily.Monospace,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 11.sp,
