@@ -1008,8 +1008,11 @@ private fun CatalogEntryCard(
                 Spacer(modifier = Modifier.height(spacing.xs))
                 Text(
                     text = it,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    lineHeight = 16.sp,
+                    letterSpacing = 0.2.sp,
+                    color = NemasysPalette.Muted,
                 )
             }
 
