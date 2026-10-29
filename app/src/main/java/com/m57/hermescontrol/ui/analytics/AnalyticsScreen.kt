@@ -602,14 +602,23 @@ private fun DailyChartDayLabel(
                     .clip(CircleShape)
                     .background(NemasysPalette.Accent),
             )
-            Text(
-                text = day?.takeIf { it.isNotBlank() } ?: "NO DATE",
-                fontFamily = FontFamily.Monospace,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 0.6.sp,
-                color = NemasysPalette.TextBright,
-            )
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = NemasysPalette.Card,
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                shadowElevation = 0.dp,
+                tonalElevation = 0.dp,
+            ) {
+                Text(
+                    text = day?.takeIf { it.isNotBlank() } ?: "NO DATE",
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = NemasysPalette.TextBright,
+                )
+            }
         }
     }
 }
