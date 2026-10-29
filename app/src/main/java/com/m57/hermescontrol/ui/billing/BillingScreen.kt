@@ -421,7 +421,7 @@ private fun FeatureUnavailableState(onRetry: () -> Unit) {
                 androidx.compose.material3.Icon(
                     imageVector = androidx.compose.material.icons.Icons.Filled.AccountBalanceWallet,
                     contentDescription = null,
-                    tint = NemasysPalette.Muted,
+                    tint = NemasysPalette.TextBright,
                     modifier = Modifier.size(32.dp),
                 )
             }
