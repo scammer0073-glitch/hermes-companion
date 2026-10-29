@@ -522,22 +522,22 @@ private fun SkillCard(
 
 @Composable
 private fun SourceBadge(source: String) {
-    val (color, label) =
-        when (source) {
-            "hub" -> MaterialTheme.colorScheme.tertiary to "hub"
-            "built-in" -> MaterialTheme.colorScheme.secondary to "built-in"
-            "optional" -> MaterialTheme.colorScheme.outline to "opt"
-            else -> MaterialTheme.colorScheme.outline to source
-        }
+    val label = if (source == "optional") "opt" else source
     Surface(
-        color = color.copy(alpha = 0.15f),
-        shape = MaterialTheme.shapes.small,
+        color = NemasysPalette.Card,
+        shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        shadowElevation = 0.dp,
+        tonalElevation = 0.dp,
     ) {
         Text(
-            text = label,
-            style = MaterialTheme.typography.labelSmall,
-            color = color,
-            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+            text = label.uppercase(),
+            fontFamily = FontFamily.Monospace,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 0.6.sp,
+            color = NemasysPalette.TextBright,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
         )
     }
 }
