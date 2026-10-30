@@ -67,6 +67,9 @@ fun ActionProgressDialog(
 
     AlertDialog(
         onDismissRequest = dismiss,
+        containerColor = NemasysPalette.Card,
+        shape = RoundedCornerShape(16.dp),
+        tonalElevation = 0.dp,
         title = { Text(title) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(spacing.sm)) {
