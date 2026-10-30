@@ -631,15 +631,7 @@ fun SessionsScreen(
 
                                 else -> {
                                     Column(modifier = Modifier.fillMaxSize()) {
-                                        Text(
-                                            text =
-                                                stringResource(
-                                                    R.string.sessions_search_results_header,
-                                                    state.searchResults.size,
-                                                    state.searchQuery,
-                                                ),
-                                            style = MaterialTheme.typography.labelMedium,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        Row(
                                             modifier =
                                                 Modifier
                                                     .fillMaxWidth()
@@ -647,7 +639,29 @@ fun SessionsScreen(
                                                         horizontal = spacing.md,
                                                         vertical = spacing.sm,
                                                     ),
-                                        )
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                        ) {
+                                            Box(
+                                                Modifier
+                                                    .size(6.dp)
+                                                    .clip(CircleShape)
+                                                    .background(NemasysPalette.Accent),
+                                            )
+                                            Text(
+                                                text =
+                                                    stringResource(
+                                                        R.string.sessions_search_results_header,
+                                                        state.searchResults.size,
+                                                        state.searchQuery,
+                                                    ).uppercase(),
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                                color = NemasysPalette.TextBright,
+                                            )
+                                        }
                                         LazyColumn(
                                             modifier = Modifier.fillMaxSize(),
                                             contentPadding = listPadding,
