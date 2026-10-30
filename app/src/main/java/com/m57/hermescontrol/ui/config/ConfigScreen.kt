@@ -792,7 +792,8 @@ private fun ConfigFieldCard(
                     Text(
                         text = row.valueText,
                         style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        // Keep uncovered config values on the Nemasys Black card hierarchy.
+                        color = NemasysPalette.TextBright,
                         modifier = Modifier.padding(top = 4.dp),
                     )
                 }
