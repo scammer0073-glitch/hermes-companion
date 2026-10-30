@@ -80,7 +80,7 @@ fun ChatResumeErrorOverlay(
                         Spacer(Modifier.width(6.dp))
                         Text(
                             text = stringResource(R.string.chat_resume_error_title).uppercase(),
-                            color = NemasysPalette.Muted,
+                            color = NemasysPalette.TextBright,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.SemiBold,
                             fontFamily = FontFamily.Monospace,
