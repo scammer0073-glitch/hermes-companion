@@ -887,13 +887,22 @@ private fun ReviewStep(
                         )
                     }
                 } else {
-                    Text(
-                        text = stringResource(R.string.profiles_builder_review_mcp_none).uppercase(),
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 11.sp,
-                        letterSpacing = 0.6.sp,
-                        color = NemasysPalette.Muted,
-                    )
+                    Card(
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Text(
+                            text = stringResource(R.string.profiles_builder_review_mcp_none).uppercase(),
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
+                        )
+                    }
                 }
             }
         }
