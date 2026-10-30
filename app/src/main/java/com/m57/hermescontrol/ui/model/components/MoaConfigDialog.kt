@@ -292,7 +292,25 @@ private fun MoaConfigEditor(
         ) {
             // Simplified preset dropdown with buttons
             if (presetNames.isNotEmpty()) {
-                Text(stringResource(R.string.moa_preset_label), style = MaterialTheme.typography.bodySmall)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Text(
+                        text = stringResource(R.string.moa_preset_label).uppercase(),
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.TextBright,
+                    )
+                }
                 presetNames.forEach { name ->
                     TextButton(
                         onClick = { onSelectPreset(name) },
