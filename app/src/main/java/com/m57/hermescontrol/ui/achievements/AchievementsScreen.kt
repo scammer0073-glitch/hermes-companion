@@ -422,9 +422,12 @@ private fun ScanStatusChip(
 
         if (scanRunCount > 0) {
             Text(
-                text = stringResource(R.string.achievements_scan_count, scanRunCount),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                text = stringResource(R.string.achievements_scan_count, scanRunCount).uppercase(),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.6.sp,
+                color = NemasysPalette.Muted,
             )
         }
     }
