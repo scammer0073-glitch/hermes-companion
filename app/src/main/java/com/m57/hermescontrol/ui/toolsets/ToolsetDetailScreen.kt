@@ -9,6 +9,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -53,6 +55,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -724,20 +727,35 @@ private fun PostSetupRunner(
                                 .verticalScroll(rememberScrollState())
                                 .padding(10.dp),
                     ) {
-                        Text(
-                            text =
-                                if (lines.isEmpty()) {
-                                    runningText.uppercase()
-                                } else {
-                                    lines.joinToString("\n")
-                                },
-                            style = MaterialTheme.typography.bodySmall,
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = if (lines.isEmpty()) 11.sp else MaterialTheme.typography.bodySmall.fontSize,
-                            fontWeight = if (lines.isEmpty()) FontWeight.Bold else FontWeight.Normal,
-                            letterSpacing = if (lines.isEmpty()) 0.6.sp else 0.sp,
-                            color = if (lines.isEmpty()) NemasysPalette.TextBright else NemasysPalette.Text,
-                        )
+                        if (lines.isEmpty()) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            ) {
+                                Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .clip(CircleShape)
+                                        .background(NemasysPalette.Accent),
+                                )
+                                Text(
+                                    text = runningText.uppercase(),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = NemasysPalette.TextBright,
+                                )
+                            }
+                        } else {
+                            Text(
+                                text = lines.joinToString("\n"),
+                                style = MaterialTheme.typography.bodySmall,
+                                fontFamily = FontFamily.Monospace,
+                                color = NemasysPalette.Text,
+                            )
+                        }
                     }
                 }
             }
