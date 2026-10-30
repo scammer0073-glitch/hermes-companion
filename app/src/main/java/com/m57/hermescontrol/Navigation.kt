@@ -242,10 +242,13 @@ fun MainNavigation(sessionId: String? = null) {
                         )
                     }
                     Text(
-                        text = stringResource(R.string.nav_drawer_subtitle),
+                        text = stringResource(R.string.nav_drawer_subtitle).uppercase(),
                         modifier = Modifier.padding(start = 16.dp, bottom = 8.dp, end = 16.dp),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.Muted,
                     )
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
