@@ -804,7 +804,7 @@ private fun ConfigFieldCard(
                 Text(
                     text = field.type,
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                 )
             }
 
