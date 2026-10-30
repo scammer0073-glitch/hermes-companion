@@ -762,7 +762,7 @@ private fun EnvVarSection(
                         Text(
                             text = if (value.length > 30) "${value.take(15)}…${value.takeLast(10)}" else value,
                             style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                         )
                     }
                 }
