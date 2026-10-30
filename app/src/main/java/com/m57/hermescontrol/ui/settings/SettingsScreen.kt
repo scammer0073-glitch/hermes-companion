@@ -240,11 +240,33 @@ private fun SettingsCategoryCard(items: List<SettingsRow>) {
                                         }
                                     }
                                 } else {
-                                    Text(
-                                        text = summary,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = NemasysPalette.Muted,
-                                    )
+                                    Surface(
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = NemasysPalette.Card,
+                                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                        shadowElevation = 0.dp,
+                                        tonalElevation = 0.dp,
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                                        ) {
+                                            Box(
+                                                Modifier
+                                                    .size(6.dp)
+                                                    .background(NemasysPalette.Accent, CircleShape),
+                                            )
+                                            Spacer(Modifier.width(6.dp))
+                                            Text(
+                                                text = summary.uppercase(),
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                                color = NemasysPalette.Muted,
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         },
