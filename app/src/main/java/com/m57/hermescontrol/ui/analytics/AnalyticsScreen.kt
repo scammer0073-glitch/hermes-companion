@@ -566,6 +566,7 @@ private fun DailyChartDayLabel(
         Surface(
             shape = RoundedCornerShape(16.dp),
             color = NemasysPalette.Card,
+            contentColor = NemasysPalette.TextBright,
             border = BorderStroke(1.dp, NemasysPalette.CardBorder),
             shadowElevation = 0.dp,
             tonalElevation = 0.dp,
