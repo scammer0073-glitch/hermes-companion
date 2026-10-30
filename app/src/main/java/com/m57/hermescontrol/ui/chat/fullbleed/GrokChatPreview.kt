@@ -138,6 +138,7 @@ private fun StaticResearchChat() {
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
                     shape = RoundedCornerShape(16.dp),
                     color = NemasysPalette.Card,
+                    contentColor = NemasysPalette.TextBright,
                     border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                     tonalElevation = 0.dp,
                     shadowElevation = 0.dp,
