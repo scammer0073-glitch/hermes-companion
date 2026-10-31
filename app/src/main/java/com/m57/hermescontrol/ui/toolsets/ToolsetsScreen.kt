@@ -255,13 +255,26 @@ fun ToolsetsScreen(
                                         verticalAlignment = Alignment.CenterVertically,
                                     ) {
                                         Column(modifier = Modifier.weight(1f)) {
-                                            Text(
-                                                text =
-                                                    toolset.label
-                                                        ?: toolset.name.replaceFirstChar { it.uppercase() },
-                                                style = MaterialTheme.typography.titleMedium,
-                                                fontWeight = FontWeight.Bold,
-                                            )
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Box(
+                                                    Modifier
+                                                        .size(6.dp)
+                                                        .clip(CircleShape)
+                                                        .background(NemasysPalette.Accent),
+                                                )
+                                                Spacer(Modifier.width(6.dp))
+                                                Text(
+                                                    text =
+                                                        (toolset.label
+                                                            ?: toolset.name.replaceFirstChar { it.uppercase() })
+                                                            .uppercase(),
+                                                    fontFamily = FontFamily.Monospace,
+                                                    fontSize = 11.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    letterSpacing = 0.6.sp,
+                                                    color = NemasysPalette.TextBright,
+                                                )
+                                            }
                                             toolset.description?.let {
                                                 Spacer(modifier = Modifier.height(4.dp))
                                                 Text(
