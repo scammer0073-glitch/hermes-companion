@@ -288,30 +288,40 @@ private fun NoActivePlanCard(subscription: SubscriptionStateResponse) {
                 color = NemasysPalette.TextBright,
                 modifier = Modifier.padding(top = 6.dp),
             )
-            Row(
-                modifier = Modifier.padding(top = 4.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            Surface(
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                shape = RoundedCornerShape(16.dp),
+                color = NemasysPalette.Card,
+                contentColor = NemasysPalette.TextBright,
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                shadowElevation = 0.dp,
+                tonalElevation = 0.dp,
             ) {
-                Box(
-                    Modifier
-                        .size(6.dp)
-                        .clip(CircleShape)
-                        .background(NemasysPalette.Accent),
-                )
-                Text(
-                    text =
-                        if (subscription.logged_in == true) {
-                            stringResource(R.string.billing_no_active_plan)
-                        } else {
-                            stringResource(R.string.billing_login_required)
-                        }.uppercase(),
-                    fontFamily = FontFamily.Monospace,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 0.6.sp,
-                    color = NemasysPalette.TextBright,
-                )
+                Row(
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(NemasysPalette.Accent),
+                    )
+                    Text(
+                        text =
+                            if (subscription.logged_in == true) {
+                                stringResource(R.string.billing_no_active_plan)
+                            } else {
+                                stringResource(R.string.billing_login_required)
+                            }.uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.TextBright,
+                    )
+                }
             }
         }
     }
