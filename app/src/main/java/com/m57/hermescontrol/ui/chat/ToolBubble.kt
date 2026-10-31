@@ -496,7 +496,8 @@ private fun ExpandedToolContent(
                     view.detail == "No content available" ||
                     view.detail == "No description available" ||
                     view.detail == "No terminal output" ||
-                    view.detail == "NO RESULTS"
+                    view.detail == "NO RESULTS" ||
+                    view.detail.startsWith("No ")
                 ) {
                     Card(
                         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
