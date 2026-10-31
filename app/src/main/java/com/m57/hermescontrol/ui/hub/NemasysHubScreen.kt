@@ -217,14 +217,17 @@ fun NemasysHubScreen(modifier: Modifier = Modifier) {
                 Spacer(Modifier.weight(1f))
                 Surface(
                     shape = RoundedCornerShape(50),
-                    color = if (featured) NemasysPalette.Accent else NemasysPalette.CardBorder,
+                    color = NemasysPalette.Card,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
                 ) {
                     Text(
                         badge,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (featured) NemasysPalette.OnAccent else NemasysPalette.Muted,
+                        color = NemasysPalette.Muted,
                     )
                 }
             }
