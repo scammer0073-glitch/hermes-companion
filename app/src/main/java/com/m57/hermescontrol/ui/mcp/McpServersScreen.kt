@@ -213,7 +213,7 @@ fun McpServersScreen(
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
                                         letterSpacing = 0.6.sp,
-                                        color = NemasysPalette.TextBright,
+                                        color = NemasysPalette.Muted,
                                         textAlign = TextAlign.Center,
                                     )
                                 }
