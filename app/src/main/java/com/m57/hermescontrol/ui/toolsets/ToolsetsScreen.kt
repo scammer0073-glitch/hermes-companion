@@ -120,7 +120,44 @@ fun ToolsetsScreen(
             else -> {
                 Box(Modifier.fillMaxSize()) {
                     if (state.isLoading && state.toolsets.isEmpty()) {
-                        CircularProgressIndicator()
+                        Card(
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                            shape = RoundedCornerShape(16.dp),
+                            colors =
+                                CardDefaults.cardColors(
+                                    containerColor = NemasysPalette.Card,
+                                    contentColor = NemasysPalette.TextBright,
+                                ),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            ) {
+                                Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .clip(CircleShape)
+                                        .background(NemasysPalette.Accent),
+                                )
+                                Text(
+                                    text = "LOADING TOOLSETS",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = NemasysPalette.TextBright,
+                                    modifier = Modifier.weight(1f),
+                                )
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(18.dp),
+                                    strokeWidth = 2.dp,
+                                    color = NemasysPalette.Accent,
+                                )
+                            }
+                        }
                     } else if (state.errorMessage != null && state.toolsets.isEmpty()) {
                         Card(
                             modifier = Modifier.padding(16.dp),
