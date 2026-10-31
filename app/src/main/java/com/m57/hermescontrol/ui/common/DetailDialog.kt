@@ -153,7 +153,7 @@ fun DetailDialog(
                                         DetailRowTone.ERROR -> statusColors.error
                                         DetailRowTone.INFO -> statusColors.info
                                         DetailRowTone.NEUTRAL -> statusColors.neutral
-                                        DetailRowTone.NONE -> MaterialTheme.colorScheme.onSurfaceVariant
+                                        DetailRowTone.NONE -> NemasysPalette.Muted
                                     },
                             )
                         }
