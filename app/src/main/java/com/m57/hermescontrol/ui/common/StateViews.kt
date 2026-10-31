@@ -187,11 +187,11 @@ fun EmptyState(
                         textAlign = TextAlign.Center,
                     )
                 }
-                if (subtitle != null) {
+                if (!subtitle.isNullOrBlank()) {
                     Spacer(Modifier.height(6.dp))
                     Text(
                         subtitle.uppercase(),
-                        color = NemasysPalette.TextBright,
+                        color = NemasysPalette.Muted,
                         textAlign = TextAlign.Center,
                         fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                         fontSize = 11.sp,
