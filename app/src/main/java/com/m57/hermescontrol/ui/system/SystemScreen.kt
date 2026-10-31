@@ -1719,10 +1719,21 @@ private fun LazyListScope.actionLogSection(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(spacing.sm),
                 ) {
+                    if (state.activeAction.isNullOrBlank()) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
+                        )
+                    }
                     Text(
-                        text = state.activeAction ?: "",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
+                        text = state.activeAction?.uppercase() ?: "NO ACTIVE ACTION",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.TextBright,
                         modifier = Modifier.weight(1f),
                     )
                     val actionLog = state.actionLog
