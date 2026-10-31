@@ -83,18 +83,30 @@ fun NemasysChatEmpty(
             }
         }
         Spacer(Modifier.height(18.dp))
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-            Surface(shape = CircleShape, color = NemasysPalette.Accent, modifier = Modifier.size(6.dp)) {}
-            Spacer(Modifier.width(6.dp))
-            Text(
-                "START A CONVERSATION",
-                fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 0.6.sp,
-                color = NemasysPalette.TextBright,
-                textAlign = TextAlign.Center,
-            )
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = NemasysPalette.Card,
+            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+            shadowElevation = 0.dp,
+            tonalElevation = 0.dp,
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Surface(shape = CircleShape, color = NemasysPalette.Accent, modifier = Modifier.size(6.dp)) {}
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    "START A CONVERSATION",
+                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.6.sp,
+                    color = NemasysPalette.TextBright,
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
         Surface(
             shape = RoundedCornerShape(16.dp),
