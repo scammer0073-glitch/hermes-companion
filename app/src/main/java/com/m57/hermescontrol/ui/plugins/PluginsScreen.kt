@@ -518,10 +518,21 @@ private fun PluginCard(
 
             Spacer(modifier = Modifier.height(4.dp))
 
-            // Description
+            // Description, with a compact Nemasys empty treatment when omitted.
             Text(
-                text = plugin.description ?: stringResource(R.string.plugins_no_desc),
-                style = MaterialTheme.typography.bodyMedium,
+                text = plugin.description ?: stringResource(R.string.plugins_no_desc).uppercase(),
+                style =
+                    if (plugin.description == null) {
+                        MaterialTheme.typography.labelSmall.copy(
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            letterSpacing = 0.4.sp,
+                        )
+                    } else {
+                        MaterialTheme.typography.bodyMedium
+                    },
+                color = if (plugin.description == null) NemasysPalette.Muted else MaterialTheme.colorScheme.onSurface,
             )
 
             // Status badges
