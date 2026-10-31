@@ -1067,7 +1067,10 @@ private fun ScanResultCard(result: SkillScanResponse) {
                 Text(
                     text = result.policyReason,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    letterSpacing = 0.2.sp,
                 )
             }
 
