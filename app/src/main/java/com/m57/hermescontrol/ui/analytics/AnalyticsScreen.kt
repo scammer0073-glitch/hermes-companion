@@ -798,9 +798,11 @@ private fun ToolRow(tool: com.m57.hermescontrol.data.model.AnalyticsToolUsage) {
                             R.string.analytics_tool_uses,
                             tool.count,
                             tool.percentage.toInt(),
-                        ),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        ).uppercase(),
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    letterSpacing = 0.3.sp,
+                    color = NemasysPalette.Muted,
                 )
             }
         }
