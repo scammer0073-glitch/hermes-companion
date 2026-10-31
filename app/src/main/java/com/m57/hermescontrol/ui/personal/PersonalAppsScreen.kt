@@ -325,19 +325,28 @@ fun PersonalAppDetailScreen(
                                     horizontalAlignment = Alignment.CenterHorizontally,
                                     verticalArrangement = Arrangement.spacedBy(8.dp),
                                 ) {
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                    Surface(
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = NemasysPalette.Card,
+                                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                        shadowElevation = 0.dp,
+                                        tonalElevation = 0.dp,
                                     ) {
-                                        Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
-                                        Text(
-                                            text = "NO ENTRIES",
-                                            fontFamily = FontFamily.Monospace,
-                                            fontSize = 11.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            letterSpacing = 0.6.sp,
-                                            color = NemasysPalette.TextBright,
-                                        )
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                        ) {
+                                            Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
+                                            Text(
+                                                text = "NO ENTRIES",
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                                color = NemasysPalette.TextBright,
+                                            )
+                                        }
                                     }
                                     Surface(
                                         modifier = Modifier.size(48.dp),
