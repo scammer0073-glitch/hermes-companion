@@ -820,7 +820,7 @@ private fun ConfigFieldCard(
                         Text(
                             text = description,
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                             modifier = Modifier.weight(1f),
                         )
                         Switch(
