@@ -35,6 +35,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -518,22 +519,44 @@ private fun PluginCard(
 
             Spacer(modifier = Modifier.height(4.dp))
 
-            // Description, with a compact Nemasys empty treatment when omitted.
-            Text(
-                text = plugin.description ?: stringResource(R.string.plugins_no_desc).uppercase(),
-                style =
-                    if (plugin.description == null) {
-                        MaterialTheme.typography.labelSmall.copy(
+            // Keep missing descriptions on the same Nemasys Black rail as other empties.
+            if (plugin.description == null) {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    color = NemasysPalette.Card,
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 9.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(R.string.plugins_no_desc).uppercase(),
                             fontFamily = FontFamily.Monospace,
                             fontSize = 11.sp,
-                            fontWeight = FontWeight.Medium,
-                            letterSpacing = 0.4.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
                         )
-                    } else {
-                        MaterialTheme.typography.bodyMedium
-                    },
-                color = if (plugin.description == null) NemasysPalette.Muted else MaterialTheme.colorScheme.onSurface,
-            )
+                    }
+                }
+            } else {
+                Text(
+                    text = plugin.description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            }
 
             // Status badges
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
