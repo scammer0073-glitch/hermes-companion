@@ -53,6 +53,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
@@ -276,9 +277,12 @@ fun ChatInputBar(
                                     Box(modifier = Modifier.weight(1f)) {
                                         if (inputFieldValue.text.isEmpty()) {
                                             Text(
-                                                text = placeholderText,
-                                                style = MaterialTheme.typography.bodyMedium,
-                                                color = NemasysPalette.Muted,
+                                                text = placeholderText.uppercase(),
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                                color = NemasysPalette.TextBright,
                                             )
                                         }
                                         innerTextField()
