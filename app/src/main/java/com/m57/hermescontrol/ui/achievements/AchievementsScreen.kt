@@ -626,7 +626,7 @@ private fun AchievementCard(
                     when {
                         isUnlocked -> MaterialTheme.colorScheme.primary
                         achievement.state == "secret" -> MaterialTheme.colorScheme.error
-                        else -> MaterialTheme.colorScheme.onSurfaceVariant
+                        else -> NemasysPalette.Muted
                     }
                 Text(
                     text = stateText,
