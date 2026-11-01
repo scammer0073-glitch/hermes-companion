@@ -261,8 +261,11 @@ fun SearchBar(
                     if (query.isEmpty()) {
                         Text(
                             text = placeholder,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = NemasysPalette.Muted.copy(alpha = 0.6f),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
                         )
                     }
                     innerTextField()
