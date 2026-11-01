@@ -273,9 +273,12 @@ private fun ProviderSelectionSection(
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = stringResource(R.string.plugins_providers_hint),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                text = stringResource(R.string.plugins_providers_hint).uppercase(),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Medium,
+                letterSpacing = 0.4.sp,
+                color = NemasysPalette.Muted,
             )
             Spacer(modifier = Modifier.height(12.dp))
 
