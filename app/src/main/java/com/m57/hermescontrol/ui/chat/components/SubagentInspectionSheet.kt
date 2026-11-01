@@ -61,6 +61,9 @@ fun SubagentInspectionSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
         modifier = modifier.testTag("subagent_inspection_sheet"),
+        containerColor = NemasysPalette.Card,
+        tonalElevation = 0.dp,
+        shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
     ) {
         Column(
             modifier =
