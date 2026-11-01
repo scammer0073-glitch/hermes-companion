@@ -258,14 +258,17 @@ private fun MemoryProviderConfigContent(
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 0.6.sp,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            color = NemasysPalette.TextBright,
                         )
                     }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = stringResource(R.string.memory_provider_setup_hint),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = stringResource(R.string.memory_provider_setup_hint).uppercase(),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Medium,
+                        letterSpacing = 0.4.sp,
+                        color = NemasysPalette.Muted,
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Button(
