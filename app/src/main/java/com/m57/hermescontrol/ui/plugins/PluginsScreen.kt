@@ -699,7 +699,7 @@ private fun OrphanPluginCard(
                     Text(
                         text = it,
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = NemasysPalette.Muted,
                     )
                 }
             }
