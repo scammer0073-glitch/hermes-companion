@@ -583,8 +583,9 @@ private fun FormEditor(
                                     },
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.3.sp,
-                                color = NemasysPalette.Muted,
+                                color = NemasysPalette.TextBright,
                             )
                         }
                     }
