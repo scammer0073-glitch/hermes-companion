@@ -323,7 +323,10 @@ private fun GatewayOfflineBanner(gatewayCommand: String) {
             ) {
                 Text(
                     text = "  $gatewayCommand",
-                    style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        color = NemasysPalette.TextBright,
+                        fontFamily = FontFamily.Monospace,
+                    ),
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
                 )
             }
