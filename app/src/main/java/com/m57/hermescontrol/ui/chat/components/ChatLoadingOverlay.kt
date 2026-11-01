@@ -55,6 +55,7 @@ fun ChatLoadingOverlay(isLoading: Boolean) {
                 colors =
                     CardDefaults.cardColors(
                         containerColor = NemasysPalette.Card,
+                        contentColor = NemasysPalette.Text,
                     ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
