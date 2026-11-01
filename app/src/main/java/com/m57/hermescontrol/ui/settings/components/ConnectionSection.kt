@@ -238,7 +238,11 @@ internal fun TestResultCard(testResult: String?) {
                     Text(
                         text = result,
                         modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyMedium,
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Medium,
+                        letterSpacing = 0.4.sp,
+                        color = NemasysPalette.Muted,
                     )
                 }
             }
