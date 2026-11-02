@@ -251,7 +251,7 @@ fun AuthLoginScreen(
                     text = stringResource(R.string.auth_login_probing_dashboard),
                     style =
                         MaterialTheme.typography.bodySmall.copy(
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = NemasysPalette.Muted,
                         ),
                 )
             }
