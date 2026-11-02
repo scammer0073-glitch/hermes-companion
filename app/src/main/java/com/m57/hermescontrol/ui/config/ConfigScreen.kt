@@ -175,7 +175,7 @@ private fun ConfigContent(
                 Text(
                     text = stringResource(R.string.config_path, path),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = NemasysPalette.Muted,
                     modifier = Modifier.padding(bottom = 8.dp),
                 )
             }
