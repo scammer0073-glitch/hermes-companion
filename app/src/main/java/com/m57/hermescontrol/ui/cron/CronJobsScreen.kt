@@ -194,7 +194,7 @@ fun CronJobsScreen(
                                 Text(
                                     text = CronExpressionFormatter.cronToHumanReadable(job.scheduleText),
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = NemasysPalette.Muted,
                                 )
                                 Spacer(modifier = Modifier.height(spacing.xs))
                                 Text(
