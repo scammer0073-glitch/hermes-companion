@@ -8,6 +8,7 @@ package com.m57.hermescontrol.ui.keys
 import android.content.ClipData
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -720,6 +721,7 @@ private fun EnvVarCard(
                     color = NemasysPalette.Card,
                     border = BorderStroke(1.dp, NemasysPalette.CardBorder),
                     shadowElevation = 0.dp,
+                    tonalElevation = 0.dp,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Row(
@@ -737,19 +739,33 @@ private fun EnvVarCard(
                                     .horizontalScroll(rememberScrollState()),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            Text(
-                                text = displayValue,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color =
-                                    if (config.isSet) {
-                                        MaterialTheme.colorScheme.onSurface
-                                    } else {
-                                        NemasysPalette.Muted
-                                    },
-                                fontFamily = FontFamily.Monospace,
-                                maxLines = 1,
-                                softWrap = false,
-                            )
+                            if (!config.isSet && !isRevealed) {
+                                Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .background(NemasysPalette.Accent, androidx.compose.foundation.shape.CircleShape),
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                Text(
+                                    text = displayValue.uppercase(),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = NemasysPalette.TextBright,
+                                    maxLines = 1,
+                                    softWrap = false,
+                                )
+                            } else {
+                                Text(
+                                    text = displayValue,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    fontFamily = FontFamily.Monospace,
+                                    maxLines = 1,
+                                    softWrap = false,
+                                )
+                            }
                         }
                         Row {
                             if (config.isSet) {
