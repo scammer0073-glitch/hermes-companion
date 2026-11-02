@@ -104,10 +104,13 @@ fun ErrorState(
         }
         Spacer(Modifier.height(12.dp))
         Text(
-            message,
-            color = NemasysPalette.Text,
+            message.uppercase(),
+            color = NemasysPalette.Muted,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyMedium,
+            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Medium,
+            letterSpacing = 0.4.sp,
             modifier = Modifier.padding(horizontal = 16.dp),
         )
         if (onRetry != null) {
