@@ -358,7 +358,15 @@ fun SessionsScreen(
             shape = RoundedCornerShape(16.dp),
             tonalElevation = 0.dp,
             title = { Text(stringResource(R.string.sessions_empty_cleanup_title)) },
-            text = { Text(stringResource(R.string.sessions_empty_cleanup_message, state.emptyCount)) },
+            text = {
+                Text(
+                    text = stringResource(R.string.sessions_empty_cleanup_message, state.emptyCount).uppercase(),
+                    color = NemasysPalette.Muted,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 11.sp,
+                    letterSpacing = 0.4.sp,
+                )
+            },
             confirmButton = {
                 TextButton(onClick = { viewModel.confirmEmptyCleanup() }) {
                     if (state.isCleaningEmpty) {
