@@ -23,6 +23,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -275,13 +276,40 @@ private fun PendingCard(
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                Text(
-                    text = item.userId ?: stringResource(R.string.pairing_label_unknown_user),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = NemasysPalette.Muted,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                if (item.userId == null) {
+                    Surface(
+                        modifier = Modifier.padding(top = 6.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        color = NemasysPalette.Card,
+                        contentColor = NemasysPalette.TextBright,
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        shadowElevation = 0.dp,
+                        tonalElevation = 0.dp,
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
+                            Text(
+                                text = stringResource(R.string.pairing_label_unknown_user).uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = item.userId,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = NemasysPalette.Muted,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
                 item.ageMinutes?.let { age ->
                     Text(
                         text = formatAge(age),
