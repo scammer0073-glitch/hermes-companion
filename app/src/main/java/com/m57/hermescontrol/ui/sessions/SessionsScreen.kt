@@ -1284,14 +1284,42 @@ private fun SearchResultCard(
 
                     Spacer(modifier = Modifier.height(spacing.xs))
 
-                    // The matched snippet, highlighted — shown as the body, NOT as a title.
-                    Text(
-                        text = highlightText(cleanSnippet, query, highlightBackground, highlightForeground),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        maxLines = 4,
-                        overflow = TextOverflow.Ellipsis,
-                    )
+                    // Missing previews use a distinct empty surface, never a fabricated match.
+                    if (session.preview.isNullOrBlank()) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(16.dp),
+                            color = NemasysPalette.Card,
+                            contentColor = NemasysPalette.TextBright,
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                            tonalElevation = 0.dp,
+                            shadowElevation = 0.dp,
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            ) {
+                                Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
+                                Text(
+                                    text = stringResource(R.string.history_untitled).uppercase(),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                )
+                            }
+                        }
+                    } else {
+                        // The matched snippet is the body, NOT a session title.
+                        Text(
+                            text = highlightText(cleanSnippet, query, highlightBackground, highlightForeground),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            maxLines = 4,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(spacing.xs))
 
