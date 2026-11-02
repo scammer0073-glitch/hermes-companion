@@ -212,11 +212,31 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
             }
         }
         if (showCreate) {
-            AlertDialog(onDismissRequest = {
-                showCreate = false
-            }, title = {
-                Text("New Personal App")
-            }, text = {
+            AlertDialog(
+                onDismissRequest = { showCreate = false },
+                shape = RoundedCornerShape(16.dp),
+                containerColor = NemasysPalette.Card,
+                tonalElevation = 0.dp,
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            Modifier
+                                .size(6.dp)
+                                .clip(CircleShape)
+                                .background(NemasysPalette.Accent),
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            "NEW PERSONAL APP",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
+                        )
+                    }
+                },
+                text = {
                 OutlinedTextField(value = newName, onValueChange = {
                     newName = it
                 }, placeholder = {
