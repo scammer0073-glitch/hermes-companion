@@ -71,7 +71,7 @@ fun CompactSearchInput(
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    tint = NemasysPalette.Muted,
                     modifier = Modifier.size(18.dp),
                 )
                 Box(modifier = Modifier.weight(1f)) {
