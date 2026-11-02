@@ -617,29 +617,50 @@ fun ProfilesScreen(
                                             ) {
                                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                                     ProfileModelLabel(model = profile.model)
-                                                    Text(
-                                                        text =
-                                                            stringResource(
-                                                                R.string.profiles_label_provider,
-                                                                profile.provider ?: "None",
-                                                            ),
-                                                        style =
-                                                            if (profile.provider == null) {
-                                                                MaterialTheme.typography.labelSmall.copy(
+                                                    if (profile.provider == null) {
+                                                        Surface(
+                                                            shape = RoundedCornerShape(16.dp),
+                                                            color = NemasysPalette.Card,
+                                                            contentColor = NemasysPalette.TextBright,
+                                                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                                            tonalElevation = 0.dp,
+                                                            shadowElevation = 0.dp,
+                                                        ) {
+                                                            Row(
+                                                                modifier = Modifier.padding(10.dp),
+                                                                verticalAlignment = Alignment.CenterVertically,
+                                                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                                            ) {
+                                                                Box(
+                                                                    Modifier
+                                                                        .size(6.dp)
+                                                                        .clip(CircleShape)
+                                                                        .background(NemasysPalette.Accent),
+                                                                )
+                                                                Text(
+                                                                    text =
+                                                                        stringResource(
+                                                                            R.string.profiles_label_provider,
+                                                                            "None",
+                                                                        ).uppercase(),
                                                                     fontFamily = FontFamily.Monospace,
+                                                                    fontSize = 11.sp,
                                                                     fontWeight = FontWeight.Bold,
                                                                     letterSpacing = 0.6.sp,
                                                                 )
-                                                            } else {
-                                                                MaterialTheme.typography.bodySmall
-                                                            },
-                                                        color =
-                                                            if (profile.provider == null) {
-                                                                NemasysPalette.Text
-                                                            } else {
-                                                                MaterialTheme.colorScheme.onSurfaceVariant
-                                                            },
-                                                    )
+                                                            }
+                                                        }
+                                                    } else {
+                                                        Text(
+                                                            text =
+                                                                stringResource(
+                                                                    R.string.profiles_label_provider,
+                                                                    profile.provider,
+                                                                ),
+                                                            style = MaterialTheme.typography.bodySmall,
+                                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                        )
+                                                    }
                                                     Text(
                                                         text =
                                                             stringResource(
