@@ -77,6 +77,46 @@ import com.m57.hermescontrol.ui.profiles.components.ProfileBuilderView
 import com.m57.hermescontrol.ui.profiles.components.validateProfileName
 import kotlinx.coroutines.launch
 
+@Composable
+private fun ProfileModelLabel(model: String?) {
+    if (model != null) {
+        Text(
+            text = stringResource(R.string.profiles_label_model, model),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        return
+    }
+
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            Box(
+                Modifier
+                    .size(6.dp)
+                    .clip(CircleShape)
+                    .background(NemasysPalette.Accent),
+            )
+            Text(
+                text = stringResource(R.string.profiles_label_model, "None").uppercase(),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.6.sp,
+                color = NemasysPalette.TextBright,
+            )
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfilesScreen(
@@ -576,29 +616,7 @@ fun ProfilesScreen(
                                                 verticalAlignment = Alignment.CenterVertically,
                                             ) {
                                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                                    Text(
-                                                        text =
-                                                            stringResource(
-                                                                R.string.profiles_label_model,
-                                                                profile.model ?: "None",
-                                                            ),
-                                                        style =
-                                                            if (profile.model == null) {
-                                                                MaterialTheme.typography.labelSmall.copy(
-                                                                    fontFamily = FontFamily.Monospace,
-                                                                    fontWeight = FontWeight.Bold,
-                                                                    letterSpacing = 0.6.sp,
-                                                                )
-                                                            } else {
-                                                                MaterialTheme.typography.bodyMedium
-                                                            },
-                                                        color =
-                                                            if (profile.model == null) {
-                                                                NemasysPalette.Text
-                                                            } else {
-                                                                MaterialTheme.colorScheme.onSurfaceVariant
-                                                            },
-                                                    )
+                                                    ProfileModelLabel(model = profile.model)
                                                     Text(
                                                         text =
                                                             stringResource(
