@@ -661,15 +661,50 @@ fun ProfilesScreen(
                                                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                                                         )
                                                     }
-                                                    Text(
-                                                        text =
-                                                            stringResource(
-                                                                R.string.profiles_label_skills,
-                                                                profile.skill_count ?: 0,
-                                                            ),
-                                                        style = MaterialTheme.typography.bodySmall,
-                                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                                    )
+                                                    if ((profile.skill_count ?: 0) == 0) {
+                                                        Surface(
+                                                            shape = RoundedCornerShape(16.dp),
+                                                            color = NemasysPalette.Card,
+                                                            contentColor = NemasysPalette.TextBright,
+                                                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                                            tonalElevation = 0.dp,
+                                                            shadowElevation = 0.dp,
+                                                        ) {
+                                                            Row(
+                                                                modifier = Modifier.padding(10.dp),
+                                                                verticalAlignment = Alignment.CenterVertically,
+                                                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                                            ) {
+                                                                Box(
+                                                                    Modifier
+                                                                        .size(6.dp)
+                                                                        .clip(CircleShape)
+                                                                        .background(NemasysPalette.Accent),
+                                                                )
+                                                                Text(
+                                                                    text =
+                                                                        stringResource(
+                                                                            R.string.profiles_label_skills,
+                                                                            0,
+                                                                        ).uppercase(),
+                                                                    fontFamily = FontFamily.Monospace,
+                                                                    fontSize = 11.sp,
+                                                                    fontWeight = FontWeight.Bold,
+                                                                    letterSpacing = 0.6.sp,
+                                                                )
+                                                            }
+                                                        }
+                                                    } else {
+                                                        Text(
+                                                            text =
+                                                                stringResource(
+                                                                    R.string.profiles_label_skills,
+                                                                    profile.skill_count ?: 0,
+                                                                ),
+                                                            style = MaterialTheme.typography.bodySmall,
+                                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                        )
+                                                    }
                                                     profile.path?.let {
                                                         Text(
                                                             text = stringResource(R.string.profiles_label_path, it),
