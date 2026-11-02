@@ -379,13 +379,40 @@ private fun ApprovedCard(
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                Text(
-                    text = item.userId ?: stringResource(R.string.pairing_label_unknown_user),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = NemasysPalette.Muted,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                val userId = item.userId?.takeIf { it.isNotBlank() }
+                if (userId == null) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
+                            Text(
+                                text = stringResource(R.string.pairing_label_unknown_user).uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.TextBright,
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = userId,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = NemasysPalette.Muted,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
             Spacer(modifier = Modifier.width(12.dp))
             OutlinedButton(
