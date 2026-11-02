@@ -170,7 +170,7 @@ fun EmptyState(
                     contentColor = NemasysPalette.Text,
                 ) {
                     Box(contentAlignment = Alignment.Center) {
-                        Icon(icon, null, tint = NemasysPalette.Text, modifier = Modifier.size(28.dp))
+                        Icon(icon, null, tint = NemasysPalette.TextBright, modifier = Modifier.size(28.dp))
                     }
                 }
                 Spacer(Modifier.height(14.dp))
