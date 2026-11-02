@@ -324,14 +324,41 @@ internal fun BotPickerRow(
                 val subtitle =
                     profile.description?.takeIf { it.isNotBlank() }
                         ?: listOfNotNull(profile.provider, profile.model).joinToString(" / ")
-                            .ifBlank { stringResource(R.string.profiles_description_placeholder) }
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = NemasysPalette.Muted,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                if (subtitle.isBlank()) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Box(
+                                Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape),
+                            )
+                            Text(
+                                text = stringResource(R.string.profiles_description_placeholder).uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.Text,
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = subtitle,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = NemasysPalette.Muted,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
             if (isActive) {
                 Icon(
