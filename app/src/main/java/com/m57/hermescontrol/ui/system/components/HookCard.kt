@@ -79,14 +79,44 @@ internal fun HookCard(
                 }
                 Spacer(modifier = Modifier.height(spacing.xs))
                 Row(horizontalArrangement = Arrangement.spacedBy(spacing.xs)) {
-                    Text(
-                        text = (hook.event ?: "EVENT UNSPECIFIED").uppercase(),
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 0.6.sp,
-                        color = NemasysPalette.Muted,
-                    )
+                    if (hook.event.isNullOrBlank()) {
+                        Card(
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            ) {
+                                Box(
+                                    Modifier
+                                        .size(6.dp)
+                                        .clip(CircleShape)
+                                        .background(NemasysPalette.Accent),
+                                )
+                                Text(
+                                    text = "EVENT UNSPECIFIED",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = NemasysPalette.TextBright,
+                                )
+                            }
+                        }
+                    } else {
+                        Text(
+                            text = hook.event.uppercase(),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.Muted,
+                        )
+                    }
                     hook.matcher?.let { matcher ->
                         Text(
                             text = stringResource(R.string.system_hooks_matcher, matcher),
