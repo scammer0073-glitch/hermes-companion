@@ -127,7 +127,22 @@ fun BotPickerSheet(
                         contentDescription = null,
                     )
                 },
-                placeholder = { Text(stringResource(R.string.bots_picker_search)) },
+                placeholder = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Box(Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape))
+                        Text(
+                            text = stringResource(R.string.bots_picker_search).uppercase(),
+                            color = NemasysPalette.TextBright,
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                        )
+                    }
+                },
                 shape = RoundedCornerShape(16.dp),
                 colors =
                     OutlinedTextFieldDefaults.colors(
