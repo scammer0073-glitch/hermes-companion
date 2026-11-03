@@ -355,20 +355,53 @@ private fun ModelSettingsSection(
             Spacer(modifier = Modifier.height(12.dp))
 
             // Main model row
-            SettingsRow(
-                icon = {
-                    Icon(
-                        Icons.Filled.Star,
-                        contentDescription = null,
-                        tint = NemasysPalette.Muted,
-                        modifier = Modifier.size(16.dp),
-                    )
-                },
-                label = stringResource(R.string.model_main_label),
-                value = if (mainProvider.isNotBlank()) "$mainProvider · $mainModel" else "(unset)",
-                actionLabel = "Change",
-                onAction = onSetMainModel,
-            )
+            if (mainProvider.isBlank()) {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Box(Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent))
+                        Text(
+                            text = "${stringResource(R.string.model_main_label)}: UNSET".uppercase(),
+                            modifier = Modifier.weight(1f),
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.TextBright,
+                        )
+                        TextButton(
+                            onClick = onSetMainModel,
+                            colors = ButtonDefaults.textButtonColors(contentColor = NemasysPalette.Accent),
+                        ) {
+                            Text("Change")
+                        }
+                    }
+                }
+            } else {
+                SettingsRow(
+                    icon = {
+                        Icon(
+                            Icons.Filled.Star,
+                            contentDescription = null,
+                            tint = NemasysPalette.Muted,
+                            modifier = Modifier.size(16.dp),
+                        )
+                    },
+                    label = stringResource(R.string.model_main_label),
+                    value = "$mainProvider · $mainModel",
+                    actionLabel = "Change",
+                    onAction = onSetMainModel,
+                )
+            }
 
             Spacer(modifier = Modifier.height(8.dp))
 
