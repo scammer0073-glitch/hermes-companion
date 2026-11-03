@@ -394,7 +394,7 @@ private fun FileRow(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
-                if (subtitle == "—") {
+                if (subtitle == "—" || subtitle?.startsWith("— · ") == true) {
                     Card(
                         modifier = Modifier.padding(top = 4.dp),
                         shape = RoundedCornerShape(16.dp),
@@ -409,7 +409,7 @@ private fun FileRow(
                         ) {
                             Box(Modifier.size(4.dp).clip(CircleShape).background(NemasysPalette.Accent))
                             Text(
-                                text = "NO FILE METADATA",
+                                text = if (subtitle == "—") "NO FILE METADATA" else "FILE SIZE UNAVAILABLE",
                                 fontFamily = FontFamily.Monospace,
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
@@ -417,6 +417,16 @@ private fun FileRow(
                                 color = NemasysPalette.TextBright,
                             )
                         }
+                    }
+                    subtitle.substringAfter(" · ", "").takeIf { it.isNotBlank() }?.let { modifiedAt ->
+                        Text(
+                            text = modifiedAt,
+                            modifier = Modifier.padding(top = 4.dp),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = NemasysPalette.Muted,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
                     }
                 } else if (subtitle != null) {
                     Text(
