@@ -569,16 +569,39 @@ private fun AuxTasksDialog(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
-                            Text(
-                                text =
-                                    if (isAuto) {
-                                        "auto (use main model)"
-                                    } else {
-                                        "${cur.provider} · ${cur.model.ifBlank { "(provider default)" }}"
-                                    },
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
+                            if (isAuto) {
+                                Card(
+                                    modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                                    shape = RoundedCornerShape(16.dp),
+                                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                                ) {
+                                    Row(
+                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                    ) {
+                                        Box(
+                                            Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape),
+                                        )
+                                        Text(
+                                            text = "AUTO (USE MAIN MODEL)",
+                                            fontFamily = FontFamily.Monospace,
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = 0.6.sp,
+                                            color = NemasysPalette.TextBright,
+                                        )
+                                    }
+                                }
+                            } else {
+                                Text(
+                                    text = "${cur.provider} · ${cur.model.ifBlank { "(provider default)" }}",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                            }
                         }
                         OutlinedButton(
                             onClick = { onSetTask(info.key) },
