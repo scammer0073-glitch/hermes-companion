@@ -367,11 +367,35 @@ private fun UsageBarRow(
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                Text(
-                    text = summary,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = NemasysPalette.Muted,
-                )
+                if (summary.isBlank()) {
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(Modifier.size(4.dp).clip(CircleShape).background(NemasysPalette.Accent))
+                            Text(
+                                text = "NO USAGE SUMMARY",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.Muted,
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = summary,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = NemasysPalette.Muted,
+                    )
+                }
             }
             LinearProgressIndicator(
                 progress = { fraction },
