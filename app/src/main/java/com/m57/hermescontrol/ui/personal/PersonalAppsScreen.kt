@@ -237,11 +237,38 @@ fun PersonalAppsScreen(onOpenDrawer: (() -> Unit)? = null) {
                     }
                 },
                 text = {
-                OutlinedTextField(value = newName, onValueChange = {
-                    newName = it
-                }, placeholder = {
-                    Text("e.g. Food and Sleep")
-                }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(
+                    value = newName,
+                    onValueChange = { newName = it },
+                    placeholder = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape))
+                            Text(
+                                text = "E.G. FOOD AND SLEEP",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.TextBright,
+                            )
+                        }
+                    },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    colors =
+                        OutlinedTextFieldDefaults.colors(
+                            focusedContainerColor = NemasysPalette.Card,
+                            unfocusedContainerColor = NemasysPalette.Card,
+                            disabledContainerColor = NemasysPalette.Card,
+                            focusedBorderColor = NemasysPalette.Accent,
+                            unfocusedBorderColor = NemasysPalette.CardBorder,
+                            cursorColor = NemasysPalette.Accent,
+                        ),
+                )
             }, confirmButton = {
                 Button(onClick = {
                     if (newName.isNotBlank()) {
