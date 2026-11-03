@@ -554,10 +554,38 @@ private fun ServerCard(
             // URL or Command
             if (server.url != null) {
                 Spacer(modifier = Modifier.height(spacing.sm))
-                Text(
-                    text = server.url,
-                    style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace),
-                )
+                if (server.url.isBlank()) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(
+                                Modifier.size(4.dp).clip(CircleShape).background(NemasysPalette.Accent),
+                            )
+                            Text(
+                                text = "NO SERVER URL",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.TextBright,
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = server.url,
+                        style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace),
+                    )
+                }
             } else if (server.command != null) {
                 Spacer(modifier = Modifier.height(spacing.sm))
                 Text(
