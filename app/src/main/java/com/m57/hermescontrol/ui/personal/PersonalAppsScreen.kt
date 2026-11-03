@@ -402,7 +402,8 @@ fun PersonalAppDetailScreen(
                 Row(
                     Modifier.fillMaxWidth().padding(
                         12.dp,
-                    ).background(NemasysPalette.Card, RoundedCornerShape(16.dp)).padding(8.dp),
+                    ).background(NemasysPalette.Card, RoundedCornerShape(16.dp))
+                        .border(1.dp, NemasysPalette.CardBorder, RoundedCornerShape(16.dp)).padding(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     OutlinedTextField(
@@ -417,7 +418,32 @@ fun PersonalAppDetailScreen(
                             Modifier.weight(
                                 1f,
                             ),
-                        placeholder = { Text("Log food or sleep...") },
+                        shape = RoundedCornerShape(16.dp),
+                        colors =
+                            OutlinedTextFieldDefaults.colors(
+                                focusedContainerColor = NemasysPalette.Card,
+                                unfocusedContainerColor = NemasysPalette.Card,
+                                disabledContainerColor = NemasysPalette.Card,
+                                focusedBorderColor = NemasysPalette.Accent,
+                                unfocusedBorderColor = NemasysPalette.CardBorder,
+                                cursorColor = NemasysPalette.Accent,
+                            ),
+                        placeholder = {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            ) {
+                                Box(Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape))
+                                Text(
+                                    text = "LOG FOOD OR SLEEP",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                    color = NemasysPalette.TextBright,
+                                )
+                            }
+                        },
                         singleLine = true,
                     )
                     IconButton(onClick = {
