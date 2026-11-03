@@ -259,14 +259,24 @@ fun SearchBar(
                 )
                 Box(modifier = Modifier.weight(1f)) {
                     if (query.isEmpty()) {
-                        Text(
-                            text = placeholder,
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 0.6.sp,
-                            color = NemasysPalette.TextBright,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(4.dp)
+                                    .background(NemasysPalette.Accent, CircleShape),
+                            )
+                            Text(
+                                text = placeholder.uppercase(),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.TextBright,
+                            )
+                        }
                     }
                     innerTextField()
                 }
