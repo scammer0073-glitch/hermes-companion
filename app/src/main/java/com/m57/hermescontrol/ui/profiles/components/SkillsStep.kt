@@ -284,9 +284,37 @@ fun SkillsStep(
                                     style = MaterialTheme.typography.bodyLarge,
                                     fontWeight = FontWeight.Bold,
                                 )
-                                skill.description?.let {
+                                if (skill.description.isNullOrBlank()) {
+                                    Surface(
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = NemasysPalette.Card,
+                                        contentColor = NemasysPalette.TextBright,
+                                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                        shadowElevation = 0.dp,
+                                        tonalElevation = 0.dp,
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                        ) {
+                                            androidx.compose.foundation.layout.Box(
+                                                Modifier
+                                                    .size(6.dp)
+                                                    .background(NemasysPalette.Accent, CircleShape),
+                                            )
+                                            Text(
+                                                text = "NO DESCRIPTION",
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                            )
+                                        }
+                                    }
+                                } else {
                                     Text(
-                                        text = it,
+                                        text = skill.description.orEmpty(),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
