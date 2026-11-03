@@ -621,18 +621,47 @@ fun SubagentCard(
                 val displayText =
                     if (isComplete && !indicator.summary.isNullOrBlank()) {
                         indicator.summary
-                    } else if (!indicator.goal.isNullOrBlank()) {
-                        indicator.goal
                     } else {
-                        "Subagent task"
+                        indicator.goal
                     }
-                Text(
-                    text = displayText,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = NemasysPalette.Text,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                if (displayText.isNullOrBlank()) {
+                    Card(
+                        modifier = Modifier.weight(1f).testTag("subagent_task_empty"),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(4.dp)
+                                    .clip(CircleShape)
+                                    .background(NemasysPalette.Accent),
+                            )
+                            Text(
+                                text = "SUBAGENT TASK",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.TextBright,
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = displayText,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = NemasysPalette.Text,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
         }
     }
