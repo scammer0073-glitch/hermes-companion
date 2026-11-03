@@ -445,22 +445,37 @@ fun ProfilesScreen(
                                                     val isPlaceholder = profile.description.isNullOrBlank()
                                                     Spacer(modifier = Modifier.height(4.dp))
                                                     if (isPlaceholder) {
-                                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                                            Box(
-                                                                Modifier
-                                                                    .size(6.dp)
-                                                                    .clip(CircleShape)
-                                                                    .background(NemasysPalette.Accent),
-                                                            )
-                                                            Spacer(Modifier.width(6.dp))
-                                                            Text(
-                                                                text = descriptionText.orEmpty().uppercase(),
-                                                                fontFamily = FontFamily.Monospace,
-                                                                fontSize = 11.sp,
-                                                                fontWeight = FontWeight.Bold,
-                                                                letterSpacing = 0.6.sp,
-                                                                color = NemasysPalette.TextBright,
-                                                            )
+                                                        Card(
+                                                            modifier = Modifier.fillMaxWidth(),
+                                                            shape = RoundedCornerShape(16.dp),
+                                                            colors =
+                                                                CardDefaults.cardColors(
+                                                                    containerColor = NemasysPalette.Card,
+                                                                    contentColor = NemasysPalette.TextBright,
+                                                                ),
+                                                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                                                        ) {
+                                                            Row(
+                                                                modifier = Modifier.padding(12.dp),
+                                                                verticalAlignment = Alignment.CenterVertically,
+                                                            ) {
+                                                                Box(
+                                                                    Modifier
+                                                                        .size(6.dp)
+                                                                        .clip(CircleShape)
+                                                                        .background(NemasysPalette.Accent),
+                                                                )
+                                                                Spacer(Modifier.width(6.dp))
+                                                                Text(
+                                                                    text = descriptionText.orEmpty().uppercase(),
+                                                                    fontFamily = FontFamily.Monospace,
+                                                                    fontSize = 11.sp,
+                                                                    fontWeight = FontWeight.Bold,
+                                                                    letterSpacing = 0.6.sp,
+                                                                    color = NemasysPalette.TextBright,
+                                                                )
+                                                            }
                                                         }
                                                     } else {
                                                         Text(
