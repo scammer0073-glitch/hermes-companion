@@ -266,12 +266,43 @@ private fun InspectionItemCard(indicator: SubagentIndicator) {
                 Spacer(modifier = Modifier.width(8.dp))
 
                 val taskIndexStr = indicator.taskIndex?.let { "#$it " } ?: ""
-                Text(
-                    text = "$taskIndexStr${indicator.goal ?: "Subagent Task"}",
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.weight(1f),
-                )
+                if (indicator.goal.isNullOrBlank()) {
+                    Card(
+                        modifier = Modifier.weight(1f).testTag("inspection_task_empty"),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            androidx.compose.foundation.layout.Box(
+                                Modifier
+                                    .size(4.dp)
+                                    .clip(androidx.compose.foundation.shape.CircleShape)
+                                    .background(NemasysPalette.Accent),
+                            )
+                            Text(
+                                text = "${taskIndexStr}SUBAGENT TASK",
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                                color = NemasysPalette.TextBright,
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = "$taskIndexStr${indicator.goal}",
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.weight(1f),
+                    )
+                }
             }
 
             if (!indicator.summary.isNullOrBlank()) {
