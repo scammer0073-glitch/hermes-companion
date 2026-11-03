@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.m57.hermescontrol.R
 import com.m57.hermescontrol.theme.LocalHermesStatusColors
 import com.m57.hermescontrol.theme.NemasysPalette
@@ -37,8 +39,8 @@ import kotlin.math.min
  * prompt occupancy, which drops after context compression (issue #756). The
  * RPC may be absent on first render (WS still connecting); the chip shows as
  * soon as `fullTokens` is known, and when `usedTokens` is still null it
- * renders `— / <full>` (unknown used) rather than hiding entirely, so a
- * missing fetch never blanks the meter.
+ * renders a Nemasys Black `CONTEXT PENDING / <full>` card (unknown used)
+ * rather than hiding entirely, so a missing fetch never blanks the meter.
  *
  * @param usedTokens tokens currently in the session prompt (numerator), or null
  * @param fullTokens the active model's full context window (denominator)
@@ -88,18 +90,47 @@ fun ContextUsageChip(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(
-                text =
-                    if (usedTokens != null) {
-                        "${formatTokens(used)} / ${formatTokens(full)} context"
-                    } else {
-                        "— / ${formatTokens(full)} context"
-                    },
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+            if (usedTokens == null) {
+                androidx.compose.material3.Card(
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = androidx.compose.material3.CardDefaults.cardColors(
+                        containerColor = NemasysPalette.Card,
+                        contentColor = NemasysPalette.Text,
+                    ),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 0.dp),
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            Modifier
+                                .size(4.dp)
+                                .background(NemasysPalette.Accent, androidx.compose.foundation.shape.CircleShape),
+                        )
+                        Text(
+                            text = "CONTEXT PENDING / ${formatTokens(full)}".uppercase(java.util.Locale.ROOT),
+                            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.Text,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
+                }
+            } else {
+                Text(
+                    text = "${formatTokens(used)} / ${formatTokens(full)} context",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                 verticalAlignment = Alignment.CenterVertically,
