@@ -1115,31 +1115,48 @@ fun ProfilesScreen(
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
-                        Box(
-                            modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(16.dp))
-                                    .background(NemasysPalette.Card)
-                                    .border(
-                                        BorderStroke(1.dp, NemasysPalette.CardBorder),
-                                        RoundedCornerShape(16.dp),
-                                    )
-                                    .padding(12.dp),
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(16.dp),
+                            color = NemasysPalette.Card,
+                            contentColor = NemasysPalette.TextBright,
+                            border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                            tonalElevation = 0.dp,
+                            shadowElevation = 0.dp,
                         ) {
-                            Text(
-                                text = state.setupCommand.orEmpty(),
-                                style =
-                                    MaterialTheme.typography.bodyMedium.copy(
+                            if (state.setupCommand.isNullOrBlank()) {
+                                Row(
+                                    modifier = Modifier.padding(12.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                ) {
+                                    Box(
+                                        Modifier.size(6.dp).clip(CircleShape).background(NemasysPalette.Accent),
+                                    )
+                                    Text(
+                                        text = "NO SETUP COMMAND",
                                         fontFamily = FontFamily.Monospace,
-                                    ),
-                            )
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                    )
+                                }
+                            } else {
+                                Text(
+                                    text = state.setupCommand.orEmpty(),
+                                    modifier = Modifier.padding(12.dp),
+                                    style =
+                                        MaterialTheme.typography.bodyMedium.copy(
+                                            fontFamily = FontFamily.Monospace,
+                                        ),
+                                )
+                            }
                         }
                     }
                 }
             },
             confirmButton = {
-                if (!state.isLoadingSetupCommand && state.setupCommand != null) {
+                if (!state.isLoadingSetupCommand && !state.setupCommand.isNullOrBlank()) {
                     Button(
                         onClick = {
                             val text = AnnotatedString(state.setupCommand.orEmpty())
