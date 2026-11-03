@@ -359,13 +359,38 @@ fun SessionsScreen(
             tonalElevation = 0.dp,
             title = { Text(stringResource(R.string.sessions_empty_cleanup_title)) },
             text = {
-                Text(
-                    text = stringResource(R.string.sessions_empty_cleanup_message, state.emptyCount).uppercase(),
-                    color = NemasysPalette.Muted,
-                    fontFamily = FontFamily.Monospace,
-                    fontSize = 11.sp,
-                    letterSpacing = 0.4.sp,
-                )
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Box(Modifier.size(6.dp).background(NemasysPalette.Accent, CircleShape))
+                            Text(
+                                text = stringResource(R.string.sessions_empty_cleanup_title).uppercase(),
+                                color = NemasysPalette.TextBright,
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.6.sp,
+                            )
+                        }
+                        Text(
+                            text = stringResource(R.string.sessions_empty_cleanup_message, state.emptyCount),
+                            color = NemasysPalette.Muted,
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                    }
+                }
             },
             confirmButton = {
                 TextButton(onClick = { viewModel.confirmEmptyCleanup() }) {
