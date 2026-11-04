@@ -218,18 +218,50 @@ fun DiffViewCard(
                         modifier = Modifier.size(16.dp),
                     )
                     Spacer(Modifier.width(6.dp))
-                    Text(
-                        text = parsed.filePath ?: "diff",
-                        style =
-                            MaterialTheme.typography.labelMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                                fontFamily = FontFamily.Monospace,
-                                color = CodeTerminalText,
-                            ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.weight(1f, fill = false),
-                    )
+                    if (parsed.filePath.isNullOrBlank()) {
+                        Surface(
+                            modifier = Modifier.weight(1f, fill = false).testTag("diff_missing_path"),
+                            shape = RoundedCornerShape(16.dp),
+                            color = NemasysCard,
+                            contentColor = CodeTerminalText,
+                            border = BorderStroke(1.dp, NemasysCardBorder),
+                            tonalElevation = 0.dp,
+                            shadowElevation = 0.dp,
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Box(
+                                    Modifier.size(6.dp).background(
+                                        com.m57.hermescontrol.theme.NemasysPalette.Accent,
+                                        androidx.compose.foundation.shape.CircleShape,
+                                    ),
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                Text(
+                                    text = "NO FILE PATH",
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.6.sp,
+                                )
+                            }
+                        }
+                    } else {
+                        Text(
+                            text = parsed.filePath,
+                            style =
+                                MaterialTheme.typography.labelMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = CodeTerminalText,
+                                ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.weight(1f, fill = false),
+                        )
+                    }
                     Spacer(Modifier.width(8.dp))
 
                     // Addition / Deletion badges
