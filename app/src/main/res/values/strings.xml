@@ -584,6 +584,7 @@
     <string name="toolset_post_setup_run">Run setup</string>
     <string name="toolset_post_setup_rerun">Re-run setup</string>
     <string name="toolset_post_setup_running">Running…</string>
+    <string name="toolset_post_setup_no_output">No setup output</string>
     <string name="toolset_post_setup_installed">Installed</string>
     <string name="toolset_post_setup_hint">Installs missing dependencies for this backend</string>
     <string name="toolset_post_setup_installed_hint">Dependencies are installed</string>

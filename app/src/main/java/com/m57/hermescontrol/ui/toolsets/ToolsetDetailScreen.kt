@@ -736,7 +736,7 @@ private fun PostSetupRunner(
             }
 
             val lines = activeState?.lines.orEmpty()
-            if (activeState?.running == true || lines.isNotEmpty()) {
+            if (activeState != null) {
                 Surface(
                     shape = RoundedCornerShape(16.dp),
                     color = NemasysPalette.Card,
@@ -753,7 +753,7 @@ private fun PostSetupRunner(
                                 .verticalScroll(rememberScrollState())
                                 .padding(10.dp),
                     ) {
-                        if (lines.isEmpty()) {
+                        if (lines.all { it.isBlank() }) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -765,7 +765,12 @@ private fun PostSetupRunner(
                                         .background(NemasysPalette.Accent),
                                 )
                                 Text(
-                                    text = runningText.uppercase(),
+                                    text =
+                                        if (activeState.running) {
+                                            runningText.uppercase()
+                                        } else {
+                                            stringResource(R.string.toolset_post_setup_no_output).uppercase()
+                                        },
                                     style = MaterialTheme.typography.bodySmall,
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 11.sp,
