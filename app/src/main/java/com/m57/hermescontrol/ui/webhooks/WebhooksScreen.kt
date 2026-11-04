@@ -560,17 +560,45 @@ private fun SubscriptionCard(
                 }
             }
 
-            // URL
-            Text(
-                text = sub.url,
-                style =
-                    MaterialTheme.typography.bodySmall.copy(
-                        fontFamily = FontFamily.Monospace,
-                    ),
-                color = NemasysPalette.Muted,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+            // Keep a missing endpoint visible rather than rendering a blank Text.
+            if (sub.url.isBlank()) {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                    border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(
+                            Modifier.size(4.dp).clip(CircleShape).background(NemasysPalette.Accent),
+                        )
+                        Text(
+                            text = "NO WEBHOOK URL",
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            letterSpacing = 0.6.sp,
+                            color = NemasysPalette.Muted,
+                        )
+                    }
+                }
+            } else {
+                Text(
+                    text = sub.url,
+                    style =
+                        MaterialTheme.typography.bodySmall.copy(
+                            fontFamily = FontFamily.Monospace,
+                        ),
+                    color = NemasysPalette.Muted,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
     }
 }
