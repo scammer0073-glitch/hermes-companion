@@ -159,7 +159,32 @@ fun WebhooksScreen(
                         value = state.createFormName,
                         onValueChange = viewModel::updateCreateFormName,
                         label = { Text(stringResource(R.string.webhooks_field_name)) },
-                        placeholder = { Text(stringResource(R.string.webhooks_hint_name)) },
+                        placeholder = {
+                            Card(
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                ) {
+                                    Box(
+                                        Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape),
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.webhooks_hint_name).uppercase(),
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                        color = NemasysPalette.TextBright,
+                                    )
+                                }
+                            }
+                        },
                         singleLine = true,
                         isError = state.createFormError != null,
                         modifier = Modifier.fillMaxWidth(),
