@@ -532,9 +532,37 @@ private fun McpStep(
                                         text = "URL：${server.url}",
                                         style = MaterialTheme.typography.labelSmall,
                                     )
+                                } else if (server.command.isNullOrBlank()) {
+                                    Card(
+                                        modifier = Modifier.padding(top = 8.dp),
+                                        shape = RoundedCornerShape(16.dp),
+                                        colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                        border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                        ) {
+                                            Box(
+                                                Modifier
+                                                    .size(4.dp)
+                                                    .background(NemasysPalette.Accent, CircleShape),
+                                            )
+                                            Text(
+                                                text = "NO SERVER COMMAND",
+                                                fontFamily = FontFamily.Monospace,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Bold,
+                                                letterSpacing = 0.6.sp,
+                                                color = NemasysPalette.TextBright,
+                                            )
+                                        }
+                                    }
                                 } else {
                                     Text(
-                                        text = stringResource(R.string.profile_command, server.command ?: ""),
+                                        text = stringResource(R.string.profile_command, server.command),
                                         style = MaterialTheme.typography.labelSmall,
                                     )
                                 }
