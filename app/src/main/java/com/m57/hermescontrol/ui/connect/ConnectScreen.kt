@@ -219,7 +219,32 @@ fun ConnectScreen(
                         value = state.profileName,
                         onValueChange = viewModel::onProfileNameChange,
                         label = { Text(stringResource(R.string.connect_profile_name)) },
-                        placeholder = { Text(stringResource(R.string.connect_placeholder_profile_name)) },
+                        placeholder = {
+                            Card(
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                ) {
+                                    Box(
+                                        Modifier.size(4.dp).background(NemasysPalette.Accent, CircleShape),
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.connect_placeholder_profile_name).uppercase(),
+                                        color = NemasysPalette.TextBright,
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 0.6.sp,
+                                    )
+                                }
+                            }
+                        },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                     )
