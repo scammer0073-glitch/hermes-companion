@@ -2,6 +2,7 @@ package com.m57.hermescontrol.ui.chat.fullbleed
 
 import android.content.ClipData
 import android.text.format.DateFormat
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,10 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -109,15 +113,48 @@ internal fun FullBleedAgentMessage(
             Spacer(modifier = Modifier.height(6.dp))
         }
 
-        SelectionContainer {
-            MarkdownText(
-                text = message.content,
-                textColor = textColor,
-                isStreaming = message.isStreaming,
-                searchQuery = searchQuery,
-                isCurrentMatch = isCurrentMatch,
-                onImageClick = onImageClick,
-            )
+        if (
+            message.content.isBlank() && !message.isStreaming &&
+            message.attachments.isNullOrEmpty() && message.reasoningText.isBlank()
+        ) {
+            Card(
+                modifier = Modifier.fillMaxWidth().testTag("fullbleed_empty_message"),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = NemasysPalette.Card),
+                border = BorderStroke(1.dp, NemasysPalette.CardBorder),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Box(
+                        Modifier
+                            .size(6.dp)
+                            .background(NemasysPalette.Accent, CircleShape),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = "NO MESSAGE CONTENT",
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.6.sp,
+                        color = NemasysPalette.TextBright,
+                    )
+                }
+            }
+        } else {
+            SelectionContainer {
+                MarkdownText(
+                    text = message.content,
+                    textColor = textColor,
+                    isStreaming = message.isStreaming,
+                    searchQuery = searchQuery,
+                    isCurrentMatch = isCurrentMatch,
+                    onImageClick = onImageClick,
+                )
+            }
         }
 
         // Render inline attachments (mirrors ChatBubble so agent-delivered
