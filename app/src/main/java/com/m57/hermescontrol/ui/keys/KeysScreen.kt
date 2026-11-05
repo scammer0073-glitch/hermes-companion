@@ -739,7 +739,7 @@ private fun EnvVarCard(
                                     .horizontalScroll(rememberScrollState()),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            if (!config.isSet && !isRevealed) {
+                            if (displayValue.isBlank() || (!config.isSet && !isRevealed)) {
                                 Box(
                                     Modifier
                                         .size(6.dp)
@@ -747,7 +747,7 @@ private fun EnvVarCard(
                                 )
                                 Spacer(Modifier.width(6.dp))
                                 Text(
-                                    text = displayValue.uppercase(),
+                                    text = if (displayValue.isBlank()) "NO VALUE" else displayValue.uppercase(),
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
